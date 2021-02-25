@@ -1,0 +1,19 @@
+.Person {
+  width: 60%;
+  margin: 16px auto;
+  border: 1px solid rgb(182, 182, 182);
+  padding: 9px;
+  text-align: left;
+  cursor: pointer;
+}
+
+
+@media (min-width: 1000px) {
+  .Person {
+    width: 950px;
+  }
+}
+
+.text{
+  color: gray;
+}
