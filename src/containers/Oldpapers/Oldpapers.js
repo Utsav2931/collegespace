@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import classes from "./Oldpapers.module.css";
 import Papers from "./Papers/Papers";
+import TitleComp from '../../components/UI/TitleComp/Titlecomp';
 
 class Oldpapers extends Component {
   state = {
@@ -20,7 +21,7 @@ class Oldpapers extends Component {
   render() {
     return (
       <div>
-        <p className={classes.text}>Previous year's papers</p>
+        <TitleComp title="Previous year's papers"/>
         <Papers
           persons={this.state.persons}
         ></Papers>

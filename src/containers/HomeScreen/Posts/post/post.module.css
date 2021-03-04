@@ -1,0 +1,46 @@
+.Post {
+  width: 80%;
+  max-width: 780px;
+  padding: 1em;
+  margin: 1em auto;
+  cursor: pointer;
+  overflow: auto;
+  display: flex;
+}
+
+.img {
+  float: left;
+  padding-right: 2.8em;
+  width: 250px;
+  height:fit-content;
+}
+
+.text {
+  text-align: start;
+  color: gray;
+  width: 95%;
+  font-size: 1rem;
+}
+
+.heading {
+  font-size: 1.5rem;
+  color: #000;
+}
+
+@media (max-width: 600px) {
+  .Post {
+    flex-direction: column;
+    max-width: 340px;
+    margin: auto;
+    padding-top: 1em 1em;
+    width: 100%;
+    font-size: 5px;
+  }
+
+  .img {
+    padding-right: 0;
+    padding-bottom: 1.5em;
+    margin: auto;
+    width: 340px;
+  }
+}

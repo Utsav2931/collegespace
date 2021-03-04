@@ -103,7 +103,7 @@ header h1 {
   color: #000;
 }
 
-.faq-question :hover{
+.faqs .faq .faq-question:hover{
   color: #000;
 }
 

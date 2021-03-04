@@ -27,6 +27,7 @@ const Ul = styled.ul`
     color: #000;
   }
   
+  overflow: auto;
   flex-flow: column nowrap;
   background: linear-gradient(to right, rgba(255,51,0,1) 0%, rgba(247,223,181, 0.9) 75%, rgba(255, 255, 255, 0) 100%);
   position: absolute;
@@ -47,8 +48,8 @@ const LeftNav = ({ open }) => {
       <Ul open={open}>
         <li><a href='/'>Home</a></li>
         <Accordion/>
-        <li><a href='/old-papers'>About</a></li>
-        <li>Contact Us</li>
+        <li><a href='/about'>About</a></li>
+        <li><a href='/contact-us'>Contact Us</a></li>
       </Ul>
     </div>
   );

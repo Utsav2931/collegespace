@@ -19,8 +19,8 @@ const Questions = () => {
     {
       collection:
         "Add",
-        answer: ['Add-notes', 'Add-post'],
-        route: ['/add-notes', '/add-post'],
+        answer: ['Add-post', 'Add-notes'],
+        route: ['/add-post', '/add-notes'],
 
         open: false,
     },
