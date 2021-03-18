@@ -10,6 +10,7 @@ const Nav = styled.nav`
   position: fixed;
   justify-content: space-between;
   top: 0;
+  color: black;
   background-color: #ffffff;
   align-items: center;
   box-sizing: border-box;
@@ -21,6 +22,7 @@ const Nav = styled.nav`
     text-align: center;
     padding: auto;
     margin: auto;
+    color: black;
     padding-left: 70px;
     font-weight: bold;
     font-size: 20px;
@@ -28,6 +30,7 @@ const Nav = styled.nav`
   @media (max-width: 600px) {
     .path {
       display: none;
+      color: black;
     }
 
     .logo {
