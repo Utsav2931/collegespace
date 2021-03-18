@@ -14,7 +14,10 @@ export class ContentBuilder extends Component {
         <Route path="/old-papers" component={Oldpapers}/>
         <Route path="/add-post" component={AddPost}/>
         <Route path = "/notes" component = {Notes}/>
-        <Route path = "/events" component = {Events}/>
+        <Route path = "/events" component = {Events}
+
+          
+        />
       </div>
     );
   }
