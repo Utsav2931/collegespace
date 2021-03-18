@@ -10,8 +10,7 @@ export class ContentBuilder extends Component {
       <div>
         <Route path="/" exact component={Homescreen}/>
         <Route path="/old-papers" component={Oldpapers}/>
-        <Route path="/add-post" component={AddPost}/>
-        
+        <Route path="/add-post" component={AddPost}/>        
       </div>
     );
   }

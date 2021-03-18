@@ -2,29 +2,59 @@ import React, { Component } from "react";
 import classes from "./Oldpapers.module.css";
 import Papers from "./Papers/Papers";
 import TitleComp from '../../components/UI/TitleComp/Titlecomp';
+import firebase from '../../config/config';
+
+const db = firebase.firestore();
+
 
 class Oldpapers extends Component {
-  state = {
-    persons: [
-      { id: "fwfw", name: "Theory of computation - ", age: "May 2012" },
-      { id: "efwgw", name: "Theory of computation - ", age: "May 2013" },
-      { id: "qeqwr", name: "Theory of computation - ", age: "May 2014" },
-      { id: "qeqr", name: "Theory of computation - ", age: "May 2015" },
-      { id: "qeqwr", name: "Theory of computation - ", age: "May 2016" },
-      { id: "qeqqqr", name: "Theory of computation - ", age: "May 2018" },
-      { id: "qeqqqr", name: "Theory of computation - ", age: "May 2019" },
-      { id: "qeqqqr", name: "Theory of computation - ", age: "May 2020" },
-    ],
-    showPerson: false,
+    state = {
+      persons: [],
+      isLoaded: false,
+    };
+
+  componentDidMount() {
+    this.getPapers();
+  }
+
+  getPapers = () => {
+    db.collection("papers")
+      .limit(8)
+      .get()
+      .then((docs) => {
+        if (!docs.empty) {
+          let allArticals = [];
+          docs.forEach(function (doc) {
+            const artical = {
+              id: doc.id,
+              ...doc.data(),
+            };
+            allArticals.push(artical);
+          });
+
+          this.setState(
+            {
+              persons: allArticals,
+            },
+            () => {
+              this.setState({
+                isLoaded: true,
+              });
+            }
+          );
+        }
+      });
   };
 
   render() {
+    console.log(this.state.persons);
     return (
       <div>
         <TitleComp title="Previous year's papers"/>
-        <Papers
+        {this.state.isLoaded ? <Papers
           persons={this.state.persons}
-        ></Papers>
+        ></Papers> : ""}
+        
       </div>
     );
   }
