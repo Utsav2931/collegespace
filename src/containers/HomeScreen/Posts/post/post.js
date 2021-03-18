@@ -8,9 +8,6 @@ const post = (props) => {
         <div className={classes.text}>
           <div className={classes.heading}>{props.title}</div>
           <p className={classes.text}>{props.dess}</p>
-          <a  style={{ cursor: "pointer" }}>
-            click me!
-          </a>
         </div>
       </div>
     );
