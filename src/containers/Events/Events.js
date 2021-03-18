@@ -4,7 +4,7 @@ import i from "./../../assets/Images/about.jpeg"
 const Events = () => {
     return (
         <div>
-            <h2>&nbsp; &nbsp;Events</h2><br />
+            <p className={classes.title}>&nbsp; &nbsp;Events</p><br />
             <div className={classes.text}><br />
                 <img className={classes.textimg} src={i} align="left" hspace="20" /><br /><br /><br /><br />
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod

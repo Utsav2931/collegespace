@@ -7,14 +7,14 @@ import i3 from "./../../assets/Images/3-.png"
 const Notes = () => {
     return (
         <div>
-            <h2>Notes</h2><br></br>
+            <p className={classes.smallTitle}>Notes</p><br></br>
             <br></br>
             <a href="first.html"></a>
             <div className={classes.cardcontainer}>
                 <div className={classes.card}>
                     <img src={i1}></img>
                     <div className={classes.container}>
-                        <h5>Title One</h5><br />
+                        <p className={classes.title}>Title One</p><br />
                         <hr />
                         <br />
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
