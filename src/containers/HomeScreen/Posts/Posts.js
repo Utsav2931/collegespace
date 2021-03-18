@@ -7,7 +7,7 @@ const Posts = (props) =>
       <div>
         <Post
           title={post.title}
-          dess={post.dess}
+          dess={post.desc}
           key={post.id}
           image={post.image}
         />

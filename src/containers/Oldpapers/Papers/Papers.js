@@ -5,7 +5,7 @@ const persons = (props) =>
   props.persons.map((person) => {
     return (
       <div>
-        <Paper name={person.name} age={person.age} key={person.id} />
+        <Paper title={person.title} year={person.year} desc={person.desc} key={person.id} />
       </div>
     );
   });
