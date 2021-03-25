@@ -26,7 +26,6 @@ const Ul = styled.ul`
   li a:active {
     color: #000;
   }
-
   ::-webkit-scrollbar {
     width: 0; /* Remove scrollbar space */
     background: transparent; /* Optional: just make scrollbar invisible */
@@ -35,8 +34,8 @@ const Ul = styled.ul`
   ::-webkit-scrollbar-thumb {
     background: #ff0000;
   }
-
   overflow: auto;
+
   flex-flow: column nowrap;
   background: linear-gradient(
     to right,
@@ -60,16 +59,10 @@ const LeftNav = ({ open }) => {
   return (
     <div>
       <Ul open={open}>
-        <li>
-          <a href="/">Home</a>
-        </li>
+        <li><a href='/'>Home</a></li>
         <Accordion />
-        <li>
-          <a href="/about">About</a>
-        </li>
-        <li>
-          <a href="/contact-us">Contact Us</a>
-        </li>
+        <li><a href='/about'>About</a></li>
+        <li><a href='/contact-us'>Contact Us</a></li>
       </Ul>
     </div>
   );

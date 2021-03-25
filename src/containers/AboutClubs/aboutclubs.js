@@ -8,6 +8,7 @@ const aboutdept = () => {
   return (
     <BasicLayout>
 
+
       <center><h1 className="contentHead">About Clubs</h1></center>
       <div class="blog-card">
         <div class="meta">
