@@ -6,11 +6,9 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
           <Layout>
             <ContentBuilder />
           </Layout>
-        </div>
       </BrowserRouter>
     );
   }

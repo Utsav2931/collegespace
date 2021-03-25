@@ -6,6 +6,7 @@ const Nav = styled.nav`
   width: 100%;
   height: 80px;
   padding: 0 45px;
+  z-index: 9999;
   display: flex;
   position: fixed;
   justify-content: space-between;

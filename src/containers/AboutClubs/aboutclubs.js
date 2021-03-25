@@ -1,11 +1,12 @@
 import React from 'react';
 import './aboutclubs.css';
+import BasicLayout from "../../components/UI/BasicCompPadding/BasicLayout";
 
 
 
 const aboutdept = () => {
   return (
-    <div>
+    <BasicLayout>
 
       <center><h1 className="contentHead">About Clubs</h1></center>
       <div class="blog-card">
@@ -107,7 +108,7 @@ const aboutdept = () => {
           </p>
         </div>
       </div>
-    </div>
+    </BasicLayout>
 
 
 

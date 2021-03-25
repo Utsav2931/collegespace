@@ -10,6 +10,12 @@
     color: #333;
     font-size: 1.1rem;
   }
+
+  /* .aboutText{
+    color: black;
+    background-color: #555;
+    tex
+  } */
   
   h1,
   h2,
@@ -90,7 +96,7 @@
   
   .section-a p {
     margin: 1rem 0;
-    font-size: 25px;
+    font-size: 21px;
     text-align: justify;
   }
   

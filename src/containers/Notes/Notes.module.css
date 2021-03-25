@@ -28,6 +28,7 @@ body{
 	justify-content: center;
 	padding-top: 2%;
 	vertical-align: 10px;
+
 }
 .card{
 	width: 345px;
@@ -35,6 +36,7 @@ body{
 	margin-right: 10px;
 	background: white;
 	box-shadow: 0 4px 8px 0 rgba(15,2,2,0.692);
+	
 }
 .card:hover{
 	box-shadow: 0 4px 8px rgba(15,2,2,0.692);
@@ -45,9 +47,10 @@ body{
 .container{
 	padding: 2px 16px;
 	font-family: 'Lato';
+	
 }
-img{
-	width: 100%;
+.img{
+	width: 80%;
 	height: 40vh;
 }
 .card h5{

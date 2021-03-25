@@ -1,0 +1,43 @@
+.BasicLayout {
+  width: 1155px;
+  height: auto;
+  max-width: 75%;
+  padding: 30px 50px;
+  float: left;
+  margin: 0 auto;
+  margin-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+}
+
+@media (max-width: 600px) {
+  .BasicLayout {
+    max-width: 84%;
+    margin: 0 auto;
+    padding: 0 15px;
+    margin-bottom: 2em;
+    /* flex-direction: column;
+      max-width: 340px;
+      margin: auto;
+      padding-top: 1em 1em;
+      width: 100%;
+      font-size: 5px;
+      cursor: pointer; */
+  }
+}
+
+@media (min-width: 600px) and (max-width: 768px) {
+    .Homescreen {
+      width: 1110px;
+      height: auto;
+      max-width: 70%;
+      padding: 30px 0px;
+      float: left;
+      margin: 0 auto;
+      margin-bottom: 2em;
+      display: block;
+      border: 1px solid black;
+    }
+  }
+  

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import classes from "./Homescreen.module.css";
 import Posts from "./Posts/Posts";
-import firebase from '../../config/config';
+import firebase from "../../config/config";
+import BasicPadding from "../../components/UI/BasicCompPadding/BasicLayout";
 
 const db = firebase.firestore();
-
 
 export class Homescreen extends Component {
   state = {
@@ -83,11 +83,14 @@ export class Homescreen extends Component {
 
   render() {
     return (
-      <div className={classes.OuterDiv}>
+      // <div className={classes.OuterDiv}>
+      <BasicPadding>
         <div className={classes.Homescreen}>
           {this.state.isLoaded ? <Posts posts={this.state.posts} /> : ""}
         </div>
-      </div>
+      </BasicPadding>
+
+      // </div>
     );
   }
 }

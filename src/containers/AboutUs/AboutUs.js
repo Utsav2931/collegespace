@@ -1,9 +1,11 @@
 import React from 'react';
+import BasicLayout from '../../components/UI/BasicCompPadding/BasicLayout';
 import './AboutUs.css';
 
 
 const AboutUs = () => {
     return (
+        <BasicLayout>
         <div class="fonts">
 
 
@@ -24,6 +26,7 @@ const AboutUs = () => {
                 </div>
             </section>
         </div>
+        </BasicLayout>
 
 
 

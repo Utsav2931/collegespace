@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import classes from "./Oldpapers.module.css";
 import Papers from "./Papers/Papers";
 import TitleComp from '../../components/UI/TitleComp/Titlecomp';
 import firebase from '../../config/config';
+import BasicLayout from "../../components/UI/BasicCompPadding/BasicLayout";
 
 const db = firebase.firestore();
 
@@ -49,13 +49,12 @@ class Oldpapers extends Component {
   render() {
     console.log(this.state.persons);
     return (
-      <div>
+      <BasicLayout>
         <TitleComp title="Previous year's papers"/>
         {this.state.isLoaded ? <Papers
           persons={this.state.persons}
         ></Papers> : ""}
-        
-      </div>
+      </BasicLayout>
     );
   }
 }
