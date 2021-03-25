@@ -7,6 +7,7 @@ import Events from '../Events/Events'
 import Notes from '../Notes/Notes'
 import aboutclubs from '../AboutClubs/aboutclubs';
 import aboutus from '../AboutUs/AboutUs';
+import faq from '../Faq/faq';
 
 
 export class ContentBuilder extends Component {
@@ -21,6 +22,7 @@ export class ContentBuilder extends Component {
         <Route path="/events" component={Events} />
         <Route path="/clubs" component={aboutclubs} />
         <Route path="/about" component={aboutus} />
+        <Route path="/faqs" component={faq} />
 
       </div>
     );

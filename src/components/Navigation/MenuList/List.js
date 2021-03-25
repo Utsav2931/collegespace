@@ -12,17 +12,17 @@ const Questions = () => {
     },
     {
       collection: "Portal",
-      answer: ['Events', 'Clubs', 'Timetable',],
-      route: ['/events', '/clubs', '/time-table'],
+      answer: ['Events', 'Clubs', 'Timetable', 'FAQS'],
+      route: ['/events', '/clubs', '/time-table', '/faqs'],
       open: false,
     },
     {
       collection:
         "Add",
-        answer: ['Add-post', 'Add-notes'],
-        route: ['/add-post', '/add-notes'],
+      answer: ['Add-post', 'Add-notes'],
+      route: ['/add-post', '/add-notes'],
 
-        open: false,
+      open: false,
     },
   ]);
 
@@ -41,11 +41,11 @@ const Questions = () => {
   };
 
   return (
-      <div className="faqs">
-        {faqs.map((faq, i) => (
-          <FAQ faq={faq} index={i} toggleFAQ={toggleFAQ} />
-        ))}
-      </div>
+    <div className="faqs">
+      {faqs.map((faq, i) => (
+        <FAQ faq={faq} index={i} toggleFAQ={toggleFAQ} />
+      ))}
+    </div>
   );
 };
 
