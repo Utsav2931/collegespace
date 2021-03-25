@@ -5,7 +5,7 @@ import './aboutclubs.css';
 
 const aboutdept = () => {
   return (
-    <div>
+    <div class="overlap">
 
       <center><h1 className="contentHead">About Clubs</h1></center>
       <div class="blog-card">
