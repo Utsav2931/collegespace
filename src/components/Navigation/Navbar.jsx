@@ -13,6 +13,7 @@ const Nav = styled.nav`
   background-color: #ffffff;
   align-items: center;
   box-sizing: border-box;
+  z-index: 9999;
   box-shadow: 0px 8px 8px -6px rgba(0, 0, 0, 0.05);
 
 

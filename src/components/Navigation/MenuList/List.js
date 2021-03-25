@@ -12,8 +12,8 @@ const Questions = () => {
     },
     {
       collection: "Portal",
-      answer: ['Events', 'Clubs', 'Timetable',],
-      route: ['/events', '/clubs', '/time-table'],
+      answer: ['Events', 'Clubs', 'Timetable','FAQ'],
+      route: ['/events', '/clubs', '/time-table','/faq'],
       open: false,
     },
     {
