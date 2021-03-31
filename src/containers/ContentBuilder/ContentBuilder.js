@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route,  Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import AddPost from "../Add/AddThingsPage";
 import Homescreen from '../HomeScreen/Homescreen';
 import Oldpapers from '../Oldpapers/Oldpapers';
@@ -8,6 +8,7 @@ import Notes from '../Notes/Notes'
 import aboutclubs from '../AboutClubs/aboutclubs';
 import aboutus from '../AboutUs/AboutUs';
 import faq from '../Faq/faq';
+import contactus from '../ContactUs/contactus'
 
 
 export class ContentBuilder extends Component {
@@ -22,6 +23,7 @@ export class ContentBuilder extends Component {
         <Route path="/clubs" component={aboutclubs} />
         <Route path="/about" component={aboutus} />
         <Route path="/faqs" component={faq} />
+        <Route path="/contact-us" component={contactus} />
       </Switch>
 
     );
