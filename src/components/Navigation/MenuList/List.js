@@ -6,7 +6,7 @@ const Questions = () => {
     {
       collection: "Academics",
       answer: ['Old papers', 'Books', 'Notes'],
-      route: ['/old-papers', '/books', '/notes'],
+      route: ['/academics/cspit/ce/1/paper', '/academics/cspit/ce/1/Books', '/academics/cspit/ce/1/notes'],
 
       open: false,
     },

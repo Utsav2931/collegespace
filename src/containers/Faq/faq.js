@@ -1,16 +1,19 @@
 import React from 'react';
 import './faq.css';
+
 import BasicLayout from '../../components/UI/BasicCompPadding/BasicLayout';
+
+
 
 
 const faq = () => {
 
     return (
 
-        <div>
-            
-                <center><h1 className="contentHead">FAQS</h1></center>
-                <div className='conflict'>
+        <BasicLayout>
+            <center><h1 className="contentHead">FAQS</h1></center>
+            <div className='conflict'>
+
 
 
                     <div className="faq">
@@ -80,8 +83,9 @@ const faq = () => {
                     </div>
                 </div>
 
-           
-        </div>
+
+        </BasicLayout>
+
 
      
     )
