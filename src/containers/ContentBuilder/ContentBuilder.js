@@ -10,6 +10,8 @@ import aboutus from "../AboutUs/AboutUs";
 import faq from "../Faq/faq";
 import Academics from "../Books/Subject";
 import AcademicUse from "../Books/AcedemicUse";
+import contactus from '../ContactUs/contactus'
+
 
 export class ContentBuilder extends Component {
   render() {
@@ -34,6 +36,7 @@ export class ContentBuilder extends Component {
         />
         <Route path="/Academics/cspit/ce/1/Books/:id" component={AcademicUse} />
         <Route path="/Academics/cspit/ce/1/:id" component={Academics} />
+        <Route path="/contact-us" component={contactus} />
       </Switch>
     );
   }
