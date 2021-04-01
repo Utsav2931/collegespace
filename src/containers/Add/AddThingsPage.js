@@ -224,25 +224,25 @@ export class Add extends Component {
             </div>
             <header>Drag and Drop to Upload File</header>
             <span>OR</span>
-            <button>Browse File</button>
+
             <input
-              
+
               type="file"
               onChange={async (e) => {
                 const uploadState = await this.uploadImageCallBack(e);
                 if (uploadState.success) {
                   console.log("In Upload Success State");
                   console.log(uploadState.data.link);
-                  // this.setState({
-                  //   hasFeatureIamge: true,
-                  //   article: {
-                  //     ...this.state.article,
-                  //     image: uploadState.data.link,
-                  //   },
-                  // });
+                  this.setState({
+                    hasFeatureIamge: true,
+                    article: {
+                      ...this.state.article,
+                      image: uploadState.data.link,
+                    },
+                  });
                 }
               }}
-              hidden
+
             ></input>
           </div>
         </div>

@@ -70,14 +70,13 @@
     color: #fff;
     margin: 10px 0 15px 0;
   }
-  .drag_area button{
+  .drag_area input{
     padding: 10px 25px;
     font-size: 20px;
     font-weight: 500;
+    margin-left: 250px;
     border: none;
     outline: none;
-    background: #fff;
-    color: #5256ad;
     border-radius: 5px;
     cursor: pointer;
   }

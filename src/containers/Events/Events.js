@@ -1,37 +1,45 @@
 import React from "react";
-import classes from "./Events.module.css";
-import i from "./../../assets/Images/about.jpeg"
+import './events.css'
+
+import BasicLayout from '../../components/UI/BasicCompPadding/BasicLayout';
 const Events = () => {
     return (
-        <div>
-            <p className={classes.title}>&nbsp; &nbsp;Events</p><br />
-            <div className={classes.text}><br />
-                <img className={classes.textimg} src={i} align="left" hspace="20" /><br /><br /><br /><br />
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor.<br />Incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud<br /> exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.<br /><br /> Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. <br /> occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br /><br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor.<br />Incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud<br /> exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.<br /><br /> </p>
+        <BasicLayout>
+
+            <div>
+                <center><h1 className="contentHead">Events</h1></center>
+                <ul class="timeline">
+                    <li class="timeline-event">
+                        <label class="timeline-event-icon"></label>
+                        <div class="timeline-event-copy">
+                            <p class="timeline-event-thumbnail">April 2011 - Today</p>
+                            <h3>Great, thank you! GmbH</h3>
+                            <h4>CEO of a web studios</h4>
+                            <p><strong>Focus: Frontend development </strong>Developing sophisticated, animated, responsive and adaptive websites with HTML5, SCSS, jQuery; for all browsers, optimized for desktops, notebooks, smartphones and tablets (iOS, Android, Windows).</p>
+                            <p><strong>Project management with Scrum</strong>Constant improvement of the agile development process, for example through Grunt, Yeoman, GIT, JIRA and BrowserStack.</p>
+                        </div>
+                    </li>
+                    <li class="timeline-event">
+                        <label class="timeline-event-icon"></label>
+                        <div class="timeline-event-copy">
+                            <p class="timeline-event-thumbnail">November 2009 - March 2011</p>
+                            <h3>Freelancer</h3>
+                            <h4>Designer und Autor</h4>
+                            <p>Conception, design and production of digital magazines with InDesign, the Adobe Digital Publishing Suite and HTML5. Co-author of the specialist books "Digital Publishing for Tablets" and "Adobe Digital Publishing Suite" published by dpunkt.verlag.</p>
+                        </div>
+                    </li>
+                    <li class="timeline-event">
+                        <label class="timeline-event-icon"></label>
+                        <div class="timeline-event-copy">
+                            <p class="timeline-event-thumbnail">April 2011 - heute</p>
+                            <h3>konplan gmbh</h3>
+                            <h4>IT-Consultant</h4>
+                            <p><strong>System architecture, consulting,</strong>conception and modeling of systems and APIs for digital publishing and entitlement according to SOA</p>
+                        </div>
+                    </li>
+                </ul>
             </div>
-            <div className={classes.text2}><br /><br />
-                <img className={classes.text2img} src={i} align="left" hspace="20" /><br /><br /><br /><br />
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor.<br />Incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud<br /> exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.<br /><br /> Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. <br /> occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br /><br />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor.<br />Incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud<br /> exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.<br /><br /> Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum fugiat nulla pariatur. Excepteur<br /> sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </div>
-        </div>
+        </BasicLayout>
     )
 }
 
