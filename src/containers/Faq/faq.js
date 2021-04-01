@@ -1,11 +1,12 @@
 import React from 'react';
 import './faq.css';
+import BasicLayout from "../../components/UI/BasicCompPadding/BasicLayout";
 
 
 
 const faq = () => {
     return (
-        <div>
+        <BasicLayout>
             <center><h1 className="contentHead">FAQS</h1></center>
             <div className='conflict'>
 
@@ -78,7 +79,7 @@ const faq = () => {
             </div>
 
 
-        </div>
+        </BasicLayout>
 
 
     )

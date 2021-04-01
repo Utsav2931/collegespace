@@ -1,10 +1,11 @@
 import React from "react";
 import "./ListIteam.css";
+import { Link } from "react-router-dom";
 function FAQ({ faq, index, toggleFAQ }) {
 
     let transfomedObject = Object.keys(faq.answer)
     .map(igkey => {
-        return <div className="faq-answer"><a href={faq.route[igkey]}>{faq.answer[igkey]}</a></div>
+        return <div className="faq-answer"><Link to={faq.route[igkey]}>{faq.answer[igkey]}</Link></div>
     });
   return (
     <div

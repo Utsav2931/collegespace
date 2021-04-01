@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Accordion from "./MenuList/List";
+import { Link } from "react-router-dom";
+
 
 const Ul = styled.ul`
   display: flex;
@@ -59,10 +61,10 @@ const LeftNav = ({ open }) => {
   return (
     <div>
       <Ul open={open}>
-        <li><a href='/'>Home</a></li>
+        <Link to="/"><li>Home</li></Link>
         <Accordion />
-        <li><a href='/about'>About</a></li>
-        <li><a href='/contact-us'>Contact Us</a></li>
+        <Link to='/about'><li >About</li></Link>
+        <Link to='/contact-us'><li >Contact Us</li></Link>
       </Ul>
     </div>
   );
