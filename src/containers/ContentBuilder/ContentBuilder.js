@@ -15,6 +15,9 @@ import AddNotes from "../Add/AddNotes/AddNotes";
 
 
 export class ContentBuilder extends Component {
+  constructor({college, department, semester}){
+    super();
+  }
   render() {
     return (
       <Switch>

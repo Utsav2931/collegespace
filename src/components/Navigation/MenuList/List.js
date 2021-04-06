@@ -11,8 +11,8 @@ const Questions = (props) => {
       answer: ["Papers", "Books", "Notes"],
       route: [
         `/academics/cspit/ce/1/paper`,
-        "/academics/cspit/ce/1/Books",
-        "/academics/cspit/ce/1/notes",
+        `/academics/cspit/ce/1/Books`,
+        `/academics/cspit/ce/1/notes`,
       ],
       open: false,
     },

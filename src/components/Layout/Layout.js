@@ -79,8 +79,12 @@ class Layout extends Component {
           semester={this.state.semester}
           show={this.state.show}
         />
-        <main className={classes.Content}>{this.props.children}</main>{" "}
+
+        <main className={classes.Content} college={this.state.college}>{this.props.children}</main>{" "}
         <Modal show={this.state.show} handleClose={this.hideModal}>
+
+          {/* ================================================== */}
+
           <div className={classes.outerdiv}>
             <legend className={classes.lable}>College</legend>
             <div className={classes.collegeSelection}>
@@ -95,7 +99,7 @@ class Layout extends Component {
               <Checkbox
                 title="depstar"
                 name="college"
-                value="dep"
+                value="depstar"
                 checked={this.state.college}
                 id="c2"
                 OnchageValue={(e) => this.OnchangeValueCollege(e.target.value)}
