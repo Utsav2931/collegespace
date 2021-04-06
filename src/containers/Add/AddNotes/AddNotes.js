@@ -1,24 +1,26 @@
-import classes from "./AddThings.module.css";
+import classes from "../AddThings.module.css";
 import React, { Component } from "react";
-import BasicPadding from "../../components/UI/BasicCompPadding/BasicLayout";
-import Textfield from "../../components/UI/TextFormField/Textfield";
-import DropZone from "./DropZone/Dropzone";
-import firebase from "../../config/config";
+import BasicPadding from "../../../components/UI/BasicCompPadding/BasicLayout";
+import Textfield from "../../../components/UI/TextFormField/Textfield";
+import firebase from "../../../config/config";
 
 var currentdate = new Date();
 const db = firebase.firestore();
 const storageRef = firebase.storage();
-export class Add extends Component {
+export class AddNotes extends Component {
   state = {
     article: {
       title: "",
       desc: "",
       createDate: currentdate,
-      // author: "HowdyArsh",
       image: "",
       categoryLable: "",
       id: "",
       link: "",
+      college: "",
+      department: "",
+      semester: "",
+      subject: "",
     },
     error: "",
   };
@@ -44,8 +46,15 @@ export class Add extends Component {
       id = id.split(" ").join("-");
       article.id = id;
       console.log(id);
-      db.collection("Posts")
-        .doc(id)
+      db.collection("academics")
+        .doc(this.state.article.college)
+        .collection("department")
+        .doc(this.state.article.department)
+        .collection("sem")
+        .doc(this.state.article.semester)
+        .collection("subjects")
+        .doc(this.state.article.subject)
+        .collection("notes").doc(id)
         .set(article)
         .then((res) => {
           console.log(res);
@@ -133,11 +142,41 @@ export class Add extends Component {
     // console.log(this.state.article);
   };
 
-  onChangeArticlecategory = (value) => {
+  onChangeCollege = (value) => {
     this.setState({
       article: {
         ...this.state.article,
-        categoryLable: value,
+        college: value,
+      },
+    });
+    console.log(this.state.article);
+  };
+
+  onChangeDep = (value) => {
+    this.setState({
+      article: {
+        ...this.state.article,
+        department: value,
+      },
+    });
+    console.log(this.state.article);
+  };
+
+  onChangeSem = (value) => {
+    this.setState({
+      article: {
+        ...this.state.article,
+        semester: value,
+      },
+    });
+    console.log(this.state.article);
+  };
+
+  onChangeSub = (value) => {
+    this.setState({
+      article: {
+        ...this.state.article,
+        subject: value,
       },
     });
     console.log(this.state.article);
@@ -166,7 +205,7 @@ export class Add extends Component {
         ) : (
           ""
         )}
-        <h1>Make Post</h1>
+        <h1>Add Notes</h1>
         <div className={classes.col}>
           <div className={classes.basicInput}>
             <Textfield
@@ -177,19 +216,57 @@ export class Add extends Component {
               onChange={(e) => this.onChangeArticleDesc(e.target.value)}
               title="Description"
             />
-            <Textfield
+            {/* <Textfield
               onChange={(e) => this.onChangeArticleLink(e.target.value)}
               title="Link"
-            />
-            <label className={classes.label}>Category</label>
+            /> */}
+            <label className={classes.label}>College</label>
             <select
               className={classes.select}
-              onChange={(e) => this.onChangeArticlecategory(e.target.value)}
+              onChange={(e) => this.onChangeCollege(e.target.value)}
             >
               <option value="" disabled selected>
                 Label
               </option>
-              <option name="education">Education</option>
+              <option name="cspit">cspit</option>
+              <option name="depstar">depstar</option>
+            </select>
+
+            <label className={classes.label}>Department</label>
+            <select
+              className={classes.select}
+              onChange={(e) => this.onChangeDep(e.target.value)}
+            >
+              <option value="" disabled selected>
+                Label
+              </option>
+              <option name="ce">ce</option>
+              <option name="it">it</option>
+            </select>
+
+            <label className={classes.label}>Semester</label>
+            <select
+              className={classes.select}
+              onChange={(e) => this.onChangeSem(e.target.value)}
+            >
+              <option value="" disabled selected>
+                Label
+              </option>
+              <option name="1">1</option>
+              <option name="2">2</option>
+              <option name="3">3</option>
+            </select>
+
+            <label className={classes.label}>Subject</label>
+            <select
+              className={classes.select}
+              onChange={(e) => this.onChangeSub(e.target.value)}
+            >
+              <option value="" disabled selected>
+                Label
+              </option>
+              <option name="BEEE">BEEE</option>
+              <option name="Cprogramming">Cprogramming</option>
             </select>
             <button
               onClick={(e) => this.handleValidation(e)}
@@ -226,7 +303,6 @@ export class Add extends Component {
             <span>OR</span>
             <button>Browse File</button>
             <input
-              
               type="file"
               onChange={async (e) => {
                 const uploadState = await this.uploadImageCallBack(e);
@@ -251,4 +327,4 @@ export class Add extends Component {
   }
 }
 
-export default Add;
+export default AddNotes;
