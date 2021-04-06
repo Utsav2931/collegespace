@@ -11,16 +11,26 @@ const Title = (props) => {
   );
 };
 
-const Category = () => {
+const Category = (props) => {
   return (
     <div>
       <div className={classes.Category}>
         <div className={classes.details}>
-          <Title type="Dep" value="CSPIT - Computer Engineering" />
-          <Title type="Subject" value="Theory of computation" />
-          <Title type="Semester" value="6th" />
-          {/* <Title type="College" value="CSPIT" /> */}
+          <Title
+            type="Dep"
+            value={`${props.path[2].toUpperCase()} - ${props.path[3].toUpperCase()}`}
+          />
 
+          <Title
+            type="Subject"
+            value={props.sub.toUpperCase()}
+          />
+
+          <Title
+            type="Semester"
+            value={`${props.path[4].toUpperCase()}`}
+          />
+          {/* <Title type="College" value="CSPIT" /> */}
         </div>
       </div>
 

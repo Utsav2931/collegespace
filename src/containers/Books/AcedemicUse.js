@@ -1,41 +1,33 @@
-import classes from "./Subject.module.css";
 import React, { Component } from "react";
 import BasicLayout from "../../components/UI/BasicCompPadding/BasicLayout";
 import Book from "./Card/Card";
 import Category from "./category/Category";
 import firebase from "../../config/config";
-import GeneralPage from "./GeneralPage";
+import classes from "./GeneralPage.module.css";
 
 const db = firebase.firestore();
 var array;
 class AcademicUse extends Component {
   constructor(props) {
     super(props);
-    console.log(" in AcademicUse");
-    console.log(" in AcademicUse");
-
-    // let stringg = this.props.match.params.url;
-    // array = props.match.params.url.split("/");
-    // alert(array[0]);
     console.log(props);
+    array = this.props.location.pathname.split("/");
     this.state = {
       academicData: [],
       isLoaded: false,
     };
   }
-  
 
   componentDidMount() {
     this.getMyArtical();
+    this.setState({
+      title: array[5],
+    });
   }
-
-  
 
   getMyArtical = () => {
     console.log("in getMyArtical");
-    console.log(this.props.location.pathname);
-    array = this.props.location.pathname.split("/");
-    console.log(array[2]);
+    console.log(array);
     db.collection("academics")
       .doc(array[2])
       .collection("department")
@@ -49,11 +41,9 @@ class AcademicUse extends Component {
       // .where("isPublished", "==", true)
       .get()
       .then((docs) => {
-        console.log("in doc");
         if (!docs.empty) {
           let allArticals = [];
           docs.forEach(function (doc) {
-            console.log("in foreach");
             const artical = {
               id: doc.id,
               ...doc.data(),
@@ -77,17 +67,36 @@ class AcademicUse extends Component {
 
   render() {
     return (
-      // <div>
-      //  <h1>Hello THere</h1>
-      // </div>
-      <GeneralPage 
-      state={this.state}
-      variable = {this.state.academicData}
-      propsIds={this.props}
-
+      // <GeneralPage
       // state={this.state}
-      // paramsId={this.props.match.params.id} 
-      />
+      // variable = {this.state.academicData}
+      // propsIds={this.props}
+      // sub={this.state.academicData.subject}
+      // />
+      
+
+      <BasicLayout>
+        <div className={classes.GeneralPage}>
+          <div className={classes.div}>
+            <p className={classes.titleHeader}>{array[5]}</p>
+            <div className={classes.GeneralRow}>
+              {this.state.isLoaded ? (
+                this.state.academicData.map((variable, index) => {
+                  return (
+                    <Book varr={variable} propp={this.props} key={index} />
+                  );
+                })
+              ) : (
+                <div>Loading!!</div>
+              )}
+            </div>
+          </div>
+
+          <div className={classes.right}>
+            <Category path={array} sub={array[6]} />
+          </div>
+        </div>
+      </BasicLayout>
     );
   }
 }

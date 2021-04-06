@@ -11,6 +11,7 @@ import faq from "../Faq/faq";
 import Academics from "../Books/Subject";
 import AcademicUse from "../Books/AcedemicUse";
 import contactus from '../ContactUs/contactus'
+import AddNotes from "../Add/AddNotes/AddNotes";
 
 
 export class ContentBuilder extends Component {
@@ -18,9 +19,8 @@ export class ContentBuilder extends Component {
     return (
       <Switch>
         <Route path="/" exact component={Homescreen} />
-        {/* <Route path="/old-papers" component={Oldpapers} /> */}
         <Route path="/add-post" component={AddPost} />
-        {/* <Route path="/notes" component={Notes} /> */}
+        <Route path="/add-notes" component={AddNotes} />
         <Route path="/events" component={Events} />
         <Route path="/clubs" component={aboutclubs} />
         <Route path="/about" component={aboutus} />

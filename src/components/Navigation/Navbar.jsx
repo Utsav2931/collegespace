@@ -1,6 +1,8 @@
 import React from "react";
+import { Button } from "semantic-ui-react";
 import styled from "styled-components";
 import Burger from "./Burger";
+import classes from "../Layout/Layout.module.css";
 
 const Nav = styled.nav`
   width: 100%;
@@ -17,7 +19,7 @@ const Nav = styled.nav`
   align-items: center;
   box-sizing: border-box;
   box-shadow: 0px 8px 8px -6px rgba(0, 0, 0, 0.05);
-
+  display: ${({ open }) => (open ? "none" : "")};
 
   .logo {
     width: 100%;
@@ -28,6 +30,26 @@ const Nav = styled.nav`
     padding-left: 70px;
     font-weight: bold;
     font-size: 20px;
+  }
+
+  .buttonStyle {
+    display: ${({ nulll }) => (nulll == null ? "" : "none")};
+    background-color: #ff590b;
+    border: none;
+    border-radius: 5px;
+    width: 80px;
+    padding: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    color: white;
+    margin-top: 10px;
+    box-shadow: 0px 6px 18px -5px rgb(237, 133, 85);
+  }
+
+  .path {
+    color: black;
+    cursor: pointer;
+    display: ${({ nulll }) => (nulll == null ? "none" : "")};
   }
   @media (max-width: 600px) {
     .path {
@@ -42,12 +64,19 @@ const Nav = styled.nav`
   }
 `;
 
-const Navbar = () => {
+const Navbar = (props) => {
+  let academicsPath = `${props.college}/${props.department}/${props.semester}`;
   return (
-    <Nav>
-      <Burger />
+    <Nav open={props.show} nulll={props.college}>
+      <Burger academicsPath={academicsPath} show={props.show} />
       <p className="logo">CollegeSpace</p>
-      <p className="path">CSPIT/CE/SEM5</p>
+
+      <button className="buttonStyle" type="button" onClick={props.onclick}>
+        Branch
+      </button>
+      <p onClick={props.onclick} className="path">
+        {academicsPath}
+      </p>
     </Nav>
   );
 };

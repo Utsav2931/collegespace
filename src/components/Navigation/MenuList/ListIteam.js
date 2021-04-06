@@ -6,7 +6,7 @@ function FAQ({ faq, index, toggleFAQ }) {
     let transfomedObject = Object.keys(faq.answer)
     .map(igkey => {
         return <div className="faq-answer"><Link to={faq.route[igkey]}>{faq.answer[igkey]}</Link></div>
-    });
+    }); 
   return (
     <div
       className={"faq " + (faq.open ? "open" : "")}
