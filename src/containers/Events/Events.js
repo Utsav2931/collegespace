@@ -7,7 +7,7 @@ const Events = () => {
         <BasicLayout>
 
             <div>
-                <center><h1 className="contentHead">Events</h1></center>
+                <center><h1 className="contentHead3">Events</h1></center>
                 <ul class="timeline">
                     <li class="timeline-event">
                         <label class="timeline-event-icon"></label>

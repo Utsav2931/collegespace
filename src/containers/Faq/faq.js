@@ -11,6 +11,7 @@ const faq = () => {
     return (
 
         <BasicLayout>
+            
             <center><h1 className="contentHead">FAQS</h1></center>
             <div className='conflict'>
 

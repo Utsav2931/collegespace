@@ -17,13 +17,14 @@
 
 /* Styling */
 
-.contentHead{
+.contentHead3{
 
  
   font-size:45px;
   font-weight:500;
   margin-top: 1px;
-  margin-left: 30px;
+ margin-left: 425px;
+  margin-right: 500px;
 }
 .timeline {
   margin: 4em auto;
