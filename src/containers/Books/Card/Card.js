@@ -6,7 +6,11 @@ import { Link } from "react-router-dom";
 const Book = (props) => {
   return (
     <Link to={`${props.propp.history.location.pathname}/${props.varr.id}`}>
-      <div className={classes.Book}>
+      <div className={classes.Book} onClick={() => {
+        const url = props.varr.link;
+        if(url != null)
+        window.open(url, '_blank');
+      }}>
         <img className={classes.cardImage} src={image}></img>
         <div className={classes.text}>
           <div className={classes.titleText}>{props.varr.title}</div>

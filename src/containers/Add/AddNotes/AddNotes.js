@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import BasicPadding from "../../../components/UI/BasicCompPadding/BasicLayout";
 import Textfield from "../../../components/UI/TextFormField/Textfield";
 import firebase from "../../../config/config";
+import { v4 as uuidv4 } from 'uuid'
 
 var currentdate = new Date();
 const db = firebase.firestore();
@@ -64,55 +65,19 @@ export class AddNotes extends Component {
   }
 
   uploadImageCallBack = (e) => {
-    const promises = e.map((file) => {
-      const ref = firebase
-        .storage()
-        .ref()
-        .child(`post/image/${file.data.name}`);
-      return ref.put(file.uploadTask).then(() => ref.getDownloadURL());
-    });
-
-    console.log(promises);
-    Promise.all(promises)
-      .then((fileDownloadUrls) => {
-        this.setState({
-          article: {
-            ...this.state.article,
-            image: fileDownloadUrls,
-          },
-        });
-        // db
-        // .collection("properties")
-        // .add({
-        //     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        //     title: title,
-        //     description: description,
-        //     pictures: fileDownloadUrls,
-        //     user: user.uid
-        // })
+    return new Promise(async (resolve, reject) => {
+      const file = e.target.files[0]
+      const filename = uuidv4()
+      storageRef.ref().child("pdf/" + filename).put(file).then(async snapshot => {
+        const downloadURL = await storageRef.ref().child("pdf/" + filename).getDownloadURL()
+        console.log(downloadURL)
+        resolve({
+          success: true,
+          data: { link: downloadURL }
+        })
       })
-      .catch((err) => console.log(err));
-
-    // return new Promise((resolve, reject) => {
-    //   const file = e.target.files[0];
-    //   const fileName = uuidv4();
-    //   storageRef
-    //     .ref()
-    //     .child("Articles/" + fileName)
-    //     .put(file)
-    //     .then(async (snapshot) => {
-    //       const downloadURL = await storageRef
-    //         .ref()
-    //         .child("Articles/" + fileName)
-    //         .getDownloadURL();
-    //       console.log(downloadURL);
-    //       resolve({
-    //         success: true,
-    //         data: { link: downloadURL },
-    //       });
-    //     });
-    // });
-  };
+    })
+  }
 
   onChangeArticleTitle = (value) => {
     this.setState({
@@ -303,22 +268,21 @@ export class AddNotes extends Component {
             <span>OR</span>
             <button>Browse File</button>
             <input
-              type="file"
+              type="file" accept = "file/*"
               onChange={async (e) => {
                 const uploadState = await this.uploadImageCallBack(e);
                 if (uploadState.success) {
                   console.log("In Upload Success State");
                   console.log(uploadState.data.link);
-                  // this.setState({
-                  //   hasFeatureIamge: true,
-                  //   article: {
-                  //     ...this.state.article,
-                  //     image: uploadState.data.link,
-                  //   },
-                  // });
+                  this.setState({
+                    hasFeatureIamge: true,
+                    article: {
+                      ...this.state.article,
+                      link: uploadState.data.link,
+                    },
+                  });
                 }
               }}
-              hidden
             ></input>
           </div>
         </div>
