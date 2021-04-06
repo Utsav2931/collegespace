@@ -69,18 +69,18 @@ const LeftNav = ({ open, close, academicsPath }, ) => {
       <Backdrop show={open} clicked={close} />
       <div>
         <Ul open={open}>
-          <Link to="/">
+          <Link to="/" onClick={close}>
             <li>
               <Di>Home</Di>
             </li>
           </Link>
-          <Accordion academicsPath={academicsPath}/>
-          <Link to="/about">
+          <Accordion academicsPath={academicsPath} onClick={close}/>
+          <Link to="/about" onClick={close}>
             <li>
               <Di>About</Di>
             </li>
           </Link>
-          <Link to="/contact-us">
+          <Link to="/contact-us" onClick={close}>
             <li>
               <Di>Contact Us</Di>
             </li>

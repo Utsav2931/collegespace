@@ -71,7 +71,7 @@ const Questions = (props) => {
   return (
     <div className="faqs">
       {faqs.map((faq, i) => (
-        <FAQ faq={faq} index={i} toggleFAQ={toggleFAQ} />
+        <FAQ faq={faq} index={i} toggleFAQ={toggleFAQ} close={props.onClick}/>
       ))}
     </div>
   );
