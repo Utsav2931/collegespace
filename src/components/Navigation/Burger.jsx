@@ -39,7 +39,6 @@ const Burger = (props) => {
   (open || props.show)
     ? document.body.setAttribute("style", `position: fixed; left:0; right:0;`)
     : document.body.setAttribute("style", ``);
-    console.log(props.college);
 
   return (
     <>

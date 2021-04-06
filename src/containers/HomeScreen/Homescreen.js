@@ -49,7 +49,7 @@ export class Homescreen extends Component {
   // };
 
   componentDidMount() {
-    this.getPosts();
+    //this.getPosts();
   }
 
   getPosts = () => {

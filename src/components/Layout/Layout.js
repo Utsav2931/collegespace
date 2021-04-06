@@ -5,6 +5,7 @@ import NavBar from "../Navigation/Navbar";
 import Modal from "../UI/Modal/Modal";
 import Textfield from "../UI/TextFormField/Textfield";
 import Checkbox from "../UI/CheckBox/Checkbox";
+import ContentBuilder from "../../containers/ContentBuilder/ContentBuilder";
 
 class Layout extends Component {
   constructor() {
@@ -79,10 +80,15 @@ class Layout extends Component {
           semester={this.state.semester}
           show={this.state.show}
         />
-
-        <main className={classes.Content} college={this.state.college}>{this.props.children}</main>{" "}
+        <main className={classes.Content}>
+          <ContentBuilder
+            college={this.state.college}
+            department={this.state.department}
+            semester={this.state.semester}
+          />
+          {/* {this.props.children} */}
+        </main>{" "}
         <Modal show={this.state.show} handleClose={this.hideModal}>
-
           {/* ================================================== */}
 
           <div className={classes.outerdiv}>
@@ -267,7 +273,7 @@ class Layout extends Component {
                 name="semester"
                 checked={this.state.semester}
                 value="4"
-                id="s3"
+                id="s4"
                 OnchageValue={(e) => this.OnchangeValueSemester(e.target.value)}
               />
               <Checkbox
@@ -275,7 +281,7 @@ class Layout extends Component {
                 name="semester"
                 checked={this.state.semester}
                 value="5"
-                id="s3"
+                id="s5"
                 OnchageValue={(e) => this.OnchangeValueSemester(e.target.value)}
               />
               <Checkbox
@@ -283,7 +289,7 @@ class Layout extends Component {
                 name="semester"
                 checked={this.state.semester}
                 value="6"
-                id="s3"
+                id="s6"
                 OnchageValue={(e) => this.OnchangeValueSemester(e.target.value)}
               />
               <Checkbox
@@ -291,7 +297,7 @@ class Layout extends Component {
                 name="semester"
                 checked={this.state.semester}
                 value="7"
-                id="s3"
+                id="s7"
                 OnchageValue={(e) => this.OnchangeValueSemester(e.target.value)}
               />
               <Checkbox
@@ -299,7 +305,7 @@ class Layout extends Component {
                 name="semester"
                 checked={this.state.semester}
                 value="8"
-                id="s3"
+                id="s8"
                 OnchageValue={(e) => this.OnchangeValueSemester(e.target.value)}
               />
             </div>

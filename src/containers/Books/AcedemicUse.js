@@ -10,19 +10,18 @@ var array;
 class AcademicUse extends Component {
   constructor(props) {
     super(props);
+    array = this.props.match.url.split("/");
     console.log(props);
-    array = this.props.location.pathname.split("/");
     this.state = {
       academicData: [],
       isLoaded: false,
     };
   }
 
+
+
   componentDidMount() {
     this.getMyArtical();
-    this.setState({
-      title: array[5],
-    });
   }
 
   getMyArtical = () => {
@@ -83,7 +82,7 @@ class AcademicUse extends Component {
               {this.state.isLoaded ? (
                 this.state.academicData.map((variable, index) => {
                   return (
-                    <Book varr={variable} propp={this.props} key={index} />
+                    <Book varr={variable} propp={this.props} path={array} key={index} />
                   );
                 })
               ) : (

@@ -30,19 +30,40 @@ const Questions = (props) => {
     },
   ]);
 
+  // setfaqs(
+  //   faqs.route.map((faq, i) => {
+  //     console.log(i);
+
+  //     console.log(faq.route[i]);
+  //   })
+  // );
+
   const toggleFAQ = (index) => {
+    console.log(academicsPath);
     setfaqs(
+      // faqs[0].route.map((paths, j) => {
+      //   console.log(j);
+      //   console.log(paths.route[j]);
+      //   // paths[j].replace(`/academics/${academicsPath}/${academicsResources[j]}`);
+      //   console.log(paths[j]);
+      // }),
+
       faqs.map((faq, i) => {
-        faq.collection == "Academics"
-          ? (faq.route[
-              i
-            ] = `/academics/${academicsPath}/${academicsResources[i]}`)
-          : (faq.route[i] = faq.route[i]);
+        console.log(i);
+        faqs[0].route.map((paths) => {
+          // faqs[0].route[index] = (`/academics/${academicsPath}/${academicsResources[index]}`);
+          // console.log(paths);
+          paths = `/academics/${academicsPath}/${academicsResources[i]}`;
+          // console.log(paths);
+          faqs[0].route[i] = paths;
+        });
+        // console.log(faqs[0].route[i]);
         if (i === index) {
           faq.open = !faq.open;
         } else {
           faq.open = false;
         }
+
         return faq;
       })
     );

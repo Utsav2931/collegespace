@@ -7,9 +7,9 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Layout>
-            <ContentBuilder />
-        </Layout>
+        <Layout/>
+            {/* <ContentBuilder />
+        </Layout> */}
       </BrowserRouter>
     );
   }

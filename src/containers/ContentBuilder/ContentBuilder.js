@@ -15,7 +15,7 @@ import AddNotes from "../Add/AddNotes/AddNotes";
 
 
 export class ContentBuilder extends Component {
-  constructor({college, department, semester}){
+  constructor(props){
     super();
   }
   render() {
@@ -30,15 +30,17 @@ export class ContentBuilder extends Component {
         <Route path="/faqs" component={faq} />
         {/* <Route path="/Academics" component={Books}/> */}
         <Route
-          path="/Academics/cspit/ce/1/notes/:id"
+          path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/notes/:id`} 
           component={AcademicUse}
         />
         <Route
-          path="/Academics/cspit/ce/1/paper/:id"
+          path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/paper/:id`} 
           component={AcademicUse}
         />
-        <Route path="/Academics/cspit/ce/1/Books/:id" component={AcademicUse} />
-        <Route path="/Academics/cspit/ce/1/:id" component={Academics} />
+        <Route path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/Books/:id`}  component={AcademicUse} />
+        <Route path={`/Academics/:id/:id/:id/:id/:id`}  component={AcademicUse} />
+        <Route path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/:id`}  component={Academics} />
+        <Route path={`/Academics/:id/:id/:id/:id`}  component={Academics} />
         <Route path="/contact-us" component={contactus} />
       </Switch>
     );
