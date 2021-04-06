@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import Accordion from "./MenuList/List";
 import { Link } from "react-router-dom";
-
+import Backdrop from "../../components/UI/Backdrop/Backdrop";
+import Aux from "../../hoc/AAux";
 
 const Ul = styled.ul`
-  display: flex;
   li {
     color: #fff;
     list-style-type: none;
@@ -24,10 +24,7 @@ const Ul = styled.ul`
     text-decoration: none;
     color: white;
   }
-  li a:hover,
-  li a:active {
-    color: #000;
-  }
+
   ::-webkit-scrollbar {
     width: 0; /* Remove scrollbar space */
     background: transparent; /* Optional: just make scrollbar invisible */
@@ -36,9 +33,7 @@ const Ul = styled.ul`
   ::-webkit-scrollbar-thumb {
     background: #ff0000;
   }
-  overflow: auto;
 
-  flex-flow: column nowrap;
   background: linear-gradient(
     to right,
     rgba(255, 51, 0, 1) 0%,
@@ -46,6 +41,10 @@ const Ul = styled.ul`
     rgba(255, 255, 255, 0) 100%
   );
   position: absolute;
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: auto;
+
   margin: auto;
   padding: auto;
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-100%)")};
@@ -57,16 +56,38 @@ const Ul = styled.ul`
   transition: transform 0.1s ease-in-out;
 `;
 
-const LeftNav = ({ open }) => {
+const Di = styled.div`
+  max-width: 320px;
+  :hover,
+  :active {
+    color: #000;
+  }
+`;
+const LeftNav = ({ open, close, academicsPath }, ) => {
   return (
-    <div>
-      <Ul open={open}>
-        <Link to="/"><li>Home</li></Link>
-        <Accordion />
-        <Link to='/about'><li >About</li></Link>
-        <Link to='/contact-us'><li >Contact Us</li></Link>
-      </Ul>
-    </div>
+    <Aux>
+      <Backdrop show={open} clicked={close} />
+      <div>
+        <Ul open={open}>
+          <Link to="/">
+            <li>
+              <Di>Home</Di>
+            </li>
+          </Link>
+          <Accordion academicsPath={academicsPath}/>
+          <Link to="/about">
+            <li>
+              <Di>About</Di>
+            </li>
+          </Link>
+          <Link to="/contact-us">
+            <li>
+              <Di>Contact Us</Di>
+            </li>
+          </Link>
+        </Ul>
+      </div>
+    </Aux>
   );
 };
 

@@ -1,4 +1,3 @@
-import classes from "./Subject.module.css";
 import React, { Component } from "react";
 import BasicLayout from "../../components/UI/BasicCompPadding/BasicLayout";
 import Book from "./Card/Card";
@@ -6,7 +5,7 @@ import Category from "./category/Category";
 import firebase from "../../config/config";
 import GeneralPage from "./GeneralPage";
 import { Link } from "react-router-dom";
-
+import classes from "./GeneralPage.module.css";
 
 const db = firebase.firestore();
 var arrayy;
@@ -14,9 +13,11 @@ class Subject extends Component {
   constructor(props) {
     super(props);
     console.log(props);
+    arrayy = this.props.location.pathname.split("/");
     this.state = {
       subjects: [],
       isLoaded: false,
+      title: "",
     };
   }
   componentDidMount() {
@@ -25,9 +26,9 @@ class Subject extends Component {
 
   getMyArtical = () => {
     console.log("in getMyArtical");
-    console.log(this.props.location.pathname);
-    arrayy = this.props.location.pathname.split("/");
-    console.log(arrayy[2]);
+    // console.log(this.props.location.pathname);
+    console.log(arrayy);
+
     db.collection("academics")
       .doc(arrayy[2])
       .collection("department")
@@ -37,11 +38,9 @@ class Subject extends Component {
       .collection("subjects")
       .get()
       .then((docs) => {
-        console.log("in doc");
         if (!docs.empty) {
           let allArticals = [];
           docs.forEach(function (doc) {
-            console.log("in foreach");
             const artical = {
               id: doc.id,
               ...doc.data(),
@@ -65,40 +64,32 @@ class Subject extends Component {
 
   render() {
     return (
-      // <div>
-      //   <h1>
-      //     <Link
-      //       to={`/Academics/cspit/ce/1/notes/BEEE`}
-      //     >
-      //       Hello
-      //     </Link>
-      //   </h1>
-      // </div>
-      <GeneralPage
-        state={this.state}
-        variable = {this.state.subjects}
-        propsIds={this.props}
-      />
-      //   <BasicLayout>
-      //   <div className={classes.GeneralPage}>
-      //     <div className={classes.div}>
-      //       <p className={classes.titleHeader}>Books</p>
-      //       <div className={classes.GeneralRow}>
-      //         {this.state.isLoaded ? (
-      //           props.variable.map(( variable, index) => {
-      //             return <Book varr={variable} path={Pathlocation} propp = {props.propsIds}key={index} />;
-      //           })
-      //         ) : (
-      //           <div>Loading!!</div>
-      //         )}
-      //       </div>
-      //     </div>
+      //   state={this.state}
+      //   variable = {this.state.subjects}
+      //   propsIds={this.props}
+      //   // sub={this.state.subjects.subject}
+      <BasicLayout>
+        <div className={classes.GeneralPage}>
+          <div className={classes.div}>
+            <p className={classes.titleHeader}>{arrayy[5]}</p>
+            <div className={classes.GeneralRow}>
+              {this.state.isLoaded ? (
+                this.state.subjects.map((variable, index) => {
+                  return (
+                    <Book varr={variable} propp={this.props} key={index} />
+                  );
+                })
+              ) : (
+                <div>Loading!!</div>
+              )}
+            </div>
+          </div>
 
-      //     <div className={classes.right}>
-      //       <Category />
-      //     </div>
-      //   </div>
-      // </BasicLayout>
+          <div className={classes.right}>
+            <Category path={arrayy} sub="Select Subject" />
+          </div>
+        </div>
+      </BasicLayout>
     );
   }
 }
