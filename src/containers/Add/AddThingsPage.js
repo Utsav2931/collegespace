@@ -2,8 +2,10 @@ import classes from "./AddThings.module.css";
 import React, { Component } from "react";
 import BasicPadding from "../../components/UI/BasicCompPadding/BasicLayout";
 import Textfield from "../../components/UI/TextFormField/Textfield";
-import DropZone from "./DropZone/Dropzone";
 import firebase from "../../config/config";
+import { v4 as uuidv4 } from 'uuid'
+
+var index = 0;
 
 var currentdate = new Date();
 const db = firebase.firestore();
@@ -15,7 +17,7 @@ export class Add extends Component {
       desc: "",
       createDate: currentdate,
       // author: "HowdyArsh",
-      image: "",
+      image: [],
       categoryLable: "",
       id: "",
       link: "",
@@ -55,55 +57,20 @@ export class Add extends Component {
   }
 
   uploadImageCallBack = (e) => {
-    const promises = e.map((file) => {
-      const ref = firebase
-        .storage()
-        .ref()
-        .child(`post/image/${file.data.name}`);
-      return ref.put(file.uploadTask).then(() => ref.getDownloadURL());
-    });
-
-    console.log(promises);
-    Promise.all(promises)
-      .then((fileDownloadUrls) => {
-        this.setState({
-          article: {
-            ...this.state.article,
-            image: fileDownloadUrls,
-          },
-        });
-        // db
-        // .collection("properties")
-        // .add({
-        //     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        //     title: title,
-        //     description: description,
-        //     pictures: fileDownloadUrls,
-        //     user: user.uid
-        // })
+    return new Promise(async (resolve, reject) => {
+      const file = e.target.files[index]
+      index++
+      const filename = uuidv4()
+      storageRef.ref().child("post/image/" + filename).put(file).then(async snapshot => {
+        const downloadURL = await storageRef.ref().child("post/image/" + filename).getDownloadURL()
+        console.log(downloadURL)
+        resolve({
+          success: true,
+          data: { link: downloadURL }
+        })
       })
-      .catch((err) => console.log(err));
-
-    // return new Promise((resolve, reject) => {
-    //   const file = e.target.files[0];
-    //   const fileName = uuidv4();
-    //   storageRef
-    //     .ref()
-    //     .child("Articles/" + fileName)
-    //     .put(file)
-    //     .then(async (snapshot) => {
-    //       const downloadURL = await storageRef
-    //         .ref()
-    //         .child("Articles/" + fileName)
-    //         .getDownloadURL();
-    //       console.log(downloadURL);
-    //       resolve({
-    //         success: true,
-    //         data: { link: downloadURL },
-    //       });
-    //     });
-    // });
-  };
+    })
+  }
 
   onChangeArticleTitle = (value) => {
     this.setState({
@@ -159,6 +126,7 @@ export class Add extends Component {
   // };
 
   render() {
+    index = 0;
     return (
       <BasicPadding>
         {this.state.error !== "" ? (
@@ -226,7 +194,6 @@ export class Add extends Component {
             <span>OR</span>
 
             <input
-
               type="file"
               onChange={async (e) => {
                 const uploadState = await this.uploadImageCallBack(e);
@@ -237,12 +204,11 @@ export class Add extends Component {
                     hasFeatureIamge: true,
                     article: {
                       ...this.state.article,
-                      image: uploadState.data.link,
+                      image: [...this.state.article.image, uploadState.data.link],
                     },
                   });
                 }
               }}
-
             ></input>
           </div>
         </div>

@@ -23,7 +23,6 @@
   font-size:45px;
   font-weight:500;
   margin-top: 1px;
- margin-left: 425px;
   margin-right: 500px;
 }
 .timeline {
@@ -64,6 +63,9 @@
   top: -1.875em;
   left: 4em;
   width: 80%;
+}
+.link{
+  color: rgb(255, 102, 0);
 }
 .timeline-event-copy h3 {
   font-size: 1.75em;
