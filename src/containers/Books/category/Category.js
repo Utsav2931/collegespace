@@ -39,7 +39,7 @@ const Category = (props) => {
           //   onClick={(e) => this.handleValidation(e)}
           className={classes.cardbutton}
         >
-          Submit
+          Filter
         </button>
       </div>
 

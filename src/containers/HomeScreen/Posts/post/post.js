@@ -10,6 +10,7 @@ const post = (props) => {
     return (
       <div className={classes.Post}>
         <div className={classes.heading}>{props.title}</div>
+        
         <Carousel controls={TextTrackCueList}>
           {props.image.map((pic) => {
             console.log(pic);
@@ -24,14 +25,15 @@ const post = (props) => {
             );
           })}
         </Carousel>
+        
         <p className={classes.text}>{props.dess}</p>
-        {/* {props.link != null ? <a
+        {props.link != null ? <a
           href={props.link}
           rel="noopener noreferrer"
           target="_blank"
         >
-          Link is here
-        </a> : <div></div>} */}
+          Click here
+        </a> : <div></div>}
       </div>
     );
   }

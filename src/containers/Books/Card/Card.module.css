@@ -56,6 +56,11 @@
   box-shadow: 0px 0px 35px rgba(140, 152, 164, 0.18);
 }
 
-.card:hover::before {
+/* .card:hover::before {
   transform: scale(1.03);
+} */
+
+.Book:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 17px 20px -6px rgba(187, 195, 204, 0.36);
 }

@@ -3,6 +3,7 @@ import { Button } from "semantic-ui-react";
 import styled from "styled-components";
 import Burger from "./Burger";
 import classes from "../Layout/Layout.module.css";
+import { Link } from "react-router-dom";
 
 const Nav = styled.nav`
   width: 100%;
@@ -69,7 +70,7 @@ const Navbar = (props) => {
   return (
     <Nav open={props.show} nulll={props.college}>
       <Burger academicsPath={academicsPath} show={props.show} />
-      <p className="logo">CollegeSpace</p>
+      <Link style={{ textDecoration: "none" }} to="/"><p className="logo">CollegeSpace</p></Link>
 
       <button className="buttonStyle" type="button" onClick={props.onclick}>
         Branch

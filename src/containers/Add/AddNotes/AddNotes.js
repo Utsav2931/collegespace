@@ -264,10 +264,11 @@ export class AddNotes extends Component {
             <div className={classes.icon}>
               <i class="fas fa-cloud-upload-alt"></i>
             </div>
-            <header>Drag and Drop to Upload File</header>
-            <span>OR</span>
+            <header><h3>Select file to Upload</h3></header>
+        <br></br><br></br>
+
             <button>Browse File</button>
-            <input
+            <input className={classes.filechossen}
               type="file" accept = "file/*"
               onChange={async (e) => {
                 const uploadState = await this.uploadImageCallBack(e);

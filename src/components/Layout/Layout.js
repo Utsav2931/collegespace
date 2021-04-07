@@ -40,6 +40,8 @@ class Layout extends Component {
     localStorage.setItem("department", department ? department : "");
     localStorage.setItem("semester", semester ? semester : "");
     this.setState({ show: false });
+    
+    window.location = "/";
   };
 
   componentDidMount() {
@@ -94,7 +96,7 @@ class Layout extends Component {
           <div className={classes.outerdiv}>
             <legend className={classes.lable}>College</legend>
             <div className={classes.collegeSelection}>
-              <Checkbox
+              <Checkbox 
                 title="CSPIT"
                 value="cspit"
                 name="college"

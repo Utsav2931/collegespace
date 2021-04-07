@@ -8,18 +8,16 @@
 }
 
 
-/* Layout */
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-/* Styling */
+
 
 .contentHead3{
 
- 
   font-size:45px;
   font-weight:500;
   margin-top: 1px;
@@ -49,12 +47,12 @@
   -ms-transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
-  background-color: #a83279;
+  background-color: #FF6600;
 }
 .timeline-event:hover .timeline-event-thumbnail {
-  -moz-box-shadow: inset 40em 0 0 0 #a83279;
-  -webkit-box-shadow: inset 40em 0 0 0 #a83279;
-  box-shadow: inset 40em 0 0 0 #a83279;
+  -moz-box-shadow: inset 40em 0 0 0 #FF6600;
+  -webkit-box-shadow: inset 40em 0 0 0 #FF6600;
+  box-shadow: inset 40em 0 0 0 #FF6600;
 }
 
 .timeline-event-copy {

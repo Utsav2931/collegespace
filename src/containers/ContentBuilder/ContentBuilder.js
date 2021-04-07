@@ -4,7 +4,7 @@ import AddPost from "../Add/AddThingsPage";
 import Homescreen from "../HomeScreen/Homescreen";
 import Oldpapers from "../Oldpapers/Oldpapers";
 import Events from "../Events/Events";
-import Notes from "../Notes/Notes";
+
 import aboutclubs from "../AboutClubs/aboutclubs";
 import aboutus from "../AboutUs/AboutUs";
 import faq from "../Faq/faq";

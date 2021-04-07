@@ -29,10 +29,10 @@ const Ul = styled.ul`
     width: 0; /* Remove scrollbar space */
     background: transparent; /* Optional: just make scrollbar invisible */
   }
-  /* Optional: show position indicator in red */
   ::-webkit-scrollbar-thumb {
     background: #ff0000;
   }
+  
 
   background: linear-gradient(
     to right,
@@ -62,25 +62,27 @@ const Di = styled.div`
   :active {
     color: #000;
   }
+ 
+  
 `;
-const LeftNav = ({ open, close, academicsPath }, ) => {
+const LeftNav = ({ open, close, academicsPath },) => {
   return (
     <Aux>
       <Backdrop show={open} clicked={close} />
       <div>
         <Ul open={open}>
-          <Link to="/" onClick={close}>
+          <Link style={{ textDecoration: "none" }} to="/" onClick={close}>
             <li>
-              <Di>Home</Di>
+              <Di>home</Di>
             </li>
           </Link>
-          <Accordion academicsPath={academicsPath} onClick={close}/>
-          <Link to="/about" onClick={close}>
+          <Accordion academicsPath={academicsPath} onClick={close} />
+          <Link style={{ textDecoration: "none" }} to="/about" onClick={close}>
             <li>
               <Di>About</Di>
             </li>
           </Link>
-          <Link to="/contact-us" onClick={close}>
+          <Link style={{ textDecoration: "none" }} to="/contact-us" onClick={close}>
             <li>
               <Di>Contact Us</Di>
             </li>

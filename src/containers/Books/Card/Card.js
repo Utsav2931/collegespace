@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Book = (props) => {
   console.log(props.propp.match.url.split("/")[5]);
   return (
-    <Link to={`${props.propp.history.location.pathname}/${props.varr.id}`}>
+    <Link style={{ textDecoration: "none" , color: "black" }} to={`${props.propp.history.location.pathname}/${props.varr.id}`}>
       <div
         className={classes.Book}
         onClick={() => {
