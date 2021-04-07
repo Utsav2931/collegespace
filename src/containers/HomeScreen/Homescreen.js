@@ -49,7 +49,7 @@ export class Homescreen extends Component {
   // };
 
   componentDidMount() {
-    //this.getPosts();
+    this.getPosts();
   }
 
   getPosts = () => {
@@ -85,9 +85,7 @@ export class Homescreen extends Component {
     return (
       // <div className={classes.OuterDiv}>
       <BasicPadding>
-        <div className={classes.Homescreen}>
           {this.state.isLoaded ? <Posts posts={this.state.posts} /> : ""}
-        </div>
       </BasicPadding>
 
       // </div>

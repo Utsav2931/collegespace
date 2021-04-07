@@ -22,7 +22,7 @@ const AboutUs = () => {
                          </p>
 
                     </div>
-                    <img src="https://i.ibb.co/SP3pYmM/collegespacelogo-removebg.png" alt="" />
+                    <img class="img" src="https://i.ibb.co/SP3pYmM/collegespacelogo-removebg.png" alt="" />
                 </div>
             </section>
         </div>
