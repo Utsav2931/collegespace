@@ -5,6 +5,8 @@ import Textfield from "../../../components/UI/TextFormField/Textfield";
 import firebase from "../../../config/config";
 import { v4 as uuidv4 } from "uuid";
 
+const deptce = ["ce", "it", "mech", "civil", "ec"]
+const deptdep = ["ce", "cse", "it"]
 var currentdate = new Date();
 const db = firebase.firestore();
 const storageRef = firebase.storage();
@@ -24,6 +26,8 @@ export class AddNotes extends Component {
       author: "",
     },
     error: "",
+    opt: [1, 2, 3, 4, 5, 6, 7, 8],
+    dept: [],
   };
 
   handleValidation() {
@@ -127,6 +131,18 @@ export class AddNotes extends Component {
   };
 
   onChangeCollege = (value) => {
+    if (value == "cspit") {
+      this.setState({
+        dept: deptce
+      })
+      console.log("dept:" + this.state.dept)
+    }
+    else if (value == 'depstar') {
+      this.setState({
+        dept: deptdep
+      })
+    }
+
     this.setState({
       article: {
         ...this.state.article,
@@ -195,7 +211,7 @@ export class AddNotes extends Component {
               onChange={(e) => this.onChangeCollege(e.target.value)}
             >
               <option value="" disabled selected>
-                Label
+                College
               </option>
               <option name="cspit">cspit</option>
               <option name="depstar">depstar</option>
@@ -207,10 +223,15 @@ export class AddNotes extends Component {
               onChange={(e) => this.onChangeDep(e.target.value)}
             >
               <option value="" disabled selected>
-                Label
+                Department
               </option>
-              <option name="ce">ce</option>
-              <option name="it">it</option>
+              {
+                this.state.dept.map((e) => {
+                  return (<option name={e}>{e}</option>)
+                })
+              }
+              {/* <option name="ce">ce</option>
+              <option name="it">it</option> */}
             </select>
 
             <label className={classes.label}>Semester</label>
@@ -219,11 +240,16 @@ export class AddNotes extends Component {
               onChange={(e) => this.onChangeSem(e.target.value)}
             >
               <option value="" disabled selected>
-                Label
+                Semester
               </option>
-              <option name="1">1</option>
+              {
+                this.state.opt.map((e) => {
+                  return (<option name={e}>{e}</option>)
+                })
+              }
+              {/* <option name="1">1</option>
               <option name="2">2</option>
-              <option name="3">3</option>
+              <option name="3">3</option> */}
             </select>
 
             <label className={classes.label}>Subject</label>
@@ -232,7 +258,7 @@ export class AddNotes extends Component {
               onChange={(e) => this.onChangeSub(e.target.value)}
             >
               <option value="" disabled selected>
-                Label
+                Subject
               </option>
               <option name="BEEE">BEEE</option>
               <option name="Cprogramming">Cprogramming</option>
@@ -252,9 +278,9 @@ export class AddNotes extends Component {
             <header><h3>Select pdf file to Upload</h3></header>
             <br></br><br></br>
 
-           
+
             <input className={classes.filechossen}
-            
+
               type="file" accept="application/pdf"
               onChange={async (e) => {
                 const uploadState = await this.uploadImageCallBack(e);
