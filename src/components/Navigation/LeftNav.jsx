@@ -11,7 +11,7 @@ const Ul = styled.ul`
     list-style-type: none;
     margin: 0;
     padding: 18px 0;
-    font-size: 50px;
+    font-size: 45px;
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none; /* Safari */
@@ -73,7 +73,7 @@ const LeftNav = ({ open, close, academicsPath },) => {
         <Ul open={open}>
           <Link style={{ textDecoration: "none" }} to="/" onClick={close}>
             <li>
-              <Di>home</Di>
+              <Di>Home</Di>
             </li>
           </Link>
           <Accordion academicsPath={academicsPath} onClick={close} />

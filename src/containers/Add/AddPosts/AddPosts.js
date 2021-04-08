@@ -1,8 +1,8 @@
-import classes from "./AddThings.module.css";
+import classes from "./AddPosts.module.css";
 import React, { Component } from "react";
-import BasicPadding from "../../components/UI/BasicCompPadding/BasicLayout";
-import Textfield from "../../components/UI/TextFormField/Textfield";
-import firebase from "../../config/config";
+import BasicPadding from "../../../components/UI/BasicCompPadding/BasicLayout";
+import Textfield from "../../../components/UI/TextFormField/Textfield";
+import firebase from "../../../config/config";
 import { v4 as uuidv4 } from 'uuid'
 
 var index = 0;
@@ -16,7 +16,7 @@ export class Add extends Component {
       title: "",
       desc: "",
       createDate: currentdate,
-      // author: "HowdyArsh",
+      author: "",
       image: [],
       categoryLable: "",
       id: "",
@@ -82,6 +82,18 @@ export class Add extends Component {
     });
     // console.log(this.state.article);
   };
+
+
+  onChangeArticleAuthor = (value) => {
+    this.setState({
+      article: {
+        ...this.state.article,
+        author: value,
+      },
+    });
+    // console.log(this.state.article);
+  };
+
   onChangeArticleDesc = (value) => {
     this.setState({
       article: {
@@ -111,21 +123,6 @@ export class Add extends Component {
     console.log(this.state.article);
   };
 
-  // submitPost = () => {
-  //   let id = this.state.article.title;
-  //   const article = this.state.article;
-  //   id = id.split(" ").join("-");
-  //   article.id = id;
-  //   console.log(id);
-  //   db.collection("Posts")
-  //     .doc(id)
-  //     .set(article)
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
   render() {
     index = 0;
     return (
@@ -150,6 +147,10 @@ export class Add extends Component {
               onChange={(e) => this.onChangeArticleLink(e.target.value)}
               title="Link"
             />
+            <Textfield
+              onChange={(e) => this.onChangeArticleAuthor(e.target.value)}
+              title="Author"
+            />
             <label className={classes.label}>Category</label>
             <select
               className={classes.select}
@@ -167,30 +168,11 @@ export class Add extends Component {
               Submit
             </button>
           </div>
-          {/* <div className={classes.img}>
-            <DropZone 
-            state = {this.state.article}
-            onChange={async (e) => {
-              const uploadState = await this.uploadImageCallBack(e);
-              if (uploadState.success) {
-                console.log("In Upload Success State");
-                console.log(uploadState.data.link);
-                this.setState({
-                  hasFeatureIamge: true,
-                  article: {
-                    ...this.state.article,
-                    image: uploadState.data.link,
-                  },
-                });
-              }
-            }}
 
-            />
-          </div> */}
           <div className={classes.drag_area}>
-            <div className={classes.icon}>
+            {/* <div className={classes.icon}>
               <i class="fas fa-cloud-upload-alt"></i>
-            </div>
+            </div> */}
             <header><h3>Select file to Upload</h3></header>
             <br></br><br></br>
 

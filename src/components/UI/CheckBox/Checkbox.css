@@ -1,9 +1,3 @@
-/* input {
-  opacity: 0;
-  cursor: pointer;
-} */
-
-
 .checkbox-tools:checked + label,
 .checkbox-tools:not(:checked) + label {
   position: relative;

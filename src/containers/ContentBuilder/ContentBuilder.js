@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-import AddPost from "../Add/AddThingsPage";
+import AddPost from "../Add/AddPosts/AddPosts";
 import Homescreen from "../HomeScreen/Homescreen";
-import Oldpapers from "../Oldpapers/Oldpapers";
 import Events from "../Events/Events";
-
 import aboutclubs from "../AboutClubs/aboutclubs";
 import aboutus from "../AboutUs/AboutUs";
 import faq from "../Faq/faq";
@@ -28,7 +26,6 @@ export class ContentBuilder extends Component {
         <Route path="/clubs" component={aboutclubs} />
         <Route path="/about" component={aboutus} />
         <Route path="/faqs" component={faq} />
-        {/* <Route path="/Academics" component={Books}/> */}
         <Route
           path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/notes/:id`} 
           component={AcademicUse}

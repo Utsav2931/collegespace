@@ -1,9 +1,9 @@
-import classes from "../AddThings.module.css";
+import classes from "../AddPosts/AddPosts.module.css";
 import React, { Component } from "react";
 import BasicPadding from "../../../components/UI/BasicCompPadding/BasicLayout";
 import Textfield from "../../../components/UI/TextFormField/Textfield";
 import firebase from "../../../config/config";
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from "uuid";
 
 var currentdate = new Date();
 const db = firebase.firestore();
@@ -14,7 +14,6 @@ export class AddNotes extends Component {
       title: "",
       desc: "",
       createDate: currentdate,
-      image: "",
       categoryLable: "",
       id: "",
       link: "",
@@ -22,6 +21,7 @@ export class AddNotes extends Component {
       department: "",
       semester: "",
       subject: "",
+      author: "",
     },
     error: "",
   };
@@ -55,7 +55,8 @@ export class AddNotes extends Component {
         .doc(this.state.article.semester)
         .collection("subjects")
         .doc(this.state.article.subject)
-        .collection("notes").doc(id)
+        .collection("notes")
+        .doc(id)
         .set(article)
         .then((res) => {
           console.log(res);
@@ -66,18 +67,25 @@ export class AddNotes extends Component {
 
   uploadImageCallBack = (e) => {
     return new Promise(async (resolve, reject) => {
-      const file = e.target.files[0]
-      const filename = uuidv4()
-      storageRef.ref().child("pdf/" + filename).put(file).then(async snapshot => {
-        const downloadURL = await storageRef.ref().child("pdf/" + filename).getDownloadURL()
-        console.log(downloadURL)
-        resolve({
-          success: true,
-          data: { link: downloadURL }
-        })
-      })
-    })
-  }
+      const file = e.target.files[0];
+      const filename = uuidv4();
+      storageRef
+        .ref()
+        .child("pdf/" + filename)
+        .put(file)
+        .then(async (snapshot) => {
+          const downloadURL = await storageRef
+            .ref()
+            .child("pdf/" + filename)
+            .getDownloadURL();
+          console.log(downloadURL);
+          resolve({
+            success: true,
+            data: { link: downloadURL },
+          });
+        });
+    });
+  };
 
   onChangeArticleTitle = (value) => {
     this.setState({
@@ -93,6 +101,16 @@ export class AddNotes extends Component {
       article: {
         ...this.state.article,
         desc: value,
+      },
+    });
+    // console.log(this.state.article);
+  };
+
+  onChangeArticleAuthor = (value) => {
+    this.setState({
+      article: {
+        ...this.state.article,
+        author: value,
       },
     });
     // console.log(this.state.article);
@@ -147,21 +165,6 @@ export class AddNotes extends Component {
     console.log(this.state.article);
   };
 
-  // submitPost = () => {
-  //   let id = this.state.article.title;
-  //   const article = this.state.article;
-  //   id = id.split(" ").join("-");
-  //   article.id = id;
-  //   console.log(id);
-  //   db.collection("Posts")
-  //     .doc(id)
-  //     .set(article)
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
   render() {
     return (
       <BasicPadding>
@@ -181,10 +184,10 @@ export class AddNotes extends Component {
               onChange={(e) => this.onChangeArticleDesc(e.target.value)}
               title="Description"
             />
-            {/* <Textfield
-              onChange={(e) => this.onChangeArticleLink(e.target.value)}
-              title="Link"
-            /> */}
+            <Textfield
+              onChange={(e) => this.onChangeArticleAuthor(e.target.value)}
+              title="Author"
+            />
             <label className={classes.label}>College</label>
             <select
               className={classes.select}
@@ -240,36 +243,22 @@ export class AddNotes extends Component {
               Submit
             </button>
           </div>
-          {/* <div className={classes.img}>
-            <DropZone 
-            state = {this.state.article}
-            onChange={async (e) => {
-              const uploadState = await this.uploadImageCallBack(e);
-              if (uploadState.success) {
-                console.log("In Upload Success State");
-                console.log(uploadState.data.link);
-                this.setState({
-                  hasFeatureIamge: true,
-                  article: {
-                    ...this.state.article,
-                    image: uploadState.data.link,
-                  },
-                });
-              }
-            }}
 
-            />
-          </div> */}
           <div className={classes.drag_area}>
             <div className={classes.icon}>
               <i class="fas fa-cloud-upload-alt"></i>
             </div>
-            <header><h3>Select file to Upload</h3></header>
-        <br></br><br></br>
+            <header>
+              <h3>Select file to Upload</h3>
+            </header>
+            <br></br>
+            <br></br>
 
             <button>Browse File</button>
-            <input className={classes.filechossen}
-              type="file" accept = "file/*"
+            <input
+              className={classes.filechossen}
+              type="file"
+              accept="file/*"
               onChange={async (e) => {
                 const uploadState = await this.uploadImageCallBack(e);
                 if (uploadState.success) {

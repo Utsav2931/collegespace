@@ -13,10 +13,10 @@ body {
   background-color: #fff;
 } */
 
-code {
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
+} */
 
 /* header {
   display: flex;
@@ -57,7 +57,7 @@ header h1 {
 
 .faqs .faq .faq-question {
   position: relative;
-  font-size: 50px;
+  font-size: 45px;
   color: #fff;
   padding-right: 80px;
   transition: all 0.4s ease;
@@ -85,7 +85,7 @@ header h1 {
    -khtml-user-select: none; /* Konqueror HTML */
    -moz-user-select: none; /* Firefox */
    -ms-user-select: none; /* Internet Explorer/Edge */
-  font-size: 35px;
+  font-size: 31px;
   color: rgba(255, 255, 255, 0.7);
   max-height: 0;
   overflow-y: hidden;

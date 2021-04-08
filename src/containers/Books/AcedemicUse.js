@@ -36,8 +36,6 @@ class AcademicUse extends Component {
       .collection("subjects")
       .doc(array[6])
       .collection(array[5])
-      // .limit(8)
-      // .where("isPublished", "==", true)
       .get()
       .then((docs) => {
         if (!docs.empty) {

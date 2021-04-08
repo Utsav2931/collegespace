@@ -26,7 +26,6 @@ class Subject extends Component {
 
   getMyArtical = () => {
     console.log("in getMyArtical");
-    // console.log(this.props.location.pathname);
     console.log(arrayy);
 
     db.collection("academics")
@@ -64,10 +63,6 @@ class Subject extends Component {
 
   render() {
     return (
-      //   state={this.state}
-      //   variable = {this.state.subjects}
-      //   propsIds={this.props}
-      //   // sub={this.state.subjects.subject}
       <BasicLayout>
         <div className={classes.GeneralPage}>
           <div className={classes.div}>

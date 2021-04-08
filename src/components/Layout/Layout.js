@@ -3,7 +3,6 @@ import classes from "./Layout.module.css";
 import Aux from "../../hoc/AAux";
 import NavBar from "../Navigation/Navbar";
 import Modal from "../UI/Modal/Modal";
-import Textfield from "../UI/TextFormField/Textfield";
 import Checkbox from "../UI/CheckBox/Checkbox";
 import ContentBuilder from "../../containers/ContentBuilder/ContentBuilder";
 
@@ -26,16 +25,9 @@ class Layout extends Component {
     this.setState({ show: false });
   };
 
-  // handleChange = (collegeName) => {
-  //   this.setState({
-  //     college: collegeName,
-  //   });
-  //   console.log(this.state.college);
-  // };
 
   handleFormSubmit = () => {
     const { college, department, semester } = this.state;
-    // localStorage.setItem("rememberMe", rememberMe);
     localStorage.setItem("college", college ? college : "");
     localStorage.setItem("department", department ? department : "");
     localStorage.setItem("semester", semester ? semester : "");
@@ -320,9 +312,6 @@ class Layout extends Component {
             </button>
           </div>
         </Modal>
-        {/* <button type="button" onClick={this.showModal}>
-          Open
-        </button> */}
       </Aux>
     );
   }

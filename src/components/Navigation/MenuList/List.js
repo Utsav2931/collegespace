@@ -30,13 +30,6 @@ const Questions = (props) => {
     },
   ]);
 
-  // setfaqs(
-  //   faqs.route.map((faq, i) => {
-  //     console.log(i);
-
-  //     console.log(faq.route[i]);
-  //   })
-  // );
 
   const toggleFAQ = (index) => {
     console.log(academicsPath);
