@@ -174,15 +174,16 @@ export class Add extends Component {
               <i class="fas fa-cloud-upload-alt"></i>
             </div> */}
             <header><h3>Select file to Upload</h3></header>
+
             <br></br><br></br>
 
             <input className={classes.filechossen}
-              type="file"
+              type="file" accept="image/x-png,image/gif,image/jpeg"
               onChange={async (e) => {
                 const uploadState = await this.uploadImageCallBack(e);
                 if (uploadState.success) {
                   console.log("In Upload Success State");
-                  alert("Your image has been succesfully uploaded 👍, you can upload second image if you want");
+                  alert("Your image has been successfully uploaded 👍, you can upload second image if you want");
                   console.log(uploadState.data.link);
                   this.setState({
                     hasFeatureIamge: true,

@@ -60,6 +60,7 @@ export class AddNotes extends Component {
         .set(article)
         .then((res) => {
           console.log(res);
+          alert("Your notes has been successfully uploaded 👍");
         })
         .catch((err) => console.log(err));
     }
@@ -248,21 +249,18 @@ export class AddNotes extends Component {
             <div className={classes.icon}>
               <i class="fas fa-cloud-upload-alt"></i>
             </div>
-            <header>
-              <h3>Select file to Upload</h3>
-            </header>
-            <br></br>
-            <br></br>
+            <header><h3>Select pdf file to Upload</h3></header>
+            <br></br><br></br>
 
-            <button>Browse File</button>
-            <input
-              className={classes.filechossen}
-              type="file"
-              accept="file/*"
+           
+            <input className={classes.filechossen}
+            
+              type="file" accept="application/pdf"
               onChange={async (e) => {
                 const uploadState = await this.uploadImageCallBack(e);
                 if (uploadState.success) {
                   console.log("In Upload Success State");
+                  alert("Your pdf has been successfully uploaded 👍, click on submit button to make your notes visible");
                   console.log(uploadState.data.link);
                   this.setState({
                     hasFeatureIamge: true,
