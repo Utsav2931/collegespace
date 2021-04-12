@@ -236,6 +236,7 @@ export class AddNotes extends Component {
               </option>
               <option name="BEEE">BEEE</option>
               <option name="Cprogramming">Cprogramming</option>
+              <option name="EE">EE</option>
             </select>
             <button
               onClick={(e) => this.handleValidation(e)}

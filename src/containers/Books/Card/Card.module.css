@@ -6,6 +6,7 @@
   background-color: transparent;
   position: relative;
   margin-bottom: 30px;
+  transition: all 0.3s ease-in-out;
   /* padding: 0.5em; */
 }
 
@@ -57,6 +58,10 @@
 }
 
 /* .card:hover::before {
+  transform: scale(1.03);
+} */
+
+/* .Book:hover::before {
   transform: scale(1.03);
 } */
 
