@@ -20,30 +20,14 @@ const Category = (props) => {
             type="Dep"
             value={`${props.path[2].toUpperCase()} - ${props.path[3].toUpperCase()}`}
           />
-
-          <Title
-            type="Subject"
-            value={props.sub.toUpperCase()}
-          />
-
-          <Title
-            type="Semester"
-            value={`${props.path[4].toUpperCase()}`}
-          />
-          {/* <Title type="College" value="CSPIT" /> */}
+          <Title type="Subject" value={props.sub.toUpperCase()} />
+          <Title type="Semester" value={`${props.path[4].toUpperCase()}`} />
         </div>
       </div>
 
       <div>
-        <button
-          //   onClick={(e) => this.handleValidation(e)}
-          className={classes.cardbutton}
-        >
-          Filter
-        </button>
+        <button className={classes.cardbutton}>Filter</button>
       </div>
-
-      {/* <div>Hello</div> */}
     </div>
   );
 };
