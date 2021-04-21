@@ -5,8 +5,8 @@ import Textfield from "../../../components/UI/TextFormField/Textfield";
 import firebase from "../../../config/config";
 import { v4 as uuidv4 } from "uuid";
 
-const deptce = ["ce", "it", "mech", "civil", "ec"]
-const deptdep = ["ce", "cse", "it"]
+const deptce = ["ce", "it", "mech", "civil", "ec"];
+const deptdep = ["ce", "cse", "it"];
 var currentdate = new Date();
 const db = firebase.firestore();
 const storageRef = firebase.storage();
@@ -31,18 +31,20 @@ export class AddNotes extends Component {
   };
 
   handleValidation() {
-    const { title, desc, image, categoryLable, link } = this.state;
+    const { title, desc, image, categoryLable, link, author } = this.state;
 
     // only each block with generate error
-    if (desc == "") {
+    if (desc == null) {
       this.setState({
-        error: "DESC is not null",
+        error: "DESC is not valid",
       });
-    } else if (title == "") {
+    } else if (title == null) {
       this.setState({ error: "title is not valid" });
-    } else if (categoryLable == "") {
+    } else if (author == null) {
+      this.setState({ error: "Author is not valid" });
+    } else if (categoryLable == null) {
       this.setState({ error: "category is not valid" });
-    } else if (link == "") {
+    } else if (link == null) {
       this.setState({ error: "link is not valid" });
     } else {
       this.setState({ error: "" });
@@ -133,14 +135,13 @@ export class AddNotes extends Component {
   onChangeCollege = (value) => {
     if (value == "cspit") {
       this.setState({
-        dept: deptce
-      })
-      console.log("dept:" + this.state.dept)
-    }
-    else if (value == 'depstar') {
+        dept: deptce,
+      });
+      console.log("dept:" + this.state.dept);
+    } else if (value == "depstar") {
       this.setState({
-        dept: deptdep
-      })
+        dept: deptdep,
+      });
     }
 
     this.setState({
@@ -225,11 +226,9 @@ export class AddNotes extends Component {
               <option value="" disabled selected>
                 Department
               </option>
-              {
-                this.state.dept.map((e) => {
-                  return (<option name={e}>{e}</option>)
-                })
-              }
+              {this.state.dept.map((e) => {
+                return <option name={e}>{e}</option>;
+              })}
               {/* <option name="ce">ce</option>
               <option name="it">it</option> */}
             </select>
@@ -242,11 +241,9 @@ export class AddNotes extends Component {
               <option value="" disabled selected>
                 Semester
               </option>
-              {
-                this.state.opt.map((e) => {
-                  return (<option name={e}>{e}</option>)
-                })
-              }
+              {this.state.opt.map((e) => {
+                return <option name={e}>{e}</option>;
+              })}
               {/* <option name="1">1</option>
               <option name="2">2</option>
               <option name="3">3</option> */}
@@ -277,17 +274,24 @@ export class AddNotes extends Component {
               <i class="fas fa-cloud-upload-alt"></i>
             </div>
             <header>Select pdf file to Upload</header>
-            <br></br><br></br>
+            {/* <br></br><br></br> */}
 
+            <label for="fileImage" className={classes.btn}>
+              Upload Image
+            </label>
 
-            <input className={classes.filechossen}
-
-              type="file" accept="application/pdf"
+            <input
+              className={classes.filechossen}
+              id="fileImage"
+              type="file"
+              accept="application/pdf"
               onChange={async (e) => {
                 const uploadState = await this.uploadImageCallBack(e);
                 if (uploadState.success) {
                   console.log("In Upload Success State");
-                  alert("Your pdf has been successfully uploaded 👍, click on submit button to make your notes visible");
+                  alert(
+                    "Your pdf has been successfully uploaded 👍, click on submit button to make your notes visible"
+                  );
                   console.log(uploadState.data.link);
                   this.setState({
                     hasFeatureIamge: true,

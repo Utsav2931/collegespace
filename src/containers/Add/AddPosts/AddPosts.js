@@ -6,7 +6,7 @@ import firebase from "../../../config/config";
 import { v4 as uuidv4 } from "uuid";
 
 var index = 0;
-var calluploadfunction = false
+var calluploadfunction = false;
 
 var currentdate = new Date();
 var files = [];
@@ -27,20 +27,27 @@ export class Add extends Component {
     error: "",
   };
   uploadImageCallBack = (e) => {
-    console.log("IN IMAGE " + e)
+    console.log("IN IMAGE " + e);
     return new Promise(async (resolve, reject) => {
-      const file = e
-      const filename = uuidv4()
-      storageRef.ref().child("post/image/" + filename).put(file).then(async snapshot => {
-        const downloadURL = await storageRef.ref().child("post/image/" + filename).getDownloadURL()
-        console.log(downloadURL)
-        resolve({
-          success: true,
-          data: { link: downloadURL }
-        })
-      })
-    })
-  }
+      const file = e;
+      const filename = uuidv4();
+      storageRef
+        .ref()
+        .child("post/image/" + filename)
+        .put(file)
+        .then(async (snapshot) => {
+          const downloadURL = await storageRef
+            .ref()
+            .child("post/image/" + filename)
+            .getDownloadURL();
+          console.log(downloadURL);
+          resolve({
+            success: true,
+            data: { link: downloadURL },
+          });
+        });
+    });
+  };
   callbk = (e) => {
     return new Promise(async (resolve, reject) => {
       const uploadState = await this.uploadImageCallBack(e);
@@ -55,37 +62,38 @@ export class Add extends Component {
             image: [...this.state.article.image, uploadState.data.link],
           },
         });
-        console.log(this.state.article.image)
+        console.log(this.state.article.image);
       }
-      resolve({ success: true })
-    })
-  }
+      resolve({ success: true });
+    });
+  };
 
   handleValidation() {
     return new Promise(async (resolve, reject) => {
       const { title, desc, image, categoryLable, link } = this.state;
 
       // only each block with generate error
-      if (desc == "") {
+      if (desc == null) {
         this.setState({
-          error: "DESC is not null",
+          error: "DESC is not valid",
         });
-      } else if (title == "") {
+      } else if (title == null) {
         this.setState({ error: "title is not valid" });
-      } else if (categoryLable == "") {
+      } else if (categoryLable == null) {
         this.setState({ error: "category is not valid" });
-      } else if (link == "") {
+      } else if (link == null) {
         this.setState({ error: "link is not valid" });
       } else {
-        const len = files.length
-        console.log(len)
+        const len = files.length;
+        console.log(len);
         for (var i = 0; i < len; i++) {
-          const rand = await this.callbk(files[i])
-          if (rand.success) {}
+          const rand = await this.callbk(files[i]);
+          if (rand.success) {
+          }
         }
-        this.uploadPost()
+        this.uploadPost();
       }
-    })
+    });
   }
 
   uploadPost = () => {
@@ -103,7 +111,7 @@ export class Add extends Component {
         alert("Your post has been succesfully uploaded 👍");
       })
       .catch((err) => console.log(err));
-  }
+  };
 
   fileAdded = (e) => {
     // const file = e.target.files[index]
@@ -112,18 +120,22 @@ export class Add extends Component {
     // index++
     var len = 0;
     for (const f in e.target.files) {
-      len++ 
+      len++;
     }
     //files = [...files,e.target.files[0]]//1
-    for(var i = 0; i < len/2; i++) {
-      files = [...files,e.target.files[i]]
-      console.log(files[i])
-      console.log(files.length)
+    for (var i = 0; i < len / 2; i++) {
+      files = [...files, e.target.files[i]];
+      console.log(files[i]);
+      console.log(files.length);
     }
-   
-  }
+  };
 
-
+  displayFileNames = () => {
+      for(let i=0; i< files.length; i++){
+        console.log(files[i].name);
+          return files[i].name;
+      }
+  };
 
   onChangeArticleTitle = (value) => {
     this.setState({
@@ -228,9 +240,15 @@ export class Add extends Component {
 
             {/* <br></br>
             <br></br> */}
-
-            <input className={classes.filechossen}
-              type="file" multiple accept="image/x-png,image/gif,image/jpeg"
+            <label for="fileImage"className={classes.btn}>
+                Upload Image
+            </label>
+            <input
+              className={classes.filechossen}
+              type="file"
+              multiple
+              id="fileImage"
+              accept="image/x-png,image/gif,image/jpeg"
               // onChange={async (e) => {
               //   const uploadState = await this.uploadImageCallBack(e);
               //   if (uploadState.success) {
@@ -246,8 +264,14 @@ export class Add extends Component {
               //     });
               //   }
               // }}
-              onChange={(e) => { this.fileAdded(e) }}
+              onChange={(e) => {
+                this.fileAdded(e);
+              }}
             ></input>
+
+            {this.displayFileNames()}
+
+
           </div>
         </div>
       </BasicPadding>

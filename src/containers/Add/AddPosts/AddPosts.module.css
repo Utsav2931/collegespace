@@ -41,7 +41,7 @@ select:focus {
 
 .drag_area {
   /* border: 2px dashed #fff; */
-  max-height: 40%;
+  max-height: fit-content;
   max-width: 50%;
   background-color: #ffeee4;
   border-radius: 5px;
@@ -89,7 +89,30 @@ select:focus {
 .filechossen {
   color: red;
   overflow: hidden;
+  visibility: hidden;
 }
+
+.btn{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ff590b;
+  border: none;
+  border-radius: 5px;
+  width: fit-content;
+  height: 45px;
+  padding: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+  margin-top: 10px;
+  box-shadow: 0px 6px 18px -5px rgb(237, 133, 85);
+}
+
+/* .btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 17px 20px -6px rgba(187, 195, 204, 0.36);
+} */
 
 .cardbutton {
   position: relative;
@@ -98,6 +121,7 @@ select:focus {
   cursor: pointer;
   margin: 1em 0;
   border-radius: 4px;
+  border-color: #ff590b;
   box-shadow: 0px 4px 30px -6px rgba(36, 52, 70, 0.45);
   background: #ff590b;
   color: #fff;
@@ -108,11 +132,13 @@ select:focus {
   transition: all 0.3s ease-in-out;
 }
 
+.cardbutton:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 17px 20px -6px rgba(36, 52, 70, 0.36);
+}
+
 @media (max-width: 600px) {
-  .cardbutton:hover {
-    transform: scale(1.1);
-    box-shadow: 0px 17px 20px -6px rgba(36, 52, 70, 0.36);
-  }
+
   .col {
     flex-direction: column;
     justify-content: space-around;
@@ -122,8 +148,9 @@ select:focus {
   .drag_area {
     margin-left: 0;
     margin-bottom: 20px;
-    max-width: 500px;
-    height: 100%;
+    max-width: 100%;
+    height: fit-content;
+    padding: 20px;
   }
 
   .basicInput {
@@ -136,7 +163,21 @@ select:focus {
   }
 }
 
-@media screen and (max-width: 700px) {
+@media (min-width: 600px) and (max-width: 900px) {
+  .col {
+    flex-direction: column;
+    justify-content: space-around;
+    flex-direction: column-reverse;
+  }
+
+  .drag_area {
+    margin-left: 0;
+    margin-bottom: 20px;
+    max-width: 100%;
+    height: fit-content;
+    padding: 20px;
+  }
+
   .cardbutton:active {
     position: relative;
     bottom: auto;
@@ -149,5 +190,8 @@ select:focus {
   .drag_area header {
     font-size: 15px;
     /* color: #ff590b; */
+  }
+  .basicInput {
+    width: 100%;
   }
 }

@@ -4,22 +4,23 @@ import FAQ from "./ListIteam";
 let academicsPath;
 const Questions = (props) => {
   academicsPath = props.academicsPath;
-  let academicsResources = ["paper", "Books", "notes"];
+  let academicsResources = ["paper", "Books", "notes", "timetable"];
   const [faqs, setfaqs] = useState([
     {
       collection: "Academics",
-      answer: ["Papers", "Books", "Notes"],
+      answer: ["Papers", "Books", "Notes", "Timetable"],
       route: [
         `/academics/cspit/ce/1/paper`,
         `/academics/cspit/ce/1/Books`,
         `/academics/cspit/ce/1/notes`,
+        `/academics/cspit/ce/1/timetable`,
       ],
       open: false,
     },
     {
       collection: "Portal",
-      answer: ["Events", "Clubs", "Timetable", "FAQS"],
-      route: ["/events", "/clubs", "/time-table", "/faqs"],
+      answer: ["Events", "Clubs", "FAQS"],
+      route: ["/events", "/clubs", "/faqs"],
       open: false,
     },
     {
@@ -42,16 +43,15 @@ const Questions = (props) => {
       // }),
 
       faqs.map((faq, i) => {
-        console.log(i);
-        faqs[0].route.map((paths) => {
+        // console.log(i);
+        faqs[0].route.map((paths, index) => {
           // faqs[0].route[index] = (`/academics/${academicsPath}/${academicsResources[index]}`);
           // console.log(paths);
           props.isValid ? 
-          paths = `/academics/${academicsPath}/${academicsResources[i]}` : 
-          paths = `/academics/choose-path`
-          ;
+          paths = `/academics/${academicsPath}/${academicsResources[index]}` : 
+          paths = `/academics/choose-path`;
           // console.log(paths);
-          faqs[0].route[i] = paths;
+          faqs[0].route[index] = paths;
         });
         // console.log(faqs[0].route[i]);
         if (i === index) {
