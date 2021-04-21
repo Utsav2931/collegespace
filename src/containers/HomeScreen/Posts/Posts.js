@@ -10,6 +10,7 @@ const Posts = (props) =>
           key={post.id}
           image={post.image}
           link={post.link}
+          categoryLable = {post.categoryLable}
           // propss = {post}
         />
     );

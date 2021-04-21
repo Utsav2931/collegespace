@@ -47,15 +47,10 @@ export class Events extends Component {
 
   render() {
     return (
-      // <div className={classes.OuterDiv}>
       <BasicPadding>
-        <div >
-          <center><h1 className="contentHead3">Events</h1></center>
+          <h1 className="contentHead3">Events</h1>
           {this.state.isLoaded ? <EventFetch events={this.state.events} /> : ""}
-        </div>
       </BasicPadding>
-
-      // </div>
     );
   }
 }

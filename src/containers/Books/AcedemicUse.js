@@ -18,8 +18,6 @@ class AcademicUse extends Component {
     };
   }
 
-
-
   componentDidMount() {
     this.getMyArtical();
   }
@@ -62,6 +60,10 @@ class AcademicUse extends Component {
       });
   };
 
+  capitalizeFirstLetter = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   render() {
     return (
       // <GeneralPage
@@ -70,10 +72,37 @@ class AcademicUse extends Component {
       // propsIds={this.props}
       // sub={this.state.academicData.subject}
       // />
-      
 
       <BasicLayout>
-        <div className={classes.GeneralPage}>
+        <div className={classes.titleHeader}>{this.capitalizeFirstLetter(array[5])}</div>
+        {/* <div className={classes.GeneralPage}> */}
+        <div className={classes.headercontent}>
+          {array[2].toUpperCase()}-{array[3].toUpperCase()} /{" "}
+          {array[4].toUpperCase()} / {array[6].toUpperCase()}
+        </div>
+          <div className={classes.GeneralRow}>
+            {this.state.isLoaded ? (
+              this.state.academicData.map((variable, index) => {
+                return (
+                  <Book
+                    varr={variable}
+                    propp={this.props}
+                    path={array}
+                    key={index}
+                  />
+                );
+              })
+            ) : this.state.academicData == "" ? (
+              <div>No data</div>
+            ) : (
+              <div>Loading!!</div>
+            )}
+          </div>
+          {/* <div className={classes.right}>
+            <Category path={array} sub={array[6].toUpperCase()} />
+          </div> */}
+        {/* </div> */}
+        {/* <div className={classes.GeneralPage}>
           <div className={classes.div}>
             <p className={classes.titleHeader}>{array[5]}</p>
             <div className={classes.GeneralRow}>
@@ -92,7 +121,7 @@ class AcademicUse extends Component {
           <div className={classes.right}>
             <Category path={array} sub={array[6]} />
           </div>
-        </div>
+        </div> */}
       </BasicLayout>
     );
   }

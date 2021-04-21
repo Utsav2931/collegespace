@@ -8,12 +8,12 @@ import aboutus from "../AboutUs/AboutUs";
 import faq from "../Faq/faq";
 import Academics from "../Books/Subject";
 import AcademicUse from "../Books/AcedemicUse";
-import contactus from '../ContactUs/contactus'
+import contactus from "../ContactUs/contactus";
 import AddNotes from "../Add/AddNotes/AddNotes";
-
+import ErrorModal from "../../components/UI/ErrorModal/ErrorModal";
 
 export class ContentBuilder extends Component {
-  constructor(props){
+  constructor(props) {
     super();
   }
   render() {
@@ -26,19 +26,30 @@ export class ContentBuilder extends Component {
         <Route path="/clubs" component={aboutclubs} />
         <Route path="/about" component={aboutus} />
         <Route path="/faqs" component={faq} />
+        
         <Route
-          path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/notes/:id`} 
+          path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/notes/:id`}
           component={AcademicUse}
         />
         <Route
-          path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/paper/:id`} 
+          path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/paper/:id`}
           component={AcademicUse}
         />
-        <Route path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/Books/:id`}  component={AcademicUse} />
-        <Route path={`/Academics/:id/:id/:id/:id/:id`}  component={AcademicUse} />
-        <Route path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/:id`}  component={Academics} />
-        <Route path={`/Academics/:id/:id/:id/:id`}  component={Academics} />
+        <Route
+          path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/Books/:id`}
+          component={AcademicUse}
+        />
+        <Route
+          path={`/Academics/:id/:id/:id/:id/:id`}
+          component={AcademicUse}
+        />
+        <Route
+          path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/:id`}
+          component={Academics}
+        />
+        <Route path={`/Academics/:id/:id/:id/:id`} component={Academics} />
         <Route path="/contact-us" component={contactus} />
+        <Route  path="/academics/choose-path" component={(props) => <ErrorModal onclick={this.props.onclick} />} />
       </Switch>
     );
   }

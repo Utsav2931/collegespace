@@ -5,6 +5,7 @@ import NavBar from "../Navigation/Navbar";
 import Modal from "../UI/Modal/Modal";
 import Checkbox from "../UI/CheckBox/Checkbox";
 import ContentBuilder from "../../containers/ContentBuilder/ContentBuilder";
+import ErrorModal from "../UI/ErrorModal/ErrorModal";
 
 class Layout extends Component {
   constructor() {
@@ -25,14 +26,13 @@ class Layout extends Component {
     this.setState({ show: false });
   };
 
-
   handleFormSubmit = () => {
     const { college, department, semester } = this.state;
     localStorage.setItem("college", college ? college : "");
     localStorage.setItem("department", department ? department : "");
     localStorage.setItem("semester", semester ? semester : "");
     this.setState({ show: false });
-    
+
     window.location = "/";
   };
 
@@ -65,6 +65,7 @@ class Layout extends Component {
   };
 
   render() {
+    // <ErrorModal onclick={() => this.showModal()}></ErrorModal>
     return (
       <Aux>
         <NavBar
@@ -76,10 +77,13 @@ class Layout extends Component {
         />
         <main className={classes.Content}>
           <ContentBuilder
+            onclick={() => this.showModal()}
             college={this.state.college}
             department={this.state.department}
             semester={this.state.semester}
+            
           />
+
           {/* {this.props.children} */}
         </main>{" "}
         <Modal show={this.state.show} handleClose={this.hideModal}>
@@ -88,7 +92,7 @@ class Layout extends Component {
           <div className={classes.outerdiv}>
             <legend className={classes.lable}>College</legend>
             <div className={classes.collegeSelection}>
-              <Checkbox 
+              <Checkbox
                 title="CSPIT"
                 value="cspit"
                 name="college"

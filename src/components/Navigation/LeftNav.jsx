@@ -104,7 +104,7 @@ const Di = styled.div`
     color: #000;
   }
 `;
-const LeftNav = ({ open, close, academicsPath }) => {
+const LeftNav = ({ open, close, academicsPath, isValid }) => {
   return (
     <Aux>
       <Backdrop show={open} clicked={close} />
@@ -115,7 +115,7 @@ const LeftNav = ({ open, close, academicsPath }) => {
               <Di>Home</Di>
             </li>
           </Link>
-          <Accordion academicsPath={academicsPath} onClick={close} />
+          <Accordion academicsPath={academicsPath} isValid={isValid} onClick={close} />
           <Link style={{ textDecoration: "none" }} to="/about" onClick={close}>
             <li>
               <Di>About</Di>

@@ -1,16 +1,15 @@
 import React from "react";
 import classes from "./post.module.css";
 import { Carousel } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import placeholder from "../../../../assets/Images/books.png";
 import cx from "classnames";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Link } from "react-router-dom";
 
 const post = (props) => {
   if (props.image !== null) {
     return (
       <div className={classes.Post}>
-        <div className={classes.heading}>{props.title}</div>
-        
+        <div className={classes.categoryLable}>{props.categoryLable}</div>
         <Carousel controls={TextTrackCueList}>
           {props.image.map((pic) => {
             console.log(pic);
@@ -25,15 +24,22 @@ const post = (props) => {
             );
           })}
         </Carousel>
+
+        <div className={classes.heading}>{props.title}</div>
+
+        <div className={classes.desc}>{props.dess}</div>
         
-        <p className={classes.text}>{props.dess}</p>
-        {props.link != null ? <a
-          href={props.link}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Click here
-        </a> : <div></div>}
+          <a
+            style={{ textDecoration: "none" }}
+            className={
+              props.link != "" ? classes.linkButton : classes.noLinkButton
+            }
+            href={props.link}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Link here
+          </a>
       </div>
     );
   }

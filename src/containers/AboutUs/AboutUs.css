@@ -101,3 +101,12 @@
   }
   
   
+  
+@media (max-width: 600px) {
+  .navbar .container {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns:0 ;
+    grid-gap: 0;
+  }
+}

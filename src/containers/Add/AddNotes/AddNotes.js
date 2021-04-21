@@ -276,7 +276,7 @@ export class AddNotes extends Component {
             <div className={classes.icon}>
               <i class="fas fa-cloud-upload-alt"></i>
             </div>
-            <header><h3>Select pdf file to Upload</h3></header>
+            <header>Select pdf file to Upload</header>
             <br></br><br></br>
 
 

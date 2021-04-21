@@ -22,6 +22,7 @@ const Category = (props) => {
           />
           <Title type="Subject" value={props.sub.toUpperCase()} />
           <Title type="Semester" value={`${props.path[4].toUpperCase()}`} />
+          
         </div>
       </div>
 

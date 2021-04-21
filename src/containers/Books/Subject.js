@@ -6,6 +6,7 @@ import firebase from "../../config/config";
 import GeneralPage from "./GeneralPage";
 import { Link } from "react-router-dom";
 import classes from "./GeneralPage.module.css";
+import Loader from "../../components/UI/Loader/Loader";
 
 const db = firebase.firestore();
 var arrayy;
@@ -61,10 +62,42 @@ class Subject extends Component {
       });
   };
 
+  capitalizeFirstLetter = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
   render() {
     return (
       <BasicLayout>
-        <div className={classes.GeneralPage}>
+        <div className={classes.titleHeader}>
+          {this.capitalizeFirstLetter(this.props.match.params.id)}
+        </div>
+        <div className={classes.headercontent}>
+          {arrayy[2].toUpperCase()}-{arrayy[3].toUpperCase()} /{" "}
+          {arrayy[4].toUpperCase()} / Select Subject
+        </div>
+        {/* <div className={classes.GeneralPage}> */}
+          <div className={classes.GeneralRow}>
+            {this.state.isLoaded ? (
+              this.state.subjects.map((variable, index) => {
+                return (
+                  <Card
+                    varr={variable}
+                    propp={this.props}
+                    path={arrayy}
+                    key={index}
+                  />
+                );
+              })
+            ) : (
+              <Loader/>
+            )}
+          </div>
+          {/* <div className={classes.right}>
+            <Category path={arrayy} sub="Select Subject" />
+          </div>
+        </div> */}
+        {/* <div className={classes.GeneralPage}>
           <div className={classes.div}>
             <p className={classes.titleHeader}>{this.props.match.params.id}</p>
             <div className={classes.GeneralRow}>
@@ -83,7 +116,7 @@ class Subject extends Component {
           <div className={classes.right}>
             <Category path={arrayy} sub="Select Subject" />
           </div>
-        </div>
+        </div> */}
       </BasicLayout>
     );
   }

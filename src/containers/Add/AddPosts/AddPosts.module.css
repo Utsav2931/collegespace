@@ -7,91 +7,89 @@
   display: flex;
   flex-direction: column;
   width: 60%;
-  
+
   /* background-color:aqua; */
 }
 
-
-
 .label {
-    display: flex;
-    flex-direction: column;
-  }
+  display: flex;
+  flex-direction: column;
+}
 
-  .select{
-    width: 50%;
-    height: 50px;
-    border-radius: 5px;
-    box-shadow: none;
-    border: 1px solid #ced6e0;
-    transition: all 0.3s ease-in-out;
-    font-size: 18px;
-    padding: 5px 15px;
-    background: none;
-    color: #1a3b5d;
-    margin: 0.5em 0;
-  }
+.select {
+  width: 50%;
+  height: 50px;
+  border-radius: 5px;
+  box-shadow: none;
+  border: 1px solid #ced6e0;
+  transition: all 0.3s ease-in-out;
+  font-size: 18px;
+  padding: 5px 15px;
+  background: none;
+  color: #1a3b5d;
+  margin: 0.5em 0;
+}
 
-  select:hover,
-  select:focus {
-    border-color: #1f1f1f;
-  }
+select:hover,
+select:focus {
+  border-color: #1f1f1f;
+}
 
-  select:focus {
-    box-shadow: 0px 10px 20px -13px rgba(32, 56, 117, 0.45);
-  }
+select:focus {
+  box-shadow: 0px 10px 20px -13px rgba(32, 56, 117, 0.45);
+}
 
-
-  .drag_area{
-    border: 2px dashed #fff;
-    height: 320px;
-    width: 420px;
-    background-color: #ff590b;
-    border-radius: 5px;
-    display: flex;
-    margin-left: 50PX;
-    margin-top: 50px;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-  .drag_area.active{
-    border: 2px solid #fff;
-  }
-  .drag_area .icon{
-    font-size: 100px;
-    color: #fff;
-  }
-  .drag_area header{
-    font-size: 20px;
-    font-weight: 100;
-    color: #fff;
-  }
-  .drag_area span{
-    font-size: 25px;
-    font-weight: 500;
-    color: #fff;
-    margin: 10px 0 15px 0;
-  }
-  .drag_area input{
-    padding: 10px 25px;
-    font-size: 20px;
-    font-weight: 500;
-    margin-left: 250px;
-    border: none;
-    outline: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .drag_area .img{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 5px;
-  }
-  .filechossen{
-    color: #fff;
-  }
+.drag_area {
+  /* border: 2px dashed #fff; */
+  max-height: 40%;
+  max-width: 50%;
+  background-color: #ffeee4;
+  border-radius: 5px;
+  display: flex;
+  margin-left: 50px;
+  /* margin-top: 50px; */
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.drag_area.active {
+  border: 2px solid #fff;
+}
+.drag_area .icon {
+  font-size: 100px;
+  color: #fff;
+}
+.drag_area header {
+  font-size: 20px;
+  color: #ff590b;
+}
+.drag_area span {
+  font-size: 25px;
+  font-weight: 500;
+  color: #ff590b;
+  /* margin: 10px 0 15px 0; */
+}
+.drag_area input {
+  /* padding: 10px 25px; */
+  font-size: 20px;
+  font-weight: 500;
+  /* margin-left: 250px; */
+  width: 60%;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.drag_area .img {
+  height: fit-content;
+  width: fit-content;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.filechossen {
+  color: red;
+  overflow: hidden;
+}
 
 .cardbutton {
   position: relative;
@@ -110,10 +108,31 @@
   transition: all 0.3s ease-in-out;
 }
 
-@media screen and (min-width: 500px) {
+@media (max-width: 600px) {
   .cardbutton:hover {
     transform: scale(1.1);
     box-shadow: 0px 17px 20px -6px rgba(36, 52, 70, 0.36);
+  }
+  .col {
+    flex-direction: column;
+    justify-content: space-around;
+    flex-direction: column-reverse;
+  }
+
+  .drag_area {
+    margin-left: 0;
+    margin-bottom: 20px;
+    max-width: 500px;
+    height: 100%;
+  }
+
+  .basicInput {
+    width: 100%;
+  }
+
+  .drag_area header {
+    font-size: 15px;
+    /* color: #ff590b; */
   }
 }
 
@@ -126,6 +145,9 @@
     transform: scale(1.1);
     box-shadow: 0px 17px 20px -6px rgba(36, 52, 70, 0.36);
   }
+
+  .drag_area header {
+    font-size: 15px;
+    /* color: #ff590b; */
+  }
 }
-
-

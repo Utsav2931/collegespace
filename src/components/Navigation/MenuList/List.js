@@ -46,7 +46,10 @@ const Questions = (props) => {
         faqs[0].route.map((paths) => {
           // faqs[0].route[index] = (`/academics/${academicsPath}/${academicsResources[index]}`);
           // console.log(paths);
-          paths = `/academics/${academicsPath}/${academicsResources[i]}`;
+          props.isValid ? 
+          paths = `/academics/${academicsPath}/${academicsResources[i]}` : 
+          paths = `/academics/choose-path`
+          ;
           // console.log(paths);
           faqs[0].route[i] = paths;
         });

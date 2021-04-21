@@ -42,8 +42,8 @@ header h1 {
    -khtml-user-select: none; /* Konqueror HTML */
    -moz-user-select: none; /* Firefox */
    -ms-user-select: none; 
-    width: 100%;
-  max-width: 320px;
+    /* width: 100%; */
+  max-width:fit-content;
   cursor: pointer;
   margin: 0;
   padding: 0;
@@ -121,7 +121,7 @@ header h1 {
 
 @media (max-width: 600px) {
   .faqs{
-    max-width: 280px;
+    max-width: fit-content;
   }
   .faqs .faq .faq-question {
     font-size: 44px;

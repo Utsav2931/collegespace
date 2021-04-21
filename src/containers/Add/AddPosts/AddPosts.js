@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import BasicPadding from "../../../components/UI/BasicCompPadding/BasicLayout";
 import Textfield from "../../../components/UI/TextFormField/Textfield";
 import firebase from "../../../config/config";
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from "uuid";
 
 var index = 0;
 
@@ -40,6 +40,7 @@ export class Add extends Component {
     } else if (link == "") {
       this.setState({ error: "link is not valid" });
     } else {
+      //ahiya
       this.setState({ error: "" });
       let id = this.state.article.title;
       const article = this.state.article;
@@ -59,19 +60,26 @@ export class Add extends Component {
 
   uploadImageCallBack = (e) => {
     return new Promise(async (resolve, reject) => {
-      const file = e.target.files[index]
-      index++
-      const filename = uuidv4()
-      storageRef.ref().child("post/image/" + filename).put(file).then(async snapshot => {
-        const downloadURL = await storageRef.ref().child("post/image/" + filename).getDownloadURL()
-        console.log(downloadURL)
-        resolve({
-          success: true,
-          data: { link: downloadURL }
-        })
-      })
-    })
-  }
+      const file = e.target.files[index];
+      index++;
+      const filename = uuidv4();
+      storageRef
+        .ref()
+        .child("post/image/" + filename)
+        .put(file)
+        .then(async (snapshot) => {
+          const downloadURL = await storageRef
+            .ref()
+            .child("post/image/" + filename)
+            .getDownloadURL();
+          console.log(downloadURL);
+          resolve({
+            success: true,
+            data: { link: downloadURL },
+          });
+        });
+    });
+  };
 
   onChangeArticleTitle = (value) => {
     this.setState({
@@ -82,7 +90,6 @@ export class Add extends Component {
     });
     // console.log(this.state.article);
   };
-
 
   onChangeArticleAuthor = (value) => {
     this.setState({
@@ -173,23 +180,33 @@ export class Add extends Component {
             {/* <div className={classes.icon}>
               <i class="fas fa-cloud-upload-alt"></i>
             </div> */}
-            <header><h3>Select file to Upload</h3></header>
+            <header>Select file to Upload</header>
 
-            <br></br><br></br>
+            {/* <br></br>
+            <br></br> */}
 
-            <input className={classes.filechossen}
-              type="file" accept="image/x-png,image/gif,image/jpeg"
+            <input
+              className={classes.filechossen}
+              type="file"
+              multiple
+              accept="image/x-png,image/gif,image/jpeg"
+              name={this.state.article.image.length}
               onChange={async (e) => {
                 const uploadState = await this.uploadImageCallBack(e);
                 if (uploadState.success) {
                   console.log("In Upload Success State");
-                  alert("Your image has been successfully uploaded 👍, you can upload second image if you want");
+                  alert(
+                    "Your image has been successfully uploaded 👍, you can upload second image if you want"
+                  );
                   console.log(uploadState.data.link);
                   this.setState({
                     hasFeatureIamge: true,
                     article: {
                       ...this.state.article,
-                      image: [...this.state.article.image, uploadState.data.link],
+                      image: [
+                        ...this.state.article.image,
+                        uploadState.data.link,
+                      ],
                     },
                   });
                 }

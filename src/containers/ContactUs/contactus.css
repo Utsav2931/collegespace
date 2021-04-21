@@ -1,10 +1,8 @@
 .contactus{
     width: 400px;
     margin: 0 auto;
-    height: 100vh;
 }
 .form {
-    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -60,5 +58,12 @@
   
   .form > button:hover {
     background-color:  #df6730;
+  }
+
+  @media (max-width: 600px) {
+    .contactus{
+      width: 100%;
+      
+  }
   }
   

@@ -34,7 +34,7 @@ const Nav = styled.nav`
   }
 
   .buttonStyle {
-    display: ${({ nulll }) => (nulll == null ? "" : "none")};
+    display: ${({ col,dep,sem }) => ((col == null || dep==null || sem==null) ? "" : "none")};
     background-color: #ff590b;
     border: none;
     border-radius: 5px;
@@ -50,12 +50,16 @@ const Nav = styled.nav`
   .path {
     color: black;
     cursor: pointer;
-    display: ${({ nulll }) => (nulll == null ? "none" : "")};
+    display: ${({ col,dep,sem }) => ((col == null || dep==null || sem==null) ? "none" : "")};
   }
   @media (max-width: 600px) {
     .path {
       display: none;
       color: black;
+    }
+
+    .buttonStyle{
+      display:none;
     }
 
     .logo {
@@ -67,17 +71,18 @@ const Nav = styled.nav`
 
 const Navbar = (props) => {
   let academicsPath = `${props.college}/${props.department}/${props.semester}`;
+  let isValid = (props.college == null || props.department == null || props.semester == null) ? false : true;
   return (
-    <Nav open={props.show} nulll={props.college}>
-      <Burger academicsPath={academicsPath} show={props.show} />
+    <Nav open={props.show} col={props.college} dep={props.department} sem={props.semester}>
+      <Burger academicsPath={academicsPath} isValid={isValid} show={props.show} />
       <Link style={{ textDecoration: "none" }} to="/"><p className="logo">CollegeSpace</p></Link>
 
       <button className="buttonStyle" type="button" onClick={props.onclick}>
         Branch
       </button>
-      <p onClick={props.onclick} className="path">
+      <div onClick={props.onclick} className="path">
         {academicsPath}
-      </p>
+      </div>
     </Nav>
   );
 };

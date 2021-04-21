@@ -54,7 +54,6 @@ export class Homescreen extends Component {
 
   getPosts = () => {
     db.collection("Posts")
-      .limit(8)
       .get()
       .then((docs) => {
         if (!docs.empty) {

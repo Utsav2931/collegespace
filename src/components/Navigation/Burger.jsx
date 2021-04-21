@@ -47,7 +47,7 @@ const Burger = (props) => {
         <div />
         <div />
       </StyledBurger>
-      <LeftNav open={open} close={() => setOpen(!open)} academicsPath={props.academicsPath}/>
+      <LeftNav open={open} close={() => setOpen(!open)} academicsPath={props.academicsPath} isValid={props.isValid}/>
     </>
   );
 };

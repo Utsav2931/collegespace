@@ -59,3 +59,15 @@
 	color: rgb(31, 17, 224);
 	box-shadow: 0 1x 4px 0 rgba(0, 0, 0, 0.05);
 } */
+
+@media (max-width: 600px) {
+  .checkbox-tools:checked + label,
+.checkbox-tools:not(:checked) + label{
+  width: 120px;
+  height: 70px;
+  padding: 10px;
+  font-size: 11px;
+}
+
+
+}
