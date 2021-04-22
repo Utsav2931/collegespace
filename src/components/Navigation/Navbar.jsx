@@ -74,7 +74,7 @@ const Navbar = (props) => {
   let isValid = (props.college == null || props.department == null || props.semester == null) ? false : true;
   return (
     <Nav open={props.show} col={props.college} dep={props.department} sem={props.semester}>
-      <Burger academicsPath={academicsPath} isValid={isValid} show={props.show} />
+      <Burger academicsPath={academicsPath} isValid={isValid} show={props.show} onclick={props.onclick} />
       <Link style={{ textDecoration: "none" }} to="/"><p className="logo">CollegeSpace</p></Link>
 
       <button className="buttonStyle" type="button" onClick={props.onclick}>

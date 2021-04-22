@@ -25,6 +25,20 @@ const Ul = styled.ul`
     color: white;
   }
 
+  .buttonStyle {
+    visibility: ${({ isValid }) => (isValid ? "hidden" : "visible")};
+    background-color: #ff590b;
+    border: none;
+    border-radius: 5px;
+    width: 80px;
+    padding: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    color: white;
+    margin-top: 10px;
+    box-shadow: 0px 6px 18px -5px rgb(237, 133, 85);
+  }
+
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 
@@ -74,7 +88,8 @@ const Ul = styled.ul`
   width: 50%;
   padding-top: 7.5rem;
   // transition: transform 0.07s ease-in-out;
-  transition: opacity 0 500ms cubic-bezier(0, .61, .28, .92), visibility 0s 500ms, transform 0 900ms;
+  transition: opacity 0 500ms cubic-bezier(0, 0.61, 0.28, 0.92),
+    visibility 0s 500ms, transform 0 900ms;
 
   @media (max-width: 600px) {
     width: 100%;
@@ -90,10 +105,9 @@ const Ul = styled.ul`
       rgba(255, 140, 7, 0.55) 86%,
       rgba(255, 145, 7, 0.45) 100%
     );
-    li{
-    font-size: 44px;
+    li {
+      font-size: 44px;
     }
-
   }
 `;
 
@@ -104,18 +118,23 @@ const Di = styled.div`
     color: #000;
   }
 `;
-const LeftNav = ({ open, close, academicsPath, isValid }) => {
+const LeftNav = ({ open, close, academicsPath, isValid, onclick }) => {
+  // console.log(isValid);
   return (
     <Aux>
       <Backdrop show={open} clicked={close} />
       <div>
-        <Ul open={open}>
+        <Ul open={open} isValid={isValid}>
           <Link style={{ textDecoration: "none" }} to="/" onClick={close}>
             <li>
               <Di>Home</Di>
             </li>
           </Link>
-          <Accordion academicsPath={academicsPath} isValid={isValid} onClick={close} />
+          <Accordion
+            academicsPath={academicsPath}
+            isValid={isValid}
+            onClick={close}
+          />
           <Link style={{ textDecoration: "none" }} to="/about" onClick={close}>
             <li>
               <Di>About</Di>
