@@ -4,7 +4,7 @@ import AddPost from "../Add/AddPosts/AddPosts";
 import Homescreen from "../HomeScreen/Homescreen";
 import Events from "../Events/Events";
 import aboutclubs from "../AboutClubs/aboutclubs";
-import aboutus from "../AboutUs/AboutUs";
+import aboutus from "../AboutUs/Aboutus";
 import faq from "../Faq/faq";
 import Academics from "../Books/Subject";
 import AcademicUse from "../Books/AcedemicUse";
