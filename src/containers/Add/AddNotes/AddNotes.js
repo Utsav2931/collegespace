@@ -9,8 +9,10 @@ const deptce = ["ce", "it", "mech", "civil", "ec"];
 const deptdep = ["ce", "cse", "it"];
 var currentdate = new Date();
 const db = firebase.firestore();
+const subject = ["toc", "dwdm", "ins", "ios", "pip"]
 const storageRef = firebase.storage();
 export class AddNotes extends Component {
+ 
   state = {
     article: {
       title: "",
@@ -28,6 +30,7 @@ export class AddNotes extends Component {
     error: "",
     opt: [1, 2, 3, 4, 5, 6, 7, 8],
     dept: [],
+    sub: []
   };
 
   handleValidation() {
@@ -164,13 +167,21 @@ export class AddNotes extends Component {
   };
 
   onChangeSem = (value) => {
+    if (value == 6) {
+      this.setState({
+        sub: subject,
+      });
+      console.log(value + " " + subject)
+    }
+
     this.setState({
       article: {
         ...this.state.article,
         semester: value,
+        //  sub: subject,
       },
     });
-    console.log(this.state.article);
+    console.log(this.state.sub);
   };
 
   onChangeSub = (value) => {
@@ -256,10 +267,9 @@ export class AddNotes extends Component {
             >
               <option value="" disabled selected>
                 Subject
-              </option>
-              <option name="BEEE">BEEE</option>
-              <option name="Cprogramming">Cprogramming</option>
-              <option name="EE">EE</option>
+              </option>{this.state.sub.map((e) => {
+                return <option name={e}>{e}</option>;
+              })}
             </select>
             <button
               onClick={(e) => this.handleValidation(e)}

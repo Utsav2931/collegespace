@@ -120,15 +120,18 @@ export class Add extends Component {
     // console.log(files[0])
     // index++
     var len = 0;
+    files = []
     for (const f in e.target.files) {
-      len++;
+      if(e.target.files.hasOwnProperty(f)) len++
     }
+    console.log("length "+len)
     //files = [...files,e.target.files[0]]//1
-    for (var i = 0; i < len / 2; i++) {
+    for (var i = 0; i < len ; i++) {
       files = [...files, e.target.files[i]];
       console.log(files[i]);
       console.log(files.length);
     }
+    alert('image has been uploaded successfully')
   };
 
   displayFileNames = () => {
