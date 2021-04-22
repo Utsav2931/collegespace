@@ -31,20 +31,28 @@ export class AddNotes extends Component {
   };
 
   handleValidation() {
-    const { title, desc, image, categoryLable, link, author } = this.state.article;
+    const { title, desc, image, semester, subject, department, college,  link, author } = this.state.article;
 
     // only each block with generate error
-    if (desc == null) {
+    if (desc == "") {
       this.setState({
         error: "DESC is not valid",
       });
-    } else if (title == null) {
+    } else if (title == "") {
       this.setState({ error: "title is not valid" });
-    } else if (author == null) {
+    } else if (author == "") {
       this.setState({ error: "Author is not valid" });
-    } else if (categoryLable == null) {
-      this.setState({ error: "category is not valid" });
-    } else if (link == null) {
+    } else if (semester == "") {
+      this.setState({ error: "semester is not valid" });
+    } else if (subject == "") {
+      this.setState({ error: "subject is not valid" });
+    }
+    else if (department == "") {
+      this.setState({ error: "department is not valid" });
+    }
+    else if (college == "") {
+      this.setState({ error: "college is not valid" });
+    }else if (link == "") {
       this.setState({ error: "link is not valid" });
     } else {
       this.setState({ error: "" });

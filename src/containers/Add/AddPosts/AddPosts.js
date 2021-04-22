@@ -23,7 +23,7 @@ export class Add extends Component {
       categoryLable: "",
       id: "",
       link: "",
-      verified: false
+      verified: false,
     },
     error: "",
   };
@@ -71,19 +71,26 @@ export class Add extends Component {
 
   handleValidation() {
     return new Promise(async (resolve, reject) => {
-      const { title, desc, image, categoryLable, link } = this.state.article;
-      console.log(desc)
+      const {
+        title,
+        desc,
+        image,
+        categoryLable,
+        link,
+        author,
+      } = this.state.article;
+      console.log(desc);
       // only each block with generate error
-      if (desc == null) {
+      if (desc == "") {
         this.setState({
           error: "DESC is not valid",
         });
-      } else if (title == null) {
+      } else if (title == "") {
         this.setState({ error: "title is not valid" });
-      } else if (categoryLable == null) {
+      } else if (categoryLable == "") {
         this.setState({ error: "category is not valid" });
-      } else if (link == null) {
-        this.setState({ error: "link is not valid" });
+      }  else if (author == "") {
+        this.setState({ error: "author is not valid" });
       } else {
         const len = files.length;
         console.log(len);
@@ -92,7 +99,11 @@ export class Add extends Component {
           if (rand.success) {
           }
         }
-        this.uploadPost();
+        if (this.state.article.image == "") {
+          this.setState({ error: "Image can not be null" });
+        } else {
+          this.uploadPost();
+        }
       }
     });
   }
@@ -224,6 +235,7 @@ export class Add extends Component {
                 Label
               </option>
               <option name="education">Education</option>
+              <option name="education">Event</option>
               <option name="education">Sports</option>
             </select>
             <button
@@ -272,8 +284,6 @@ export class Add extends Component {
             ></input>
 
             {this.displayFileNames()}
-
-
           </div>
         </div>
       </BasicPadding>
