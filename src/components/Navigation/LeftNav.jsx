@@ -91,6 +91,13 @@ const Ul = styled.ul`
   transition: opacity 0 500ms cubic-bezier(0, 0.61, 0.28, 0.92),
     visibility 0s 500ms, transform 0 900ms;
 
+  .pathButton {
+    visibility: hidden;
+  }
+  .pathNavbar {
+    visibility: hidden;
+  }
+
   @media (max-width: 600px) {
     width: 100%;
     background: rgb(255, 89, 11);
@@ -108,6 +115,30 @@ const Ul = styled.ul`
     li {
       font-size: 44px;
     }
+
+    .pathButton {
+      visibility: ${({ isValid }) => (isValid == true ? "hidden" : "visible")};
+      display: ${({ isValid }) => (isValid == true ? "none" : "")};
+      background-color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      width: 140px;
+      height: 50px;
+      padding: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      color: #ff590b;
+      margin-top: 10px;
+      box-shadow: 0px 6px 18px -5px rgb(237, 133, 85);
+    }
+
+    .pathNavbar {
+      font-size: 21px;
+      color: black;
+      cursor: pointer;
+      display: ${({ isValid }) => (isValid == true ? "" : "none")};
+      visibility: ${({ isValid }) => (isValid == true ? "visible" : "hidden")};
+    }
   }
 `;
 
@@ -119,7 +150,7 @@ const Di = styled.div`
   }
 `;
 const LeftNav = ({ open, close, academicsPath, isValid, onclick }) => {
-  // console.log(isValid);
+  console.log(isValid);
   return (
     <Aux>
       <Backdrop show={open} clicked={close} />
@@ -149,6 +180,15 @@ const LeftNav = ({ open, close, academicsPath, isValid, onclick }) => {
               <Di>Contact Us</Di>
             </li>
           </Link>
+
+          <li>
+            <button className="pathButton" type="button" onClick={onclick}>
+              Branch
+            </button>
+            <div onClick={onclick} className="pathNavbar">
+              {academicsPath}
+            </div>
+          </li>
         </Ul>
       </div>
     </Aux>
