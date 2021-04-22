@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 
 const post = (props) => {
-  if (props.image !== null) {
+  if (props.image !== null ) {
     return (
       <div className={classes.Post}>
         <div className={classes.categoryLable}>{props.categoryLable}</div>

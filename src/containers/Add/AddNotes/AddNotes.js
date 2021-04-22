@@ -31,7 +31,7 @@ export class AddNotes extends Component {
   };
 
   handleValidation() {
-    const { title, desc, image, categoryLable, link, author } = this.state;
+    const { title, desc, image, categoryLable, link, author } = this.state.article;
 
     // only each block with generate error
     if (desc == null) {

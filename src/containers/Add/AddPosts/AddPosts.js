@@ -23,6 +23,7 @@ export class Add extends Component {
       categoryLable: "",
       id: "",
       link: "",
+      verified: false
     },
     error: "",
   };
@@ -70,8 +71,8 @@ export class Add extends Component {
 
   handleValidation() {
     return new Promise(async (resolve, reject) => {
-      const { title, desc, image, categoryLable, link } = this.state;
-
+      const { title, desc, image, categoryLable, link } = this.state.article;
+      console.log(desc)
       // only each block with generate error
       if (desc == null) {
         this.setState({
@@ -108,7 +109,7 @@ export class Add extends Component {
       .set(article)
       .then((res) => {
         console.log(res);
-        alert("Your post has been succesfully uploaded 👍");
+        alert("Your post has been uploaded for verification 👍");
       })
       .catch((err) => console.log(err));
   };
@@ -131,10 +132,10 @@ export class Add extends Component {
   };
 
   displayFileNames = () => {
-      for(let i=0; i< files.length; i++){
-        console.log(files[i].name);
-          return files[i].name;
-      }
+    for (let i = 0; i < files.length; i++) {
+      console.log(files[i].name);
+      return files[i].name;
+    }
   };
 
   onChangeArticleTitle = (value) => {
@@ -154,7 +155,7 @@ export class Add extends Component {
         author: value,
       },
     });
-    // console.log(this.state.article);
+    //console.log(this.state.article);
   };
 
   onChangeArticleDesc = (value) => {
@@ -164,7 +165,7 @@ export class Add extends Component {
         desc: value,
       },
     });
-    // console.log(this.state.article);
+    //console.log(this.state.article);
   };
   onChangeArticleLink = (value) => {
     this.setState({
@@ -223,6 +224,7 @@ export class Add extends Component {
                 Label
               </option>
               <option name="education">Education</option>
+              <option name="education">Sports</option>
             </select>
             <button
               onClick={async (e) => await this.handleValidation(e)}
@@ -240,8 +242,8 @@ export class Add extends Component {
 
             {/* <br></br>
             <br></br> */}
-            <label for="fileImage"className={classes.btn}>
-                Upload Image
+            <label for="fileImage" className={classes.btn}>
+              Upload Image
             </label>
             <input
               className={classes.filechossen}

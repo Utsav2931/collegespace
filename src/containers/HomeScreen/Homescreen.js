@@ -53,7 +53,7 @@ export class Homescreen extends Component {
   }
 
   getPosts = () => {
-    db.collection("Posts")
+    db.collection("Posts").where("verified", "==", true)
       .get()
       .then((docs) => {
         if (!docs.empty) {
