@@ -23,7 +23,7 @@ export class Add extends Component {
       categoryLable: "",
       id: "",
       link: "",
-      verified:false
+      verified: false
     },
     error: "",
   };
@@ -109,7 +109,7 @@ export class Add extends Component {
       .set(article)
       .then((res) => {
         console.log(res);
-        alert("Your post has been succesfully uploaded 👍");
+        alert("Your post has been uploaded for verification 👍");
       })
       .catch((err) => console.log(err));
   };
@@ -132,10 +132,10 @@ export class Add extends Component {
   };
 
   displayFileNames = () => {
-      for(let i=0; i< files.length; i++){
-        console.log(files[i].name);
-          return files[i].name;
-      }
+    for (let i = 0; i < files.length; i++) {
+      console.log(files[i].name);
+      return files[i].name;
+    }
   };
 
   onChangeArticleTitle = (value) => {
@@ -165,7 +165,7 @@ export class Add extends Component {
         desc: value,
       },
     });
-     //console.log(this.state.article);
+    //console.log(this.state.article);
   };
   onChangeArticleLink = (value) => {
     this.setState({
@@ -242,8 +242,8 @@ export class Add extends Component {
 
             {/* <br></br>
             <br></br> */}
-            <label for="fileImage"className={classes.btn}>
-                Upload Image
+            <label for="fileImage" className={classes.btn}>
+              Upload Image
             </label>
             <input
               className={classes.filechossen}
