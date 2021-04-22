@@ -3,6 +3,7 @@ import { Button } from "semantic-ui-react";
 import styled from "styled-components";
 import Burger from "./Burger";
 import classes from "../Layout/Layout.module.css";
+import { Link } from "react-router-dom";
 
 const Nav = styled.nav`
   width: 100%;
@@ -33,7 +34,7 @@ const Nav = styled.nav`
   }
 
   .buttonStyle {
-    display: ${({ nulll }) => (nulll == null ? "" : "none")};
+    display: ${({ col,dep,sem }) => ((col == null || dep==null || sem==null) ? "" : "none")};
     background-color: #ff590b;
     border: none;
     border-radius: 5px;
@@ -49,12 +50,16 @@ const Nav = styled.nav`
   .path {
     color: black;
     cursor: pointer;
-    display: ${({ nulll }) => (nulll == null ? "none" : "")};
+    display: ${({ col,dep,sem }) => ((col == null || dep==null || sem==null) ? "none" : "")};
   }
   @media (max-width: 600px) {
     .path {
       display: none;
       color: black;
+    }
+
+    .buttonStyle{
+      display:none;
     }
 
     .logo {
@@ -66,17 +71,18 @@ const Nav = styled.nav`
 
 const Navbar = (props) => {
   let academicsPath = `${props.college}/${props.department}/${props.semester}`;
+  let isValid = (props.college == null || props.department == null || props.semester == null) ? false : true;
   return (
-    <Nav open={props.show} nulll={props.college}>
-      <Burger academicsPath={academicsPath} show={props.show} />
-      <p className="logo">CollegeSpace</p>
+    <Nav open={props.show} col={props.college} dep={props.department} sem={props.semester}>
+      <Burger academicsPath={academicsPath} isValid={isValid} show={props.show} onclick={props.onclick} />
+      <Link style={{ textDecoration: "none" }} to="/"><p className="logo">CollegeSpace</p></Link>
 
       <button className="buttonStyle" type="button" onClick={props.onclick}>
         Branch
       </button>
-      <p onClick={props.onclick} className="path">
+      <div onClick={props.onclick} className="path">
         {academicsPath}
-      </p>
+      </div>
     </Nav>
   );
 };

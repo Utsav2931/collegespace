@@ -6,9 +6,6 @@ import BasicLayout from "../../components/UI/BasicCompPadding/BasicLayout";
 
 
 const GeneralPage = (props) => {
-    // console.log(props.variable.subject)
-    // let Pathlocation = props.propsIds.history.location.pathname;
-    // console.log(Pathlocation);
     console.log("In General page");
   return (
     <BasicLayout>

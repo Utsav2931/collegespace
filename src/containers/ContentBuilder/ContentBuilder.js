@@ -1,20 +1,22 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-import AddPost from "../Add/AddThingsPage";
+import AddPost from "../Add/AddPosts/AddPosts";
 import Homescreen from "../HomeScreen/Homescreen";
-import Oldpapers from "../Oldpapers/Oldpapers";
 import Events from "../Events/Events";
-import Notes from "../Notes/Notes";
 import aboutclubs from "../AboutClubs/aboutclubs";
-import aboutus from "../AboutUs/AboutUs";
+import aboutus from "../AboutUs/Aboutus";
 import faq from "../Faq/faq";
 import Academics from "../Books/Subject";
 import AcademicUse from "../Books/AcedemicUse";
-import contactus from '../ContactUs/contactus'
+import contactus from "../ContactUs/contactus";
 import AddNotes from "../Add/AddNotes/AddNotes";
-
+import ErrorModal from "../../components/UI/ErrorModal/ErrorModal";
+import Timetable from "../Books/TimeTable/Timetable";
 
 export class ContentBuilder extends Component {
+  constructor(props) {
+    super();
+  }
   render() {
     return (
       <Switch>
@@ -25,18 +27,38 @@ export class ContentBuilder extends Component {
         <Route path="/clubs" component={aboutclubs} />
         <Route path="/about" component={aboutus} />
         <Route path="/faqs" component={faq} />
-        {/* <Route path="/Academics" component={Books}/> */}
+
         <Route
-          path="/Academics/cspit/ce/1/notes/:id"
+          path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/notes/:id`}
           component={AcademicUse}
         />
         <Route
-          path="/Academics/cspit/ce/1/paper/:id"
+          path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/paper/:id`}
           component={AcademicUse}
         />
-        <Route path="/Academics/cspit/ce/1/Books/:id" component={AcademicUse} />
-        <Route path="/Academics/cspit/ce/1/:id" component={Academics} />
+        <Route
+          path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/Books/:id`}
+          component={AcademicUse}
+        />
+        <Route
+          path={`/Academics/:id/:id/:id/:id/:id`}
+          component={AcademicUse}
+        />
+
+        <Route
+          path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/timetable`}
+          component={Timetable}
+        />
+        <Route
+          path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/:id`}
+          component={Academics}
+        />
+        <Route path={`/Academics/:id/:id/:id/:id`} component={Academics} />
         <Route path="/contact-us" component={contactus} />
+        <Route
+          path="/academics/choose-path"
+          component={(props) => <ErrorModal onclick={this.props.onclick} />}
+        />
       </Switch>
     );
   }

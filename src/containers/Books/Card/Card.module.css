@@ -1,55 +1,92 @@
-.Book{
-    display: flex;
-    flex-direction: column;
-    max-width: 220px;
-    width: 100%;
-    background-color: transparent;
-    position: relative;
-    margin-bottom: 30px;
-    /* padding: 0.5em; */
+.Book {
+  display: flex;
+  flex-direction: column;
+  max-width: 230px;
+  width: 100%;
+  background-color: #ffffff;
+  position: relative;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
 }
 
-.cardImage{
+.cardImage {
   max-width: 100%;
+  /* width: 100%; */
+  /* width: 100%;
+  max-width: 230px; */
   display: block;
   margin: 0;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-
 }
 
-.text{
-    padding: 17px;
+.text {
+  padding: 10px;
+  margin-bottom: 20px;
 }
 
-.titleText{
-    font-size: 1.4em;
-    font-weight: 500;
+.titleText {
+  font-size: 1.4em;
+  font-weight: 500;
+  margin-bottom: -5px;
 }
 
-.descText{
-    font-size: 0.9em;
-    font-weight: 300;
+.descText {
+  font-size: 0.9em;
+  font-weight: 400;
+  color: #6e6a6a;
 }
 
+.authorText {
+  font-size: 0.77em;
+  font-weight: 500;
+  margin-bottom: -5px;
+  color: orangered;
+}
 
 .Book::before {
-    content: "";
-    height: inherit;
+  content: "";
+  height: inherit;
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  z-index: -1;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: block;
+  background-color: var(--c-background-1);
+  will-change: transform;
+  transform: scale(1);
+  border-radius: 10px;
+  box-shadow: 0px 0px 35px rgba(140, 152, 164, 0.18);
+}
+
+.Book:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 17px 20px -6px rgba(187, 195, 204, 0.36);
+}
+
+@media screen and (max-width: 458px) {
+  .Book {
     width: 100%;
-    position: absolute;
     height: 100%;
-    z-index: -1;
-    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    display: block;
-    background-color: var(--c-background-1);
-    will-change: transform;
-    transform: scale(1);
-    border-radius: 10px;
-    box-shadow: 0px 0px 35px rgba(140, 152, 164, 0.18);
+    margin-bottom: 0px;
+
+    /* max-width: 150px; */
   }
 
-  .card:hover::before {
-    transform: scale(1.03);
+  .titleText{
+    font-size: 1.1em;
   }
-  
+
+  .descText{
+    font-size: 0.6;
+  }
+}
+
+/* @media  (min-width: 650px) and (max-width: 900px) {
+  .Book {
+    max-width: 200px;
+    width: 100%; 
+  }
+} */

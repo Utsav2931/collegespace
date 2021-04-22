@@ -1,10 +1,8 @@
 .contactus{
     width: 400px;
     margin: 0 auto;
-    height: 100vh;
 }
 .form {
-    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -30,7 +28,7 @@
   
   .form > input:focus,
   textarea:focus {
-    border: 1px solid rgb(0, 0, 196);
+    border: 1px solid #ff590b;
   }
   
   .form > textarea {
@@ -48,7 +46,7 @@
   .form > button {
     padding: 20px;
     border: none;
-    background-color: rgb(2, 2, 110);
+    background-color:  #ff590b;
     font-weight: 500;
     font-size: 20px;
     border-radius: 3px;
@@ -59,6 +57,13 @@
   }
   
   .form > button:hover {
-    background-color: rgb(0, 0, 196);
+    background-color:  #df6730;
+  }
+
+  @media (max-width: 600px) {
+    .contactus{
+      width: 100%;
+      
+  }
   }
   

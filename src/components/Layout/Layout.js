@@ -3,8 +3,9 @@ import classes from "./Layout.module.css";
 import Aux from "../../hoc/AAux";
 import NavBar from "../Navigation/Navbar";
 import Modal from "../UI/Modal/Modal";
-import Textfield from "../UI/TextFormField/Textfield";
 import Checkbox from "../UI/CheckBox/Checkbox";
+import ContentBuilder from "../../containers/ContentBuilder/ContentBuilder";
+import ErrorModal from "../UI/ErrorModal/ErrorModal";
 
 class Layout extends Component {
   constructor() {
@@ -25,20 +26,14 @@ class Layout extends Component {
     this.setState({ show: false });
   };
 
-  // handleChange = (collegeName) => {
-  //   this.setState({
-  //     college: collegeName,
-  //   });
-  //   console.log(this.state.college);
-  // };
-
   handleFormSubmit = () => {
     const { college, department, semester } = this.state;
-    // localStorage.setItem("rememberMe", rememberMe);
     localStorage.setItem("college", college ? college : "");
     localStorage.setItem("department", department ? department : "");
     localStorage.setItem("semester", semester ? semester : "");
     this.setState({ show: false });
+
+    window.location = "/";
   };
 
   componentDidMount() {
@@ -70,6 +65,7 @@ class Layout extends Component {
   };
 
   render() {
+    // <ErrorModal onclick={() => this.showModal()}></ErrorModal>
     return (
       <Aux>
         <NavBar
@@ -79,8 +75,20 @@ class Layout extends Component {
           semester={this.state.semester}
           show={this.state.show}
         />
-        <main className={classes.Content}>{this.props.children}</main>{" "}
+        <main className={classes.Content}>
+          <ContentBuilder
+            onclick={() => this.showModal()}
+            college={this.state.college}
+            department={this.state.department}
+            semester={this.state.semester}
+            
+          />
+
+          {/* {this.props.children} */}
+        </main>{" "}
         <Modal show={this.state.show} handleClose={this.hideModal}>
+          {/* ================================================== */}
+
           <div className={classes.outerdiv}>
             <legend className={classes.lable}>College</legend>
             <div className={classes.collegeSelection}>
@@ -95,7 +103,7 @@ class Layout extends Component {
               <Checkbox
                 title="depstar"
                 name="college"
-                value="dep"
+                value="depstar"
                 checked={this.state.college}
                 id="c2"
                 OnchageValue={(e) => this.OnchangeValueCollege(e.target.value)}
@@ -263,7 +271,7 @@ class Layout extends Component {
                 name="semester"
                 checked={this.state.semester}
                 value="4"
-                id="s3"
+                id="s4"
                 OnchageValue={(e) => this.OnchangeValueSemester(e.target.value)}
               />
               <Checkbox
@@ -271,7 +279,7 @@ class Layout extends Component {
                 name="semester"
                 checked={this.state.semester}
                 value="5"
-                id="s3"
+                id="s5"
                 OnchageValue={(e) => this.OnchangeValueSemester(e.target.value)}
               />
               <Checkbox
@@ -279,7 +287,7 @@ class Layout extends Component {
                 name="semester"
                 checked={this.state.semester}
                 value="6"
-                id="s3"
+                id="s6"
                 OnchageValue={(e) => this.OnchangeValueSemester(e.target.value)}
               />
               <Checkbox
@@ -287,7 +295,7 @@ class Layout extends Component {
                 name="semester"
                 checked={this.state.semester}
                 value="7"
-                id="s3"
+                id="s7"
                 OnchageValue={(e) => this.OnchangeValueSemester(e.target.value)}
               />
               <Checkbox
@@ -295,7 +303,7 @@ class Layout extends Component {
                 name="semester"
                 checked={this.state.semester}
                 value="8"
-                id="s3"
+                id="s8"
                 OnchageValue={(e) => this.OnchangeValueSemester(e.target.value)}
               />
             </div>
@@ -308,9 +316,6 @@ class Layout extends Component {
             </button>
           </div>
         </Modal>
-        {/* <button type="button" onClick={this.showModal}>
-          Open
-        </button> */}
       </Aux>
     );
   }

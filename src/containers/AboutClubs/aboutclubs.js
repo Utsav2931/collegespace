@@ -13,18 +13,6 @@ const aboutdept = () => {
       <div class="blog-card">
         <div class="meta">
           <div class="photo" ></div>
-          <ul class="details">
-            <li class="author"><a href="#">Khatri</a></li>
-            <li class="date">Aug. 24, 2020</li>
-            <li class="tags">
-              <ul>
-                <li><a href="#">Learn</a></li>
-                <li><a href="#">Code</a></li>
-                <li><a href="#">HTML</a></li>
-                <li><a href="#">CSS</a></li>
-              </ul>
-            </li>
-          </ul>
         </div>
         <div class="description">
           <h1><b>Club Gaama</b></h1>
@@ -38,17 +26,6 @@ const aboutdept = () => {
       <div class="blog-card alt">
         <div class="meta">
           <div class="photo1" ></div>
-          <ul class="details">
-            <li class="author"><a href="#">SOMEONE</a></li>
-            <li class="date">July. 15, 2020</li>
-            <li class="tags">
-              <ul>
-                <li><a href="#">Learn</a></li>
-                <li><a href="#">Code</a></li>
-                <li><a href="#">JavaScript</a></li>
-              </ul>
-            </li>
-          </ul>
         </div>
         <div class="description">
           <h1><b>gsc</b></h1>
@@ -63,18 +40,6 @@ const aboutdept = () => {
       <div class="blog-card">
         <div class="meta">
           <div class="photo2" ></div>
-          <ul class="details">
-            <li class="author"><a href="#">Khatri</a></li>
-            <li class="date">Aug. 24, 2020</li>
-            <li class="tags">
-              <ul>
-                <li><a href="#">Learn</a></li>
-                <li><a href="#">Code</a></li>
-                <li><a href="#">HTML</a></li>
-                <li><a href="#">CSS</a></li>
-              </ul>
-            </li>
-          </ul>
         </div>
         <div class="description">
           <h1><b>Developer Student Club</b></h1>
@@ -88,7 +53,7 @@ const aboutdept = () => {
       <div class="blog-card alt">
         <div class="meta">
           <div class="photo3" ></div>
-          <ul class="details">
+          {/* <ul class="details">
             <li class="author"><a href="#">SOMEONE</a></li>
             <li class="date">July. 15, 2020</li>
             <li class="tags">
@@ -98,7 +63,7 @@ const aboutdept = () => {
                 <li><a href="#">JavaScript</a></li>
               </ul>
             </li>
-          </ul>
+          </ul> */}
         </div>
         <div class="description">
           <h1><b>AWS Student's Club</b></h1>
@@ -110,10 +75,6 @@ const aboutdept = () => {
         </div>
       </div>
     </BasicLayout>
-
-
-
-
   )
 }
 

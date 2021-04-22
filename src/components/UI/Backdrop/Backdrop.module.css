@@ -7,3 +7,9 @@
     top: 0;
     background-color: transparent;
 }
+
+@media (max-width: 600px) {
+    .Backdrop{
+        width: 0px;
+    }
+}

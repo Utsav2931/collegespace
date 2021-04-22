@@ -39,7 +39,6 @@ const Burger = (props) => {
   (open || props.show)
     ? document.body.setAttribute("style", `position: fixed; left:0; right:0;`)
     : document.body.setAttribute("style", ``);
-    console.log(props.college);
 
   return (
     <>
@@ -48,7 +47,7 @@ const Burger = (props) => {
         <div />
         <div />
       </StyledBurger>
-      <LeftNav open={open} close={() => setOpen(!open)} academicsPath={props.academicsPath}/>
+      <LeftNav open={open} close={() => setOpen(!open)} academicsPath={props.academicsPath} isValid={props.isValid} onclick={props.onclick}/>
     </>
   );
 };

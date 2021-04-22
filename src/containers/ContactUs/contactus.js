@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./contactus.css";
 import firebase from "../../config/config";
-
+import BasicLayout from '../../components/UI/BasicCompPadding/BasicLayout';
 const ContactUs = () => {
-   
-    var db = firebase.firestore();
+
+
+  var db = firebase.firestore();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -36,39 +37,41 @@ const ContactUs = () => {
   };
 
   return (
+    <BasicLayout>
       <div className='contactus'>
-    <form className="form" onSubmit={handleSubmit}>
-      <h1>Contact Us 🤳</h1>
+        <form className="form" onSubmit={handleSubmit}>
+          <h1>Contact Us 🤳</h1>
 
-      <label>Name</label>
-      <input
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+          <label>Name</label>
+          <input
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
 
-      <label>Email</label>
-      <input
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+          <label>Email</label>
+          <input
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-      <label>Message</label>
-      <textarea
-        placeholder="Message"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-      ></textarea>
+          <label>Message</label>
+          <textarea
+            placeholder="Message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          ></textarea>
 
-      <button
-        type="submit"
-        style={{ background: loader ? "#ccc" : " rgb(2, 2, 110)" }}
-      >
-        Submit
+          <button
+            type="submit"
+            style={{ background: loader ? "#ccc" : "  #ff590b" }}
+          >
+            Submit
       </button>
-    </form>
-    </div>
+        </form>
+      </div>
+    </BasicLayout>
   );
 };
 

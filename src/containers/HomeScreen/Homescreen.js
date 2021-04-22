@@ -53,8 +53,7 @@ export class Homescreen extends Component {
   }
 
   getPosts = () => {
-    db.collection("Posts")
-      .limit(8)
+    db.collection("Posts").where("verified", "==", true)
       .get()
       .then((docs) => {
         if (!docs.empty) {
@@ -85,9 +84,7 @@ export class Homescreen extends Component {
     return (
       // <div className={classes.OuterDiv}>
       <BasicPadding>
-        <div className={classes.Homescreen}>
           {this.state.isLoaded ? <Posts posts={this.state.posts} /> : ""}
-        </div>
       </BasicPadding>
 
       // </div>
