@@ -99,11 +99,9 @@ export class Add extends Component {
           if (rand.success) {
           }
         }
-        if (this.state.article.image == "") {
-          this.setState({ error: "Image can not be null" });
-        } else {
+       
           this.uploadPost();
-        }
+  
       }
     });
   }
