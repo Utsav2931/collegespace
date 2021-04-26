@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import BasicLayout from "../../components/UI/BasicCompPadding/BasicLayout";
 import Card from "./Card/Card";
-import Category from "./category/Category";
 import firebase from "../../config/config";
-import GeneralPage from "./GeneralPage";
-import { Link } from "react-router-dom";
 import classes from "./GeneralPage.module.css";
 import Loader from "../../components/UI/Loader/Loader";
 
@@ -58,6 +55,17 @@ class Subject extends Component {
               });
             }
           );
+        }else {
+          this.setState(
+            {
+              ...this.state.subjects,
+            },
+            () => {
+              this.setState({
+                isLoaded: true,
+              });
+            }
+          );
         }
       });
   };
@@ -77,8 +85,9 @@ class Subject extends Component {
           {arrayy[4].toUpperCase()} / Select Subject
         </div>
         {/* <div className={classes.GeneralPage}> */}
-          <div className={classes.GeneralRow}>
-            {this.state.isLoaded ? (
+        <div className={classes.GeneralRow}>
+          {this.state.isLoaded ? (
+            this.state.subjects != "" ? (
               this.state.subjects.map((variable, index) => {
                 return (
                   <Card
@@ -90,9 +99,12 @@ class Subject extends Component {
                 );
               })
             ) : (
-              <Loader/>
-            )}
-          </div>
+              <div>No Data</div>
+            )
+          ) : (
+            <Loader />
+          )}
+        </div>
       </BasicLayout>
     );
   }

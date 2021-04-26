@@ -28,20 +28,20 @@
 
 .titleText {
   font-size: 1.4em;
+  line-height: 1.15em;
   font-weight: 500;
-  margin-bottom: -5px;
+  /* margin-bottom: -5px; */
 }
 
 .descText {
+  margin-top: 3px;
   font-size: 0.9em;
-  font-weight: 400;
   color: #6e6a6a;
 }
 
 .authorText {
   font-size: 0.77em;
   font-weight: 500;
-  margin-bottom: -5px;
   color: orangered;
 }
 

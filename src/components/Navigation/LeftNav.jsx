@@ -18,7 +18,9 @@ const Ul = styled.ul`
     -khtml-user-select: none; /* Konqueror HTML */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none;
-  }
+    display: flex;
+    align-iteams: center;
+    }
 
   li a {
     text-decoration: none;
@@ -94,11 +96,12 @@ const Ul = styled.ul`
   .pathButton {
     visibility: hidden;
   }
-  .pathNavbar {
+  .pathSidebar {
     visibility: hidden;
   }
 
   @media (max-width: 600px) {
+    padding-top: 6.5rem;
     width: 100%;
     background: rgb(255, 89, 11);
     background: linear-gradient(
@@ -128,11 +131,11 @@ const Ul = styled.ul`
       font-size: 16px;
       cursor: pointer;
       color: #ff590b;
-      margin-top: 10px;
+      align-items: center;
       box-shadow: 0px 6px 18px -5px rgb(237, 133, 85);
     }
 
-    .pathNavbar {
+    .pathSidebar {
       font-size: 21px;
       color: black;
       cursor: pointer;
@@ -185,7 +188,7 @@ const LeftNav = ({ open, close, academicsPath, isValid, onclick }) => {
             <button className="pathButton" type="button" onClick={onclick}>
               Branch
             </button>
-            <div onClick={onclick} className="pathNavbar">
+            <div onClick={onclick} className="pathSidebar">
               {academicsPath}
             </div>
           </li>

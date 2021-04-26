@@ -41,9 +41,11 @@ body {
   color: #000000;
 }
 
-.noLinkButton{
+.noDisplay{
   display: none;
 }
+
+
 
 .desc {
   text-align: start;
@@ -60,7 +62,13 @@ body {
   font-weight: 500;
   margin-top: 0.4em;
   font-family: "Poppins", sans-serif;
+}
 
+.headingWithoutImage{
+  font-size: 1.8rem;
+  color: #000;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
 }
 
 .categoryLable {
@@ -73,7 +81,7 @@ body {
 
 @media (max-width: 600px) {
   .Post {
-    max-width: 340px;
+    /* max-width: 340px; */
     margin: 1 auto;
     padding: 1em;
     width: 100%;

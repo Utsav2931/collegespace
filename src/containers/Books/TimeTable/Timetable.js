@@ -13,7 +13,7 @@ class Timetable extends Component {
     console.log(props);
     arrayy = this.props.match.url.split("/");
     this.state = {
-      subjects: [],
+      timetables: [],
       isLoaded: false,
       title: "",
     };
@@ -47,7 +47,18 @@ class Timetable extends Component {
 
           this.setState(
             {
-              subjects: allArticals,
+              timetables: allArticals,
+            },
+            () => {
+              this.setState({
+                isLoaded: true,
+              });
+            }
+          );
+        } else {
+          this.setState(
+            {
+              ...this.state.timetables,
             },
             () => {
               this.setState({
@@ -59,33 +70,25 @@ class Timetable extends Component {
       });
   };
 
-  //   capitalizeFirstLetter = (str) => {
-  //     return str.charAt(0).toUpperCase() + str.slice(1);
-  //   };
-
   render() {
     return (
       <BasicLayout>
-        <div className={classes.titleHeader}>
-          Timetable
-          {/* {this.capitalizeFirstLetter(this.props.match.params.id)} */}
-        </div>
+        <div className={classes.titleHeader}>Timetable</div>
 
-        {/* <div className={classes.GeneralPage}> */}
         <div className={classes.col}>
           {this.state.isLoaded ? (
-            this.state.subjects.map((variable, index) => {
-              return (
-                //   <Card
-                //     varr={variable}
-                //     propp={this.props}
-                //     path={arrayy}
-                //     key={index}
-                //   />
-                
-                <TimetableComp class={variable.class} image={variable.image}/>
-              );
-            })
+            this.state.timetables != "" ? (
+              this.state.timetables.map((variable, index) => {
+                return (
+                  <TimetableComp
+                    class={variable.class}
+                    image={variable.image}
+                  />
+                );
+              })
+            ) : (
+              <div>No data</div>
+            )
           ) : (
             <Loader />
           )}

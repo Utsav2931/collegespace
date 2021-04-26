@@ -36,6 +36,8 @@ class Layout extends Component {
     window.location = "/";
   };
 
+
+
   componentDidMount() {
     const college = localStorage.getItem("college");
     const department = localStorage.getItem("department");
@@ -46,7 +48,7 @@ class Layout extends Component {
   OnchangeValueCollege = (event) => {
     this.setState({
       college: event,
-    });
+    }); 
     console.log(this.state.college);
   };
 

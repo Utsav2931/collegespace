@@ -295,7 +295,7 @@ export class AddNotes extends Component {
             {/* <br></br><br></br> */}
 
             <label for="fileImage" className={classes.btn}>
-              Upload Image
+              Upload notes
             </label>
 
             <input

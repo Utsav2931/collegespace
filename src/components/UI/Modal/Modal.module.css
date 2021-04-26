@@ -57,6 +57,7 @@
   border-radius: 20px;
   padding: 30px 30px 70px;
   overflow: auto;
+  scrollbar-width: none; /* Firefox */
 }
 
 .cookiesContent::-webkit-scrollbar {

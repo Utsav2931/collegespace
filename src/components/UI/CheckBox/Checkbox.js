@@ -2,9 +2,9 @@ import React from "react";
 import "./Checkbox.css";
 const Checkbox = (props) => {
   return (
-    <div>
+    <>
       <input
-        style={{ opacity: 0 }}
+        style={{ display: "none" }}
         class="checkbox-tools"
         type="radio"
         name={props.name}
@@ -17,7 +17,7 @@ const Checkbox = (props) => {
       <label class="for-checkbox-tools" for={props.id}>
         {props.title}
       </label>
-    </div>
+    </>
   );
 };
 

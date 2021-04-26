@@ -8,7 +8,10 @@ import { Link } from "react-router-dom";
 const Book = (props) => {
   console.log(props.propp.match.url.split("/")[5]);
   return (
-    <Link style={{ textDecoration: "none" , color: "black" }} to={`${props.propp.history.location.pathname}/${props.varr.id}`}>
+    <Link
+      style={{ textDecoration: "none", color: "black" }}
+      to={`${props.propp.history.location.pathname}/${props.varr.id}`}
+    >
       <div
         className={classes.Book}
         onClick={() => {
@@ -16,9 +19,11 @@ const Book = (props) => {
           if (url != null) window.open(url, "_blank");
         }}
       >
-        {(props.propp.match.params.id == "paper" || props.propp.match.url.split("/")[5]  == "paper") ? (
+        {props.propp.match.params.id == "paper" ||
+        props.propp.match.url.split("/")[5] == "paper" ? (
           <img className={classes.cardImage} src={paperImg}></img>
-        ) : (props.propp.match.params.id == "Books" || props.propp.match.url.split("/")[5] == "Books") ? (
+        ) : props.propp.match.params.id == "Books" ||
+          props.propp.match.url.split("/")[5] == "Books" ? (
           <img className={classes.cardImage} src={bookImg}></img>
         ) : (
           <img className={classes.cardImage} src={image}></img>

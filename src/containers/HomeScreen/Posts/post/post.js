@@ -32,7 +32,7 @@ const post = (props) => {
           <a
             style={{ textDecoration: "none" }}
             className={
-              props.link != "" ? classes.linkButton : classes.noLinkButton
+              props.link != "" ? classes.linkButton : classes.noDisplay
             }
             href={props.link}
             rel="noopener noreferrer"
