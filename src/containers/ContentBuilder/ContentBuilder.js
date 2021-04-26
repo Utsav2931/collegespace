@@ -12,6 +12,8 @@ import contactus from "../ContactUs/contactus";
 import AddNotes from "../Add/AddNotes/AddNotes";
 import ErrorModal from "../../components/UI/ErrorModal/ErrorModal";
 import Timetable from "../Books/TimeTable/Timetable";
+import AddBooks from "../AddBooks/AddBooks";
+import AddPapers from "../AddPapers/AddPapers";
 
 export class ContentBuilder extends Component {
   constructor(props) {
@@ -27,6 +29,8 @@ export class ContentBuilder extends Component {
         <Route path="/clubs" component={aboutclubs} />
         <Route path="/about" component={aboutus} />
         <Route path="/faqs" component={faq} />
+        <Route path="/addbooks" component={AddBooks} />
+        <Route path="/addpapers" component={AddPapers} />
 
         <Route
           path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/notes/:id`}
