@@ -53,17 +53,21 @@ export class Homescreen extends Component {
   }
 
   getPosts = () => {
-    db.collection("Posts").where("verified", "==", true)
+    db.collection("Posts").orderBy("createDate", "desc")
+    // .where("verified", "==", true)
       .get()
       .then((docs) => {
         if (!docs.empty) {
           let allArticals = [];
           docs.forEach(function (doc) {
+           if(doc.data().verified){
             const artical = {
               id: doc.id,
               ...doc.data(),
             };
+            // console.log(doc.data().verified)
             allArticals.push(artical);
+           }
           });
 
           this.setState(

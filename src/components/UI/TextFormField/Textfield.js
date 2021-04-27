@@ -5,6 +5,7 @@ const Textfield = (props) => {
     <label className={classes.label}>
       <span>{props.title}</span>
       <input
+        value={props.value}
         type="text"
         className={classes.input_container}
         name="title"

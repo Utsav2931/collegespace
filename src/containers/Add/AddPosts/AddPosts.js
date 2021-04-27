@@ -4,14 +4,16 @@ import BasicPadding from "../../../components/UI/BasicCompPadding/BasicLayout";
 import Textfield from "../../../components/UI/TextFormField/Textfield";
 import firebase from "../../../config/config";
 import { v4 as uuidv4 } from "uuid";
+import Loader from "../../../components/UI/Loader/Loader";
+import GeneralModal from "../../../components/UI/GeneralModal/GeneralModal";
 
 var index = 0;
 var calluploadfunction = false;
-
 var currentdate = new Date();
 var files = [];
 const db = firebase.firestore();
 const storageRef = firebase.storage();
+
 export class Add extends Component {
   state = {
     article: {
@@ -26,7 +28,10 @@ export class Add extends Component {
       verified: false,
     },
     error: "",
+    loaderDisplay: false,
   };
+
+  // Uploads only Image to firebase to storage
   uploadImageCallBack = (e) => {
     console.log("IN IMAGE " + e);
     return new Promise(async (resolve, reject) => {
@@ -49,6 +54,8 @@ export class Add extends Component {
         });
     });
   };
+
+  // Called for uploading image, when validation is done
   callbk = (e) => {
     return new Promise(async (resolve, reject) => {
       const uploadState = await this.uploadImageCallBack(e);
@@ -69,6 +76,7 @@ export class Add extends Component {
     });
   };
 
+  // Handles validation and then uploads image/images and data of the post
   handleValidation() {
     return new Promise(async (resolve, reject) => {
       const {
@@ -89,9 +97,12 @@ export class Add extends Component {
         this.setState({ error: "title is not valid" });
       } else if (categoryLable == "") {
         this.setState({ error: "category is not valid" });
-      }  else if (author == "") {
+      } else if (author == "") {
         this.setState({ error: "author is not valid" });
       } else {
+        this.setState({
+          loaderDisplay: true,
+        });
         const len = files.length;
         console.log(len);
         for (var i = 0; i < len; i++) {
@@ -99,14 +110,14 @@ export class Add extends Component {
           if (rand.success) {
           }
         }
-       
-          this.uploadPost();
-  
+
+        this.uploadPost();
       }
     });
   }
 
   uploadPost = () => {
+    //this.state.loaderDisplay = true;
     this.setState({ error: "" });
     let id = this.state.article.title;
     const article = this.state.article;
@@ -117,6 +128,21 @@ export class Add extends Component {
       .doc(id)
       .set(article)
       .then((res) => {
+        files = [];
+        this.setState({
+          article: {
+            title: "",
+            desc: "",
+            createDate: currentdate,
+            author: "",
+            image: [],
+            categoryLable: "",
+            id: "",
+            link: "",
+            verified: false,
+          },
+          loaderDisplay: false,
+        });
         console.log(res);
         alert("Your post has been uploaded for verification 👍");
       })
@@ -129,26 +155,30 @@ export class Add extends Component {
     // console.log(files[0])
     // index++
     var len = 0;
-    files = []
+    // files = [];
     for (const f in e.target.files) {
-      if(e.target.files.hasOwnProperty(f)) len++
+      if (e.target.files.hasOwnProperty(f)) len++;
     }
-    console.log("length "+len)
+    console.log("length " + len);
     //files = [...files,e.target.files[0]]//1
-    for (var i = 0; i < len ; i++) {
+    for (var i = 0; i < len; i++) {
       files = [...files, e.target.files[i]];
       console.log(files[i]);
       console.log(files.length);
     }
-    alert('image has been uploaded successfully')
+    // alert("image has been uploaded successfully");
+    this.setState({});
   };
 
-  displayFileNames = () => {
-    for (let i = 0; i < files.length; i++) {
-      console.log(files[i].name);
-      return files[i].name;
-    }
-  };
+  // displayFileNames = () => {
+  //   for (let i = 0; i < files.length; i++) {
+  //     console.log(files[i].name);
+  //     // this.setState({
+
+  //     // })
+  //     return files[i].name;
+  //   }
+  // };
 
   onChangeArticleTitle = (value) => {
     this.setState({
@@ -203,6 +233,14 @@ export class Add extends Component {
     index = 0;
     return (
       <BasicPadding>
+        {this.state.loaderDisplay ? (
+          <GeneralModal >
+            <Loader />
+          </GeneralModal>
+        ) : (
+          <div></div>
+        )}
+
         {this.state.error !== "" ? (
           <span style={{ color: "red" }}>{this.state.error}</span>
         ) : (
@@ -212,18 +250,22 @@ export class Add extends Component {
         <div className={classes.col}>
           <div className={classes.basicInput}>
             <Textfield
+              value={this.state.article.title}
               onChange={(e) => this.onChangeArticleTitle(e.target.value)}
               title="Title"
             />
             <Textfield
+              value={this.state.article.desc}
               onChange={(e) => this.onChangeArticleDesc(e.target.value)}
               title="Description"
             />
             <Textfield
+              value={this.state.article.link}
               onChange={(e) => this.onChangeArticleLink(e.target.value)}
               title="Link"
             />
             <Textfield
+              value={this.state.article.author}
               onChange={(e) => this.onChangeArticleAuthor(e.target.value)}
               title="Author"
             />
@@ -231,9 +273,10 @@ export class Add extends Component {
             <select
               className={classes.select}
               onChange={(e) => this.onChangeArticlecategory(e.target.value)}
+              value={this.state.article.categoryLable}
             >
               <option value="" disabled selected>
-                Label
+                Select
               </option>
               <option name="education">Education</option>
               <option name="education">Event</option>
@@ -284,7 +327,10 @@ export class Add extends Component {
               }}
             ></input>
 
-            {this.displayFileNames()}
+            {files.map((imageName) => {
+              return <div>{imageName.name}</div>;
+            })}
+            {/* {this.displayFileNames()} */}
           </div>
         </div>
       </BasicPadding>

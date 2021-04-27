@@ -97,6 +97,26 @@
 }
 
 
+.LoadingBackground {
+  position: fixed;
+  max-width: 100px;
+  width: 70%;
+  /* max-width: 680px; */
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  /* color: #000; */
+  border-radius: 20px;
+  padding: 15px;
+  overflow: auto;
+  scrollbar-width: none; /* Firefox */
+}
+
+
+
 @media (max-width: 600px) {
   .cookiesContent{
     max-width: 340px;

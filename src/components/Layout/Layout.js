@@ -26,6 +26,7 @@ class Layout extends Component {
     this.setState({ show: false });
   };
 
+  //for validation 
   handleFormSubmit = () => {
     const { college, department, semester } = this.state;
     localStorage.setItem("college", college ? college : "");
@@ -35,9 +36,8 @@ class Layout extends Component {
 
     window.location = "/";
   };
-
-
-
+  
+  //for mountaing the selected data with variables 
   componentDidMount() {
     const college = localStorage.getItem("college");
     const department = localStorage.getItem("department");
@@ -45,6 +45,7 @@ class Layout extends Component {
     this.setState({ college, department, semester });
   }
 
+  //for updating college value if user change it
   OnchangeValueCollege = (event) => {
     this.setState({
       college: event,
@@ -52,6 +53,7 @@ class Layout extends Component {
     console.log(this.state.college);
   };
 
+  //for updating department value if user change it
   OnchangeValueDepartment = (event) => {
     this.setState({
       department: event,
@@ -59,6 +61,7 @@ class Layout extends Component {
     console.log(this.state.department);
   };
 
+  //for updating semester value if user change it
   OnchangeValueSemester = (event) => {
     this.setState({
       semester: event,
@@ -85,7 +88,6 @@ class Layout extends Component {
             semester={this.state.semester}
             
           />
-
           {/* {this.props.children} */}
         </main>{" "}
         <Modal show={this.state.show} handleClose={this.hideModal}>

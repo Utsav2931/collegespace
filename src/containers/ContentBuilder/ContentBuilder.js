@@ -24,13 +24,15 @@ export class ContentBuilder extends Component {
       <Switch>
         <Route path="/" exact component={Homescreen} />
         <Route path="/add-post" component={AddPost} />
-        <Route path="/add-notes" component={AddNotes} />
+        <Route  path="/add-notes" component={(props) => <AddNotes college={this.props.college}/>}
+        // component={AddNotes} 
+/>
         <Route path="/events" component={Events} />
         <Route path="/clubs" component={aboutclubs} />
         <Route path="/about" component={aboutus} />
         <Route path="/faqs" component={faq} />
-        <Route path="/addbooks" component={AddBooks} />
-        <Route path="/addpapers" component={AddPapers} />
+        <Route path="/addbooksCS1479" component={AddBooks} />
+        <Route path="/addpapersCS1479" component={AddPapers} />
 
         <Route
           path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/notes/:id`}
