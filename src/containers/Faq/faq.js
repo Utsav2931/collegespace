@@ -9,104 +9,57 @@ const faq = () => {
       <h1 className="contentHead">FAQS</h1>
       <div className="conflict">
         <div className="faq">
-          <p class="faq-heading">How do I purchase Brainitz?</p>
+          <p class="faq-heading">What is CollegeSpace?</p>
           <div class="faq-arrow"></div>
           <p class="faq-text">
-            You can purchase an individual account or a site license by emailing
-            us at welcome@brainitz.com One of our staff will be in touch shortly
-            to set-up your account. We accept credit card, purchase order, or
-            check. Learn more on our pricing page.We also offer professional
-            development trainings that include the opportunity to pursue credit
-            while also receiving a discounted license. If you have more
-            questions, please feel free to submit a request!
+            CollegeSpace is a socio-academic portal for the students/alumni of Charusat. CollegeSpace, an endeavor for all the students.
+            With the help of this portal, students can find college-related information and material on a single website.
           </p>
         </div>
         <hr class="new1"></hr>
 
         <div className="faq">
           <label for="faq-b">
-            <p class="faq-heading">How do I purchase Brainitz?</p>
+            <p class="faq-heading">How can I upload class-notes ?</p>
             <div class="faq-arrow"></div>
             <p class="faq-text">
-              You can purchase an individual account or a site license by
-              emailing us at welcome@brainitz.com One of our staff will be in
-              touch shortly to set-up your account. We accept credit card,
-              purchase order, or check. Learn more on our pricing page.We also
-              offer professional development trainings that include the
-              opportunity to pursue credit while also receiving a discounted
-              license. If you have more questions, please feel free to submit a
-              request!
+              First, open Left Navigation Drawer, Then Click on Add-Notes and fill data According to your notes and click on Upload Notes Button,
+              and upload your notes and click submit. Now your notes will be uploaded.
             </p>
           </label>
         </div>
         <hr class="new1"></hr>
         <div className="faq">
           <label for="faq-c">
-            <p class="faq-heading">How do I purchase Brainitz?</p>
+            <p class="faq-heading">How much time will it take to varify and upload post ?</p>
             <div class="faq-arrow"></div>
             <p class="faq-text">
-              You can purchase an individual account or a site license by
-              emailing us at welcome@brainitz.com One of our staff will be in
-              touch shortly to set-up your account. We accept credit card,
-              purchase order, or check. Learn more on our pricing page.We also
-              offer professional development trainings that include the
-              opportunity to pursue credit while also receiving a discounted
-              license. If you have more questions, please feel free to submit a
-              request!
+              Nearly It will take 1 to 2 hours to verify and upload Your post to the home screen. Appreciate your peace!!!
             </p>
           </label>
         </div>
         <hr class="new1"></hr>
         <div className="faq">
           <label for="faq-d">
-            <p class="faq-heading">How do I purchase Brainitz?</p>
+            <p class="faq-heading">How to change department path ?</p>
             <div class="faq-arrow"></div>
             <p class="faq-text">
-              You can purchase an individual account or a site license by
-              emailing us at welcome@brainitz.com One of our staff will be in
-              touch shortly to set-up your account. We accept credit card,
-              purchase order, or check. Learn more on our pricing page.We also
-              offer professional development trainings that include the
-              opportunity to pursue credit while also receiving a discounted
-              license. If you have more questions, please feel free to submit a
-              request!
+              For PC you will find<b> The Path</b> on the rightmost side of the navbar and for Mobile,
+            you will find<b> The Path</b> at the bottom of the left navigation drawer. Click on that Path and you can change your path.
             </p>
           </label>
         </div>
         <hr class="new1"></hr>
         <div className="faq">
           <label for="faq-e">
-            <p class="faq-heading">How do I purchase Brainitz?</p>
+            <p class="faq-heading">What if my questions are not answered in FAQ's section ?</p>
             <div class="faq-arrow"></div>
             <p class="faq-text">
-              You can purchase an individual account or a site license by
-              emailing us at welcome@brainitz.com One of our staff will be in
-              touch shortly to set-up your account. We accept credit card,
-              purchase order, or check. Learn more on our pricing page.We also
-              offer professional development trainings that include the
-              opportunity to pursue credit while also receiving a discounted
-              license. If you have more questions, please feel free to submit a
-              request!
+              You can always contact on our social media handles, we are happy to solve your doubts :)
             </p>
           </label>
         </div>
         <hr class="new1"></hr>
-        <div className="faq">
-          <label for="faq-f">
-            <p class="faq-heading">How do I purchase Brainitz?</p>
-            <div class="faq-arrow"></div>
-            <p class="faq-text">
-              You can purchase an individual account or a site license by
-              emailing us at welcome@brainitz.com One of our staff will be in
-              touch shortly to set-up your account. We accept credit card,
-              purchase order, or check. Learn more on our pricing page.We also
-              offer professional development trainings that include the
-              opportunity to pursue credit while also receiving a discounted
-              license. If you have more questions, please feel free to submit a
-              request!
-            </p>
-          </label>
-        </div>
       </div>
     </BasicLayout>
   );
