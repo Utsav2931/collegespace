@@ -15,6 +15,7 @@ import Timetable from "../Books/TimeTable/Timetable";
 import AddBooks from "../AddBooks/AddBooks";
 import AddPapers from "../AddPapers/AddPapers";
 
+// for routing between different screens
 export class ContentBuilder extends Component {
   constructor(props) {
     super();
@@ -24,9 +25,7 @@ export class ContentBuilder extends Component {
       <Switch>
         <Route path="/" exact component={Homescreen} />
         <Route path="/add-post" component={AddPost} />
-        <Route  path="/add-notes" component={(props) => <AddNotes college={this.props.college}/>}
-        // component={AddNotes} 
-/>
+        <Route path="/add-notes" component={AddNotes} />
         <Route path="/events" component={Events} />
         <Route path="/clubs" component={aboutclubs} />
         <Route path="/about" component={aboutus} />

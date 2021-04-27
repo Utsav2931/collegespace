@@ -8,7 +8,7 @@ const GeneralModal = (props) => {
   //   : document.body.setAttribute("style", ``);
 
   return (
-    <div className={classes.bodyOfContainer}>
+    <div className={classes.LoadingContainerBody}>
       <div className={classes.LoadingBackground}>{props.children}</div>
     </div>
   );

@@ -1,24 +1,32 @@
 import React from "react";
 import "./ListIteam.css";
 import { Link } from "react-router-dom";
-function FAQ({ faq, index, toggleFAQ, close }) {
 
-    let transfomedObject = Object.keys(faq.answer)
-    .map(igkey => {
-        return <div className="faq-answer">
-          <Link style={{ textDecoration: "none"  }} to={faq.route[igkey]} onClick={close}>{faq.answer[igkey]}</Link>
-          </div>
-    }); 
+// This function contains sub menu items of List class
+function ListIteam({ list, index, toggleMenu, close }) {
+  let transfomedObject = Object.keys(list.answer).map((igkey) => {
+    return (
+      <div className="faq-answer">
+        <Link
+          style={{ textDecoration: "none" }}
+          to={list.route[igkey]}
+          onClick={close}
+        >
+          {list.answer[igkey]}
+        </Link>
+      </div>
+    );
+  });
   return (
     <div
-      className={"faq " + (faq.open ? "open" : "")}
+      className={"faq " + (list.open ? "open" : "")}
       key={index}
-      onClick={() => toggleFAQ(index)}
+      onClick={() => toggleMenu(index)}
     >
-      <div className={"faq-question"}>{faq.collection}</div>
+      <div className={"faq-question"}>{list.collection}</div>
       {transfomedObject}
     </div>
   );
 }
 
-export default FAQ;
+export default ListIteam;
