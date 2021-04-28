@@ -1,0 +1,15 @@
+.link{
+    color: black;
+}
+
+.link:hover{
+    text-decoration: underline;
+    color: #ff590b;
+}
+/* a{
+    text-decoration: none;
+    display: inline-block;
+} */
+/* a:hover {
+    text-decoration: underline;
+} */

@@ -40,7 +40,6 @@ select:focus {
 }
 
 .drag_area {
-  /* border: 2px dashed #fff; */
   max-height: fit-content;
   max-width: 50%;
   background-color: #ffeee4;
@@ -176,6 +175,7 @@ select:focus {
     max-width: 100%;
     height: fit-content;
     padding: 20px;
+
   }
 
   .cardbutton:active {
