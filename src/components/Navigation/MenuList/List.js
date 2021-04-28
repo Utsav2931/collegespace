@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import FAQ from "./ListIteam";
+import ListIteam from "./ListIteam";
 
-let academicsPath;
-const Questions = (props) => {
-  academicsPath = props.academicsPath;
+// This class contains sub manu iteams of academic section
+const List = (props) => { 
+  let academicsPath = props.academicsPath;
   let academicsResources = ["paper", "Books", "notes", "timetable"];
-  const [faqs, setfaqs] = useState([
+  const [lists, setlists] = useState([
     {
       collection: "Academics",
       answer: ["Papers", "Books", "Notes", "Timetable"],
@@ -31,46 +31,33 @@ const Questions = (props) => {
     },
   ]);
 
-
-  const toggleFAQ = (index) => {
+  // For toggling Menu
+  const toggleMenu = (index) => {
     console.log(academicsPath);
-    setfaqs(
-      // faqs[0].route.map((paths, j) => {
-      //   console.log(j);
-      //   console.log(paths.route[j]);
-      //   // paths[j].replace(`/academics/${academicsPath}/${academicsResources[j]}`);
-      //   console.log(paths[j]);
-      // }),
-
-      faqs.map((faq, i) => {
-        // console.log(i);
-        faqs[0].route.map((paths, index) => {
-          // faqs[0].route[index] = (`/academics/${academicsPath}/${academicsResources[index]}`);
-          // console.log(paths);
+    setlists(
+      lists.map((list, i) => {
+        lists[0].route.map((paths, index) => {
           props.isValid ? 
           paths = `/academics/${academicsPath}/${academicsResources[index]}` : 
           paths = `/academics/choose-path`;
-          // console.log(paths);
-          faqs[0].route[index] = paths;
+          lists[0].route[index] = paths;
         });
-        // console.log(faqs[0].route[i]);
         if (i === index) {
-          faq.open = !faq.open;
+          list.open = !list.open;
         } else {
-          faq.open = false;
+          list.open = false;
         }
-
-        return faq;
+        return list;
       })
     );
   };
   return (
     <div className="faqs">
-      {faqs.map((faq, i) => (
-        <FAQ faq={faq} index={i} toggleFAQ={toggleFAQ} close={props.onClick}/>
+      {lists.map((list, i) => (
+        <ListIteam list={list} index={i} toggleMenu={toggleMenu} close={props.onClick}/>
       ))}
     </div>
   );
 };
 
-export default Questions;
+export default List;

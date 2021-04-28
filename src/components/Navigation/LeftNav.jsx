@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Accordion from "./MenuList/List";
+import List from "./MenuList/List";
 import { Link } from "react-router-dom";
 import Backdrop from "../../components/UI/Backdrop/Backdrop";
 import Aux from "../../hoc/AAux";
@@ -51,13 +51,6 @@ const Ul = styled.ul`
   ::-webkit-scrollbar-thumb {
     background: #ff0000;
   }
-
-  // background: linear-gradient(
-  //   to right,
-  //   rgba(255, 51, 0, 1) 0%,
-  //   rgba(247, 223, 181, 0.9) 75%,
-  //   rgba(255, 255, 255, 0) 100%
-  // );
 
   background: rgb(255, 89, 11);
   background: linear-gradient(
@@ -164,7 +157,7 @@ const LeftNav = ({ open, close, academicsPath, isValid, onclick }) => {
               <Di>Home</Di>
             </li>
           </Link>
-          <Accordion
+          <List
             academicsPath={academicsPath}
             isValid={isValid}
             onClick={close}

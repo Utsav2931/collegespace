@@ -5,8 +5,8 @@ import NavBar from "../Navigation/Navbar";
 import Modal from "../UI/Modal/Modal";
 import Checkbox from "../UI/CheckBox/Checkbox";
 import ContentBuilder from "../../containers/ContentBuilder/ContentBuilder";
-import ErrorModal from "../UI/ErrorModal/ErrorModal";
 
+// Main layout for the whole website
 class Layout extends Component {
   constructor() {
     super();
@@ -18,15 +18,17 @@ class Layout extends Component {
     };
   }
 
+  // shows path select screen
   showModal = () => {
     this.setState({ show: true });
   };
 
+  // Hide path select screen
   hideModal = () => {
     this.setState({ show: false });
   };
 
-  //for validation 
+  // Store the data in browser (Loacal Storage) 
   handleFormSubmit = () => {
     const { college, department, semester } = this.state;
     localStorage.setItem("college", college ? college : "");
@@ -70,7 +72,6 @@ class Layout extends Component {
   };
 
   render() {
-    // <ErrorModal onclick={() => this.showModal()}></ErrorModal>
     return (
       <Aux>
         <NavBar
@@ -91,7 +92,7 @@ class Layout extends Component {
           {/* {this.props.children} */}
         </main>{" "}
         <Modal show={this.state.show} handleClose={this.hideModal}>
-          {/* ================================================== */}
+          {/* --------------------------------------------------- */}
 
           <div className={classes.outerdiv}>
             <legend className={classes.lable}>College</legend>
