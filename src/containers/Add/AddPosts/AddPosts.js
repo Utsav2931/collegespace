@@ -271,9 +271,9 @@ export class AddPosts extends Component {
           </div>
 
           <div className={classes.drag_area}>
-            <header>Select file to Upload</header>
+            <header>Select Image or multiple images </header>
             <label for="fileImage" className={classes.btn}>
-              Upload Image
+              Choose Image
             </label>
             <input
               className={classes.filechossen}

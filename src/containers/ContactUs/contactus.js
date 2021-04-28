@@ -1,47 +1,65 @@
 import React, { useState, useEffect } from "react";
 import "./contactus.css";
 import firebase from "../../config/config";
-import BasicLayout from '../../components/UI/BasicCompPadding/BasicLayout';
+import BasicLayout from "../../components/UI/BasicCompPadding/BasicLayout";
+import GeneralModal from "../../components/UI/GeneralModal/GeneralModal";
+import Loader from "../../components/UI/Loader/Loader";
 const ContactUs = () => {
-
-
   var db = firebase.firestore();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
   const [loader, setLoader] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoader(true);
+    if (name == "") {
+      setError("Name can't be null");
+    } else if (email == "") {
+      setError("Email can't be null");
+    } else if (message == "") {
+      setError("Message can't be null");
+    } else {
+      setLoader(true);
+      db.collection("contacts")
+        .add({
+          name: name,
+          email: email,
+          message: message,
+        })
+        .then(() => {
+          setLoader(false);
+          alert("Your message has been submitted👍");
+        })
+        .catch((error) => {
+          alert(error.message);
+          setLoader(false);
+        });
 
-    db.collection("contacts")
-      .add({
-        name: name,
-        email: email,
-        message: message,
-      })
-      .then(() => {
-        setLoader(false);
-        alert("Your message has been submitted👍");
-      })
-      .catch((error) => {
-        alert(error.message);
-        setLoader(false);
-      });
-
-    setName("");
-    setEmail("");
-    setMessage("");
+      setName("");
+      setEmail("");
+      setMessage("");
+      setError("");
+    }
   };
 
   return (
     <BasicLayout>
-      <div className='contactus'>
-        <form className="form" onSubmit={handleSubmit}>
-          <h1>Contact Us 🤳</h1>
+      {loader ? (
+        <GeneralModal>
+          <Loader />
+        </GeneralModal>
+      ) : (
+        <div></div>
+      )}
 
+
+      <div className="contactus">
+        <form className="form" onSubmit={handleSubmit}>
+          <div className="title">Contact Us </div>
+          {error !== "" ? <span style={{ color: "red" }}>{error}</span> : ""}
           <label>Name</label>
           <input
             placeholder="Name"
@@ -68,7 +86,7 @@ const ContactUs = () => {
             style={{ background: loader ? "#ccc" : "  #ff590b" }}
           >
             Submit
-      </button>
+          </button>
         </form>
       </div>
     </BasicLayout>
