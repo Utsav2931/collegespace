@@ -3,54 +3,56 @@ import React, { Component } from "react";
 import BasicPadding from "../../../components/UI/BasicCompPadding/BasicLayout";
 import Textfield from "../../../components/UI/TextFormField/Textfield";
 import firebase from "../../../config/config";
-import { v4 as uuidv4 } from "uuid";
 import Loader from "../../../components/UI/Loader/Loader";
 import GeneralModal from "../../../components/UI/GeneralModal/GeneralModal";
-const deptce = ["ce", "it", "mech", "civil", "ec"];
-const deptdep = ["ce", "cse", "it"];
-var currentdate = new Date();
-const db = firebase.firestore();
-const subject = ["toc", "dwdm", "ins", "ios", "pip"];
-const storageRef = firebase.storage();
 
-var file = {};
+// This class is used for uploading notes
 export class AddNotes extends Component {
+  file = {};
+  deptCspit = ["ce", "it"];
+  deptDep = ["ce", "cs", "it"];
+  currentDate = new Date();
+  db = firebase.firestore();
+  subjectCe = ["toc", "dwdm", "ins", "ios", "pip"];
+  subjecIt = ["crns", "se", "mla", "wcmc", "hs"];
+  subjecCse = ["se","crns","ml","iot","hs"]
+  storageRef = firebase.storage();
   constructor(props) {
-    // console.log(props.college);
     super(props);
     this.state = {
       article: {
         title: "",
         desc: "",
-        createDate: currentdate,
+        createDate: this.currentDate,
         categoryLable: "",
         id: "",
         link: "",
-        college: props.college,
+        college: "",
         department: "",
         semester: "",
         subject: "",
         author: "",
       },
       error: "",
-      opt: [1, 2, 3, 4, 5, 6, 7, 8],
+      opt: [6],
       dept: [],
       sub: [],
       loaderDisplay: false,
     };
   }
 
-  uploadImageCallBack = () => {
+  // This returns a callback when a files successfully uploaded to the storage  
+  uploadNoteCallBack = () => {
     return new Promise(async (resolve, reject) => {
       // file = e.target.files[0];
-      const filename = file.name;
+      const filename = this.file.name;
       // uuidv4();
-      storageRef
+      this.storageRef
         .ref()
         .child("pdf/" + filename)
-        .put(file)
+        .put(this.file)
         .then(async (snapshot) => {
-          const downloadURL = await storageRef
+          const downloadURL = await this.storageRef
             .ref()
             .child("pdf/" + filename)
             .getDownloadURL();
@@ -63,14 +65,12 @@ export class AddNotes extends Component {
     });
   };
 
-  callbk = () => {
+  // This recivies promise from uploadNotesCallback and returns a new promise
+  callBk = () => {
     return new Promise(async (resolve, reject) => {
-      const uploadState = await this.uploadImageCallBack();
+      const uploadState = await this.uploadNoteCallBack();
       if (uploadState.success) {
         console.log("In Upload Success State");
-        // alert(
-        //   "Your pdf has been successfully uploaded 👍, click on submit button to make your notes visible"
-        // );
         console.log(uploadState.data.link);
         this.setState({
           hasFeatureIamge: true,
@@ -84,12 +84,12 @@ export class AddNotes extends Component {
     });
   };
 
+  // This function checks validation of the article
   handleValidation() {
     return new Promise(async (resolve, reject) => {
       const {
         title,
         desc,
-        image,
         semester,
         subject,
         department,
@@ -97,8 +97,6 @@ export class AddNotes extends Component {
         link,
         author,
       } = this.state.article;
-
-      // only each block with generate error
       if (desc == "") {
         this.setState({
           error: "DESC is not valid",
@@ -119,7 +117,7 @@ export class AddNotes extends Component {
         this.setState({
           loaderDisplay: true,
         });
-        await this.callbk();
+        await this.callBk();
         if (link == "") {
           this.setState({ error: "Adding pdf is Mandatory!" });
         }
@@ -128,6 +126,7 @@ export class AddNotes extends Component {
     });
   }
 
+  // If the article if valid this function will upload it to the firebase
   uploadNotes = () => {
     this.setState({ error: "" });
     let id = this.state.article.title;
@@ -135,7 +134,7 @@ export class AddNotes extends Component {
     id = id.split(" ").join("-");
     article.id = id;
     console.log(id);
-    db.collection("academics")
+    this.db.collection("academics")
       .doc(this.state.article.college)
       .collection("department")
       .doc(this.state.article.department)
@@ -147,12 +146,12 @@ export class AddNotes extends Component {
       .doc(id)
       .set(article)
       .then((res) => {
-        file = "";
+        this.file = "";
         this.setState({
           article: {
             title: "",
             desc: "",
-            createDate: currentdate,
+            createDate: this.currentDate,
             categoryLable: "",
             id: "",
             link: "",
@@ -163,7 +162,7 @@ export class AddNotes extends Component {
             author: "",
           },
           error: "",
-          opt: [1, 2, 3, 4, 5, 6, 7, 8],
+          opt: [6],
           dept: [],
           sub: [],
           loaderDisplay: false,
@@ -174,11 +173,13 @@ export class AddNotes extends Component {
       .catch((err) => console.log(err));
   };
 
-  addImageToFile = (e) => {
-    file = e.target.files[0];
+  //This function is used to add file to website
+  addFile = (e) => {
+    this.file = e.target.files[0];
     this.setState({});
   };
 
+  //This function is used to update Title
   onChangeArticleTitle = (value) => {
     this.setState({
       article: {
@@ -186,8 +187,9 @@ export class AddNotes extends Component {
         title: value,
       },
     });
-    // console.log(this.state.article);
   };
+
+  //This function is used to update Description
   onChangeArticleDesc = (value) => {
     this.setState({
       article: {
@@ -195,9 +197,9 @@ export class AddNotes extends Component {
         desc: value,
       },
     });
-    // console.log(this.state.article);
   };
 
+  //This function is used to update Author
   onChangeArticleAuthor = (value) => {
     this.setState({
       article: {
@@ -205,8 +207,9 @@ export class AddNotes extends Component {
         author: value,
       },
     });
-    // console.log(this.state.article);
   };
+
+  //This function is used to update Link
   onChangeArticleLink = (value) => {
     this.setState({
       article: {
@@ -214,18 +217,18 @@ export class AddNotes extends Component {
         link: value,
       },
     });
-    // console.log(this.state.article);
   };
 
+  //This function is used to update College
   onChangeCollege = (value) => {
     if (value == "cspit") {
       this.setState({
-        dept: deptce,
+        dept: this.deptCspit,
       });
       console.log("dept:" + this.state.dept);
     } else if (value == "depstar") {
       this.setState({
-        dept: deptdep,
+        dept: this.deptDep,
       });
     }
 
@@ -238,7 +241,13 @@ export class AddNotes extends Component {
     console.log(this.state.article);
   };
 
+  //This function is used to update Department
   onChangeDep = (value) => {
+    if (value == 'ce') {
+      this.setState({
+        sub: this.subjectCe
+      })
+    }
     this.setState({
       article: {
         ...this.state.article,
@@ -248,24 +257,33 @@ export class AddNotes extends Component {
     console.log(this.state.article);
   };
 
+  //This function is used to update Semester
   onChangeSem = (value) => {
-    if (value == 6) {
+    if (value == 6 && this.state.article.department == "ce") {
       this.setState({
-        sub: subject,
+        sub: this.subjectCe,
       });
-      console.log(value + " " + subject);
+      console.log(value + " " + this.subject);
+    } else if (value == 6 && this.state.article.department == "it") {
+      this.setState({
+        sub: this.subjecIt,
+      });
+    } else if( value == 6 && this.state.article.department == "cs") {
+      this.setState({
+        sub: this.subjecCse,
+      });
     }
 
     this.setState({
       article: {
         ...this.state.article,
         semester: value,
-        //  sub: subject,
       },
     });
     console.log(this.state.sub);
   };
 
+  //This function is used to update Subject
   onChangeSub = (value) => {
     this.setState({
       article: {
@@ -277,7 +295,7 @@ export class AddNotes extends Component {
   };
 
   render() {
-    console.log(file);
+    console.log(this.file);
     return (
       <BasicPadding>
         {this.state.loaderDisplay ? (
@@ -335,10 +353,7 @@ export class AddNotes extends Component {
               {this.state.dept.map((e) => {
                 return <option name={e}>{e}</option>;
               })}
-              {/* <option name="ce">ce</option>
-              <option name="it">it</option> */}
             </select>
-
             <label className={classes.label}>Semester</label>
             <select
               value={this.state.article.semester}
@@ -351,9 +366,6 @@ export class AddNotes extends Component {
               {this.state.opt.map((e) => {
                 return <option name={e}>{e}</option>;
               })}
-              {/* <option name="1">1</option>
-              <option name="2">2</option>
-              <option name="3">3</option> */}
             </select>
 
             <label className={classes.label}>Subject</label>
@@ -382,7 +394,6 @@ export class AddNotes extends Component {
               <i class="fas fa-cloud-upload-alt"></i>
             </div>
             <header>Select pdf file to Upload</header>
-            {/* <br></br><br></br> */}
 
             <label for="fileImage" className={classes.btn}>
               Upload notes
@@ -392,31 +403,11 @@ export class AddNotes extends Component {
               className={classes.filechossen}
               id="fileImage"
               type="file"
-              // accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
-              // accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
-              // text/plain, application/pdf, image/*  "
-
-              // accept=".doc,.docx,application/msword,application/pdf"
               onChange={(e) => {
-                this.addImageToFile(e);
-                // const uploadState = await this.addImageToFile(e);
-                // if (uploadState.success) {
-                //   console.log("In Upload Success State");
-                //   alert(
-                //     "Your pdf has been successfully uploaded 👍, click on submit button to make your notes visible"
-                //   );
-                //   console.log(uploadState.data.link);
-                //   this.setState({
-                //     hasFeatureIamge: true,
-                //     article: {
-                //       ...this.state.article,
-                //       link: uploadState.data.link,
-                //     },
-                //   });
-                // }
+                this.addFile(e);
               }}
             ></input>
-            <div>{file.name}</div>
+            <div>{this.file.name}</div>
           </div>
         </div>
       </BasicPadding>

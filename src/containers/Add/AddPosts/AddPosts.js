@@ -7,19 +7,17 @@ import { v4 as uuidv4 } from "uuid";
 import Loader from "../../../components/UI/Loader/Loader";
 import GeneralModal from "../../../components/UI/GeneralModal/GeneralModal";
 
-var index = 0;
-var calluploadfunction = false;
-var currentdate = new Date();
-var files = [];
-const db = firebase.firestore();
-const storageRef = firebase.storage();
-
-export class Add extends Component {
+//This class is used for adding a new Post
+export class AddPosts extends Component {
+  currentDate = new Date();
+  files = [];
+  db = firebase.firestore();
+  storageRef = firebase.storage();
   state = {
     article: {
       title: "",
       desc: "",
-      createDate: currentdate,
+      createDate: this.currentDate,
       author: "",
       image: [],
       categoryLable: "",
@@ -37,12 +35,12 @@ export class Add extends Component {
     return new Promise(async (resolve, reject) => {
       const file = e;
       const filename = uuidv4();
-      storageRef
+      this.storageRef
         .ref()
         .child("post/image/" + filename)
         .put(file)
         .then(async (snapshot) => {
-          const downloadURL = await storageRef
+          const downloadURL = await this.storageRef
             .ref()
             .child("post/image/" + filename)
             .getDownloadURL();
@@ -54,14 +52,12 @@ export class Add extends Component {
         });
     });
   };
-
-  // Called for uploading image, when validation is done
+  // Call uploadImageCallBack and returns a promise
   callbk = (e) => {
     return new Promise(async (resolve, reject) => {
       const uploadState = await this.uploadImageCallBack(e);
       if (uploadState.success) {
         console.log("In Upload Success State");
-        //alert("Your image has been successfully uploaded 👍, you can upload second image if you want");
         console.log(uploadState.data.link);
         this.setState({
           hasFeatureIamge: true,
@@ -75,8 +71,7 @@ export class Add extends Component {
       resolve({ success: true });
     });
   };
-
-  // Handles validation and then uploads image/images and data of the post
+  // Used for validation of article
   handleValidation() {
     return new Promise(async (resolve, reject) => {
       const {
@@ -88,26 +83,25 @@ export class Add extends Component {
         author,
       } = this.state.article;
       console.log(desc);
-      // only each block with generate error
       if (desc == "") {
         this.setState({
-          error: "DESC is not valid",
+          error: "Description is not valid",
         });
       } else if (title == "") {
-        this.setState({ error: "title is not valid" });
+        this.setState({ error: "Title is not valid" });
       } else if (categoryLable == "") {
-        this.setState({ error: "category is not valid" });
+        this.setState({ error: "Category is not valid" });
       } else if (author == "") {
-        this.setState({ error: "author is not valid" });
+        this.setState({ error: "Author is not valid" });
       } else {
         this.setState({
           loaderDisplay: true,
         });
-        const len = files.length;
+        const len = this.files.length;
         console.log(len);
         for (var i = 0; i < len; i++) {
-          const rand = await this.callbk(files[i]);
-          if (rand.success) {
+          const result = await this.callbk(this.files[i]);
+          if (result.success) {
           }
         }
 
@@ -115,25 +109,25 @@ export class Add extends Component {
       }
     });
   }
-
+ 
+  //If article is valid this function will upload the post to firebase
   uploadPost = () => {
-    //this.state.loaderDisplay = true;
     this.setState({ error: "" });
     let id = this.state.article.title;
     const article = this.state.article;
     id = id.split(" ").join("-");
     article.id = id;
     console.log(id);
-    db.collection("Posts")
+    this.db.collection("Posts")
       .doc(id)
       .set(article)
       .then((res) => {
-        files = [];
+        this.files = [];
         this.setState({
           article: {
             title: "",
             desc: "",
-            createDate: currentdate,
+            createDate: this.currentDate,
             author: "",
             image: [],
             categoryLable: "",
@@ -148,38 +142,23 @@ export class Add extends Component {
       })
       .catch((err) => console.log(err));
   };
-
+  
+  // For mounting local file to website
   fileAdded = (e) => {
-    // const file = e.target.files[index]
-    // files = [e.target.files[0], ...files]
-    // console.log(files[0])
-    // index++
     var len = 0;
-    // files = [];
     for (const f in e.target.files) {
       if (e.target.files.hasOwnProperty(f)) len++;
     }
     console.log("length " + len);
-    //files = [...files,e.target.files[0]]//1
     for (var i = 0; i < len; i++) {
-      files = [...files, e.target.files[i]];
-      console.log(files[i]);
-      console.log(files.length);
+      this.files = [...this.files, e.target.files[i]];
+      console.log(this.files[i]);
+      console.log(this.files.length);
     }
-    // alert("image has been uploaded successfully");
     this.setState({});
   };
 
-  // displayFileNames = () => {
-  //   for (let i = 0; i < files.length; i++) {
-  //     console.log(files[i].name);
-  //     // this.setState({
-
-  //     // })
-  //     return files[i].name;
-  //   }
-  // };
-
+  //This function update the title if the user chages it
   onChangeArticleTitle = (value) => {
     this.setState({
       article: {
@@ -187,9 +166,9 @@ export class Add extends Component {
         title: value,
       },
     });
-    // console.log(this.state.article);
   };
 
+  //This function update the author if the user chages it
   onChangeArticleAuthor = (value) => {
     this.setState({
       article: {
@@ -197,9 +176,9 @@ export class Add extends Component {
         author: value,
       },
     });
-    //console.log(this.state.article);
   };
 
+  //This function update the Description if the user chages it
   onChangeArticleDesc = (value) => {
     this.setState({
       article: {
@@ -207,8 +186,9 @@ export class Add extends Component {
         desc: value,
       },
     });
-    //console.log(this.state.article);
   };
+
+  //This function update the link if the user chages it
   onChangeArticleLink = (value) => {
     this.setState({
       article: {
@@ -216,9 +196,9 @@ export class Add extends Component {
         link: value,
       },
     });
-    // console.log(this.state.article);
   };
 
+  //This function update the category if the user chages it
   onChangeArticlecategory = (value) => {
     this.setState({
       article: {
@@ -230,7 +210,7 @@ export class Add extends Component {
   };
 
   render() {
-    index = 0;
+    this.index = 0;
     return (
       <BasicPadding>
         {this.state.loaderDisplay ? (
@@ -291,13 +271,7 @@ export class Add extends Component {
           </div>
 
           <div className={classes.drag_area}>
-            {/* <div className={classes.icon}>
-              <i class="fas fa-cloud-upload-alt"></i>
-            </div> */}
             <header>Select file to Upload</header>
-
-            {/* <br></br>
-            <br></br> */}
             <label for="fileImage" className={classes.btn}>
               Upload Image
             </label>
@@ -307,30 +281,14 @@ export class Add extends Component {
               multiple
               id="fileImage"
               accept="image/x-png,image/gif,image/jpeg"
-              // onChange={async (e) => {
-              //   const uploadState = await this.uploadImageCallBack(e);
-              //   if (uploadState.success) {
-              //     console.log("In Upload Success State");
-              //     alert("Your image has been successfully uploaded 👍, you can upload second image if you want");
-              //     console.log(uploadState.data.link);
-              //     this.setState({
-              //       hasFeatureIamge: true,
-              //       article: {
-              //         ...this.state.article,
-              //         image: [...this.state.article.image, uploadState.data.link],
-              //       },
-              //     });
-              //   }
-              // }}
               onChange={(e) => {
                 this.fileAdded(e);
               }}
             ></input>
 
-            {files.map((imageName) => {
+            {this.files.map((imageName) => {
               return <div>{imageName.name}</div>;
             })}
-            {/* {this.displayFileNames()} */}
           </div>
         </div>
       </BasicPadding>
@@ -338,4 +296,4 @@ export class Add extends Component {
   }
 }
 
-export default Add;
+export default AddPosts;
