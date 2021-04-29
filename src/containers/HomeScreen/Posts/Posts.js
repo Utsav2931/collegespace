@@ -12,7 +12,6 @@ const Posts = (props) =>
         image={post.image}
         link={post.link}
         categoryLable={post.categoryLable}
-        // propss = {post}
       />
     );
   });

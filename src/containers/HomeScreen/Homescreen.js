@@ -6,6 +6,7 @@ import BasicPadding from "../../components/UI/BasicCompPadding/BasicLayout";
 import Loader from "../../components/UI/Loader/Loader";
 const db = firebase.firestore();
 
+// Displays posts in the home screen
 export class Homescreen extends Component {
   limit = 2;
   // state of the this screen
@@ -46,7 +47,7 @@ export class Homescreen extends Component {
             }
           });
 
-          // set this all data to the state object
+          // set this all data(stored in allArticals) to the state object
           this.setState(
             {
               posts: allArticals,
