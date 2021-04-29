@@ -15,7 +15,6 @@ const post = (props) => {
         <Carousel controls={TextTrackCueList}>
           {/* maping all the image to carousel */}
           {props.image.map((pic) => {
-            console.log(pic);
             return (
               <Carousel.Item interval={50000}>
                 <img

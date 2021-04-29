@@ -63,7 +63,6 @@ export class AddPapers extends Component {
       const article = this.state.article;
       id = id.split(" ").join("-");
       article.id = id;
-      console.log(id);
       db.collection("academics")
         .doc(this.state.article.college)
         .collection("department")
@@ -76,7 +75,6 @@ export class AddPapers extends Component {
         .doc(id)
         .set(article)
         .then((res) => {
-          console.log(res);
           alert("Your notes has been successfully uploaded 👍");
         })
         .catch((err) => console.log(err));
@@ -96,7 +94,6 @@ export class AddPapers extends Component {
             .ref()
             .child("pdf/" + filename)
             .getDownloadURL();
-          console.log(downloadURL);
           resolve({
             success: true,
             data: { link: downloadURL },
@@ -112,7 +109,6 @@ export class AddPapers extends Component {
         title: value,
       },
     });
-    // console.log(this.state.article);
   };
   onChangeArticleLink = (value) => {
    this.setState({
@@ -121,7 +117,6 @@ export class AddPapers extends Component {
        link: value,
      },
    });
-   // console.log(this.state.article);
  };
   onChangeArticleDesc = (value) => {
     this.setState({
@@ -130,7 +125,6 @@ export class AddPapers extends Component {
         desc: value,
       },
     });
-    // console.log(this.state.article);
   };
 
   onChangeArticleAuthor = (value) => {
@@ -140,7 +134,6 @@ export class AddPapers extends Component {
         author: value,
       },
     });
-    // console.log(this.state.article);
   };
   onChangeArticleLink = (value) => {
     this.setState({
@@ -149,7 +142,6 @@ export class AddPapers extends Component {
         link: value,
       },
     });
-    // console.log(this.state.article);
   };
 
   onChangeCollege = (value) => {
@@ -157,7 +149,6 @@ export class AddPapers extends Component {
       this.setState({
         dept: deptce,
       });
-      console.log("dept:" + this.state.dept);
     } else if (value == "depstar") {
       this.setState({
         dept: deptdep,
@@ -170,7 +161,6 @@ export class AddPapers extends Component {
         college: value,
       },
     });
-    console.log(this.state.article);
   };
 
   onChangeDep = (value) => {
@@ -180,7 +170,6 @@ export class AddPapers extends Component {
         department: value,
       },
     });
-    console.log(this.state.article);
   };
 
   onChangeSem = (value) => {
@@ -188,7 +177,6 @@ export class AddPapers extends Component {
       this.setState({
         sub: subject,
       });
-      console.log(value + " " + subject)
     }
 
     this.setState({
@@ -198,7 +186,6 @@ export class AddPapers extends Component {
         //  sub: subject,
       },
     });
-    console.log(this.state.sub);
   };
 
   onChangeSub = (value) => {
@@ -208,7 +195,6 @@ export class AddPapers extends Component {
         subject: value,
       },
     });
-    console.log(this.state.article);
   };
 
   render() {

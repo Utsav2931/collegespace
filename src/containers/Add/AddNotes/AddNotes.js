@@ -56,7 +56,6 @@ export class AddNotes extends Component {
             .ref()
             .child("pdf/" + filename)
             .getDownloadURL();
-          console.log(downloadURL);
           resolve({
             success: true,
             data: { link: downloadURL },
@@ -70,8 +69,6 @@ export class AddNotes extends Component {
     return new Promise(async (resolve, reject) => {
       const uploadState = await this.uploadNoteCallBack();
       if (uploadState.success) {
-        console.log("In Upload Success State");
-        console.log(uploadState.data.link);
         this.setState({
           hasFeatureIamge: true,
           article: {
@@ -133,7 +130,6 @@ export class AddNotes extends Component {
     const article = this.state.article;
     id = id.split(" ").join("-");
     article.id = id;
-    console.log(id);
     this.db.collection("academics")
       .doc(this.state.article.college)
       .collection("department")
@@ -167,7 +163,6 @@ export class AddNotes extends Component {
           sub: [],
           loaderDisplay: false,
         });
-        console.log(res);
         alert("Your notes has been successfully uploaded 👍");
       })
       .catch((err) => console.log(err));
@@ -225,7 +220,6 @@ export class AddNotes extends Component {
       this.setState({
         dept: this.deptCspit,
       });
-      console.log("dept:" + this.state.dept);
     } else if (value == "depstar") {
       this.setState({
         dept: this.deptDep,
@@ -238,7 +232,6 @@ export class AddNotes extends Component {
         college: value,
       },
     });
-    console.log(this.state.article);
   };
 
   //This function is used to update Department
@@ -254,7 +247,6 @@ export class AddNotes extends Component {
         department: value,
       },
     });
-    console.log(this.state.article);
   };
 
   //This function is used to update Semester
@@ -263,7 +255,6 @@ export class AddNotes extends Component {
       this.setState({
         sub: this.subjectCe,
       });
-      console.log(value + " " + this.subject);
     } else if (value == 6 && this.state.article.department == "it") {
       this.setState({
         sub: this.subjecIt,
@@ -280,7 +271,6 @@ export class AddNotes extends Component {
         semester: value,
       },
     });
-    console.log(this.state.sub);
   };
 
   //This function is used to update Subject
@@ -291,11 +281,9 @@ export class AddNotes extends Component {
         subject: value,
       },
     });
-    console.log(this.state.article);
   };
 
   render() {
-    console.log(this.file);
     return (
       <BasicPadding>
         {this.state.loaderDisplay ? (

@@ -31,7 +31,6 @@ export class AddPosts extends Component {
 
   // Uploads only Image to firebase to storage
   uploadImageCallBack = (e) => {
-    console.log("IN IMAGE " + e);
     return new Promise(async (resolve, reject) => {
       const file = e;
       const filename = uuidv4();
@@ -44,7 +43,6 @@ export class AddPosts extends Component {
             .ref()
             .child("post/image/" + filename)
             .getDownloadURL();
-          console.log(downloadURL);
           resolve({
             success: true,
             data: { link: downloadURL },
@@ -57,8 +55,6 @@ export class AddPosts extends Component {
     return new Promise(async (resolve, reject) => {
       const uploadState = await this.uploadImageCallBack(e);
       if (uploadState.success) {
-        console.log("In Upload Success State");
-        console.log(uploadState.data.link);
         this.setState({
           hasFeatureIamge: true,
           article: {
@@ -66,7 +62,6 @@ export class AddPosts extends Component {
             image: [...this.state.article.image, uploadState.data.link],
           },
         });
-        console.log(this.state.article.image);
       }
       resolve({ success: true });
     });
@@ -82,7 +77,6 @@ export class AddPosts extends Component {
         link,
         author,
       } = this.state.article;
-      console.log(desc);
       if (desc == "") {
         this.setState({
           error: "Description is not valid",
@@ -98,7 +92,6 @@ export class AddPosts extends Component {
           loaderDisplay: true,
         });
         const len = this.files.length;
-        console.log(len);
         for (var i = 0; i < len; i++) {
           const result = await this.callbk(this.files[i]);
           if (result.success) {
@@ -117,7 +110,6 @@ export class AddPosts extends Component {
     const article = this.state.article;
     id = id.split(" ").join("-");
     article.id = id;
-    console.log(id);
     this.db.collection("Posts")
       .doc(id)
       .set(article)
@@ -137,7 +129,6 @@ export class AddPosts extends Component {
           },
           loaderDisplay: false,
         });
-        console.log(res);
         alert("Your post has been uploaded for verification 👍");
       })
       .catch((err) => console.log(err));
@@ -149,11 +140,8 @@ export class AddPosts extends Component {
     for (const f in e.target.files) {
       if (e.target.files.hasOwnProperty(f)) len++;
     }
-    console.log("length " + len);
     for (var i = 0; i < len; i++) {
       this.files = [...this.files, e.target.files[i]];
-      console.log(this.files[i]);
-      console.log(this.files.length);
     }
     this.setState({});
   };
@@ -206,7 +194,6 @@ export class AddPosts extends Component {
         categoryLable: value,
       },
     });
-    console.log(this.state.article);
   };
 
   render() {

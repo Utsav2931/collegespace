@@ -52,7 +52,6 @@ class Layout extends Component {
     this.setState({
       college: event,
     });
-    console.log(this.state.college);
   };
 
   //for updating department value if user change it
@@ -60,7 +59,6 @@ class Layout extends Component {
     this.setState({
       department: event,
     });
-    console.log(this.state.department);
   };
 
   //for updating semester value if user change it
@@ -68,7 +66,6 @@ class Layout extends Component {
     this.setState({
       semester: event,
     });
-    console.log(this.state.semester);
   };
 
   // For render the UI

@@ -21,7 +21,6 @@ export class Homescreen extends Component {
 
   // increment the limit of the post
   incLimit = () => {
-    console.log("click");
     this.limit += 2;
     this.getPosts();
   };

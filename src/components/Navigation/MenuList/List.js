@@ -35,7 +35,6 @@ const List = (props) => {
 
   // For toggling Menu
   const toggleMenu = (index) => {
-    console.log(academicsPath);
     setlists(
       // map all the list object aarray and alter it with the academicsResources
       lists.map((list, i) => {
