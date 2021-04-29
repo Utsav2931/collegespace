@@ -1,5 +1,7 @@
 import React from "react";
-import classes from './Textfield.module.css';
+import classes from "./Textfield.module.css";
+
+// Componet to generate custom textfield, it takes the data as an argument for display
 const Textfield = (props) => {
   return (
     <label className={classes.label}>
@@ -14,7 +16,6 @@ const Textfield = (props) => {
       />
     </label>
   );
-  
 };
 
 export default Textfield;

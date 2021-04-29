@@ -1,6 +1,7 @@
 import classes from './Linkcomponent.module.css';
 import React from 'react'
 
+// Get the link as an argument and lead to that link
 const Linkcomponent = (props) => {
     return (
         <div>

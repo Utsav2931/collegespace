@@ -3,40 +3,17 @@
   justify-content: space-between;
   position: relative;
   max-width: 100%;
-  /* background-color: rgb(226, 215, 236); */
 }
 
 .GeneralRow {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 1.2rem;
-
-  /* max-width: 530px; */
-  /* max-width: 80%; */
-  /* width: 100%; */
-
-  /* display: flex;    
-    flex-wrap: wrap;
-    gap: 0.5em;
-    justify-content: space-between;
-    background-color:#fff3e9;
-    align-items: stretch; */
 }
 
 .GeneralRow > div {
-    /* background: #EDE7F6; */
-    /* padding: 1.5rem; */
-    /* border-radius: 1rem; */
-    width: 100%;
-  }
-
-/* .GeneralRow > *{
-    flex: 0 1 14em;
-} */
-/* 
-.GeneralRow > *{
-    flex-basis: 150%;
-} */
+  width: 100%;
+}
 
 .div {
   position: relative;
@@ -81,16 +58,9 @@
 }
 
 @media screen and (max-width: 458px) {
-
-    .GeneralRow{
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
-        grid-gap: 0.8rem;
-    }
+  .GeneralRow {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+    grid-gap: 0.8rem;
   }
-  
-  /* @media (min-width: 650px) and
-  (max-width: 900px) {
-      
-  } */
-
+}

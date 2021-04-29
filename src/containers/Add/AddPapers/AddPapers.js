@@ -1,8 +1,8 @@
-import classes from "../AddBooks/AddBooks.module.css"
+import classes from "../AddPapers/AddPapers.module.css"
 import React, { Component } from "react";
-import BasicPadding from "../../components/UI/BasicCompPadding/BasicLayout";
-import Textfield from "../../components/UI/TextFormField/Textfield";
-import firebase from "../../config/config";
+import BasicPadding from "../../../components/UI/BasicCompPadding/BasicLayout";
+import Textfield from "../../../components/UI/TextFormField/Textfield";
+import firebase from "../../../config/config";
 import { v4 as uuidv4 } from "uuid";
 
 const deptce = ["ce", "it", "mech", "civil", "ec"];
@@ -11,7 +11,7 @@ var currentdate = new Date();
 const db = firebase.firestore();
 const subject = ["toc", "dwdm", "ins", "ios", "pip"]
 const storageRef = firebase.storage();
-export class AddBooks extends Component {
+export class AddPapers extends Component {
  
   state = {
     article: {
@@ -72,7 +72,7 @@ export class AddBooks extends Component {
         .doc(this.state.article.semester)
         .collection("subjects")
         .doc(this.state.article.subject)
-        .collection("Books")
+        .collection("paper")
         .doc(id)
         .set(article)
         .then((res) => {
@@ -219,7 +219,7 @@ export class AddBooks extends Component {
         ) : (
           ""
         )}
-        <h1 style = {{textAlign: "center"}}>Add Books</h1>
+        <h1 style = {{textAlign: "center"}}>Add Papers</h1>
         <div className={classes.col}>
           <div className={classes.basicInput}>
             <Textfield
@@ -305,4 +305,4 @@ export class AddBooks extends Component {
   }
 }
 
-export default AddBooks;
+export default AddPapers;

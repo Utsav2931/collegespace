@@ -12,8 +12,8 @@ import contactus from "../ContactUs/contactus";
 import AddNotes from "../Add/AddNotes/AddNotes";
 import ErrorModal from "../../components/UI/ErrorModal/ErrorModal";
 import Timetable from "../Books/TimeTable/Timetable";
-import AddBooks from "../AddBooks/AddBooks";
-import AddPapers from "../AddPapers/AddPapers";
+import AddBooks from "../Add/AddBooks/AddBooks";
+import AddPapers from "../Add/AddPapers/AddPapers";
 
 // for routing between different screens
 export class ContentBuilder extends Component {
@@ -22,6 +22,7 @@ export class ContentBuilder extends Component {
   }
   render() {
     return (
+      // Can select one path at once from the Side drawer
       <Switch>
         <Route path="/" exact component={Homescreen} />
         <Route path="/add-post" component={AddPost} />

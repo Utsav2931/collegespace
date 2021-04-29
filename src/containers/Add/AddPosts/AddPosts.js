@@ -272,6 +272,7 @@ export class AddPosts extends Component {
 
           <div className={classes.drag_area}>
             <header>Select Image or multiple images </header>
+            {/* <div style={{color: "grey"}}>450x450 px recommended</div> */}
             <label for="fileImage" className={classes.btn}>
               Choose Image
             </label>
@@ -291,6 +292,7 @@ export class AddPosts extends Component {
             })}
           </div>
         </div>
+        <div className= {classes.note}>*Verification may take up to 2 to 3 hours. Thank you for the patients :)</div>
       </BasicPadding>
     );
   }

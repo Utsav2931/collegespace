@@ -7,25 +7,26 @@ import TimetableComp from "./TimetableComp";
 
 const db = firebase.firestore();
 var arrayy;
+// Used to display time-table respected to the Department
 class Timetable extends Component {
+  // used to initialize the arrayy var using the link of the page(using react router)
   constructor(props) {
     super(props);
-    console.log(props);
     arrayy = this.props.match.url.split("/");
+    // State of this page
     this.state = {
       timetables: [],
       isLoaded: false,
       title: "",
     };
   }
+  // executes when the screen load
   componentDidMount() {
-    this.getMyArtical();
+    this.getTimetables();
   }
 
-  getMyArtical = () => {
-    console.log("in getMyArtical");
-    console.log(arrayy);
-
+  // get the data of all time-table of selected department
+  getTimetables = () => {
     db.collection("academics")
       .doc(arrayy[2])
       .collection("department")
@@ -70,6 +71,7 @@ class Timetable extends Component {
       });
   };
 
+  // to render the UI
   render() {
     return (
       <BasicLayout>
@@ -78,6 +80,7 @@ class Timetable extends Component {
         <div className={classes.col}>
           {this.state.isLoaded ? (
             this.state.timetables != "" ? (
+              // maps all the data one by one to the TimetableComp component to display nicely to user
               this.state.timetables.map((variable, index) => {
                 return (
                   <TimetableComp

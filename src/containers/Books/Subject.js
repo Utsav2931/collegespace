@@ -7,25 +7,29 @@ import Loader from "../../components/UI/Loader/Loader";
 
 const db = firebase.firestore();
 var arrayy;
+
+// Used to display the subject cards
 class Subject extends Component {
+  // used to initialize the arrayy var using the link of the page(using react router)
   constructor(props) {
     super(props);
-    console.log(props);
     arrayy = this.props.match.url.split("/");
+
+    // State of this page
     this.state = {
       subjects: [],
       isLoaded: false,
       title: "",
     };
   }
+
+  // executes when the screen is displayed
   componentDidMount() {
-    this.getMyArtical();
+    this.getSubjects();
   }
 
-  getMyArtical = () => {
-    console.log("in getMyArtical");
-    console.log(arrayy);
-
+  // get the data of all subjects in the selected field
+  getSubjects = () => {
     db.collection("academics")
       .doc(arrayy[2])
       .collection("department")
@@ -55,7 +59,7 @@ class Subject extends Component {
               });
             }
           );
-        }else {
+        } else {
           this.setState(
             {
               ...this.state.subjects,
@@ -70,10 +74,12 @@ class Subject extends Component {
       });
   };
 
+  // make capital first letter of a word
   capitalizeFirstLetter = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
+  // to render the UI
   render() {
     return (
       <BasicLayout>
@@ -84,10 +90,10 @@ class Subject extends Component {
           {arrayy[2].toUpperCase()}-{arrayy[3].toUpperCase()} /{" "}
           {arrayy[4].toUpperCase()} / Select Subject
         </div>
-        {/* <div className={classes.GeneralPage}> */}
         <div className={classes.GeneralRow}>
           {this.state.isLoaded ? (
             this.state.subjects != "" ? (
+              // maps all the data one by one to the Card component to display nicely to user
               this.state.subjects.map((variable, index) => {
                 return (
                   <Card

@@ -11,11 +11,13 @@ import smit from "../../assets/Images/SmitProfile.png";
 import dev from "../../assets/Images/DevProfile.png";
 import DevCard from "./DevCard";
 
+// Social links for CollegeSpace
 const socialLinks = [
   "https://twitter.com/CollegeSpace1",
   "https://www.instagram.com/collegespace1/",
 ];
 
+// developer info object which contains the information of developers
 let developerInfo = [
   {
     name: "Harsh Patel",
@@ -23,18 +25,16 @@ let developerInfo = [
     social: [
       "https://twitter.com/harshptl14",
       "https://www.instagram.com/harshptl14/",
-      "https://github.com/harshptl14"
-
+      "https://github.com/harshptl14",
     ],
   },
-
   {
     name: "Utsav Patel",
     image: utsav,
     social: [
       "https://twitter.com/Utsav14403558",
       "https://www.instagram.com/utsav_2931/",
-      "https://github.com/Utsav2931"
+      "https://github.com/Utsav2931",
     ],
   },
   {
@@ -43,20 +43,21 @@ let developerInfo = [
     social: [
       "https://twitter.com/SmitPat64609331",
       "https://www.instagram.com/smit028/",
-      "https://github.com/smit4297"
+      "https://github.com/smit4297",
     ],
   },
   {
     name: "Dev Patel",
     image: dev,
     social: [
-      "https://twitter.com/howdy_arsh",
+      "https://twitter.com/DevPate42553609",
       "https://www.instagram.com/_devpatel_5/",
-      "https://github.com/DevPatel05"
+      "https://github.com/DevPatel05",
     ],
   },
 ];
 
+// Component to display the About us page
 const AboutUs = () => {
   return (
     <BasicLayout>
@@ -79,6 +80,7 @@ const AboutUs = () => {
         </div>
       </div>
 
+      {/* Display the social networks of CollegeSpace */}
       <div className={classes.link}>
         <li className={classes.iconStyle}>
           <SocialLink link={socialLinks[0]}>
@@ -95,11 +97,10 @@ const AboutUs = () => {
 
       <div className={classes.headerText}>Gigs behind this project</div>
 
+      {/* Map all developerInfo object's data to DevCard component to display data */}
       <div className={classes.CardRow}>
         {developerInfo.map((variable, index) => {
-          return (
-            <DevCard varr={variable} key={index} />
-          );
+          return <DevCard varr={variable} key={index} />;
         })}
       </div>
     </BasicLayout>

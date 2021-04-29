@@ -298,7 +298,6 @@ export class AddNotes extends Component {
     console.log(this.file);
     return (
       <BasicPadding>
-       
         {this.state.loaderDisplay ? (
           <GeneralModal>
             <Loader />

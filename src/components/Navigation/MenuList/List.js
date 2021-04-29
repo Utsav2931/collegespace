@@ -5,6 +5,8 @@ import ListIteam from "./ListIteam";
 const List = (props) => { 
   let academicsPath = props.academicsPath;
   let academicsResources = ["paper", "Books", "notes", "timetable"];
+
+  // State for the lists object 
   const [lists, setlists] = useState([
     {
       collection: "Academics",
@@ -35,6 +37,7 @@ const List = (props) => {
   const toggleMenu = (index) => {
     console.log(academicsPath);
     setlists(
+      // map all the list object aarray and alter it with the academicsResources
       lists.map((list, i) => {
         lists[0].route.map((paths, index) => {
           props.isValid ? 
@@ -53,6 +56,7 @@ const List = (props) => {
   };
   return (
     <div className="faqs">
+      {/* Map all the list object array data and pass it to the ListIteam component */}
       {lists.map((list, i) => (
         <ListIteam list={list} index={i} toggleMenu={toggleMenu} close={props.onClick}/>
       ))}

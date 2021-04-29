@@ -1,5 +1,7 @@
 import React from "react";
 import "./Checkbox.css";
+
+// generate the checkbox
 const Checkbox = (props) => {
   return (
     <>

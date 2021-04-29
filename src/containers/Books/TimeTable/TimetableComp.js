@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./Timetable.module.css";
 
+// It's a laytout to display the time-table 
 const TimetableComp = (props) => {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>

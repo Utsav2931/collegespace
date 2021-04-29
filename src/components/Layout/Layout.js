@@ -28,7 +28,7 @@ class Layout extends Component {
     this.setState({ show: false });
   };
 
-  // Store the data in browser (Loacal Storage) 
+  // Store the data in browser (Loacal Storage)
   handleFormSubmit = () => {
     const { college, department, semester } = this.state;
     localStorage.setItem("college", college ? college : "");
@@ -38,8 +38,8 @@ class Layout extends Component {
 
     window.location = "/";
   };
-  
-  //for mountaing the selected data with variables 
+
+  //for mountaing the selected data with variables
   componentDidMount() {
     const college = localStorage.getItem("college");
     const department = localStorage.getItem("department");
@@ -51,7 +51,7 @@ class Layout extends Component {
   OnchangeValueCollege = (event) => {
     this.setState({
       college: event,
-    }); 
+    });
     console.log(this.state.college);
   };
 
@@ -71,9 +71,11 @@ class Layout extends Component {
     console.log(this.state.semester);
   };
 
+  // For render the UI
   render() {
     return (
       <Aux>
+        {/* navigation Bar on top of the screen which is fixed */}
         <NavBar
           onclick={() => this.showModal()}
           college={this.state.college}
@@ -81,20 +83,19 @@ class Layout extends Component {
           semester={this.state.semester}
           show={this.state.show}
         />
+        {/* Main content under the Navbar */}
         <main className={classes.Content}>
           <ContentBuilder
             onclick={() => this.showModal()}
             college={this.state.college}
             department={this.state.department}
             semester={this.state.semester}
-            
           />
-          {/* {this.props.children} */}
         </main>{" "}
+        {/* This modal display the layout to choose path(Branch name, department etc.) */}
         <Modal show={this.state.show} handleClose={this.hideModal}>
-          {/* --------------------------------------------------- */}
-
           <div className={classes.outerdiv}>
+            {/* College selection */}
             <legend className={classes.lable}>College</legend>
             <div className={classes.collegeSelection}>
               <Checkbox
@@ -170,7 +171,8 @@ class Layout extends Component {
                 OnchageValue={(e) => this.OnchangeValueCollege(e.target.value)}
               />
             </div>
-            {/* -------------------------------- */}
+
+            {/* Department selection */}
             <legend className={classes.lable}>Department</legend>
             <div className={classes.collegeSelection}>
               <Checkbox
@@ -244,7 +246,7 @@ class Layout extends Component {
                 }
               />
             </div>
-            {/* -------------------------------- */}
+            {/* Semester selection */}
             <legend className={classes.lable}>Semester</legend>
             <div className={classes.collegeSelection}>
               <Checkbox
@@ -312,6 +314,7 @@ class Layout extends Component {
                 OnchageValue={(e) => this.OnchangeValueSemester(e.target.value)}
               />
             </div>
+            {/* Submit button */}
             <button
               className={classes.buttonStyle}
               type="button"

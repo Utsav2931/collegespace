@@ -17,27 +17,19 @@
     margin: 0 auto;
     padding: 0px 5px;
     margin-bottom: 2em;
-    /* flex-direction: column;
-      max-width: 340px;
-      margin: auto;
-      padding-top: 1em 1em;
-      width: 100%;
-      font-size: 5px;
-      cursor: pointer; */
   }
 }
 
 @media (min-width: 600px) and (max-width: 1000px) {
-    .BasicLayout {
-      width: 1110px;
-      height: auto;
-      max-width: 80%;
-      padding: 30px 15px;
-      float: left;
-      margin: 0 auto;
-      margin-bottom: 2em;
-      display: block;
-      border: 0px solid black;
-    }
+  .BasicLayout {
+    width: 1110px;
+    height: auto;
+    max-width: 80%;
+    padding: 30px 15px;
+    float: left;
+    margin: 0 auto;
+    margin-bottom: 2em;
+    display: block;
+    border: 0px solid black;
   }
-  
+}

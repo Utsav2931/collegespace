@@ -3,14 +3,17 @@ import classes from "./post.module.css";
 import { Carousel } from "react-bootstrap";
 import cx from "classnames";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
 
 const post = (props) => {
-  if (props.image !== null ) {
+  // checks whether image is available or not, if not return the other card
+  if (props.image !== null) {
     return (
       <div className={classes.Post}>
         <div className={classes.categoryLable}>{props.categoryLable}</div>
+
+        {/* carousel displays a image or multiple images */}
         <Carousel controls={TextTrackCueList}>
+          {/* maping all the image to carousel */}
           {props.image.map((pic) => {
             console.log(pic);
             return (
@@ -25,21 +28,22 @@ const post = (props) => {
           })}
         </Carousel>
 
+        {/* display title */}
         <div className={classes.heading}>{props.title}</div>
 
+        {/* display description */}
         <div className={classes.desc}>{props.dess}</div>
-        
-          <a
-            style={{ textDecoration: "none" }}
-            className={
-              props.link != "" ? classes.linkButton : classes.noDisplay
-            }
-            href={props.link}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Link here
-          </a>
+
+        {/* Display link, if available */}
+        <a
+          style={{ textDecoration: "none" }}
+          className={props.link != "" ? classes.linkButton : classes.noDisplay}
+          href={props.link}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Link here
+        </a>
       </div>
     );
   }
@@ -54,7 +58,3 @@ const post = (props) => {
 };
 
 export default post;
-
-// Finite Autometa Example
-// Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-//           imperdiet, nulla et dictum interdum

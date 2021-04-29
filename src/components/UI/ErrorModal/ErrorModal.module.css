@@ -7,7 +7,6 @@
   align-items: center;
   justify-content: center;
   height: fit-content;
-  /* width: 60%; */
   background-color: #ffeee4;
   color: #ff590b;
   padding: 50px;
@@ -85,6 +84,5 @@
 @media (min-width: 650px) and (max-width: 980px) {
   .ErrorModal {
     width: 90%;
-    /* font-size: 5px; */
   }
 }

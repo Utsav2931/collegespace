@@ -7,24 +7,27 @@ import Loader from "../../components/UI/Loader/Loader";
 
 const db = firebase.firestore();
 var array;
+
+// Used to display papers, books, and notes respected to the subject
 class AcademicUse extends Component {
+  // used to initialize the array var using the link of the page(using react router)
   constructor(props) {
     super(props);
     array = this.props.match.url.split("/");
-    console.log(props);
+    // State of this page
     this.state = {
       academicData: [],
       isLoaded: false,
     };
   }
 
+  // executes when the screen is displayed
   componentDidMount() {
-    this.getMyArtical();
+    this.getMaterials();
   }
 
-  getMyArtical = () => {
-    console.log("in getMyArtical");
-    console.log(array);
+  // get the data of all books or notes or papers
+  getMaterials = () => {
     db.collection("academics")
       .doc(array[2])
       .collection("department")
@@ -71,17 +74,18 @@ class AcademicUse extends Component {
       });
   };
 
+  // make capital first letter of a word
   capitalizeFirstLetter = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
+  // to render the UI
   render() {
     return (
       <BasicLayout>
         <div className={classes.titleHeader}>
           {this.capitalizeFirstLetter(array[5])}
         </div>
-        {/* <div className={classes.GeneralPage}> */}
         <div className={classes.headercontent}>
           {array[2].toUpperCase()}-{array[3].toUpperCase()} /{" "}
           {array[4].toUpperCase()} / {array[6].toUpperCase()}
@@ -89,6 +93,7 @@ class AcademicUse extends Component {
         <div className={classes.GeneralRow}>
           {this.state.isLoaded ? (
             this.state.academicData != "" ? (
+              // maps all the data one by one to the Card component to display nicely to user
               this.state.academicData.map((variable, index) => {
                 return (
                   <Book

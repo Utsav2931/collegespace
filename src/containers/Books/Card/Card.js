@@ -5,9 +5,11 @@ import paperImg from "../../../assets/Images/paper.png";
 import bookImg from "../../../assets/Images/books.png";
 import { Link } from "react-router-dom";
 
+// Generate the card and display the content which is received from props
 const Book = (props) => {
   console.log(props.propp.match.url.split("/")[5]);
   return (
+    //  add the id to the path
     <Link
       style={{ textDecoration: "none", color: "black" }}
       to={`${props.propp.history.location.pathname}/${props.varr.id}`}

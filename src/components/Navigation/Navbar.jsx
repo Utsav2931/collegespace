@@ -1,8 +1,6 @@
 import React from "react";
-import { Button } from "semantic-ui-react";
 import styled from "styled-components";
 import Burger from "./Burger";
-import classes from "../Layout/Layout.module.css";
 import { Link } from "react-router-dom";
 
 const Nav = styled.nav`
@@ -34,7 +32,8 @@ const Nav = styled.nav`
   }
 
   .buttonStyle {
-    display: ${({ col,dep,sem }) => ((col == null || dep==null || sem==null) ? "" : "none")};
+    display: ${({ col, dep, sem }) =>
+      col == null || dep == null || sem == null ? "" : "none"};
     background-color: #ff590b;
     border: none;
     border-radius: 5px;
@@ -50,7 +49,8 @@ const Nav = styled.nav`
   .path {
     color: black;
     cursor: pointer;
-    display: ${({ col,dep,sem }) => ((col == null || dep==null || sem==null) ? "none" : "")};
+    display: ${({ col, dep, sem }) =>
+      col == null || dep == null || sem == null ? "none" : ""};
   }
   @media (max-width: 600px) {
     .path {
@@ -58,8 +58,8 @@ const Nav = styled.nav`
       color: black;
     }
 
-    .buttonStyle{
-      display:none;
+    .buttonStyle {
+      display: none;
     }
 
     .logo {
@@ -69,14 +69,32 @@ const Nav = styled.nav`
   }
 `;
 
+// Component to display Navigation Bar at the top of the screen
 const Navbar = (props) => {
   let academicsPath = `${props.college}/${props.department}/${props.semester}`;
-  let isValid = (props.college == null || props.department == null || props.semester == null) ? false : true;
+  let isValid =
+    props.college == null || props.department == null || props.semester == null
+      ? false
+      : true;
   return (
-    <Nav open={props.show} col={props.college} dep={props.department} sem={props.semester}>
-      <Burger academicsPath={academicsPath} isValid={isValid} show={props.show} onclick={props.onclick} />
-      <Link style={{ textDecoration: "none" }} to="/"><p className="logo">CollegeSpace</p></Link>
-
+    <Nav
+      open={props.show}
+      col={props.college}
+      dep={props.department}
+      sem={props.semester}
+    >
+      {/* The Hamburger icon to open the side drawer */}
+      <Burger
+        academicsPath={academicsPath}
+        isValid={isValid}
+        show={props.show}
+        onclick={props.onclick}
+      />
+      {/* The middle CollegeSpace logo */}
+      <Link style={{ textDecoration: "none" }} to="/">
+        <p className="logo">CollegeSpace</p>
+      </Link>
+      {/* Button to select and modify the path */}
       <button className="buttonStyle" type="button" onClick={props.onclick}>
         Branch
       </button>

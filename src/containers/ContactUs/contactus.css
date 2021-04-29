@@ -8,13 +8,12 @@
   justify-content: center;
 }
 
-.title{
+.title {
   font-size: 3em;
   font-weight: 500;
   letter-spacing: 0.04ch;
   line-height: 50px;
   padding-bottom: 15px;
-
 }
 .form > h1 {
   margin-bottom: 30px;
@@ -34,17 +33,17 @@ textarea {
   transition: all 0.3s ease-in-out;
 }
 
-.form > input:focus, input:hover,
-textarea:focus, textarea:hover {
+.form > input:focus,
+input:hover,
+textarea:focus,
+textarea:hover {
   border-color: #1f1f1f;
 }
 
-.form > input:focus, 
-textarea:focus{
+.form > input:focus,
+textarea:focus {
   box-shadow: 0px 10px 20px -13px rgba(32, 56, 117, 0.45);
-  
 }
-
 
 .form > textarea {
   height: 150px;
@@ -59,16 +58,6 @@ textarea:focus{
 }
 
 .form > button {
-  /* padding: 20px;
-  border: none;
-  background-color: #ff590b;
-  font-weight: 500;
-  font-size: 20px;
-  border-radius: 3px;
-  color: #fff;
-  cursor: pointer;
-  transition: 0.2s ease-in-out;
-  margin-top: 10px; */
   position: relative;
   text-decoration: none;
   padding: 15px 25px;

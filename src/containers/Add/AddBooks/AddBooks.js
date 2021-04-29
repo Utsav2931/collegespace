@@ -1,18 +1,17 @@
-import classes from "../AddPapers/AddPapers.module.css"
+import classes from "../AddBooks/AddBooks.module.css";
 import React, { Component } from "react";
-import BasicPadding from "../../components/UI/BasicCompPadding/BasicLayout";
-import Textfield from "../../components/UI/TextFormField/Textfield";
-import firebase from "../../config/config";
+import BasicPadding from "../../../components/UI/BasicCompPadding/BasicLayout";
+import Textfield from "../../../components/UI/TextFormField/Textfield";
+import firebase from "../../../config/config";
 import { v4 as uuidv4 } from "uuid";
 
 const deptce = ["ce", "it", "mech", "civil", "ec"];
 const deptdep = ["ce", "cse", "it"];
 var currentdate = new Date();
 const db = firebase.firestore();
-const subject = ["toc", "dwdm", "ins", "ios", "pip"]
+const subject = ["toc", "dwdm", "ins", "ios", "pip"];
 const storageRef = firebase.storage();
-export class AddPapers extends Component {
- 
+export class AddBooks extends Component {
   state = {
     article: {
       title: "",
@@ -30,11 +29,21 @@ export class AddPapers extends Component {
     error: "",
     opt: [1, 2, 3, 4, 5, 6, 7, 8],
     dept: [],
-    sub: []
+    sub: [],
   };
 
   handleValidation() {
-    const { title, desc, image, semester, subject, department, college,  link, author } = this.state.article;
+    const {
+      title,
+      desc,
+      image,
+      semester,
+      subject,
+      department,
+      college,
+      link,
+      author,
+    } = this.state.article;
 
     // only each block with generate error
     if (desc == "") {
@@ -49,13 +58,11 @@ export class AddPapers extends Component {
       this.setState({ error: "semester is not valid" });
     } else if (subject == "") {
       this.setState({ error: "subject is not valid" });
-    }
-    else if (department == "") {
+    } else if (department == "") {
       this.setState({ error: "department is not valid" });
-    }
-    else if (college == "") {
+    } else if (college == "") {
       this.setState({ error: "college is not valid" });
-    }else if (link == "") {
+    } else if (link == "") {
       this.setState({ error: "link is not valid" });
     } else {
       this.setState({ error: "" });
@@ -72,7 +79,7 @@ export class AddPapers extends Component {
         .doc(this.state.article.semester)
         .collection("subjects")
         .doc(this.state.article.subject)
-        .collection("paper")
+        .collection("Books")
         .doc(id)
         .set(article)
         .then((res) => {
@@ -115,14 +122,14 @@ export class AddPapers extends Component {
     // console.log(this.state.article);
   };
   onChangeArticleLink = (value) => {
-   this.setState({
-     article: {
-       ...this.state.article,
-       link: value,
-     },
-   });
-   // console.log(this.state.article);
- };
+    this.setState({
+      article: {
+        ...this.state.article,
+        link: value,
+      },
+    });
+    // console.log(this.state.article);
+  };
   onChangeArticleDesc = (value) => {
     this.setState({
       article: {
@@ -188,7 +195,7 @@ export class AddPapers extends Component {
       this.setState({
         sub: subject,
       });
-      console.log(value + " " + subject)
+      console.log(value + " " + subject);
     }
 
     this.setState({
@@ -219,7 +226,7 @@ export class AddPapers extends Component {
         ) : (
           ""
         )}
-        <h1 style = {{textAlign: "center"}}>Add Papers</h1>
+        <h1 style={{ textAlign: "center" }}>Add Books</h1>
         <div className={classes.col}>
           <div className={classes.basicInput}>
             <Textfield
@@ -288,7 +295,8 @@ export class AddPapers extends Component {
             >
               <option value="" disabled selected>
                 Subject
-              </option>{this.state.sub.map((e) => {
+              </option>
+              {this.state.sub.map((e) => {
                 return <option name={e}>{e}</option>;
               })}
             </select>
@@ -305,4 +313,4 @@ export class AddPapers extends Component {
   }
 }
 
-export default AddPapers;
+export default AddBooks;

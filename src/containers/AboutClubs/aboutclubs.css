@@ -10,10 +10,8 @@
   display: flex;
   flex-direction: column;
   height: fit-content;
-  /* margin: 1rem auto; */
   width: 100%;
   box-shadow: 0px 0px 35px rgba(140, 152, 164, 0.18);
-  /* box-shadow: 0 3px 7px -1px rgba(0, 0, 0, 0.1); */
   margin-bottom: 30px;
   background: #fff;
   line-height: 1.4;
@@ -195,11 +193,9 @@
   left: 0%;
 }
 @media (min-width: 640px) {
-
   .blog-card {
     flex-direction: row;
     margin-bottom: 30px;
-    /* max-width: 700px; */
   }
   .blog-card .meta {
     flex-basis: 40%;

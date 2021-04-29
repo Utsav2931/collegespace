@@ -20,7 +20,7 @@ const Ul = styled.ul`
     -ms-user-select: none;
     display: flex;
     align-iteams: center;
-    }
+  }
 
   li a {
     text-decoration: none;
@@ -80,9 +80,8 @@ const Ul = styled.ul`
   top: 0;
   left: 0;
   height: 100vh;
-  width: 50%;
+  width: 60%;
   padding-top: 7.5rem;
-  // transition: transform 0.07s ease-in-out;
   transition: opacity 0 500ms cubic-bezier(0, 0.61, 0.28, 0.92),
     visibility 0s 500ms, transform 0 900ms;
 
@@ -136,6 +135,18 @@ const Ul = styled.ul`
       visibility: ${({ isValid }) => (isValid == true ? "visible" : "hidden")};
     }
   }
+
+  @media (max-width: 350px) {
+    li {
+      font-size: 28px;
+    }
+  }
+
+  @media (min-width: 600px) and (max-width: 850px) {
+    li {
+      font-size: 43px;
+    }
+  }
 `;
 
 const Di = styled.div`
@@ -145,11 +156,13 @@ const Di = styled.div`
     color: #000;
   }
 `;
+
+// Component to disply side drawer
 const LeftNav = ({ open, close, academicsPath, isValid, onclick }) => {
-  console.log(isValid);
   return (
     <Aux>
       <Backdrop show={open} clicked={close} />
+      {/* All links to navigate to different pages */}
       <div>
         <Ul open={open} isValid={isValid}>
           <Link style={{ textDecoration: "none" }} to="/" onClick={close}>
@@ -157,6 +170,7 @@ const LeftNav = ({ open, close, academicsPath, isValid, onclick }) => {
               <Di>Home</Di>
             </li>
           </Link>
+          {/* inherited list of links (Dropdown) */}
           <List
             academicsPath={academicsPath}
             isValid={isValid}

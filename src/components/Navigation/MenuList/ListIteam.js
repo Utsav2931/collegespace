@@ -7,6 +7,7 @@ function ListIteam({ list, index, toggleMenu, close }) {
   let transfomedObject = Object.keys(list.answer).map((igkey) => {
     return (
       <div className="faq-answer">
+        {/* Link, used for navigate to the clicked location */}
         <Link
           style={{ textDecoration: "none" }}
           to={list.route[igkey]}

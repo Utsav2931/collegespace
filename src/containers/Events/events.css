@@ -116,7 +116,6 @@
   .timeline {
     margin: 0em 0;
     position: relative;
-    /* max-width: 46em; */
   }
 
   .timeline-event-copy {
@@ -126,7 +125,6 @@
     left: 0em;
     margin: 0 auto;
     width: 100%;
-    /* background-color: #ef795a; */
   }
 
   .timeline-event-copy .title {
@@ -143,10 +141,5 @@
 
   .timeline:before {
     display: none;
-    /* display: none; */
   }
-
-  /* ul{
-    display: none;    
-  } */
 }

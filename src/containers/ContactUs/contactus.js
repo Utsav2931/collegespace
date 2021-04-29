@@ -4,15 +4,19 @@ import firebase from "../../config/config";
 import BasicLayout from "../../components/UI/BasicCompPadding/BasicLayout";
 import GeneralModal from "../../components/UI/GeneralModal/GeneralModal";
 import Loader from "../../components/UI/Loader/Loader";
+
+// Contact us page
 const ContactUs = () => {
-  var db = firebase.firestore();
+var db = firebase.firestore();
+
+  // all react useState hooks for state management
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-
   const [loader, setLoader] = useState(false);
 
+  // review the validation and upload the message
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name == "") {
@@ -38,6 +42,7 @@ const ContactUs = () => {
           setLoader(false);
         });
 
+      // set all field null for next response(after uploading the first one)
       setName("");
       setEmail("");
       setMessage("");
@@ -54,7 +59,6 @@ const ContactUs = () => {
       ) : (
         <div></div>
       )}
-
 
       <div className="contactus">
         <form className="form" onSubmit={handleSubmit}>

@@ -7,8 +7,6 @@
   display: flex;
   flex-direction: column;
   width: 60%;
-
-  /* background-color:aqua; */
 }
 
 .label {
@@ -46,7 +44,6 @@ select:focus {
   border-radius: 5px;
   display: flex;
   margin-left: 50px;
-  /* margin-top: 50px; */
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -66,13 +63,10 @@ select:focus {
   font-size: 25px;
   font-weight: 500;
   color: #ff590b;
-  /* margin: 10px 0 15px 0; */
 }
 .drag_area input {
-  /* padding: 10px 25px; */
   font-size: 20px;
   font-weight: 500;
-  /* margin-left: 250px; */
   width: 60%;
   border: none;
   outline: none;
@@ -91,7 +85,7 @@ select:focus {
   visibility: hidden;
 }
 
-.btn{
+.btn {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -107,11 +101,6 @@ select:focus {
   margin-top: 10px;
   box-shadow: 0px 6px 18px -5px rgb(237, 133, 85);
 }
-
-/* .btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 17px 20px -6px rgba(187, 195, 204, 0.36);
-} */
 
 .cardbutton {
   position: relative;
@@ -136,13 +125,7 @@ select:focus {
   box-shadow: 0px 17px 20px -6px rgba(36, 52, 70, 0.36);
 }
 
-.note{
-color: rgb(211, 202, 202);
-font-size: 0.9em;
-}
-
 @media (max-width: 600px) {
-
   .col {
     flex-direction: column;
     justify-content: space-around;
@@ -163,11 +146,8 @@ font-size: 0.9em;
 
   .drag_area header {
     font-size: 15px;
-    /* color: #ff590b; */
   }
 }
-
-
 
 @media (min-width: 600px) and (max-width: 900px) {
   .col {
@@ -182,7 +162,6 @@ font-size: 0.9em;
     max-width: 100%;
     height: fit-content;
     padding: 20px;
-
   }
 
   .cardbutton:active {
@@ -196,7 +175,6 @@ font-size: 0.9em;
 
   .drag_area header {
     font-size: 15px;
-    /* color: #ff590b; */
   }
   .basicInput {
     width: 100%;

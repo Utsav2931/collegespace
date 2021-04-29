@@ -2,6 +2,7 @@ import React from "react";
 import "./aboutclubs.css";
 import BasicLayout from "../../components/UI/BasicCompPadding/BasicLayout";
 
+// Display the information about the clubs
 const aboutdept = () => {
   return (
     <BasicLayout>
@@ -77,17 +78,6 @@ const aboutdept = () => {
       <div className="blog-card alt">
         <div className="meta">
           <div className="photo3"></div>
-          {/* <ul class="details">
-            <li class="author"><a href="#">SOMEONE</a></li>
-            <li class="date">July. 15, 2020</li>
-            <li class="tags">
-              <ul>
-                <li><a href="#">Learn</a></li>
-                <li><a href="#">Code</a></li>
-                <li><a href="#">JavaScript</a></li>
-              </ul>
-            </li>
-          </ul> */}
         </div>
         <div className="description">
           <h1>
