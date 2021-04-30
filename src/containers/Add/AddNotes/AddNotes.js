@@ -15,7 +15,7 @@ export class AddNotes extends Component {
   db = firebase.firestore();
   subjectCe = ["toc", "dwdm", "ins", "ios", "pip"];
   subjecIt = ["crns", "se", "mla", "wcmc", "hs"];
-  subjecCse = ["se","crns","ml","iot","hs"]
+  subjecCse = ["se", "crns", "ml", "iot", "hs"]
   subjectEc = ["el", "awp", "dc", "es", "jp", "hs"]
   storageRef = firebase.storage();
   constructor(props) {
@@ -127,10 +127,10 @@ export class AddNotes extends Component {
   // If the article if valid this function will upload it to the firebase
   uploadNotes = () => {
     this.setState({ error: "" });
-    let id = this.state.article.title;
+    //let id = this.state.article.title;
     const article = this.state.article;
-    id = id.split(" ").join("-");
-    article.id = id;
+    //id = id.split(" ").join("-");
+    //article.id = id;
     this.db.collection("academics")
       .doc(this.state.article.college)
       .collection("department")
@@ -140,7 +140,7 @@ export class AddNotes extends Component {
       .collection("subjects")
       .doc(this.state.article.subject)
       .collection("notes")
-      .doc(id)
+      .doc()
       .set(article)
       .then((res) => {
         this.file = "";
@@ -241,20 +241,20 @@ export class AddNotes extends Component {
       this.setState({
         sub: this.subjectCe
       })
-    } 
-    else if(value == 'it') {
+    }
+    else if (value == 'it') {
       this.setState({
-        sub:this.subjecIt
+        sub: this.subjecIt
       })
     }
-    else if(value == 'cs') {
+    else if (value == 'cs') {
       this.setState({
-        sub:this.subjecCse
+        sub: this.subjecCse
       })
     }
-    else if(value == 'ec') {
+    else if (value == 'ec') {
       this.setState({
-        sub:this.subjectEc
+        sub: this.subjectEc
       })
     }
     this.setState({
@@ -275,9 +275,14 @@ export class AddNotes extends Component {
       this.setState({
         sub: this.subjecIt,
       });
-    } else if( value == 6 && this.state.article.department == "cs") {
+    } else if (value == 6 && this.state.article.department == "cs") {
       this.setState({
         sub: this.subjecCse,
+      });
+    }
+    else if (value == 6 && this.state.article.department == "ec") {
+      this.setState({
+        sub: this.subjectEc,
       });
     }
 
@@ -297,6 +302,7 @@ export class AddNotes extends Component {
         subject: value,
       },
     });
+    console.log(this.state.article.subject)
   };
 
   render() {

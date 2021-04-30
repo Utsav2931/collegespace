@@ -106,12 +106,12 @@ export class AddPosts extends Component {
   //If article is valid this function will upload the post to firebase
   uploadPost = () => {
     this.setState({ error: "" });
-    let id = this.state.article.title;
+   // let id = this.state.article.title;
     const article = this.state.article;
-    id = id.split(" ").join("-");
-    article.id = id;
+   // id = id.split(" ").join("-");
+    //article.id = id;
     this.db.collection("Posts")
-      .doc(id)
+      .doc()
       .set(article)
       .then((res) => {
         this.files = [];
