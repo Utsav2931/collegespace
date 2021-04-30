@@ -283,6 +283,7 @@ export class AddNotes extends Component {
       },
     });
   };
+  
 
   onChangeArticlecategory = (value) => {
     this.setState({
