@@ -15,7 +15,7 @@ export class AddNotes extends Component {
   db = firebase.firestore();
   subjectCe = ["toc", "dwdm", "ins", "ios", "pip"];
   subjecIt = ["crns", "se", "mla", "wcmc", "hs"];
-  subjecCse = ["se","crns","ml","iot","hs"]
+  subjecCse = ["se", "crns", "ml", "iot", "hs"];
   storageRef = firebase.storage();
   constructor(props) {
     super(props);
@@ -41,7 +41,7 @@ export class AddNotes extends Component {
     };
   }
 
-  // This returns a callback when a files successfully uploaded to the storage  
+  // This returns a callback when a files successfully uploaded to the storage
   uploadNoteCallBack = () => {
     return new Promise(async (resolve, reject) => {
       // file = e.target.files[0];
@@ -130,7 +130,8 @@ export class AddNotes extends Component {
     const article = this.state.article;
     id = id.split(" ").join("-");
     article.id = id;
-    this.db.collection("academics")
+    this.db
+      .collection("academics")
       .doc(this.state.article.college)
       .collection("department")
       .doc(this.state.article.department)
@@ -236,10 +237,10 @@ export class AddNotes extends Component {
 
   //This function is used to update Department
   onChangeDep = (value) => {
-    if (value == 'ce') {
+    if (value == "ce") {
       this.setState({
-        sub: this.subjectCe
-      })
+        sub: this.subjectCe,
+      });
     }
     this.setState({
       article: {
@@ -259,7 +260,7 @@ export class AddNotes extends Component {
       this.setState({
         sub: this.subjecIt,
       });
-    } else if( value == 6 && this.state.article.department == "cs") {
+    } else if (value == 6 && this.state.article.department == "cs") {
       this.setState({
         sub: this.subjecCse,
       });
@@ -279,6 +280,15 @@ export class AddNotes extends Component {
       article: {
         ...this.state.article,
         subject: value,
+      },
+    });
+  };
+
+  onChangeArticlecategory = (value) => {
+    this.setState({
+      article: {
+        ...this.state.article,
+        categoryLable: value,
       },
     });
   };
@@ -316,6 +326,24 @@ export class AddNotes extends Component {
               onChange={(e) => this.onChangeArticleAuthor(e.target.value)}
               title="Author"
             />
+
+            <label className={classes.label}>Category</label>
+
+            <select
+              className={classes.select}
+              onChange={(e) => this.onChangeArticlecategory(e.target.value)}
+              value={this.state.article.categoryLable}
+            >
+              <option value="" name="education" selected>
+                Select
+              </option>
+              <option name="education">Assignment</option>
+              <option name="education">Practical</option>
+              <option name="education">Classnotes</option>
+              <option name="education">PPT</option>
+              <option name="education">Question Bank</option>
+            </select>
+
             <label className={classes.label}>College</label>
             <select
               value={this.state.article.college}

@@ -4,12 +4,14 @@ import Book from "./Card/Card";
 import firebase from "../../config/config";
 import classes from "./GeneralPage.module.css";
 import Loader from "../../components/UI/Loader/Loader";
+import cx from "classnames";
 
 const db = firebase.firestore();
 var array;
 
 // Used to display papers, books, and notes respected to the subject
 class AcademicUse extends Component {
+  //  state.allAticles = [];
   // used to initialize the array var using the link of the page(using react router)
   constructor(props) {
     super(props);
@@ -18,6 +20,8 @@ class AcademicUse extends Component {
     this.state = {
       academicData: [],
       isLoaded: false,
+      filter: "",
+      allAticles: [],
     };
   }
 
@@ -40,18 +44,17 @@ class AcademicUse extends Component {
       .get()
       .then((docs) => {
         if (!docs.empty) {
-          let allArticals = [];
-          docs.forEach(function (doc) {
+          docs.forEach((doc)=> {
             const artical = {
               id: doc.id,
               ...doc.data(),
             };
-            allArticals.push(artical);
+            this.state.allAticles.push(artical);
           });
 
           this.setState(
             {
-              academicData: allArticals,
+              academicData: this.state.allAticles,
             },
             () => {
               this.setState({
@@ -74,6 +77,34 @@ class AcademicUse extends Component {
       });
   };
 
+  onChangeArticlecategory = (value) => {
+    this.setState({
+      filter: value,
+    });
+    console.log(this.state.filter);
+    if (value == "All Notes") {
+      this.setState({
+        academicData: this.state.allAticles,
+      });
+    } else {
+      let filterArtical = [];
+      // let this.state.allAticles = [];
+      console.log(this.state.academicData);
+      this.state.allAticles.forEach(function (doc) {
+        if (doc.categoryLable == value) {
+          const artical = {
+            ...doc,
+          };
+          filterArtical.push(artical);
+        }
+      });
+
+      this.setState({
+        academicData: filterArtical,
+      });
+    }
+  };
+
   // make capital first letter of a word
   capitalizeFirstLetter = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -86,10 +117,38 @@ class AcademicUse extends Component {
         <div className={classes.titleHeader}>
           {this.capitalizeFirstLetter(array[5])}
         </div>
+        {/* <div className={classes.pathAndFilter}> */}
         <div className={classes.headercontent}>
-          {array[2].toUpperCase()}-{array[3].toUpperCase()} /{" "}
-          {array[4].toUpperCase()} / {array[6].toUpperCase()}
+          <div>
+            {array[2].toUpperCase()}-{array[3].toUpperCase()} /{" "}
+            {array[4].toUpperCase()} / {array[6].toUpperCase()} /
+          </div>
+          <select
+            className={classes.select}
+            onChange={(e) => this.onChangeArticlecategory(e.target.value)}
+            // value={this.state.article.categoryLable}
+          >
+            <option className={classes.optionClass} name="education" selected>
+              All Notes
+            </option>
+            <option className={classes.optionClass} name="education">
+              Assignment
+            </option>
+            <option className={classes.optionClass} name="education">
+              Practical
+            </option>
+            <option className={classes.optionClass} name="education">
+              Classnotes
+            </option>
+            <option className={classes.optionClass} name="education">
+              PPT
+            </option>
+            <option className={classes.optionClass} name="education">
+              Question Bank
+            </option>
+          </select>
         </div>
+
         <div className={classes.GeneralRow}>
           {this.state.isLoaded ? (
             this.state.academicData != "" ? (

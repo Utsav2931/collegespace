@@ -26,9 +26,19 @@
   font-size: 18px;
   padding: 5px 15px;
   background: none;
-  color: #1a3b5d;
+  color: #000000;
   margin: 0.5em 0;
 }
+
+/* .select::after {
+  content: "";
+  position: absolute;
+  right: 0.8em;
+  top: 0.9em;
+  border: 0.3em solid #3694d7;
+  border-color: #3694d7 transparent transparent transparent;
+  transition: 0.4s all ease-in-out;
+} */
 
 select:hover,
 select:focus {
