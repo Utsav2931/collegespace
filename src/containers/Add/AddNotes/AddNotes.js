@@ -9,13 +9,14 @@ import GeneralModal from "../../../components/UI/GeneralModal/GeneralModal";
 // This class is used for uploading notes
 export class AddNotes extends Component {
   file = {};
-  deptCspit = ["ce", "it"];
+  deptCspit = ["ce", "it", "ec"];
   deptDep = ["ce", "cs", "it"];
   currentDate = new Date();
   db = firebase.firestore();
   subjectCe = ["toc", "dwdm", "ins", "ios", "pip"];
   subjecIt = ["crns", "se", "mla", "wcmc", "hs"];
   subjecCse = ["se","crns","ml","iot","hs"]
+  subjectEc = ["el", "awp", "dc", "es", "jp", "hs"]
   storageRef = firebase.storage();
   constructor(props) {
     super(props);
@@ -239,6 +240,21 @@ export class AddNotes extends Component {
     if (value == 'ce') {
       this.setState({
         sub: this.subjectCe
+      })
+    } 
+    else if(value == 'it') {
+      this.setState({
+        sub:this.subjecIt
+      })
+    }
+    else if(value == 'cs') {
+      this.setState({
+        sub:this.subjecCse
+      })
+    }
+    else if(value == 'ec') {
+      this.setState({
+        sub:this.subjectEc
       })
     }
     this.setState({

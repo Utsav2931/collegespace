@@ -7,15 +7,79 @@ import Checkbox from "../UI/CheckBox/Checkbox";
 import ContentBuilder from "../../containers/ContentBuilder/ContentBuilder";
 
 // Main layout for the whole website
+
+var college = [{
+  title: "CSPIT",
+  value: "cspit",
+  name: "college",
+  id: "c1"
+}, {
+  title: "DEPSTAR",
+  value: "depstar",
+  name: "college",
+  id: "c2"
+}]
+var deptCE = [
+  {
+    title: "Computer Engineering",
+    name: "department",
+    value: "ce",
+    id: "d1",
+  }, {
+    title: "Information Technology",
+    value: "it",
+    name: "department",
+    id: "d2"
+  },
+  {
+    title: "Electronics & Communication",
+    value: "ec",
+    name: "department",
+    id: "d3"
+  }
+]
+
+var deptDep = [
+  {
+    title: "Computer Engineering",
+    name: "department",
+    value: "ce",
+    id: "d4",
+  }, {
+    title: "Information Technology",
+    value: "it",
+    name: "department",
+    id: "d5"
+  },
+  {
+    title: "Computer Science",
+    value: "ec",
+    name: "department",
+    id: "d6"
+  }
+]
+
+var sem = [
+  {
+    title: "6",
+    name: "semester",
+    value: "6",
+    id: "s6",
+  },
+]
+
 class Layout extends Component {
   constructor() {
     super();
     this.state = {
       show: false,
-      college: "cspit",
-      department: "ce",
-      semester: "1",
+      college: "x",
+      department: "y",
+      semester: "z",
+      dept: [],
+      semt:[]
     };
+
   }
 
   // shows path select screen
@@ -30,6 +94,7 @@ class Layout extends Component {
 
   // Store the data in browser (Loacal Storage)
   handleFormSubmit = () => {
+    this.updateDept(this.state.college)
     const { college, department, semester } = this.state;
     localStorage.setItem("college", college ? college : "");
     localStorage.setItem("department", department ? department : "");
@@ -41,24 +106,48 @@ class Layout extends Component {
 
   //for mountaing the selected data with variables
   componentDidMount() {
+    this.updateDept(localStorage.getItem("college"))
+    this.updateSem(localStorage.getItem("department"))
     const college = localStorage.getItem("college");
     const department = localStorage.getItem("department");
     const semester = localStorage.getItem("semester");
     this.setState({ college, department, semester });
   }
 
+  updateDept = (event) => {
+
+    if (event == "cspit") {
+      this.setState({
+        dept: deptCE
+      })
+    }
+    else if (event == "depstar") {
+      this.setState({
+        dept: deptDep
+      })
+    }
+    console.log("inside updateDept " + this.state.dept)
+  }
   //for updating college value if user change it
   OnchangeValueCollege = (event) => {
     this.setState({
       college: event,
     });
+    this.updateDept(event)
   };
 
+  updateSem = (event) => {
+    if (event == "ce" || event == "ec" || event == "it" || event == "cs")
+      this.setState({
+        semt: sem
+      })
+  }
   //for updating department value if user change it
   OnchangeValueDepartment = (event) => {
     this.setState({
       department: event,
     });
+    this.updateSem(event)
   };
 
   //for updating semester value if user change it
@@ -95,7 +184,19 @@ class Layout extends Component {
             {/* College selection */}
             <legend className={classes.lable}>College</legend>
             <div className={classes.collegeSelection}>
-              <Checkbox
+              {
+                college.map(e =>
+                  <Checkbox
+                    title={e.title}
+                    value={e.value}
+                    name={e.name}
+                    checked={this.state.college}
+                    id={e.id}
+                    OnchageValue={(e) => this.OnchangeValueCollege(e.target.value)}
+                  />
+                )
+              }
+              {/* <Checkbox
                 title="CSPIT"
                 value="cspit"
                 name="college"
@@ -166,13 +267,26 @@ class Layout extends Component {
                 checked={this.state.college}
                 id="c8"
                 OnchageValue={(e) => this.OnchangeValueCollege(e.target.value)}
-              />
+              /> */}
             </div>
 
             {/* Department selection */}
-            <legend className={classes.lable}>Department</legend>
+            {this.state.dept[0] == null ? <div /> : <legend className={classes.lable}>Department</legend>}
             <div className={classes.collegeSelection}>
-              <Checkbox
+              {
+                this.state.dept ? this.state.dept.map(e =>
+                  <Checkbox
+                    title={e.title}
+                    name={e.name}
+                    value={e.value}
+                    checked={this.state.department}
+                    id={e.id}
+                    OnchageValue={(e) =>
+                      this.OnchangeValueDepartment(e.target.value)
+                    }
+                  />
+                ) : <div />}
+              {/* <Checkbox
                 title="Computer Engineering"
                 name="department"
                 value="ce"
@@ -241,12 +355,44 @@ class Layout extends Component {
                 OnchageValue={(e) =>
                   this.OnchangeValueDepartment(e.target.value)
                 }
-              />
+              /> */}
             </div>
             {/* Semester selection */}
-            <legend className={classes.lable}>Semester</legend>
+            {this.state.semt[0] == null ? <div /> : <legend className={classes.lable}>Semester</legend>}
             <div className={classes.collegeSelection}>
-              <Checkbox
+              {
+                this.state.semt ? this.state.semt.map(e =>
+                  <Checkbox
+                    title={e.title}
+                    name={e.name}
+                    value={e.value}
+                    checked={this.state.semester}
+                    id={e.id}
+                    OnchageValue={(e) =>
+                      this.OnchangeValueSemester(e.target.value)
+                    }
+                  />) : <div />
+                /* {sem.map(e =>
+                <Checkbox
+                  title={e.title}
+                  name={e.name}
+                  value={e.value}
+                  checked={this.state.department}
+                  id={e.id}
+                  OnchageValue={(e) =>
+                    this.OnchangeValueDepartment(e.target.value)
+                  }
+                />
+              )} */}
+              {/* {this.state.semester?this.state.semester.map(e => <Checkbox
+                title={e.title}
+                name={e.name}
+                value={e.value}
+                checked={this.state.semester}
+                id={e.value}
+                OnchageValue={(e) => this.OnchangeValueSemester(e.target.value)}
+              />):<div/>} */}
+              {/* <Checkbox
                 title="1"
                 name="semester"
                 value="1"
@@ -309,7 +455,7 @@ class Layout extends Component {
                 value="8"
                 id="s8"
                 OnchageValue={(e) => this.OnchangeValueSemester(e.target.value)}
-              />
+              /> */}
             </div>
             {/* Submit button */}
             <button
