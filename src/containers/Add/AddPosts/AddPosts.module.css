@@ -28,6 +28,7 @@
   background: none;
   color: #000000;
   margin: 0.5em 0;
+  cursor: pointer;
 }
 
 /* .select::after {
@@ -101,7 +102,7 @@ select:focus {
   visibility: hidden;
 }
 
-.btn{
+.btn {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -139,6 +140,7 @@ select:focus {
   font-size: 16px;
   text-align: center;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .cardbutton:hover {
@@ -146,13 +148,14 @@ select:focus {
   box-shadow: 0px 17px 20px -6px rgba(36, 52, 70, 0.36);
 }
 
-.note{
-color: rgb(211, 202, 202);
-font-size: 0.9em;
+.note {
+  color: rgb(211, 202, 202);
+  font-size: 0.9em;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 600px) {
-
   .col {
     flex-direction: column;
     justify-content: space-around;
@@ -177,8 +180,6 @@ font-size: 0.9em;
   }
 }
 
-
-
 @media (min-width: 600px) and (max-width: 900px) {
   .col {
     flex-direction: column;
@@ -192,7 +193,6 @@ font-size: 0.9em;
     max-width: 100%;
     height: fit-content;
     padding: 20px;
-
   }
 
   .cardbutton:active {

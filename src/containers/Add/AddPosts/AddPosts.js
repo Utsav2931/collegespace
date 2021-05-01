@@ -78,15 +78,19 @@ export class AddPosts extends Component {
         author,
       } = this.state.article;
       if (desc == "") {
-        this.setState({
-          error: "Description is not valid",
-        });
+        return alert("Description is not valid");
       } else if (title == "") {
-        this.setState({ error: "Title is not valid" });
+        return alert("Title is not valid");
+
+        // this.setState({ error: "Title is not valid" });
       } else if (categoryLable == "") {
-        this.setState({ error: "Category is not valid" });
+        return alert("CategoryLable is not valid");
+
+        // this.setState({ error: "Category is not valid" });
       } else if (author == "") {
-        this.setState({ error: "Author is not valid" });
+        return alert("Author is not valid");
+
+        // this.setState({ error: "Author is not valid" });
       } else {
         this.setState({
           loaderDisplay: true,
@@ -94,23 +98,24 @@ export class AddPosts extends Component {
         const len = this.files.length;
         for (var i = 0; i < len; i++) {
           const result = await this.callbk(this.files[i]);
-          if (result.success) {
-          }
+          // if (result.success) {
+          // }
         }
 
         this.uploadPost();
       }
     });
   }
- 
+
   //If article is valid this function will upload the post to firebase
   uploadPost = () => {
     this.setState({ error: "" });
-   // let id = this.state.article.title;
+    // let id = this.state.article.title;
     const article = this.state.article;
-   // id = id.split(" ").join("-");
+    // id = id.split(" ").join("-");
     //article.id = id;
-    this.db.collection("Posts")
+    this.db
+      .collection("Posts")
       .doc()
       .set(article)
       .then((res) => {
@@ -133,7 +138,7 @@ export class AddPosts extends Component {
       })
       .catch((err) => console.log(err));
   };
-  
+
   // For mounting local file to website
   fileAdded = (e) => {
     var len = 0;
@@ -201,7 +206,7 @@ export class AddPosts extends Component {
     return (
       <BasicPadding>
         {this.state.loaderDisplay ? (
-          <GeneralModal >
+          <GeneralModal>
             <Loader />
           </GeneralModal>
         ) : (
@@ -279,7 +284,13 @@ export class AddPosts extends Component {
             })}
           </div>
         </div>
-        <div className= {classes.note}>*Verification may take up to 2 to 3 hours. Thank you for the patients :)</div>
+        <div className={classes.note}>
+          <div>
+            *Verification may take up to 2 to 3 hours. Thank you for the
+            patients :)
+          </div>
+          *Adding photos is not compulsory.
+        </div>
       </BasicPadding>
     );
   }

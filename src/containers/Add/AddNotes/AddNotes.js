@@ -15,8 +15,8 @@ export class AddNotes extends Component {
   db = firebase.firestore();
   subjectCe = ["toc", "dwdm", "ins", "ios", "pip"];
   subjecIt = ["crns", "se", "mla", "wcmc", "hs"];
-  subjecCse = ["se", "crns", "ml", "iot", "hs"]
-  subjectEc = ["el", "awp", "dc", "es", "jp", "hs"]
+  subjecCse = ["se", "crns", "ml", "iot", "hs"];
+  subjectEc = ["el", "awp", "dc", "es", "jp", "hs"];
   storageRef = firebase.storage();
   constructor(props) {
     super(props);
@@ -94,32 +94,35 @@ export class AddNotes extends Component {
         college,
         link,
         author,
+        categoryLable,
       } = this.state.article;
+      console.log(this.file.name);
       if (desc == "") {
-        this.setState({
-          error: "DESC is not valid",
-        });
+        alert("Description is not valid");
       } else if (title == "") {
-        this.setState({ error: "title is not valid" });
+        alert("Title is not valid");
       } else if (author == "") {
-        this.setState({ error: "Author is not valid" });
+        alert("Author is not valid");
+      } else if (categoryLable == "") {
+        alert("Category is not valid");
       } else if (semester == "") {
-        this.setState({ error: "semester is not valid" });
+        alert("Semester is not valid");
       } else if (subject == "") {
-        this.setState({ error: "subject is not valid" });
+        alert("Title is not valid");
       } else if (department == "") {
-        this.setState({ error: "department is not valid" });
+        alert("Department is not valid");
       } else if (college == "") {
-        this.setState({ error: "college is not valid" });
+        alert("College is not valid");
       } else {
-        this.setState({
-          loaderDisplay: true,
-        });
-        await this.callBk();
-        if (link == "") {
-          this.setState({ error: "Adding pdf is Mandatory!" });
+        if (this.file.name == undefined) {
+          return alert("Adding pdf is Mandatory!");
+        } else {
+          this.setState({
+            loaderDisplay: true,
+          });
+          await this.callBk();
+          this.uploadNotes();
         }
-        this.uploadNotes();
       }
     });
   }
@@ -131,7 +134,8 @@ export class AddNotes extends Component {
     const article = this.state.article;
     //id = id.split(" ").join("-");
     //article.id = id;
-    this.db.collection("academics")
+    this.db
+      .collection("academics")
       .doc(this.state.article.college)
       .collection("department")
       .doc(this.state.article.department)
@@ -239,23 +243,20 @@ export class AddNotes extends Component {
   onChangeDep = (value) => {
     if (value == "ce") {
       this.setState({
-        sub: this.subjectCe
-      })
-    }
-    else if (value == 'it') {
+        sub: this.subjectCe,
+      });
+    } else if (value == "it") {
       this.setState({
-        sub: this.subjecIt
-      })
-    }
-    else if (value == 'cs') {
+        sub: this.subjecIt,
+      });
+    } else if (value == "cs") {
       this.setState({
-        sub: this.subjecCse
-      })
-    }
-    else if (value == 'ec') {
+        sub: this.subjecCse,
+      });
+    } else if (value == "ec") {
       this.setState({
-        sub: this.subjectEc
-      })
+        sub: this.subjectEc,
+      });
     }
     this.setState({
       article: {
@@ -279,8 +280,7 @@ export class AddNotes extends Component {
       this.setState({
         sub: this.subjecCse,
       });
-    }
-    else if (value == 6 && this.state.article.department == "ec") {
+    } else if (value == 6 && this.state.article.department == "ec") {
       this.setState({
         sub: this.subjectEc,
       });
