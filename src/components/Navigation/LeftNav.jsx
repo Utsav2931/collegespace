@@ -136,7 +136,7 @@ const Ul = styled.ul`
     }
   }
 
-  @media (max-width: 350px) {
+  @media (max-width: 380px) {
     li {
       font-size: 28px;
     }

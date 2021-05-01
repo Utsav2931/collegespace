@@ -44,7 +44,7 @@ class AcademicUse extends Component {
       .get()
       .then((docs) => {
         if (!docs.empty) {
-          docs.forEach((doc)=> {
+          docs.forEach((doc) => {
             const artical = {
               id: doc.id,
               ...doc.data(),
@@ -112,6 +112,7 @@ class AcademicUse extends Component {
 
   // to render the UI
   render() {
+    console.log(array[5]);
     return (
       <BasicLayout>
         <div className={classes.titleHeader}>
@@ -121,32 +122,42 @@ class AcademicUse extends Component {
         <div className={classes.headercontent}>
           <div>
             {array[2].toUpperCase()}-{array[3].toUpperCase()} /{" "}
-            {array[4].toUpperCase()} / {array[6].toUpperCase()} /
+            {array[4].toUpperCase()} / {array[6].toUpperCase()} / 
           </div>
-          <select
-            className={classes.select}
-            onChange={(e) => this.onChangeArticlecategory(e.target.value)}
-            // value={this.state.article.categoryLable}
-          >
-            <option className={classes.optionClass} name="education" selected>
-              All Notes
-            </option>
-            <option className={classes.optionClass} name="education">
-              Assignment
-            </option>
-            <option className={classes.optionClass} name="education">
-              Practical
-            </option>
-            <option className={classes.optionClass} name="education">
-              Classnotes
-            </option>
-            <option className={classes.optionClass} name="education">
-              PPT
-            </option>
-            <option className={classes.optionClass} name="education">
-              Question Bank
-            </option>
-          </select>
+          {array[5] == "notes" ? (
+            <div>
+              <select
+                className={classes.selectFilter}
+                onChange={(e) => this.onChangeArticlecategory(e.target.value)}
+                // value={this.state.article.categoryLable}
+              >
+                <option
+                  className={classes.optionClass}
+                  name="education"
+                  selected
+                >
+                  All Notes
+                </option>
+                <option className={classes.optionClass} name="education">
+                  Assignment
+                </option>
+                <option className={classes.optionClass} name="education">
+                  Practical
+                </option>
+                <option className={classes.optionClass} name="education">
+                  Classnotes
+                </option>
+                <option className={classes.optionClass} name="education">
+                  PPT
+                </option>
+                <option className={classes.optionClass} name="education">
+                  Question Bank
+                </option>
+              </select>
+            </div>
+          ) : (
+            <div />
+          )}
         </div>
 
         <div className={classes.GeneralRow}>

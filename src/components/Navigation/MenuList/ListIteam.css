@@ -131,7 +131,7 @@ header h1 {
   }
 }
 
-@media (max-width: 350px) {
+@media (max-width: 380px) {
   .faqs {
     max-width: fit-content;
   }
