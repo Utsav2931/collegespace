@@ -78,6 +78,9 @@ class Layout extends Component {
       semester: "z",
       dept: [],
       semt: [],
+      clgName: "",
+      deptName: "",
+      semName: "",
     };
   }
 
@@ -91,7 +94,11 @@ class Layout extends Component {
     if (document.querySelector('input[name="college"]:checked') &&
       document.querySelector('input[name="department"]:checked') &&
       document.querySelector('input[name="semester"]:checked')) {
-      this.setState({ show: false });
+      this.setState({
+        show: false, clgName: this.state.college,
+        semName: this.state.semester,
+        deptName: this.state.department
+      });
     } else {
       alert("please select all the fields")
     }
@@ -104,16 +111,21 @@ class Layout extends Component {
       document.querySelector('input[name="semester"]:checked')) {
       console.log(true)
       this.updateDept(this.state.college)
-      const { college, department, semester } = this.state;
-      localStorage.setItem("college", college ? college : "");
-      localStorage.setItem("department", department ? department : "");
-      localStorage.setItem("semester", semester ? semester : "");
+      const { clgName, deptName, semName } = this.state;
+      localStorage.setItem("college", clgName ? clgName : "");
+      localStorage.setItem("department", deptName ? deptName : "");
+      localStorage.setItem("semester", semName ? semName : "");
       this.setState({ show: false });
-      //this.setState({ college: this.state.clgName })
+      this.setState({
+        college: this.state.clgName,
+        semester: this.state.semName,
+        department: this.state.deptName
+      })
       window.location = "/";
     }
     else {
       console.log(false)
+      // this.setState({clgName:this.state.college})
       alert('please select all the field')
     }
     // this.updateDept(this.state.college)
@@ -130,10 +142,13 @@ class Layout extends Component {
   componentDidMount() {
     this.updateDept(localStorage.getItem("college"))
     this.updateSem(localStorage.getItem("department"))
-    const college = localStorage.getItem("college");
-    const department = localStorage.getItem("department");
-    const semester = localStorage.getItem("semester");
-    this.setState({ college, department, semester });
+    const clgName = localStorage.getItem("college");
+    const deptName = localStorage.getItem("department");
+    const semName = localStorage.getItem("semester");
+    const college = clgName
+    const department = deptName
+    const semester = semName
+    this.setState({ college, department, semester, clgName, deptName, semName });
   }
 
   updateDept = (event) => {
@@ -153,7 +168,7 @@ class Layout extends Component {
   //for updating college value if user change it
   OnchangeValueCollege = (event) => {
     this.setState({
-      college: event,
+      clgName: event,
     });
     this.updateDept(event)
   };
@@ -167,7 +182,7 @@ class Layout extends Component {
   //for updating department value if user change it
   OnchangeValueDepartment = (event) => {
     this.setState({
-      department: event,
+      deptName: event,
     });
     this.updateSem(event)
   };
@@ -175,7 +190,7 @@ class Layout extends Component {
   //for updating semester value if user change it
   OnchangeValueSemester = (event) => {
     this.setState({
-      semester: event,//6
+      semName: event,//6
     });
   };
 
@@ -212,7 +227,7 @@ class Layout extends Component {
                     title={e.title}
                     value={e.value}
                     name={e.name}
-                    checked={this.state.college}
+                    checked={this.state.clgName}
                     id={e.id}
                     OnchageValue={(e) => this.OnchangeValueCollege(e.target.value)}
                   />
@@ -301,7 +316,7 @@ class Layout extends Component {
                     title={e.title}
                     name={e.name}
                     value={e.value}
-                    checked={this.state.department}
+                    checked={this.state.deptName}
                     id={e.id}
                     OnchageValue={(e) =>
                       this.OnchangeValueDepartment(e.target.value)
@@ -388,7 +403,7 @@ class Layout extends Component {
                     title={e.title}
                     name={e.name}
                     value={e.value}
-                    checked={this.state.semester}
+                    checked={this.state.semName}
                     id={e.id}
                     OnchageValue={(e) =>
                       this.OnchangeValueSemester(e.target.value)
