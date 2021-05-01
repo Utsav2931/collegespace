@@ -53,7 +53,7 @@ var deptDep = [
   },
   {
     title: "Computer Science",
-    value: "ec",
+    value: "cs",
     name: "department",
     id: "d6"
   }
@@ -77,9 +77,8 @@ class Layout extends Component {
       department: "y",
       semester: "z",
       dept: [],
-      semt:[]
+      semt: [],
     };
-
   }
 
   // shows path select screen
@@ -89,19 +88,42 @@ class Layout extends Component {
 
   // Hide path select screen
   hideModal = () => {
-    this.setState({ show: false });
+    if (document.querySelector('input[name="college"]:checked') &&
+      document.querySelector('input[name="department"]:checked') &&
+      document.querySelector('input[name="semester"]:checked')) {
+      this.setState({ show: false });
+    } else {
+      alert("please select all the fields")
+    }
   };
 
   // Store the data in browser (Loacal Storage)
   handleFormSubmit = () => {
-    this.updateDept(this.state.college)
-    const { college, department, semester } = this.state;
-    localStorage.setItem("college", college ? college : "");
-    localStorage.setItem("department", department ? department : "");
-    localStorage.setItem("semester", semester ? semester : "");
-    this.setState({ show: false });
+    if (document.querySelector('input[name="college"]:checked') &&
+      document.querySelector('input[name="department"]:checked') &&
+      document.querySelector('input[name="semester"]:checked')) {
+      console.log(true)
+      this.updateDept(this.state.college)
+      const { college, department, semester } = this.state;
+      localStorage.setItem("college", college ? college : "");
+      localStorage.setItem("department", department ? department : "");
+      localStorage.setItem("semester", semester ? semester : "");
+      this.setState({ show: false });
+      //this.setState({ college: this.state.clgName })
+      window.location = "/";
+    }
+    else {
+      console.log(false)
+      alert('please select all the field')
+    }
+    // this.updateDept(this.state.college)
+    // const { college, department, semester } = this.state;
+    // localStorage.setItem("college", college ? college : "");
+    // localStorage.setItem("department", department ? department : "");
+    // localStorage.setItem("semester", semester ? semester : "");
+    // this.setState({ show: false });
 
-    window.location = "/";
+    // window.location = "/";
   };
 
   //for mountaing the selected data with variables
