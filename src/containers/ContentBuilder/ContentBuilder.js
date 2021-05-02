@@ -15,6 +15,7 @@ import ErrorModal from "../../components/UI/ErrorModal/ErrorModal";
 import Timetable from "../Books/TimeTable/Timetable";
 import AddBooks from "../Add/AddBooks/AddBooks";
 import AddPapers from "../Add/AddPapers/AddPapers";
+import AddNotesAdmin from "../Add/AddNotesAdmin/AdminNotesAdmin";
 
 // for routing between different screens
 export class ContentBuilder extends Component {
@@ -35,6 +36,7 @@ export class ContentBuilder extends Component {
         <Route path="/addbooksCS1479" component={AddBooks} />
         <Route path="/addpapersCS1479" component={AddPapers} />
         <Route path="/addpostsAcedemicsCS1479" component={AddPostsAcademics} />
+        <Route path="/addnotesCS1479" component={AddNotesAdmin} />
 
         <Route
           path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/notes/:id`}
