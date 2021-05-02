@@ -1,103 +1,59 @@
-import classes from "../AddPapers/AddPapers.module.css";
+import classes from "../AddPosts/AddPosts.module.css";
 import React, { Component } from "react";
 import BasicPadding from "../../../components/UI/BasicCompPadding/BasicLayout";
 import Textfield from "../../../components/UI/TextFormField/Textfield";
 import firebase from "../../../config/config";
-import { v4 as uuidv4 } from "uuid";
+import Loader from "../../../components/UI/Loader/Loader";
+import GeneralModal from "../../../components/UI/GeneralModal/GeneralModal";
 
-const deptce = ["ce", "it", "mech", "civil", "ec"];
-const deptdep = ["ce", "cse", "it"];
-var currentdate = new Date();
-const db = firebase.firestore();
-const subject = ["toc", "dwdm", "ins", "ios", "pip"];
-const storageRef = firebase.storage();
-export class AddPapers extends Component {
-  state = {
-    article: {
-      title: "",
-      desc: "",
-      createDate: currentdate,
-      categoryLable: "",
-      id: "",
-      link: "",
-      college: "",
-      department: "",
-      semester: "",
-      subject: "",
-      author: "",
-    },
-    error: "",
-    opt: [1, 2, 3, 4, 5, 6, 7, 8],
-    dept: [],
-    sub: [],
-  };
-
-  handleValidation() {
-    const {
-      title,
-      desc,
-      image,
-      semester,
-      subject,
-      department,
-      college,
-      link,
-      author,
-    } = this.state.article;
-
-    // only each block with generate error
-    if (desc == "") {
-      this.setState({
-        error: "DESC is not valid",
-      });
-    } else if (title == "") {
-      this.setState({ error: "title is not valid" });
-    } else if (author == "") {
-      this.setState({ error: "Author is not valid" });
-    } else if (semester == "") {
-      this.setState({ error: "semester is not valid" });
-    } else if (subject == "") {
-      this.setState({ error: "subject is not valid" });
-    } else if (department == "") {
-      this.setState({ error: "department is not valid" });
-    } else if (college == "") {
-      this.setState({ error: "college is not valid" });
-    } else if (link == "") {
-      this.setState({ error: "link is not valid" });
-    } else {
-      this.setState({ error: "" });
-      let id = this.state.article.title;
-      const article = this.state.article;
-      id = id.split(" ").join("-");
-      article.id = id;
-      db.collection("academics")
-        .doc(this.state.article.college)
-        .collection("department")
-        .doc(this.state.article.department)
-        .collection("sem")
-        .doc(this.state.article.semester)
-        .collection("subjects")
-        .doc(this.state.article.subject)
-        .collection("paper")
-        .doc(id)
-        .set(article)
-        .then((res) => {
-          alert("Your notes has been successfully uploaded 👍");
-        })
-        .catch((err) => console.log(err));
-    }
+// This class is used for uploading notes
+export class AddNotes extends Component {
+  file = {};
+  deptCspit = ["ce", "it", "ec"];
+  deptDep = ["ce", "cs", "it"];
+  currentDate = new Date();
+  db = firebase.firestore();
+  subjectCe = ["toc", "dwdm", "ins", "ios", "pip"];
+  subjecIt = ["crns", "se", "mla", "wcmc", "hs"];
+  subjecCse = ["se", "crns", "ml", "iot", "hs"];
+  subjectEc = ["el", "awp", "dc", "es", "jp", "hs"];
+  storageRef = firebase.storage();
+  constructor(props) {
+    super(props);
+    this.state = {
+      article: {
+        title: "",
+        desc: "",
+        createDate: this.currentDate,
+        categoryLable: "",
+        id: "",
+        link: "",
+        college: "",
+        department: "",
+        semester: "",
+        subject: "",
+        author: "",
+      },
+      error: "",
+      opt: [6],
+      dept: [],
+      sub: [],
+      loaderDisplay: false,
+    };
   }
 
-  uploadImageCallBack = (e) => {
+  // This returns a callback when a files successfully uploaded to the storage
+  uploadNoteCallBack = () => {
     return new Promise(async (resolve, reject) => {
-      const file = e.target.files[0];
-      const filename = uuidv4();
-      storageRef
+      // file = e.target.files[0];
+      const filename = this.file.name;
+      // uuidv4();
+      this.storageRef
         .ref()
         .child("pdf/" + filename)
-        .put(file)
+        .put(this.file)
         .then(async (snapshot) => {
-          const downloadURL = await storageRef
+          const downloadURL = await this.storageRef
             .ref()
             .child("pdf/" + filename)
             .getDownloadURL();
@@ -109,6 +65,91 @@ export class AddPapers extends Component {
     });
   };
 
+  // This function checks validation of the article
+  handleValidation() {
+    return new Promise(async (resolve, reject) => {
+      const {
+        title,
+        desc,
+        semester,
+        subject,
+        department,
+        college,
+        link,
+        author,
+        categoryLable,
+      } = this.state.article;
+      console.log(this.file.name);
+      if (desc == "") {
+        alert("Description is not valid");
+      } else if (title == "") {
+        alert("Title is not valid");
+      } else if (author == "") {
+        alert("Author is not valid");
+      } else if (semester == "") {
+        alert("Semester is not valid");
+      } else if (subject == "") {
+        alert("Title is not valid");
+      } else if (department == "") {
+        alert("Department is not valid");
+      } else if (college == "") {
+        alert("College is not valid");
+      } else {
+        //await this.callBk();
+        this.uploadNotes();
+      }
+    });
+  }
+
+  // If the article if valid this function will upload it to the firebase
+  uploadNotes = () => {
+    this.setState({ error: "" });
+    //let id = this.state.article.title;
+    const article = this.state.article;
+    //id = id.split(" ").join("-");
+    //article.id = id;
+    this.db
+      .collection("academics")
+      .doc(this.state.article.college)
+      .collection("department")
+      .doc(this.state.article.department)
+      .collection("sem")
+      .doc(this.state.article.semester)
+      .collection("subjects")
+      .doc(this.state.article.subject)
+      .collection("paper")
+      .doc()
+      .set(article)
+      .then((res) => {
+        this.file = "";
+        this.setState({
+          article: {
+            title: "",
+            desc: "",
+            createDate: this.currentDate,
+            categoryLable: "",
+            id: "",
+            link: "",
+            college: "",
+            department: "",
+            semester: "",
+            subject: "",
+            author: "",
+          },
+          error: "",
+          opt: [6],
+          dept: [],
+          sub: [],
+          loaderDisplay: false,
+        });
+        alert("Your notes has been successfully uploaded 👍");
+      })
+      .catch((err) => console.log(err));
+  };
+
+  //This function is used to add file to website
+
+  //This function is used to update Title
   onChangeArticleTitle = (value) => {
     this.setState({
       article: {
@@ -117,14 +158,8 @@ export class AddPapers extends Component {
       },
     });
   };
-  onChangeArticleLink = (value) => {
-    this.setState({
-      article: {
-        ...this.state.article,
-        link: value,
-      },
-    });
-  };
+
+  //This function is used to update Description
   onChangeArticleDesc = (value) => {
     this.setState({
       article: {
@@ -134,6 +169,7 @@ export class AddPapers extends Component {
     });
   };
 
+  //This function is used to update Author
   onChangeArticleAuthor = (value) => {
     this.setState({
       article: {
@@ -142,6 +178,8 @@ export class AddPapers extends Component {
       },
     });
   };
+
+  //This function is used to update Link
   onChangeArticleLink = (value) => {
     this.setState({
       article: {
@@ -151,14 +189,15 @@ export class AddPapers extends Component {
     });
   };
 
+  //This function is used to update College
   onChangeCollege = (value) => {
     if (value == "cspit") {
       this.setState({
-        dept: deptce,
+        dept: this.deptCspit,
       });
     } else if (value == "depstar") {
       this.setState({
-        dept: deptdep,
+        dept: this.deptDep,
       });
     }
 
@@ -170,7 +209,25 @@ export class AddPapers extends Component {
     });
   };
 
+  //This function is used to update Department
   onChangeDep = (value) => {
+    if (value == "ce") {
+      this.setState({
+        sub: this.subjectCe,
+      });
+    } else if (value == "it") {
+      this.setState({
+        sub: this.subjecIt,
+      });
+    } else if (value == "cs") {
+      this.setState({
+        sub: this.subjecCse,
+      });
+    } else if (value == "ec") {
+      this.setState({
+        sub: this.subjectEc,
+      });
+    }
     this.setState({
       article: {
         ...this.state.article,
@@ -179,10 +236,23 @@ export class AddPapers extends Component {
     });
   };
 
+  //This function is used to update Semester
   onChangeSem = (value) => {
-    if (value == 6) {
+    if (value == 6 && this.state.article.department == "ce") {
       this.setState({
-        sub: subject,
+        sub: this.subjectCe,
+      });
+    } else if (value == 6 && this.state.article.department == "it") {
+      this.setState({
+        sub: this.subjecIt,
+      });
+    } else if (value == 6 && this.state.article.department == "cs") {
+      this.setState({
+        sub: this.subjecCse,
+      });
+    } else if (value == 6 && this.state.article.department == "ec") {
+      this.setState({
+        sub: this.subjectEc,
       });
     }
 
@@ -190,11 +260,20 @@ export class AddPapers extends Component {
       article: {
         ...this.state.article,
         semester: value,
-        //  sub: subject,
       },
     });
   };
 
+  onChangeArticleLink = (value) => {
+    this.setState({
+      article: {
+        ...this.state.article,
+        link: value,
+      },
+    });
+  };
+
+  //This function is used to update Subject
   onChangeSub = (value) => {
     this.setState({
       article: {
@@ -202,73 +281,65 @@ export class AddPapers extends Component {
         subject: value,
       },
     });
+
+    // console.log(this.state.article.subject);
   };
 
-  onChangePapercategory = (value) =>{
+  onChangeArticlecategory = (value) => {
     this.setState({
       article: {
         ...this.state.article,
         categoryLable: value,
       },
     });
-  }
+  };
 
   render() {
     return (
       <BasicPadding>
+        {this.state.loaderDisplay ? (
+          <GeneralModal>
+            <Loader />
+          </GeneralModal>
+        ) : (
+          <div></div>
+        )}
         {this.state.error !== "" ? (
           <span style={{ color: "red" }}>{this.state.error}</span>
         ) : (
           ""
         )}
-        <h1 style={{ textAlign: "center" }}>Add Papers</h1>
+        <h1 style={{ textAlign: 'center' }}>Add Papers</h1>
         <div className={classes.col}>
           <div className={classes.basicInput}>
             <Textfield
+              value={this.state.article.title}
               onChange={(e) => this.onChangeArticleTitle(e.target.value)}
               title="Title"
             />
             <Textfield
+              value={this.state.article.desc}
               onChange={(e) => this.onChangeArticleDesc(e.target.value)}
               title="Description"
             />
             <Textfield
-              onChange={(e) => this.onChangeArticleLink(e.target.value)}
-              title="Link"
-            />
-            <Textfield
+              value={this.state.article.author}
               onChange={(e) => this.onChangeArticleAuthor(e.target.value)}
               title="Author"
             />
 
-            <label className={classes.label}>CategoryLable</label>
-
-            <select
-              className={classes.select}
-              onChange={(e) => this.onChangePapercategory(e.target.value)}
-              value={this.state.article.categoryLable}
-            >
-              <option className={classes.optionClass} name="education" value="" disabled selected>
-              CategoryLable
-              </option>
-              <option className={classes.optionClass} name="education">
-                Internal papers
-              </option>
-              <option className={classes.optionClass} name="education">
-                External papers
-              </option>
-              <option className={classes.optionClass} name="education">
-                UnitTest papers
-              </option>
-            </select>
-
+            <Textfield
+              onChange={(e) => this.onChangeArticleLink(e.target.value)}
+              title="Link"
+            />
             <label className={classes.label}>College</label>
             <select
+              value={this.state.article.college}
               className={classes.select}
               onChange={(e) => this.onChangeCollege(e.target.value)}
             >
               <option value="" disabled selected>
-                College
+                Select
               </option>
               <option name="cspit">cspit</option>
               <option name="depstar">depstar</option>
@@ -276,42 +347,39 @@ export class AddPapers extends Component {
 
             <label className={classes.label}>Department</label>
             <select
+              value={this.state.article.department}
               className={classes.select}
               onChange={(e) => this.onChangeDep(e.target.value)}
             >
               <option value="" disabled selected>
-                Department
+                Select
               </option>
               {this.state.dept.map((e) => {
                 return <option name={e}>{e}</option>;
               })}
-              {/* <option name="ce">ce</option>
-              <option name="it">it</option> */}
             </select>
-
             <label className={classes.label}>Semester</label>
             <select
+              value={this.state.article.semester}
               className={classes.select}
               onChange={(e) => this.onChangeSem(e.target.value)}
             >
               <option value="" disabled selected>
-                Semester
+                Select
               </option>
               {this.state.opt.map((e) => {
                 return <option name={e}>{e}</option>;
               })}
-              {/* <option name="1">1</option>
-              <option name="2">2</option>
-              <option name="3">3</option> */}
             </select>
 
             <label className={classes.label}>Subject</label>
             <select
+              value={this.state.article.subject}
               className={classes.select}
               onChange={(e) => this.onChangeSub(e.target.value)}
             >
               <option value="" disabled selected>
-                Subject
+                Select
               </option>
               {this.state.sub.map((e) => {
                 return <option name={e}>{e}</option>;
@@ -330,4 +398,4 @@ export class AddPapers extends Component {
   }
 }
 
-export default AddPapers;
+export default AddNotes;
