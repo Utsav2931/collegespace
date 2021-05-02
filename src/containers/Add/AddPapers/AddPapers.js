@@ -1,4 +1,4 @@
-import classes from "../AddPapers/AddPapers.module.css"
+import classes from "../AddPapers/AddPapers.module.css";
 import React, { Component } from "react";
 import BasicPadding from "../../../components/UI/BasicCompPadding/BasicLayout";
 import Textfield from "../../../components/UI/TextFormField/Textfield";
@@ -9,10 +9,9 @@ const deptce = ["ce", "it", "mech", "civil", "ec"];
 const deptdep = ["ce", "cse", "it"];
 var currentdate = new Date();
 const db = firebase.firestore();
-const subject = ["toc", "dwdm", "ins", "ios", "pip"]
+const subject = ["toc", "dwdm", "ins", "ios", "pip"];
 const storageRef = firebase.storage();
 export class AddPapers extends Component {
- 
   state = {
     article: {
       title: "",
@@ -30,11 +29,21 @@ export class AddPapers extends Component {
     error: "",
     opt: [1, 2, 3, 4, 5, 6, 7, 8],
     dept: [],
-    sub: []
+    sub: [],
   };
 
   handleValidation() {
-    const { title, desc, image, semester, subject, department, college,  link, author } = this.state.article;
+    const {
+      title,
+      desc,
+      image,
+      semester,
+      subject,
+      department,
+      college,
+      link,
+      author,
+    } = this.state.article;
 
     // only each block with generate error
     if (desc == "") {
@@ -49,13 +58,11 @@ export class AddPapers extends Component {
       this.setState({ error: "semester is not valid" });
     } else if (subject == "") {
       this.setState({ error: "subject is not valid" });
-    }
-    else if (department == "") {
+    } else if (department == "") {
       this.setState({ error: "department is not valid" });
-    }
-    else if (college == "") {
+    } else if (college == "") {
       this.setState({ error: "college is not valid" });
-    }else if (link == "") {
+    } else if (link == "") {
       this.setState({ error: "link is not valid" });
     } else {
       this.setState({ error: "" });
@@ -111,13 +118,13 @@ export class AddPapers extends Component {
     });
   };
   onChangeArticleLink = (value) => {
-   this.setState({
-     article: {
-       ...this.state.article,
-       link: value,
-     },
-   });
- };
+    this.setState({
+      article: {
+        ...this.state.article,
+        link: value,
+      },
+    });
+  };
   onChangeArticleDesc = (value) => {
     this.setState({
       article: {
@@ -197,6 +204,15 @@ export class AddPapers extends Component {
     });
   };
 
+  onChangePapercategory = (value) =>{
+    this.setState({
+      article: {
+        ...this.state.article,
+        categoryLable: value,
+      },
+    });
+  }
+
   render() {
     return (
       <BasicPadding>
@@ -205,7 +221,7 @@ export class AddPapers extends Component {
         ) : (
           ""
         )}
-        <h1 style = {{textAlign: "center"}}>Add Papers</h1>
+        <h1 style={{ textAlign: "center" }}>Add Papers</h1>
         <div className={classes.col}>
           <div className={classes.basicInput}>
             <Textfield
@@ -224,6 +240,28 @@ export class AddPapers extends Component {
               onChange={(e) => this.onChangeArticleAuthor(e.target.value)}
               title="Author"
             />
+
+            <label className={classes.label}>CategoryLable</label>
+
+            <select
+              className={classes.select}
+              onChange={(e) => this.onChangePapercategory(e.target.value)}
+              value={this.state.article.categoryLable}
+            >
+              <option className={classes.optionClass} name="education" value="" disabled selected>
+              CategoryLable
+              </option>
+              <option className={classes.optionClass} name="education">
+                Internal papers
+              </option>
+              <option className={classes.optionClass} name="education">
+                External papers
+              </option>
+              <option className={classes.optionClass} name="education">
+                UnitTest papers
+              </option>
+            </select>
+
             <label className={classes.label}>College</label>
             <select
               className={classes.select}
@@ -274,7 +312,8 @@ export class AddPapers extends Component {
             >
               <option value="" disabled selected>
                 Subject
-              </option>{this.state.sub.map((e) => {
+              </option>
+              {this.state.sub.map((e) => {
                 return <option name={e}>{e}</option>;
               })}
             </select>

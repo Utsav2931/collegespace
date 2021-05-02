@@ -105,6 +105,34 @@ class AcademicUse extends Component {
     }
   };
 
+  onChangePapercategory = (value) => {
+    this.setState({
+      filter: value,
+    });
+    console.log(this.state.filter);
+    if (value == "All Papers") {
+      this.setState({
+        academicData: this.state.allAticles,
+      });
+    } else {
+      let filterArtical = [];
+      // let this.state.allAticles = [];
+      console.log(this.state.academicData);
+      this.state.allAticles.forEach(function (doc) {
+        if (doc.categoryLable == value) {
+          const artical = {
+            ...doc,
+          };
+          filterArtical.push(artical);
+        }
+      });
+
+      this.setState({
+        academicData: filterArtical,
+      });
+    }
+  };
+
   // make capital first letter of a word
   capitalizeFirstLetter = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -122,7 +150,7 @@ class AcademicUse extends Component {
         <div className={classes.headercontent}>
           <div>
             {array[2].toUpperCase()}-{array[3].toUpperCase()} /{" "}
-            {array[4].toUpperCase()} / {array[6].toUpperCase()} / 
+            {array[4].toUpperCase()} / {array[6].toUpperCase()} /
           </div>
           {array[5] == "notes" ? (
             <div>
@@ -152,6 +180,35 @@ class AcademicUse extends Component {
                 </option>
                 <option className={classes.optionClass} name="education">
                   Question Bank
+                </option>
+              </select>
+            </div>
+          ) : (
+            <div />
+          )}
+
+          {array[5] == "paper" ? (
+            <div>
+              <select
+                className={classes.selectFilter}
+                onChange={(e) => this.onChangePapercategory(e.target.value)}
+                // value={this.state.article.categoryLable}
+              >
+                <option
+                  className={classes.optionClass}
+                  name="education"
+                  selected
+                >
+                  All Papers
+                </option>
+                <option className={classes.optionClass} name="education">
+                  Internal papers
+                </option>
+                <option className={classes.optionClass} name="education">
+                  External papers
+                </option>
+                <option className={classes.optionClass} name="education">
+                  UnitTest papers
                 </option>
               </select>
             </div>

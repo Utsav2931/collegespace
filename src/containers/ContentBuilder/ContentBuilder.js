@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import AddPost from "../Add/AddPosts/AddPosts";
+import AddPostsAcademics from "../Add/AddPostsAcademics/AddPostsAcademics";
 import Homescreen from "../HomeScreen/Homescreen";
 import Events from "../Events/Events";
 import aboutclubs from "../AboutClubs/aboutclubs";
@@ -33,6 +34,7 @@ export class ContentBuilder extends Component {
         <Route path="/faqs" component={faq} />
         <Route path="/addbooksCS1479" component={AddBooks} />
         <Route path="/addpapersCS1479" component={AddPapers} />
+        <Route path="/addpostsAcedemicsCS1479" component={AddPostsAcademics} />
 
         <Route
           path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/notes/:id`}

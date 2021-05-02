@@ -4,25 +4,37 @@ import Posts from "./Posts/Posts";
 import firebase from "../../config/config";
 import BasicPadding from "../../components/UI/BasicCompPadding/BasicLayout";
 import Loader from "../../components/UI/Loader/Loader";
+import cx from "classnames";
+
 const db = firebase.firestore();
 
 // Displays posts in the home screen
 export class Homescreen extends Component {
   limit = 2;
+  limitAcedemicPosts = 2;
   // state of the this screen
   state = {
     posts: [],
+    AcedemicsPosts: [],
     isLoaded: false,
+    isLoadedAcedemics: false,
+    toggleState: 1,
   };
 
   // Runs this function, whenever this page loads
   componentDidMount() {
     this.getPosts();
+    this.getAcedemicPosts();
   }
 
   // increment the limit of the post
   incLimit = () => {
     this.limit += 2;
+    this.getPosts();
+  };
+
+  incLimitAcedemics = () => {
+    this.limitAcedemicPosts += 2;
     this.getPosts();
   };
 
@@ -62,27 +74,132 @@ export class Homescreen extends Component {
       });
   };
 
+  getAcedemicPosts = () => {
+    db.collection("AcademicPosts")
+      .orderBy("createDate", "desc")
+      .limit(this.limitAcedemicPosts)
+      .get()
+      .then((docs) => {
+        if (!docs.empty) {
+          let allArticalsAcedemics = [];
+
+          // store each data in local array, "allArticals"
+          docs.forEach(function (doc) {
+            if (doc.data().verified) {
+              const artical = {
+                id: doc.id,
+                ...doc.data(),
+              };
+              allArticalsAcedemics.push(artical);
+            }
+          });
+
+          // set this all data(stored in allArticals) to the state object
+          this.setState(
+            {
+              AcedemicsPosts: allArticalsAcedemics,
+            },
+            () => {
+              this.setState({
+                isLoadedAcedemics: true,
+              });
+            }
+          );
+        }
+      });
+  };
+
+  toggleTab = (index) => {
+    this.setState({
+      toggleState: index,
+    });
+  };
+
   // React function to render the UI
   render() {
     return (
       <BasicPadding>
-        {/* checks whether the data is retrieved or not, after getting data, it passes to the Posts component */}
-        {this.state.isLoaded ? (
-          <Posts posts={this.state.posts} />
-        ) : (
-          <center>
-            <Loader />
-          </center>
-        )}
-
-        {/* Display showmore button after the data is loaded */}
-        {this.state.isLoaded ? (
-          <div onClick={this.incLimit} className={classes.showmoreButton}>
-            Show more
+        <div className={classes.container}>
+          <div className={classes.bloctabs}>
+            <div
+              className={
+                this.state.toggleState === 1
+                  ? cx(classes.tabs, classes.activetabs)
+                  : cx(classes.tabs)
+              }
+              onClick={() => this.toggleTab(1)}
+            >
+              Posts
+            </div>
+            <div
+              className={
+                this.state.toggleState === 2
+                  ? cx(classes.tabs, classes.activetabs)
+                  : cx(classes.tabs)
+              }
+              onClick={() => this.toggleTab(2)}
+            >
+              Academic Posts
+            </div>
           </div>
-        ) : (
-          <div></div>
-        )}
+
+          <div className={classes.contenttabs}>
+            <div
+              className={
+                this.state.toggleState === 1
+                  ? cx(classes.content, classes.activecontent)
+                  : cx(classes.content)
+              }
+            >
+              {/* checks whether the data is retrieved or not, after getting data, it passes to the Posts component */}
+              {this.state.isLoaded ? (
+                <Posts posts={this.state.posts} />
+              ) : (
+                <center>
+                  <Loader />
+                </center>
+              )}
+
+              {/* Display showmore button after the data is loaded */}
+              {this.state.isLoaded ? (
+                <div onClick={this.incLimit} className={classes.showmoreButton}>
+                  Show more
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+
+            <div
+              className={
+                this.state.toggleState === 2
+                  ? cx(classes.content, classes.activecontent)
+                  : cx(classes.content)
+              }
+            >
+              {/* checks whether the data is retrieved or not, after getting data, it passes to the Posts component */}
+              {this.state.isLoadedAcedemics ? (
+                <Posts posts={this.state.AcedemicsPosts} />
+              ) : (
+                <center>
+                  <Loader />
+                </center>
+              )}
+
+              {/* Display showmore button after the data is loaded */}
+              {this.state.isLoadedAcedemics ? (
+                <div
+                  onClick={this.incLimitAcedemics}
+                  className={classes.showmoreButton}
+                >
+                  Show more
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+          </div>
+        </div>
       </BasicPadding>
     );
   }
