@@ -7,7 +7,7 @@ import Loader from "../../../components/UI/Loader/Loader";
 import GeneralModal from "../../../components/UI/GeneralModal/GeneralModal";
 
 // This class is used for uploading notes
-export class AddNotes extends Component {
+export class AddPapers extends Component {
   file = {};
   deptCspit = ["ce", "it", "ec"];
   deptDep = ["ce", "cs", "it"];
@@ -84,16 +84,17 @@ export class AddNotes extends Component {
         alert("Description is not valid");
       } else if (title == "") {
         alert("Title is not valid");
-      } else if (author == "") {
-        alert("Author is not valid");
-      } else if (semester == "") {
+      }  else if (semester == "") {
         alert("Semester is not valid");
       } else if (subject == "") {
         alert("Title is not valid");
-      } else if (department == "") {
-        alert("Department is not valid");
+      } else if (categoryLable == "") {
+        alert("CategoryLable is not valid");
       } else if (college == "") {
         alert("College is not valid");
+      } 
+      else if (link == "") {
+        alert("Link is not valid");
       } else {
         //await this.callBk();
         this.uploadNotes();
@@ -209,6 +210,15 @@ export class AddNotes extends Component {
     });
   };
 
+  onChangePapercategory = (value) => {
+    this.setState({
+      article: {
+        ...this.state.article,
+        categoryLable: value,
+      },
+    });
+  };
+
   //This function is used to update Department
   onChangeDep = (value) => {
     if (value == "ce") {
@@ -309,7 +319,7 @@ export class AddNotes extends Component {
         ) : (
           ""
         )}
-        <h1 style={{ textAlign: 'center' }}>Add Papers</h1>
+        <h1 style={{ textAlign: "center" }}>Add Papers</h1>
         <div className={classes.col}>
           <div className={classes.basicInput}>
             <Textfield
@@ -322,16 +332,30 @@ export class AddNotes extends Component {
               onChange={(e) => this.onChangeArticleDesc(e.target.value)}
               title="Description"
             />
-            <Textfield
-              value={this.state.article.author}
-              onChange={(e) => this.onChangeArticleAuthor(e.target.value)}
-              title="Author"
-            />
+      
 
             <Textfield
               onChange={(e) => this.onChangeArticleLink(e.target.value)}
               title="Link"
             />
+            <label className={classes.label}>CategoryLable</label>
+
+            <select
+              className={classes.select}
+              onChange={(e) => this.onChangePapercategory(e.target.value)}
+              value={this.state.article.categoryLable}
+            >
+              <option className={classes.optionClass} name="education" value="" disabled selected>
+                Select
+              </option>
+              <option className={classes.optionClass} name="education">
+                Internal papers
+              </option>
+              <option className={classes.optionClass} name="education">
+                External papers
+              </option>
+            </select>
+
             <label className={classes.label}>College</label>
             <select
               value={this.state.article.college}
@@ -398,4 +422,4 @@ export class AddNotes extends Component {
   }
 }
 
-export default AddNotes;
+export default AddPapers;

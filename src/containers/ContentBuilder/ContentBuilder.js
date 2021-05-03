@@ -37,7 +37,6 @@ export class ContentBuilder extends Component {
         <Route path="/addpapersCS1479" component={AddPapers} />
         <Route path="/addpostsAcedemicsCS1479" component={AddPostsAcademics} />
         <Route path="/addnotesCS1479" component={AddNotesAdmin} />
-
         <Route
           path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/notes/:id`}
           component={AcademicUse}

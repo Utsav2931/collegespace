@@ -207,9 +207,6 @@ class AcademicUse extends Component {
                 <option className={classes.optionClass} name="education">
                   External papers
                 </option>
-                <option className={classes.optionClass} name="education">
-                  UnitTest papers
-                </option>
               </select>
             </div>
           ) : (

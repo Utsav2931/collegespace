@@ -11,8 +11,23 @@
 /* style for showmore button */
 .showmoreButton {
   margin: 0 auto;
-  color: #ff590b;
+  /* color: #ff590b;
+  cursor: pointer; */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ff590b;
+  border: none;
+  border-radius: 5px;
+  width: fit-content;
+  height: 45px;
+  padding: 15px;
+  font-size: 16px;
   cursor: pointer;
+  color: white;
+  margin-top: 10px;
+  box-shadow: 0px 6px 18px -5px rgb(237, 133, 85);
 }
 
 /* hover effect */
@@ -25,7 +40,7 @@
   flex-direction: column;
   position: relative;
   width: 100%;  
-  height: 300px;
+  /* height: 300px; */
   word-break: break-all;
   border: 0px solid rgba(0, 0, 0, 0.274);
   border-radius: 15px;
@@ -33,21 +48,24 @@
 
 .bloctabs {
   display: flex;
+  justify-content: center;
   border-radius: 30px;
   position: relative;
-  width: 50%;
+  width: 100%;
   align-items: center;
   align-self: center;
   background-color: white;
   transition : scale3d(1,1,1); 
   /* box-shadow: rgba(170, 170, 170, 0.1) 0px 8px 24px; */
   height: 60px;
+  font-size: 1em;
+
 }
 .tabs {
-  margin: 15px;
-  padding: 9px;
+  margin: 3px;
+  padding: 9px 25px;
   text-align: center;
-  width: 50%;
+  width: fit-content;
   background: white;
   cursor: pointer;
   border-radius: 25px;
@@ -61,7 +79,7 @@
 }
 
 .activetabs  {
-  border-radius: 25px;
+  border-radius: 30px;
   background: #ffeee4;
   transform: translateX(0);
   transition : all .2s ease-in;
@@ -89,14 +107,25 @@
 .content {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  background: white;
-  padding: 20px;
+  margin-top: 20px;
   width: 100%;
-  height: 100%;
   display: none;
 }
 .activecontent {
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: 600px) {
+  .bloctabs{
+    width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    font-size: 0.8em;
+  }
+
+  .content{
+    margin-top: 7px;
+
+  }
 }

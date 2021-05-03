@@ -10,8 +10,8 @@ const db = firebase.firestore();
 
 // Displays posts in the home screen
 export class Homescreen extends Component {
-  limit = 2;
-  limitAcedemicPosts = 2;
+  limit = 3;
+  limitAcedemicPosts = 3;
   // state of the this screen
   state = {
     posts: [],
@@ -19,6 +19,8 @@ export class Homescreen extends Component {
     isLoaded: false,
     isLoadedAcedemics: false,
     toggleState: 1,
+    endOfPost: false,
+    endOfPostAcedemics: false,
   };
 
   // Runs this function, whenever this page loads
@@ -30,12 +32,13 @@ export class Homescreen extends Component {
   // increment the limit of the post
   incLimit = () => {
     this.limit += 2;
+    console.log(this.limit);
     this.getPosts();
   };
 
   incLimitAcedemics = () => {
     this.limitAcedemicPosts += 2;
-    this.getPosts();
+    this.getAcedemicPosts();
   };
 
   // This function gets the posts from the database
@@ -45,9 +48,9 @@ export class Homescreen extends Component {
       .limit(this.limit)
       .get()
       .then((docs) => {
+        console.log(docs);
         if (!docs.empty) {
           let allArticals = [];
-
           // store each data in local array, "allArticals"
           docs.forEach(function (doc) {
             if (doc.data().verified) {
@@ -59,6 +62,11 @@ export class Homescreen extends Component {
             }
           });
 
+          if (allArticals.length == this.state.posts.length) {
+            this.setState({
+              endOfPost: true,
+            });
+          }
           // set this all data(stored in allArticals) to the state object
           this.setState(
             {
@@ -70,7 +78,15 @@ export class Homescreen extends Component {
               });
             }
           );
+
+          // console.log(allArticals.length)
+          // console.log(this.state.posts.length)
         }
+        // else{
+        //   this.setState({
+        //     endOfPost : true,
+        //   })
+        // }
       });
   };
 
@@ -93,6 +109,12 @@ export class Homescreen extends Component {
               allArticalsAcedemics.push(artical);
             }
           });
+
+          if (allArticalsAcedemics.length == this.state.AcedemicsPosts.length) {
+            this.setState({
+              endOfPostAcedemics: true,
+            });
+          }
 
           // set this all data(stored in allArticals) to the state object
           this.setState(
@@ -162,9 +184,16 @@ export class Homescreen extends Component {
 
               {/* Display showmore button after the data is loaded */}
               {this.state.isLoaded ? (
-                <div onClick={this.incLimit} className={classes.showmoreButton}>
-                  Show more
-                </div>
+                this.state.endOfPost ? (
+                  <div></div>
+                ) : (
+                  <button
+                    onClick={this.incLimit}
+                    className={classes.showmoreButton}
+                  >
+                    Show more
+                  </button>
+                )
               ) : (
                 <div></div>
               )}
@@ -188,12 +217,16 @@ export class Homescreen extends Component {
 
               {/* Display showmore button after the data is loaded */}
               {this.state.isLoadedAcedemics ? (
-                <div
-                  onClick={this.incLimitAcedemics}
-                  className={classes.showmoreButton}
-                >
-                  Show more
-                </div>
+                this.state.endOfPostAcedemics ? (
+                  <div></div>
+                ) : (
+                  <button
+                    onClick={this.incLimitAcedemics}
+                    className={classes.showmoreButton}
+                  >
+                    Show more
+                  </button>
+                )
               ) : (
                 <div></div>
               )}

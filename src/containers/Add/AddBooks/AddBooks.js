@@ -7,7 +7,7 @@ import Loader from "../../../components/UI/Loader/Loader";
 import GeneralModal from "../../../components/UI/GeneralModal/GeneralModal";
 
 // This class is used for uploading notes
-export class AddNotes extends Component {
+export class AddBooks extends Component {
   file = {};
   deptCspit = ["ce", "it", "ec"];
   deptDep = ["ce", "cs", "it"];
@@ -398,4 +398,4 @@ export class AddNotes extends Component {
   }
 }
 
-export default AddNotes;
+export default AddBooks;
