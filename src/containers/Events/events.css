@@ -2,7 +2,7 @@
   font-family: "Poppins", sans-serif;
   font-size: 1em;
   font-weight: 300;
-  line-height: 1.5;
+  /* line-height: 1.5; */
   letter-spacing: 0.05em;
 }
 
@@ -51,6 +51,13 @@
   box-shadow: inset 40em 0 0 0 #ff6600;
 }
 
+.timing{
+margin-top: 10px;
+margin-bottom: 5px
+}
+
+
+
 .timeline-event-copy {
   padding: 2em;
   position: relative;
@@ -63,6 +70,7 @@
 }
 .timeline-event-copy .title {
   font-size: 1.75em;
+  font-weight: 600;
 }
 .timeline-event-copy .by {
   font-size: 1.2em;
@@ -129,10 +137,11 @@
 
   .timeline-event-copy .title {
     font-size: 1.5em;
+    line-height: 1em;
   }
   .timeline-event-copy .by {
     font-size: 1em;
-    margin-bottom: 1.2em;
+    margin-bottom: 1em;
   }
 
   .timeline-event-icon {
@@ -141,5 +150,14 @@
 
   .timeline:before {
     display: none;
+    /* margin-left: -28px; */
   }
+  .timeline-event-copy p:not(.timeline-event-thumbnail) {
+    padding-bottom: 0em;
+  }
+
+  .apply{
+    margin-bottom: 60px;
+  }
+  
 }

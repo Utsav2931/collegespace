@@ -32,7 +32,6 @@ export class Homescreen extends Component {
   // increment the limit of the post
   incLimit = () => {
     this.limit += 2;
-    console.log(this.limit);
     this.getPosts();
   };
 
@@ -48,7 +47,6 @@ export class Homescreen extends Component {
       .limit(this.limit)
       .get()
       .then((docs) => {
-        console.log(docs);
         if (!docs.empty) {
           let allArticals = [];
           // store each data in local array, "allArticals"
@@ -78,15 +76,7 @@ export class Homescreen extends Component {
               });
             }
           );
-
-          // console.log(allArticals.length)
-          // console.log(this.state.posts.length)
         }
-        // else{
-        //   this.setState({
-        //     endOfPost : true,
-        //   })
-        // }
       });
   };
 

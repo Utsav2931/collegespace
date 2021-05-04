@@ -14,20 +14,20 @@ const fetchevent = (props) => {
             <strong>By : </strong>
             {props.author}
           </h4>
-          <p>
+          <div>
             <strong>About : </strong>
             {props.desc}
-          </p>
-          <p>
+          </div>
+          <div className="timing">
             <strong>Timings : </strong>
             {props.time}
-          </p>
-          <p>
+          </div>
+          <div className="apply">
             <strong>Apply Link : </strong>
             <a class="link" href={props.link} target="_blank">
               Click Here
             </a>
-          </p>
+          </div>
         </div>
       </div>
     </div>
