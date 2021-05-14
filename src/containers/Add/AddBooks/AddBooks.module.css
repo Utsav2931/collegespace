@@ -1,0 +1,182 @@
+.col {
+  display: flex;
+  justify-content: space-around;
+}
+
+.basicInput {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+}
+
+.select {
+  width: 50%;
+  height: 50px;
+  border-radius: 5px;
+  box-shadow: none;
+  border: 1px solid #ced6e0;
+  transition: all 0.3s ease-in-out;
+  font-size: 18px;
+  padding: 5px 15px;
+  background: none;
+  color: #1a3b5d;
+  margin: 0.5em 0;
+}
+
+select:hover,
+select:focus {
+  border-color: #1f1f1f;
+}
+
+select:focus {
+  box-shadow: 0px 10px 20px -13px rgba(32, 56, 117, 0.45);
+}
+
+.drag_area {
+  max-height: fit-content;
+  max-width: 50%;
+  background-color: #ffeee4;
+  border-radius: 5px;
+  display: flex;
+  margin-left: 50px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.drag_area.active {
+  border: 2px solid #fff;
+}
+.drag_area .icon {
+  font-size: 100px;
+  color: #fff;
+}
+.drag_area header {
+  font-size: 20px;
+  color: #ff590b;
+}
+.drag_area span {
+  font-size: 25px;
+  font-weight: 500;
+  color: #ff590b;
+}
+.drag_area input {
+  font-size: 20px;
+  font-weight: 500;
+  width: 60%;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.drag_area .img {
+  height: fit-content;
+  width: fit-content;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.filechossen {
+  color: red;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ff590b;
+  border: none;
+  border-radius: 5px;
+  width: fit-content;
+  height: 45px;
+  padding: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+  margin-top: 10px;
+  box-shadow: 0px 6px 18px -5px rgb(237, 133, 85);
+}
+
+.cardbutton {
+  position: relative;
+  text-decoration: none;
+  padding: 15px 25px;
+  cursor: pointer;
+  margin: 1em 0;
+  border-radius: 4px;
+  border-color: #ff590b;
+  box-shadow: 0px 4px 30px -6px rgba(36, 52, 70, 0.45);
+  background: #ff590b;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 16px;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.cardbutton:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 17px 20px -6px rgba(36, 52, 70, 0.36);
+}
+
+@media (max-width: 600px) {
+  .col {
+    flex-direction: column;
+    justify-content: space-around;
+    flex-direction: column-reverse;
+  }
+
+  .drag_area {
+    margin-left: 0;
+    margin-bottom: 20px;
+    max-width: 100%;
+    height: fit-content;
+    padding: 20px;
+  }
+
+  .basicInput {
+    width: 100%;
+  }
+
+  .drag_area header {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+  .col {
+    flex-direction: column;
+    justify-content: space-around;
+    flex-direction: column-reverse;
+  }
+
+  .drag_area {
+    margin-left: 0;
+    margin-bottom: 20px;
+    max-width: 100%;
+    height: fit-content;
+    padding: 20px;
+  }
+
+  .cardbutton:active {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin-top: 20px;
+    transform: scale(1.1);
+    box-shadow: 0px 17px 20px -6px rgba(36, 52, 70, 0.36);
+  }
+
+  .drag_area header {
+    font-size: 15px;
+  }
+  .basicInput {
+    width: 100%;
+  }
+}

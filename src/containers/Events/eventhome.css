@@ -1,0 +1,13 @@
+.contentHead3 {
+  font-size: 45px;
+  font-weight: 500;
+  margin-top: 1em;
+  margin-left: 30px;
+}
+
+@media (max-width: 600px) {
+  .contentHead3 {
+    margin: 0;
+    margin-bottom: 1em;
+  }
+}
