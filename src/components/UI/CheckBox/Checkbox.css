@@ -3,9 +3,9 @@
   position: relative;
   display: flex;
   padding: 20px;
-  width: 140px;
+  width: 150px;
   height: 90px;
-  font-size: 14px;
+  font-size: 12.5px;
   line-height: 20px;
   letter-spacing: 1px;
   margin-right: 20px;
@@ -54,7 +54,7 @@
 @media (max-width: 600px) {
   .checkbox-tools:checked + label,
   .checkbox-tools:not(:checked) + label {
-    width: 120px;
+    width: 125px;
     height: 70px;
     padding: 10px;
     font-size: 11px;
@@ -64,9 +64,9 @@
 @media (max-width: 350px) {
   .checkbox-tools:checked + label,
   .checkbox-tools:not(:checked) + label {
-    width: 95px;
+    width: 90px;
     height: 60px;
     padding: 10px;
-    font-size: 10px;
+    font-size: 7.5px;
   }
 }

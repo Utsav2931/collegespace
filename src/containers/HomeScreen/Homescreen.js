@@ -10,8 +10,11 @@ const db = firebase.firestore();
 
 // Displays posts in the home screen
 export class Homescreen extends Component {
+
+  // both are limit variable to display intial posts and academicspost respectively
   limit = 3;
   limitAcedemicPosts = 3;
+
   // state of the this screen
   state = {
     posts: [],
@@ -35,6 +38,7 @@ export class Homescreen extends Component {
     this.getPosts();
   };
 
+  // increment the limit of the Academicpost
   incLimitAcedemics = () => {
     this.limitAcedemicPosts += 2;
     this.getAcedemicPosts();
@@ -80,6 +84,7 @@ export class Homescreen extends Component {
       });
   };
 
+  // This function gets the Academicsposts from the database
   getAcedemicPosts = () => {
     db.collection("AcademicPosts")
       .orderBy("createDate", "desc")
@@ -121,6 +126,7 @@ export class Homescreen extends Component {
       });
   };
 
+  // Changes the state to toggle between post and academicsposts
   toggleTab = (index) => {
     this.setState({
       toggleState: index,

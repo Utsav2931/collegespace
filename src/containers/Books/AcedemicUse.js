@@ -81,7 +81,6 @@ class AcademicUse extends Component {
     this.setState({
       filter: value,
     });
-    console.log(this.state.filter);
     if (value == "All Notes") {
       this.setState({
         academicData: this.state.allAticles,
@@ -89,7 +88,6 @@ class AcademicUse extends Component {
     } else {
       let filterArtical = [];
       // let this.state.allAticles = [];
-      console.log(this.state.academicData);
       this.state.allAticles.forEach(function (doc) {
         if (doc.categoryLable == value) {
           const artical = {
@@ -109,7 +107,6 @@ class AcademicUse extends Component {
     this.setState({
       filter: value,
     });
-    console.log(this.state.filter);
     if (value == "All Papers") {
       this.setState({
         academicData: this.state.allAticles,
@@ -117,7 +114,6 @@ class AcademicUse extends Component {
     } else {
       let filterArtical = [];
       // let this.state.allAticles = [];
-      console.log(this.state.academicData);
       this.state.allAticles.forEach(function (doc) {
         if (doc.categoryLable == value) {
           const artical = {
@@ -140,7 +136,6 @@ class AcademicUse extends Component {
 
   // to render the UI
   render() {
-    console.log(array[5]);
     return (
       <BasicLayout>
         <div className={classes.titleHeader}>

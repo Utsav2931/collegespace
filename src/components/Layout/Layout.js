@@ -109,7 +109,6 @@ class Layout extends Component {
     if (document.querySelector('input[name="college"]:checked') &&
       document.querySelector('input[name="department"]:checked') &&
       document.querySelector('input[name="semester"]:checked')) {
-      console.log(true)
       this.updateDept(this.state.college)
       const { clgName, deptName, semName } = this.state;
       localStorage.setItem("college", clgName ? clgName : "");
@@ -124,7 +123,6 @@ class Layout extends Component {
       window.location = "/";
     }
     else {
-      console.log(false)
       // this.setState({clgName:this.state.college})
       alert('please select all the field')
     }
@@ -163,7 +161,6 @@ class Layout extends Component {
         dept: deptDep
       })
     }
-    console.log("inside updateDept " + this.state.dept)
   }
   //for updating college value if user change it
   OnchangeValueCollege = (event) => {

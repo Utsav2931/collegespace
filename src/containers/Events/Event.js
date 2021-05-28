@@ -5,6 +5,7 @@ const Event = (props) =>
   // map all the data and pass it to the EventFetch component
   props.events.map((event) => {
     return (
+      
       <EventFetch
         title={event.title}
         desc={event.desc}

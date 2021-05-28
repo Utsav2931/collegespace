@@ -96,7 +96,6 @@ export class AddNotes extends Component {
         author,
         categoryLable,
       } = this.state.article;
-      console.log(this.file.name);
       if (desc == "") {
         alert("Description is not valid");
       } else if (title == "") {
@@ -303,7 +302,6 @@ export class AddNotes extends Component {
       },
     });
 
-    // console.log(this.state.article.subject);
   };
 
   onChangeArticlecategory = (value) => {

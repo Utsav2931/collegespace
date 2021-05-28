@@ -293,7 +293,6 @@ export class AddNotesAdmin extends Component {
          },
       });
 
-      // console.log(this.state.article.subject);
    };
 
    onChangeArticlecategory = (value) => {

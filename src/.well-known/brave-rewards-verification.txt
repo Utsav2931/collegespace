@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: collegespace.ml
+Token: 21302824540b32e98b788fd5bc1a807f1db86901de30ad927ee434c3e8733952
