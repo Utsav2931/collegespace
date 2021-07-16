@@ -14,6 +14,7 @@ export class AddNotes extends Component {
   currentDate = new Date();
   db = firebase.firestore();
   subjectCe = ["toc", "dwdm", "ins", "ios", "pip"];
+  subjectCe7 = ["bda", "dlp", "cc", "iot", "bct", "ml"];
   subjecIt = ["crns", "se", "mla", "wcmc", "hs"];
   subjecCse = ["se", "crns", "ml", "iot", "hs"];
   subjectEc = ["el", "awp", "dc", "es", "jp", "hs"];
@@ -35,7 +36,7 @@ export class AddNotes extends Component {
         author: "",
       },
       error: "",
-      opt: [6],
+      opt: [6, 7],
       dept: [],
       sub: [],
       loaderDisplay: false,
@@ -162,7 +163,7 @@ export class AddNotes extends Component {
             author: "",
           },
           error: "",
-          opt: [6],
+          opt: [6, 7],
           dept: [],
           sub: [],
           loaderDisplay: false,
@@ -270,6 +271,10 @@ export class AddNotes extends Component {
     if (value == 6 && this.state.article.department == "ce") {
       this.setState({
         sub: this.subjectCe,
+      });
+    } else if (value == 7 && this.state.article.department == "ce") {
+      this.setState({
+        sub: this.subjectCe7,
       });
     } else if (value == 6 && this.state.article.department == "it") {
       this.setState({

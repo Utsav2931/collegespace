@@ -66,6 +66,12 @@ var sem = [
     value: "6",
     id: "s6",
   },
+  {
+    title: "7",
+    name: "semester",
+    value: "7",
+    id: "s7",
+  },
 ]
 
 class Layout extends Component {
