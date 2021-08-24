@@ -77,6 +77,8 @@ class AcademicUse extends Component {
       });
   };
 
+  //  
+
   onChangeArticlecategory = (value) => {
     this.setState({
       filter: value,

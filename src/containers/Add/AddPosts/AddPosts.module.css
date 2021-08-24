@@ -194,7 +194,6 @@ select:focus {
     height: fit-content;
     padding: 20px;
   }
-
   .cardbutton:active {
     position: relative;
     bottom: auto;
@@ -203,7 +202,6 @@ select:focus {
     transform: scale(1.1);
     box-shadow: 0px 17px 20px -6px rgba(36, 52, 70, 0.36);
   }
-
   .drag_area header {
     font-size: 15px;
     /* color: #ff590b; */
