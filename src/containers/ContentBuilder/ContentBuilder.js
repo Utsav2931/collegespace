@@ -68,9 +68,11 @@ export class ContentBuilder extends Component {
           path="/academics/choose-path"
           component={(props) => <ErrorModal onclick={this.props.onclick} />}
         />
+      
       </Switch>
     );
   }
 }
 
 export default ContentBuilder;
+//fkkfkfk
