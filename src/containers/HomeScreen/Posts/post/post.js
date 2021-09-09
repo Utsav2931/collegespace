@@ -3,6 +3,8 @@ import classes from "./post.module.css";
 import { Carousel } from "react-bootstrap";
 import cx from "classnames";
 import "bootstrap/dist/css/bootstrap.min.css";
+import parse from "html-react-parser";
+
 
 const post = (props) => {
   // checks whether image is available or not, if not return the other card
@@ -31,7 +33,7 @@ const post = (props) => {
         <div className={classes.heading}>{props.title}</div>
 
         {/* display description */}
-        <div className={classes.desc}>{props.dess}</div>
+        <div className={classes.desc}>{parse(props.dess)}</div>
 
         {/* Display link, if available */}
         <a
@@ -50,7 +52,7 @@ const post = (props) => {
     <div className={classes.Post}>
       <div className={classes.text}>
         <div className={classes.heading}>{props.title}</div>
-        <p className={classes.text}>{props.dess}</p>
+        <p className={classes.text}>{parse(props.dess)}</p>
       </div>
     </div>
   );
