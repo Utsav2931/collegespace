@@ -7,10 +7,12 @@ import parse from "html-react-parser";
 
 
 const post = (props) => {
+  console.log(props.theme);
+  console.log(props.image.length);
   // checks whether image is available or not, if not return the other card
-  if (props.image !== null) {
+  if (props.image.length !== 0) {
     return (
-      <div className={classes.Post}>
+      <div className={classes.Post + (props.theme === 'light' ? '' : ' ' + classes.PostDark)}>
         <div className={classes.categoryLable}>{props.categoryLable}</div>
 
         {/* carousel displays a image or multiple images */}
@@ -30,7 +32,7 @@ const post = (props) => {
         </Carousel>
 
         {/* display title */}
-        <div className={classes.heading}>{props.title}</div>
+        <div className={classes.heading + (props.theme === 'light' ? '' : ' ' + classes.headingDark)}>{props.title}</div>
 
         {/* display description */}
         <div className={classes.desc}>{parse(props.dess)}</div>
@@ -38,7 +40,7 @@ const post = (props) => {
         {/* Display link, if available */}
         <a
           style={{ textDecoration: "none" }}
-          className={props.link != "" ? classes.linkButton : classes.noDisplay}
+          className={props.link != "" ? classes.linkButton + (props.theme === 'light' ? '' : ' ' + classes.linkButtonDark) : classes.noDisplay}
           href={props.link}
           rel="noopener noreferrer"
           target="_blank"
@@ -49,10 +51,20 @@ const post = (props) => {
     );
   }
   return (
-    <div className={classes.Post}>
+    <div className={classes.Post + (props.theme === 'light' ? '' : ' ' + classes.PostDark)}>
+       <div className={classes.categoryLable}>{props.categoryLable}</div>
       <div className={classes.text}>
-        <div className={classes.heading}>{props.title}</div>
-        <p className={classes.text}>{parse(props.dess)}</p>
+      <div className={classes.heading + (props.theme === 'light' ? '' : ' ' + classes.headingDark)}>{props.title}</div>
+        <p className={classes.desc}>{parse(props.dess)}</p>
+        <a
+          style={{ textDecoration: "none" }}
+          className={props.link != "" ? classes.linkButton + (props.theme === 'light' ? '' : ' ' + classes.linkButtonDark) : classes.noDisplay}
+          href={props.link}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Link here
+        </a>
       </div>
     </div>
   );

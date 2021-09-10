@@ -20,8 +20,10 @@ class AcademicUse extends Component {
     this.state = {
       academicData: [],
       isLoaded: false,
-      filter: "",
+      filter: "All Notes",
+      year: "All Year",
       allAticles: [],
+      YearData: [],
     };
   }
 
@@ -29,6 +31,10 @@ class AcademicUse extends Component {
   componentDidMount() {
     this.getMaterials();
   }
+
+  // componentDidUpdate(){
+  //   array[5] == "notes" ? onChangeArticlecategory() : onChangePapercategory();
+  // }
 
   // get the data of all books or notes or papers
   getMaterials = () => {
@@ -55,6 +61,7 @@ class AcademicUse extends Component {
           this.setState(
             {
               academicData: this.state.allAticles,
+              yearData: this.state.allAticles,
             },
             () => {
               this.setState({
@@ -77,33 +84,110 @@ class AcademicUse extends Component {
       });
   };
 
-  //  
+  //
 
-  onChangeArticlecategory = (value) => {
+  onChangeArticlecategory = (value, yearValue) => {
     this.setState({
       filter: value,
     });
-    if (value == "All Notes") {
+    this.setState({
+      year: yearValue,
+    });
+    console.log("Hello");
+    console.log(yearValue);
+    console.log(value);
+    if (value == "All Notes" && yearValue == "All Year") {
       this.setState({
         academicData: this.state.allAticles,
       });
     } else {
-      let filterArtical = [];
-      // let this.state.allAticles = [];
-      this.state.allAticles.forEach(function (doc) {
-        if (doc.categoryLable == value) {
-          const artical = {
-            ...doc,
-          };
-          filterArtical.push(artical);
-        }
-      });
+      if (value == "All Notes" && yearValue != "All Year") {
+        let filterArtical = [];
+        // let this.state.allAticles = [];
+        this.state.allAticles.forEach(function (doc) {
+          if (doc.year == yearValue) {
+            const artical = {
+              ...doc,
+            };
+            filterArtical.push(artical);
+          }
+        });
 
-      this.setState({
-        academicData: filterArtical,
-      });
+        this.setState({
+          academicData: filterArtical,
+        });
+      } else if(yearValue == "All Year" && value != "All Notes"){
+        let filterArtical = [];
+        // let this.state.allAticles = [];
+        this.state.allAticles.forEach(function (doc) {
+          if (doc.categoryLable == value) {
+            const artical = {
+              ...doc,
+            };
+            filterArtical.push(artical);
+          }
+        });
+
+        this.setState({
+          academicData: filterArtical,
+        });
+      }else if(yearValue != "All Year" && value != "All Notes"){
+        let filterArtical = [];
+        // let this.state.allAticles = [];
+        this.state.allAticles.forEach(function (doc) {
+          if (doc.categoryLable == value && doc.year == yearValue) {
+            const artical = {
+              ...doc,
+            };
+            filterArtical.push(artical);
+          }
+        });
+
+        this.setState({
+          academicData: filterArtical,
+        });
+      }
     }
   };
+
+  // onYearChange = (value) => {
+  //   this.setState({
+  //     year: value,
+  //   })
+  //   if (value == "All Year") {
+  //     this.setState({
+  //       filter: "",
+  //       academicData: this.state.allAticles,
+  //       yearData: this.state.allAticles,
+  //     });
+  //   } else {
+  //     let filterArtical = [];
+  //     let filter = this.state.filter;
+  //     // let this.state.allAticles = [];
+  //     this.state.allAticles.forEach(function (doc) {
+  //       if(filter == ""){
+  //         if (doc.year == value) {
+  //           const artical = {
+  //             ...doc,
+  //           };
+  //           filterArtical.push(artical);
+  //         }
+  //       }
+  //       else{
+  //       if (doc.year == value && doc.categoryLable == filter) {
+  //         const artical = {
+  //           ...doc,
+  //         };
+  //         filterArtical.push(artical);
+  //       }}
+  //     });
+
+  //     this.setState({
+  //       academicData: filterArtical,
+  //       yearData: filterArtical,
+  //     });
+  //   }
+  // }
 
   onChangePapercategory = (value) => {
     this.setState({
@@ -153,7 +237,30 @@ class AcademicUse extends Component {
             <div>
               <select
                 className={classes.selectFilter}
-                onChange={(e) => this.onChangeArticlecategory(e.target.value)}
+                onChange={(e) =>
+                  this.onChangeArticlecategory(
+                    this.state.filter,
+                    e.target.value
+                  )
+                }
+                // value={this.state.article.categoryLable}
+              >
+                <option className={classes.optionClass} name="Year" selected>
+                  All Year
+                </option>
+                <option className={classes.optionClass} name="Year">
+                  2020
+                </option>
+                <option className={classes.optionClass} name="Year">
+                  2021
+                </option>
+              </select>
+
+              <select
+                className={classes.selectFilter}
+                onChange={(e) =>
+                  this.onChangeArticlecategory(e.target.value, this.state.year)
+                }
                 // value={this.state.article.categoryLable}
               >
                 <option

@@ -58,7 +58,7 @@ let developerInfo = [
 ];
 
 // Component to display the About us page
-const AboutUs = () => {
+const AboutUs = (props) => {
   return (
     <BasicLayout>
       <div className={classes.titleHeader}>About us</div>
@@ -75,7 +75,7 @@ const AboutUs = () => {
           <br />
           Show your LOVE if you like this website.
         </div>
-        <div className={classes.imagediv}>
+        <div className={classes.imagediv + (props.theme === 'light' ? '' : ' ' + classes.imagedivDark)}>
           <img className={classes.img} src={collegespacelogo} alt="" />
         </div>
       </div>
@@ -84,13 +84,13 @@ const AboutUs = () => {
       <div className={classes.link}>
         <li className={classes.iconStyle}>
           <SocialLink link={socialLinks[0]}>
-            <FaTwitter size={30} />
+            <FaTwitter size={30} color={props.theme === 'light' ? 'black' : 'white'} />
           </SocialLink>
         </li>
 
         <li className={classes.iconStyle}>
           <SocialLink link={socialLinks[1]}>
-            <FaInstagram size={30} />
+            <FaInstagram size={30} color={props.theme === 'light' ? 'black' : 'white'} />
           </SocialLink>
         </li>
       </div>
@@ -100,7 +100,7 @@ const AboutUs = () => {
       {/* Map all developerInfo object's data to DevCard component to display data */}
       <div className={classes.CardRow}>
         {developerInfo.map((variable, index) => {
-          return <DevCard varr={variable} key={index} />;
+          return <DevCard varr={variable} key={index} theme={props.theme} />;
         })}
       </div>
     </BasicLayout>

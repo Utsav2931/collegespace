@@ -6,7 +6,7 @@ import GeneralModal from "../../components/UI/GeneralModal/GeneralModal";
 import Loader from "../../components/UI/Loader/Loader";
 
 // Contact us page
-const ContactUs = () => {
+const ContactUs = (props) => {
 var db = firebase.firestore();
 
   // all react useState hooks for state management
@@ -61,25 +61,28 @@ var db = firebase.firestore();
       )}
 
       <div className="contactus">
-        <form className="form" onSubmit={handleSubmit}>
+        <form className={"form" + (props.theme === 'light' ? '' : ' ' + "formDark")} onSubmit={handleSubmit}>
           <div className="title">Contact Us </div>
           {error !== "" ? <span style={{ color: "red" }}>{error}</span> : ""}
-          <label>Name</label>
+          {/* <label>Name</label> */}
           <input
+          // classes.Post + (props.theme === 'light' ? '' : ' ' + classes.PostDark)
+            
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
 
-          <label>Email</label>
+          {/* <label>Email</label> */}
           <input
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <label>Message</label>
+          {/* <label>Message</label> */}
           <textarea
+            
             placeholder="Message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}

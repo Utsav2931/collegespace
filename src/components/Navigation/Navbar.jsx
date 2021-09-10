@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Burger from "./Burger";
 import { Link } from "react-router-dom";
+import Toggle from "../UI/DarkMode/Toggle.js";
 
 const Nav = styled.nav`
   width: 100%;
@@ -12,9 +13,9 @@ const Nav = styled.nav`
   position: fixed;
   justify-content: space-between;
   top: 0;
-  color: black;
+  color: ${({ theme }) => (theme === "light" ? "black" : "#ffffff")};
   z-index: 9999;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => (theme === "light" ? "#ffffff" : "var(--color-div)")};
   align-items: center;
   box-sizing: border-box;
   box-shadow: 0px 8px 8px -6px rgba(0, 0, 0, 0.05);
@@ -25,7 +26,7 @@ const Nav = styled.nav`
     text-align: center;
     padding: auto;
     margin: auto;
-    color: black;
+    color: ${({ theme }) => (theme === "light" ? "black" : "var(--comp-white)")};
     padding-left: 70px;
     font-weight: bold;
     font-size: 20px;
@@ -47,10 +48,17 @@ const Nav = styled.nav`
   }
 
   .path {
-    color: black;
+    color: ${({ theme }) => (theme === "light" ? "black" : "var(--comp-white)")};;
     cursor: pointer;
     display: ${({ col, dep, sem }) =>
       col == null || dep == null || sem == null ? "none" : ""};
+  }
+
+  .toggleDiv{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
   }
   @media (max-width: 600px) {
     .path {
@@ -82,6 +90,7 @@ const Navbar = (props) => {
       col={props.college}
       dep={props.department}
       sem={props.semester}
+      theme={props.theme}
     >
       {/* The Hamburger icon to open the side drawer */}
       <Burger
@@ -89,6 +98,7 @@ const Navbar = (props) => {
         isValid={isValid}
         show={props.show}
         onclick={props.onclick}
+        theme={props.theme}
       />
       {/* The middle CollegeSpace logo */}
       <Link style={{ textDecoration: "none" }} to="/">
@@ -98,8 +108,12 @@ const Navbar = (props) => {
       <button className="buttonStyle" type="button" onClick={props.onclick}>
         Branch
       </button>
+      <div className="toggleDiv">
       <div onClick={props.onclick} className="path">
         {academicsPath}
+      </div>
+      {/* <button onClick={() => props.toggleTheme(!props.darkMode)}>Toggle Dark Mode</button> */}
+      <Toggle theme={props.theme} toggleTheme={props.toggleTheme} />
       </div>
     </Nav>
   );

@@ -9,7 +9,7 @@ const Textfield = (props) => {
       <input
         value={props.value}
         type="text"
-        className={classes.input_container}
+        className={classes.input_container + (props.theme === 'light' ? '' : ' ' + classes.input_containerDark) }
         name="title"
         required
         onChange={props.onChange}

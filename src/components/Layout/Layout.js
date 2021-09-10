@@ -208,14 +208,17 @@ class Layout extends Component {
           department={this.state.department}
           semester={this.state.semester}
           show={this.state.show}
+          theme={this.props.theme}
+          toggleTheme={this.props.toggleTheme}
         />
         {/* Main content under the Navbar */}
-        <main className={classes.Content}>
+        <main className={classes.Content + (this.props.theme === 'light' ? '' : ' ' + classes.contentDark)}>
           <ContentBuilder
             onclick={() => this.showModal()}
             college={this.state.college}
             department={this.state.department}
             semester={this.state.semester}
+            theme={this.props.theme}
           />
         </main>{" "}
         {/* This modal display the layout to choose path(Branch name, department etc.) */}

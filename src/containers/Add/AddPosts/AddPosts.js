@@ -222,28 +222,32 @@ export class AddPosts extends Component {
         <div className={classes.col}>
           <div className={classes.basicInput}>
             <Textfield
+              theme={this.props.theme}
               value={this.state.article.title}
               onChange={(e) => this.onChangeArticleTitle(e.target.value)}
               title="Title"
             />
             <Textfield
+              theme={this.props.theme}
               value={this.state.article.desc}
               onChange={(e) => this.onChangeArticleDesc(e.target.value)}
               title="Description"
             />
             <Textfield
+              theme={this.props.theme}
               value={this.state.article.link}
               onChange={(e) => this.onChangeArticleLink(e.target.value)}
               title="Link"
             />
             <Textfield
+              theme={this.props.theme}
               value={this.state.article.author}
               onChange={(e) => this.onChangeArticleAuthor(e.target.value)}
               title="Author"
             />
             <label className={classes.label}>Category</label>
             <select
-              className={classes.select}
+              className={classes.select + (this.props.theme === 'light' ? '' : ' ' + classes.selectDark) }
               onChange={(e) => this.onChangeArticlecategory(e.target.value)}
               value={this.state.article.categoryLable}
             >
@@ -262,10 +266,10 @@ export class AddPosts extends Component {
             </button>
           </div>
 
-          <div className={classes.drag_area}>
+          <div className={classes.drag_area + (this.props.theme === 'light' ? '' : ' ' + classes.drag_areaDark)  }>
             <header>Select Image or multiple images </header>
             {/* <div style={{color: "grey"}}>450x450 px recommended</div> */}
-            <label for="fileImage" className={classes.btn}>
+            <label for="fileImage" className={classes.btn + (this.props.theme === 'light' ? '' : ' ' + classes.btnDark) }>
               Choose Image
             </label>
             <input

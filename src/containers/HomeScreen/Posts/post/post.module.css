@@ -16,6 +16,12 @@ body {
   box-shadow: 0px 0px 35px rgba(165, 166, 170, 0.22);
 }
 
+.PostDark{
+  background-color: var(--color-div);
+  
+  box-shadow: 0px 0px 0px rgba(165, 166, 170, 0.22);
+}
+
 .img {
   width: 300px;
   width: 100%;
@@ -33,9 +39,15 @@ body {
   flex-direction: column;
   justify-content: center;
   font-size: 14px;
-  color: #ff590b;
+  color: var(--color-contrast);
   margin-top: 10px;
 }
+
+.linkButtonDark {
+  color: var(--color-contrast);
+  background-color: var(--color-contrastBackgroundDark);
+}
+
 
 .linkButton:hover{
   color: #000000;
@@ -62,6 +74,10 @@ body {
   font-weight: 500;
   margin-top: 0.4em;
   font-family: "Poppins", sans-serif;
+}
+
+.headingDark{
+  color: #fff;
 }
 
 .headingWithoutImage{
