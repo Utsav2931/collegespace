@@ -1,0 +1,21 @@
+.contentHead {
+  font-family: "Poppins", sans-serif;
+  font-size: 45px;
+  font-weight: 500;
+  margin-top: 5px;
+  margin-left: 0px;
+}
+.faq-heading {
+  font-size: 25px;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  text-align: justify;
+}
+.normalPtag {
+  font-size: larger;
+  font-family: "Poppins", sans-serif;
+  text-align: justify;
+}
+hr.new1 {
+  border-top: 1px solid rgb(255, 115, 0);
+}

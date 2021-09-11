@@ -1,0 +1,15 @@
+.Backdrop {
+  height: 100%;
+  width: 60%;
+  position: fixed;
+  z-index: 100;
+  right: 0;
+  top: 0;
+  background-color: transparent;
+}
+
+@media (max-width: 600px) {
+  .Backdrop {
+    width: 0px;
+  }
+}

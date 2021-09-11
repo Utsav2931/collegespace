@@ -1,0 +1,14 @@
+import React from "react";
+import "./Loader.css";
+
+// Component to generate the loader
+const Loader = () => {
+  return (
+    <div class="lds-ripple">
+      <div></div>
+      <div></div>
+    </div>
+  );
+};
+
+export default Loader;

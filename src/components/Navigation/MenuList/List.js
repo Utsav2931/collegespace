@@ -1,52 +1,66 @@
 import React, { useState } from "react";
-import FAQ from "./ListIteam";
+import ListIteam from "./ListIteam";
 
-const Questions = () => {
-  const [faqs, setfaqs] = useState([
+// This class contains sub manu iteams of academic section
+const List = (props) => { 
+  let academicsPath = props.academicsPath;
+  let academicsResources = ["paper", "Books", "notes", "timetable"];
+
+  // State for the lists object 
+  const [lists, setlists] = useState([
     {
       collection: "Academics",
-      answer: ['Old papers', 'Books', 'Notes'],
-      route: ['/old-papers', '/books', '/notes'],
-
+      answer: ["Papers", "Books", "Notes", "Timetable"],
+      route: [
+        `/academics/cspit/ce/1/paper`,
+        `/academics/cspit/ce/1/Books`,
+        `/academics/cspit/ce/1/notes`,
+        `/academics/cspit/ce/1/timetable`,
+      ],
       open: false,
     },
     {
       collection: "Portal",
-      answer: ['Events', 'Clubs', 'Timetable',],
-      route: ['/events', '/clubs', '/time-table'],
+      answer: ["Events", "Clubs", "FAQS"],
+      route: ["/events", "/clubs", "/faqs"],
       open: false,
     },
     {
-      collection:
-        "Add",
-        answer: ['Add-post', 'Add-notes'],
-        route: ['/add-post', '/add-notes'],
-
-        open: false,
+      collection: "Add",
+      answer: ["Add-post", "Add-notes"],
+      route: ["/add-post", "/add-notes"],
+      open: false,
     },
   ]);
 
-  const toggleFAQ = (index) => {
-    setfaqs(
-      faqs.map((faq, i) => {
+  // For toggling Menu
+  const toggleMenu = (index) => {
+    setlists(
+      // map all the list object aarray and alter it with the academicsResources
+      lists.map((list, i) => {
+        lists[0].route.map((paths, index) => {
+          props.isValid ? 
+          paths = `/academics/${academicsPath}/${academicsResources[index]}` : 
+          paths = `/academics/choose-path`;
+          lists[0].route[index] = paths;
+        });
         if (i === index) {
-          faq.open = !faq.open;
+          list.open = !list.open;
         } else {
-          faq.open = false;
+          list.open = false;
         }
-
-        return faq;
+        return list;
       })
     );
   };
-
   return (
-      <div className="faqs">
-        {faqs.map((faq, i) => (
-          <FAQ faq={faq} index={i} toggleFAQ={toggleFAQ} />
-        ))}
-      </div>
+    <div className="faqs">
+      {/* Map all the list object array data and pass it to the ListIteam component */}
+      {lists.map((list, i) => (
+        <ListIteam list={list} index={i} toggleMenu={toggleMenu} close={props.onClick}/>
+      ))}
+    </div>
   );
 };
 
-export default Questions;
+export default List;

@@ -33,9 +33,16 @@ const StyledBurger = styled.div`
   }
 `;
 
-const Burger = () => {
+// Component to generate the burger icon
+const Burger = (props) => {
   const [open, setOpen] = useState(false);
 
+  // If the navigation is open, fixesd the position of the body(Can't scroll)
+  (open || props.show)
+    ? document.body.setAttribute("style", `position: fixed; left:0; right:0;`)
+    : document.body.setAttribute("style", ``);
+
+    // Display UI
   return (
     <>
       <StyledBurger open={open} onClick={() => setOpen(!open)}>
@@ -43,7 +50,7 @@ const Burger = () => {
         <div />
         <div />
       </StyledBurger>
-      <LeftNav open={open} />
+      <LeftNav open={open} close={() => setOpen(!open)} academicsPath={props.academicsPath} isValid={props.isValid} onclick={props.onclick}/>
     </>
   );
 };
