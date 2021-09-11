@@ -146,6 +146,27 @@ class AcademicUse extends Component {
         <div className={classes.titleHeader}>
           {this.capitalizeFirstLetter(array[5])}
         </div>
+        <div className={classes.block}>
+          <input style={{ marginBottom: "10px" }} type="text" class="input-res" onChange={(e) => {
+            console.log(e.target.value)
+            let filterArtical = [];
+            // let this.state.allAticles = [];
+            this.state.allAticles.forEach(function (doc) {
+              if (doc.desc.toLowerCase().includes(e.target.value.toLowerCase())
+                || doc.title.toLowerCase().includes(e.target.value.toLowerCase())) {
+                const artical = {
+                  ...doc,
+                };
+                filterArtical.push(artical);
+              }
+            });
+            this.setState({
+              academicData: filterArtical,
+            });
+          }}
+
+          />
+        </div>
         {/* <div className={classes.pathAndFilter}> */}
         <div className={classes.headercontent}>
           <div>
@@ -154,10 +175,11 @@ class AcademicUse extends Component {
           </div>
           {array[5] == "notes" ? (
             <div>
+
               <select
                 className={classes.selectFilter}
                 onChange={(e) => this.onChangeArticlecategory(e.target.value)}
-                // value={this.state.article.categoryLable}
+              // value={this.state.article.categoryLable}
               >
                 <option
                   className={classes.optionClass}
@@ -192,7 +214,7 @@ class AcademicUse extends Component {
               <select
                 className={classes.selectFilter}
                 onChange={(e) => this.onChangePapercategory(e.target.value)}
-                // value={this.state.article.categoryLable}
+              // value={this.state.article.categoryLable}
               >
                 <option
                   className={classes.optionClass}
