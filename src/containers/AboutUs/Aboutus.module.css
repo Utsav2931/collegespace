@@ -39,6 +39,10 @@
   justify-content: center;
 }
 
+.imagedivDark{
+  background-color: var(--color-contrastBackgroundDark);
+}
+
 .img {
   width: 200px;
   height: 200px;
@@ -63,6 +67,9 @@
   background-color: #ffeee4;
 }
 
+.profileCardsDark{
+  background-color: var(--color-contrastBackgroundDark);
+}
 .profileImage {
   width: 110px;
   height: 110px;

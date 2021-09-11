@@ -5,6 +5,7 @@ import Textfield from "../../../components/UI/TextFormField/Textfield";
 import firebase from "../../../config/config";
 import Loader from "../../../components/UI/Loader/Loader";
 import GeneralModal from "../../../components/UI/GeneralModal/GeneralModal";
+// import  sendMail  from "../../../components/sendMail/sendMail";
 
 // This class is used for uploading notes
 export class AddNotes extends Component {
@@ -34,6 +35,7 @@ export class AddNotes extends Component {
         semester: "",
         subject: "",
         author: "",
+        year: this.currentDate.getFullYear(),
       },
       error: "",
       opt: [6, 7],
@@ -169,6 +171,7 @@ export class AddNotes extends Component {
           loaderDisplay: false,
         });
         alert("Your notes has been successfully uploaded 👍");
+        // sendMail.sendEmail("sub","violetmoreau93@gmail.com","msg");
       })
       .catch((err) => console.log(err));
   };
@@ -337,16 +340,19 @@ export class AddNotes extends Component {
         <div className={classes.col}>
           <div className={classes.basicInput}>
             <Textfield
+             theme={this.props.theme}
               value={this.state.article.title}
               onChange={(e) => this.onChangeArticleTitle(e.target.value)}
               title="Title"
             />
             <Textfield
+             theme={this.props.theme}
               value={this.state.article.desc}
               onChange={(e) => this.onChangeArticleDesc(e.target.value)}
               title="Description"
             />
             <Textfield
+             theme={this.props.theme}
               value={this.state.article.author}
               onChange={(e) => this.onChangeArticleAuthor(e.target.value)}
               title="Author"
@@ -355,7 +361,7 @@ export class AddNotes extends Component {
             <label className={classes.label}>Category</label>
 
             <select
-              className={classes.select}
+              className={classes.select + (this.props.theme === 'light' ? '' : ' ' + classes.selectDark) }
               onChange={(e) => this.onChangeArticlecategory(e.target.value)}
               value={this.state.article.categoryLable}
             >
@@ -372,7 +378,7 @@ export class AddNotes extends Component {
             <label className={classes.label}>College</label>
             <select
               value={this.state.article.college}
-              className={classes.select}
+              className={classes.select + (this.props.theme === 'light' ? '' : ' ' + classes.selectDark) }
               onChange={(e) => this.onChangeCollege(e.target.value)}
             >
               <option value="" disabled selected>
@@ -385,7 +391,7 @@ export class AddNotes extends Component {
             <label className={classes.label}>Department</label>
             <select
               value={this.state.article.department}
-              className={classes.select}
+              className={classes.select + (this.props.theme === 'light' ? '' : ' ' + classes.selectDark) }
               onChange={(e) => this.onChangeDep(e.target.value)}
             >
               <option value="" disabled selected>
@@ -398,7 +404,7 @@ export class AddNotes extends Component {
             <label className={classes.label}>Semester</label>
             <select
               value={this.state.article.semester}
-              className={classes.select}
+              className={classes.select + (this.props.theme === 'light' ? '' : ' ' + classes.selectDark) }
               onChange={(e) => this.onChangeSem(e.target.value)}
             >
               <option value="" disabled selected>
@@ -412,7 +418,7 @@ export class AddNotes extends Component {
             <label className={classes.label}>Subject</label>
             <select
               value={this.state.article.subject}
-              className={classes.select}
+              className={classes.select + (this.props.theme === 'light' ? '' : ' ' + classes.selectDark) }
               onChange={(e) => this.onChangeSub(e.target.value)}
             >
               <option value="" disabled selected>
@@ -430,13 +436,13 @@ export class AddNotes extends Component {
             </button>
           </div>
 
-          <div className={classes.drag_area}>
+          <div className={classes.drag_area + (this.props.theme === 'light' ? '' : ' ' + classes.drag_areaDark)  }>
             <div className={classes.icon}>
               <i class="fas fa-cloud-upload-alt"></i>
             </div>
             <header>Select pdf or doc file</header>
 
-            <label for="fileImage" className={classes.btn}>
+            <label for="fileImage" className={classes.btn + (this.props.theme === 'light' ? '' : ' ' + classes.btnDark) }>
               choose notes
             </label>
 

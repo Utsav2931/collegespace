@@ -23,7 +23,7 @@
 textarea {
   padding: 20px;
   border-radius: 3px;
-  margin-bottom: 20px;
+  margin: 20px 0px;
   border: 1px solid lightgray;
   box-shadow: none;
   background: #fff;
@@ -31,6 +31,19 @@ textarea {
   color: rgb(0, 0, 32);
   outline: none;
   transition: all 0.3s ease-in-out;
+}
+
+.formDark >  textarea{
+  background: var(--color-div);
+  border: 0;
+  color: #fff;
+}
+
+.formDark > 
+input{
+  background: var(--color-div);
+  border: 0;
+  color: #fff;
 }
 
 .form > input:focus,
@@ -44,6 +57,11 @@ textarea:hover {
 textarea:focus {
   box-shadow: 0px 10px 20px -13px rgba(32, 56, 117, 0.45);
 }
+
+/* .formDark > input:focus,
+textarea:focus {
+  color: white;
+} */
 
 .form > textarea {
   height: 150px;

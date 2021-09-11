@@ -3,6 +3,11 @@
   display: flex;
 }
 
+.contentDark{
+  background-color: var(--color-backgroundDark);
+  color: white;
+}
+
 .outerdiv {
   padding: 20px;
 }

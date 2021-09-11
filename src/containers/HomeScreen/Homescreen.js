@@ -5,12 +5,13 @@ import firebase from "../../config/config";
 import BasicPadding from "../../components/UI/BasicCompPadding/BasicLayout";
 import Loader from "../../components/UI/Loader/Loader";
 import cx from "classnames";
+import { useTheme } from 'styled-components';
+
 
 const db = firebase.firestore();
 
 // Displays posts in the home screen
 export class Homescreen extends Component {
-
   // both are limit variable to display intial posts and academicspost respectively
   limit = 3;
   limitAcedemicPosts = 3;
@@ -132,9 +133,10 @@ export class Homescreen extends Component {
       toggleState: index,
     });
   };
-
   // React function to render the UI
   render() {
+    
+    // console.log(this.props.theme);
     return (
       <BasicPadding>
         <div className={classes.container}>
@@ -142,8 +144,8 @@ export class Homescreen extends Component {
             <div
               className={
                 this.state.toggleState === 1
-                  ? cx(classes.tabs, classes.activetabs)
-                  : cx(classes.tabs)
+                ? cx(classes.tabs, classes.activetabs) + (this.props.theme === "light" ? '' : ' ' + cx(classes.tabsDark, classes.activetabsDark))
+                : cx(classes.tabs) + (this.props.theme === "light" ? '' : ' ' + cx(classes.tabsDark))
               }
               onClick={() => this.toggleTab(1)}
             >
@@ -152,8 +154,8 @@ export class Homescreen extends Component {
             <div
               className={
                 this.state.toggleState === 2
-                  ? cx(classes.tabs, classes.activetabs)
-                  : cx(classes.tabs)
+                ? cx(classes.tabs, classes.activetabs) + (this.props.theme === "light" ? '' : ' ' + cx(classes.tabsDark, classes.activetabsDark))
+                : cx(classes.tabs) + (this.props.theme === "light" ? '' : ' ' + cx(classes.tabsDark))
               }
               onClick={() => this.toggleTab(2)}
             >
@@ -165,16 +167,16 @@ export class Homescreen extends Component {
             <div
               className={
                 this.state.toggleState === 1
-                  ? cx(classes.content, classes.activecontent)
-                  : cx(classes.content)
+                  ? cx(classes.content, classes.activecontent) 
+                  : cx(classes.content) 
               }
             >
               {/* checks whether the data is retrieved or not, after getting data, it passes to the Posts component */}
               {this.state.isLoaded ? (
-                <Posts posts={this.state.posts} />
+                <Posts posts={this.state.posts} theme={this.props.theme}/>
               ) : (
                 <center>
-                  <Loader />
+                  <Loader /> 
                 </center>
               )}
 
@@ -185,7 +187,7 @@ export class Homescreen extends Component {
                 ) : (
                   <button
                     onClick={this.incLimit}
-                    className={classes.showmoreButton}
+                    className={classes.showmoreButton + (this.props.theme === 'light' ? '' : ' ' + classes.dark)}
                   >
                     Show more
                   </button>
@@ -204,7 +206,7 @@ export class Homescreen extends Component {
             >
               {/* checks whether the data is retrieved or not, after getting data, it passes to the Posts component */}
               {this.state.isLoadedAcedemics ? (
-                <Posts posts={this.state.AcedemicsPosts} />
+                <Posts posts={this.state.AcedemicsPosts} theme={this.props.theme}/>
               ) : (
                 <center>
                   <Loader />
@@ -218,7 +220,7 @@ export class Homescreen extends Component {
                 ) : (
                   <button
                     onClick={this.incLimitAcedemics}
-                    className={classes.showmoreButton}
+                    className={ classes.showmoreButton + (this.props.theme === 'light' ? '' : ' ' + classes.dark)}
                   >
                     Show more
                   </button>

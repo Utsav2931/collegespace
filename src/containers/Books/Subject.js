@@ -7,14 +7,15 @@ import Loader from "../../components/UI/Loader/Loader";
 
 const db = firebase.firestore();
 var arrayy;
-
+var theme;
 // Used to display the subject cards
 class Subject extends Component {
   // used to initialize the arrayy var using the link of the page(using react router)
   constructor(props) {
+    console.log(props);
     super(props);
     arrayy = this.props.match.url.split("/");
-
+    theme= this.props.theme;
     // State of this page
     this.state = {
       subjects: [],
@@ -82,6 +83,7 @@ class Subject extends Component {
   // to render the UI
   render() {
     return (
+      console.log(theme),
       <BasicLayout>
         <div className={classes.titleHeader}>
           {this.capitalizeFirstLetter(this.props.match.params.id)}

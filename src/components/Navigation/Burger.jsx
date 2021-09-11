@@ -16,7 +16,7 @@ const StyledBurger = styled.div`
   div {
     width: 2rem;
     height: 0.25rem;
-    background-color: ${({ open }) => (open ? "#fff" : "#333")};
+    background-color: ${({ open,theme }) => (open ? theme === "light" ? "#000" : "#fff" : theme === "light" ? "#333" : "var(--comp-white)")};
     border-radius: 10px;
     transform-origin: 1px;
     transition: all 0.3s linear;
@@ -45,7 +45,7 @@ const Burger = (props) => {
     // Display UI
   return (
     <>
-      <StyledBurger open={open} onClick={() => setOpen(!open)}>
+      <StyledBurger open={open} onClick={() => setOpen(!open)} theme={props.theme}>
         <div />
         <div />
         <div />

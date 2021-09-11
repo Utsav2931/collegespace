@@ -1,12 +1,23 @@
+:root {
+  /* background: yellow; */
+  --color-backgroundDark: rgb(8, 8, 8);
+  --color-foreground: #1F2023;
+  --color-div: #15181C;
+  --comp-white: #e2e2e2;
+  --text-offwhite: #d8d8d8;
+  --color-contrast: #ff590b;
+  --color-contrastBackgroundDark: #381200;
+  --color-contrastBackgroundLight: #ffeee4;
+}
+
 body {
   margin: 0;
   font-family: "Poppins", sans-serif !important;
-  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
