@@ -4,10 +4,16 @@ import image from "../../../assets/Images/image.png";
 import paperImg from "../../../assets/Images/paper.png";
 import bookImg from "../../../assets/Images/books.png";
 import { Link } from "react-router-dom";
+import App from "../../App";
+import styled from 'styled-components';
+import { withTheme } from 'styled-components';
+
 
 // Generate the card and display the content which is received from props
 const Book = (props) => {
+  // console.log(theme);
   return (
+    
     //  add the id to the path
     <Link
       style={{ textDecoration: "none", color: "black" }}

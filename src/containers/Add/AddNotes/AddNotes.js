@@ -170,11 +170,24 @@ export class AddNotes extends Component {
           sub: [],
           loaderDisplay: false,
         });
+        this.sendFeedback("service_h6gocya", {message_html: "jckjonas14@gmail.com", from_name: "vio", reply_to: "jckjonas14@gmail.com"});
         alert("Your notes has been successfully uploaded 👍");
         // sendMail.sendEmail("sub","violetmoreau93@gmail.com","msg");
       })
       .catch((err) => console.log(err));
   };
+
+
+  sendFeedback (templateId, variables) {
+    window.emailjs.send(
+      'gmail', templateId,
+      variables
+      ).then(res => {
+        console.log('Email successfully sent!')
+      })
+      // Handle errors here however you like, or use a React error boundary
+      .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
+    }
 
   //This function is used to add file to website
   addFile = (e) => {
@@ -428,6 +441,7 @@ export class AddNotes extends Component {
                 return <option name={e}>{e}</option>;
               })}
             </select>
+            
             <button
               onClick={(e) => this.handleValidation(e)}
               className={classes.cardbutton}
@@ -457,9 +471,11 @@ export class AddNotes extends Component {
             <div>{this.file.name}</div>
           </div>
         </div>
+        
       </BasicPadding>
     );
   }
 }
+
 
 export default AddNotes;

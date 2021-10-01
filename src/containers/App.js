@@ -7,9 +7,8 @@ import { GlobalStyles } from "../components/UI/DarkMode/global";
 import Toggle from "../components/UI/DarkMode/Toggle.js";
 import { ThemeProvider } from "styled-components";
 
-
 // Website starts from here
-const App = React.memo(function App() {
+const App = function App() {
   // const [darkMode, toggleTheme] = React.useState(false);
   const [theme, toggleTheme, componentMounted] = useDarkMode();
 
@@ -23,26 +22,22 @@ const App = React.memo(function App() {
   //   localStorage.setItem("site-dark-mode", json);
   // }, [darkMode]);
   if (!componentMounted) {
-    return <div />
-  };
+    return <div />;
+  }
 
-  const themeMode = theme === 'light' ? lightTheme : darkTheme;
-
-
+  const themeMode = theme === "light" ? lightTheme : darkTheme;
 
   return (
-        // console.log(theme),
-        <ThemeProvider theme={themeMode}>
-          <>
-          <BrowserRouter>
+    // console.log(theme),
+    <ThemeProvider theme={themeMode}>
+      <>
+        <BrowserRouter>
           <GlobalStyles />
-          <Layout theme={theme} toggleTheme={toggleTheme}/>
+          <Layout theme={theme} toggleTheme={toggleTheme} />
         </BrowserRouter>
-          </>
-        </ThemeProvider>
-        
-
+      </>
+    </ThemeProvider>
   );
-});
+};
 
 export default App;

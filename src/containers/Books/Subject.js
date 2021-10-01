@@ -10,10 +10,11 @@ var arrayy;
 var theme;
 // Used to display the subject cards
 class Subject extends Component {
+
   // used to initialize the arrayy var using the link of the page(using react router)
   constructor(props) {
-    console.log(props);
     super(props);
+    console.log(props);
     arrayy = this.props.match.url.split("/");
     theme= this.props.theme;
     // State of this page
@@ -82,6 +83,7 @@ class Subject extends Component {
 
   // to render the UI
   render() {
+    console.log(this.props.theme);
     return (
       console.log(theme),
       <BasicLayout>

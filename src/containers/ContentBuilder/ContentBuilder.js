@@ -95,7 +95,7 @@ export class ContentBuilder extends Component {
         />
         <Route
           path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/:id`}
-          component={Academics}
+          component={Academics} 
         />
         <Route path={`/Academics/:id/:id/:id/:id`} component={Academics} />
         <Route path="/contact-us" component={() => <Contactus theme={this.props.theme} />} />
