@@ -4,8 +4,9 @@ import AddPost from "../Add/AddPosts/AddPosts";
 import AddPostsAcademics from "../Add/AddPostsAcademics/AddPostsAcademics";
 import Homescreen from "../HomeScreen/Homescreen";
 import Events from "../Events/Events";
+
 import AboutClubs from "../AboutClubs/aboutclubs";
-import Aboutus from "../AboutUs/Aboutus";
+import Aboutus from "../AboutUs/AboutUs";
 import Faq from "../Faq/faq";
 import Academics from "../Books/Subject";
 import AcademicUse from "../Books/AcedemicUse";
