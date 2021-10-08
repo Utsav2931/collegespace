@@ -1,10 +1,8 @@
-// Toggle.styled.js
 import styled from 'styled-components';
 
 const ToggleContainer = styled.button`
   background: ${({ theme }) => theme.toggle};
   padding: 0.6rem;
-
   border: 2px solid ${({ theme }) => theme.toggleBorder};
   border-radius: 50px;
 //   cursor: pointer;
@@ -34,7 +32,7 @@ border: 0px;
     // &:nth-child(2) {
     //   transform: ${({ lightTheme }) => lightTheme ? 'translateY(-100px)' : 'translateY(0)'};
     }
-  }
+  
 `;
 
 export default ToggleContainer;

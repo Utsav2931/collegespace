@@ -8,7 +8,7 @@
   margin-bottom: 2em;
   display: flex;
   flex-direction: column;
-  border: 0px solid black;
+  /* border: 0px solid black; */
 }
 
 @media (max-width: 600px) {
@@ -30,6 +30,6 @@
     margin: 0 auto;
     margin-bottom: 2em;
     display: block;
-    border: 0px solid black;
+    /* border: 0px solid black; */
   }
 }

@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 import styled from "styled-components";
 import Burger from "./Burger";
 import { Link } from "react-router-dom";
 import Toggle from "../UI/DarkMode/Toggle.js";
+import { ThemeContext } from "../UI/DarkMode/ThemeContext";
 
 const Nav = styled.nav`
   width: 100%;
@@ -79,6 +80,10 @@ const Nav = styled.nav`
 
 // Component to display Navigation Bar at the top of the screen
 const Navbar = (props) => {
+
+  const {theme, toggleTheme} = useContext(ThemeContext);
+  console.log('New Theme Controller', theme);
+
   let academicsPath = `${props.college}/${props.department}/${props.semester}`;
   let isValid =
     props.college == null || props.department == null || props.semester == null
@@ -90,7 +95,7 @@ const Navbar = (props) => {
       col={props.college}
       dep={props.department}
       sem={props.semester}
-      theme={props.theme}
+      theme={theme}
     >
       {/* The Hamburger icon to open the side drawer */}
       <Burger
@@ -112,8 +117,7 @@ const Navbar = (props) => {
       <div onClick={props.onclick} className="path">
         {academicsPath}
       </div>
-      {/* <button onClick={() => props.toggleTheme(!props.darkMode)}>Toggle Dark Mode</button> */}
-      <Toggle theme={props.theme} toggleTheme={props.toggleTheme} />
+      <Toggle theme={theme} toggleTheme={toggleTheme} />
       </div>
     </Nav>
   );
