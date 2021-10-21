@@ -14,6 +14,9 @@ export class AddPapers extends Component {
   currentDate = new Date();
   db = firebase.firestore();
   subjectCe = ["toc", "dwdm", "ins", "ios", "pip"];
+  subjectCe7 = ["bda", "dlp", "cc", "iot", "bct", "ml"];
+  subjectCe3 = ["dcn", "de", "jp", "hs"];
+  subjectCe4 = ["co", "dbms", "dsa", "os"];
   subjecIt = ["crns", "se", "mla", "wcmc", "hs"];
   subjecCse = ["se", "crns", "ml", "iot", "hs"];
   subjectEc = ["el", "awp", "dc", "es", "jp", "hs"];
@@ -35,7 +38,7 @@ export class AddPapers extends Component {
         author: "",
       },
       error: "",
-      opt: [6],
+      opt: [3,4,6,7],
       dept: [],
       sub: [],
       loaderDisplay: false,
@@ -138,7 +141,7 @@ export class AddPapers extends Component {
             author: "",
           },
           error: "",
-          opt: [6],
+          opt: [3,4,6,7],
           dept: [],
           sub: [],
           loaderDisplay: false,
@@ -252,7 +255,12 @@ export class AddPapers extends Component {
       this.setState({
         sub: this.subjectCe,
       });
-    } else if (value == 6 && this.state.article.department == "it") {
+    }else if (value == 7 && this.state.article.department == "ce") {
+      this.setState({
+        sub: this.subjectCe7,
+      });
+    } 
+     else if (value == 6 && this.state.article.department == "it") {
       this.setState({
         sub: this.subjecIt,
       });
@@ -263,6 +271,15 @@ export class AddPapers extends Component {
     } else if (value == 6 && this.state.article.department == "ec") {
       this.setState({
         sub: this.subjectEc,
+      });
+    }else if (value == 3 && this.state.article.department == "ce") {
+      this.setState({
+        sub: this.subjectCe3,
+      });
+    }
+    else if (value == 4 && this.state.article.department == "ce") {
+      this.setState({
+        sub: this.subjectCe4,
       });
     }
 

@@ -61,10 +61,28 @@ var deptDep = [
 
 var sem = [
   {
+    title: "3",
+    name: "semester",
+    value: "3",
+    id: "s3",
+  },
+  {
+    title: "4",
+    name: "semester",
+    value: "4",
+    id: "s4",
+  },
+  {
     title: "6",
     name: "semester",
     value: "6",
     id: "s6",
+  },
+  {
+    title: "7",
+    name: "semester",
+    value: "7",
+    id: "s7",
   },
 ]
 

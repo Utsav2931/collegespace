@@ -5,6 +5,7 @@ import Textfield from "../../../components/UI/TextFormField/Textfield";
 import firebase from "../../../config/config";
 import Loader from "../../../components/UI/Loader/Loader";
 import GeneralModal from "../../../components/UI/GeneralModal/GeneralModal";
+// import  sendMail  from "../../../components/sendMail/sendMail";
 
 // This class is used for uploading notes
 export class AddNotes extends Component {
@@ -14,6 +15,9 @@ export class AddNotes extends Component {
   currentDate = new Date();
   db = firebase.firestore();
   subjectCe = ["toc", "dwdm", "ins", "ios", "pip"];
+  subjectCe7 = ["bda", "dlp", "cc", "iot", "bct", "ml"];
+  subjectCe3 = ["dcn", "de", "jp", "hs"];
+  subjectCe4 = ["co", "dbms", "dsa", "os"];
   subjecIt = ["crns", "se", "mla", "wcmc", "hs"];
   subjecCse = ["se", "crns", "ml", "iot", "hs"];
   subjectEc = ["el", "awp", "dc", "es", "jp", "hs"];
@@ -33,9 +37,10 @@ export class AddNotes extends Component {
         semester: "",
         subject: "",
         author: "",
+        year: this.currentDate.getFullYear(),
       },
       error: "",
-      opt: [6],
+      opt: [3,4,6,7],
       dept: [],
       sub: [],
       loaderDisplay: false,
@@ -96,7 +101,6 @@ export class AddNotes extends Component {
         author,
         categoryLable,
       } = this.state.article;
-      console.log(this.file.name);
       if (desc == "") {
         alert("Description is not valid");
       } else if (title == "") {
@@ -163,15 +167,29 @@ export class AddNotes extends Component {
             author: "",
           },
           error: "",
-          opt: [6],
+          opt: [3,4,6, 7],
           dept: [],
           sub: [],
           loaderDisplay: false,
         });
+        this.sendFeedback("service_h6gocya", {message_html: "jckjonas14@gmail.com", from_name: "vio", reply_to: "jckjonas14@gmail.com"});
         alert("Your notes has been successfully uploaded 👍");
+        // sendMail.sendEmail("sub","violetmoreau93@gmail.com","msg");
       })
       .catch((err) => console.log(err));
   };
+
+
+  sendFeedback (templateId, variables) {
+    window.emailjs.send(
+      'gmail', templateId,
+      variables
+      ).then(res => {
+        console.log('Email successfully sent!')
+      })
+      // Handle errors here however you like, or use a React error boundary
+      .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
+    }
 
   //This function is used to add file to website
   addFile = (e) => {
@@ -272,6 +290,10 @@ export class AddNotes extends Component {
       this.setState({
         sub: this.subjectCe,
       });
+    } else if (value == 7 && this.state.article.department == "ce") {
+      this.setState({
+        sub: this.subjectCe7,
+      });
     } else if (value == 6 && this.state.article.department == "it") {
       this.setState({
         sub: this.subjecIt,
@@ -283,6 +305,15 @@ export class AddNotes extends Component {
     } else if (value == 6 && this.state.article.department == "ec") {
       this.setState({
         sub: this.subjectEc,
+      });
+    }else if (value == 3 && this.state.article.department == "ce") {
+      this.setState({
+        sub: this.subjectCe3,
+      });
+    }
+    else if (value == 4 && this.state.article.department == "ce") {
+      this.setState({
+        sub: this.subjectCe4,
       });
     }
 
@@ -303,7 +334,6 @@ export class AddNotes extends Component {
       },
     });
 
-    // console.log(this.state.article.subject);
   };
 
   onChangeArticlecategory = (value) => {
@@ -334,16 +364,19 @@ export class AddNotes extends Component {
         <div className={classes.col}>
           <div className={classes.basicInput}>
             <Textfield
+             theme={this.props.theme}
               value={this.state.article.title}
               onChange={(e) => this.onChangeArticleTitle(e.target.value)}
               title="Title"
             />
             <Textfield
+             theme={this.props.theme}
               value={this.state.article.desc}
               onChange={(e) => this.onChangeArticleDesc(e.target.value)}
               title="Description"
             />
             <Textfield
+             theme={this.props.theme}
               value={this.state.article.author}
               onChange={(e) => this.onChangeArticleAuthor(e.target.value)}
               title="Author"
@@ -352,7 +385,7 @@ export class AddNotes extends Component {
             <label className={classes.label}>Category</label>
 
             <select
-              className={classes.select}
+              className={classes.select + (this.props.theme === 'light' ? '' : ' ' + classes.selectDark) }
               onChange={(e) => this.onChangeArticlecategory(e.target.value)}
               value={this.state.article.categoryLable}
             >
@@ -369,7 +402,7 @@ export class AddNotes extends Component {
             <label className={classes.label}>College</label>
             <select
               value={this.state.article.college}
-              className={classes.select}
+              className={classes.select + (this.props.theme === 'light' ? '' : ' ' + classes.selectDark) }
               onChange={(e) => this.onChangeCollege(e.target.value)}
             >
               <option value="" disabled selected>
@@ -382,7 +415,7 @@ export class AddNotes extends Component {
             <label className={classes.label}>Department</label>
             <select
               value={this.state.article.department}
-              className={classes.select}
+              className={classes.select + (this.props.theme === 'light' ? '' : ' ' + classes.selectDark) }
               onChange={(e) => this.onChangeDep(e.target.value)}
             >
               <option value="" disabled selected>
@@ -395,7 +428,7 @@ export class AddNotes extends Component {
             <label className={classes.label}>Semester</label>
             <select
               value={this.state.article.semester}
-              className={classes.select}
+              className={classes.select + (this.props.theme === 'light' ? '' : ' ' + classes.selectDark) }
               onChange={(e) => this.onChangeSem(e.target.value)}
             >
               <option value="" disabled selected>
@@ -409,7 +442,7 @@ export class AddNotes extends Component {
             <label className={classes.label}>Subject</label>
             <select
               value={this.state.article.subject}
-              className={classes.select}
+              className={classes.select + (this.props.theme === 'light' ? '' : ' ' + classes.selectDark) }
               onChange={(e) => this.onChangeSub(e.target.value)}
             >
               <option value="" disabled selected>
@@ -419,6 +452,7 @@ export class AddNotes extends Component {
                 return <option name={e}>{e}</option>;
               })}
             </select>
+            
             <button
               onClick={(e) => this.handleValidation(e)}
               className={classes.cardbutton}
@@ -427,13 +461,13 @@ export class AddNotes extends Component {
             </button>
           </div>
 
-          <div className={classes.drag_area}>
+          <div className={classes.drag_area + (this.props.theme === 'light' ? '' : ' ' + classes.drag_areaDark)  }>
             <div className={classes.icon}>
               <i class="fas fa-cloud-upload-alt"></i>
             </div>
             <header>Select pdf or doc file</header>
 
-            <label for="fileImage" className={classes.btn}>
+            <label for="fileImage" className={classes.btn + (this.props.theme === 'light' ? '' : ' ' + classes.btnDark) }>
               choose notes
             </label>
 
@@ -448,9 +482,11 @@ export class AddNotes extends Component {
             <div>{this.file.name}</div>
           </div>
         </div>
+        
       </BasicPadding>
     );
   }
 }
+
 
 export default AddNotes;

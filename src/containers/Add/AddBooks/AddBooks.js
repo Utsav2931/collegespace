@@ -14,6 +14,9 @@ export class AddBooks extends Component {
   currentDate = new Date();
   db = firebase.firestore();
   subjectCe = ["toc", "dwdm", "ins", "ios", "pip"];
+  subjectCe7 = ["bda", "dlp", "cc", "iot", "bct", "ml"];
+  subjectCe3 = ["dcn", "de", "jp", "hs"];
+  subjectCe4 = ["co", "dbms", "dsa", "os"];
   subjecIt = ["crns", "se", "mla", "wcmc", "hs"];
   subjecCse = ["se", "crns", "ml", "iot", "hs"];
   subjectEc = ["el", "awp", "dc", "es", "jp", "hs"];
@@ -35,7 +38,7 @@ export class AddBooks extends Component {
         author: "",
       },
       error: "",
-      opt: [6],
+      opt: [3, 4, 6, 7],
       dept: [],
       sub: [],
       loaderDisplay: false,
@@ -86,7 +89,7 @@ export class AddBooks extends Component {
         alert("Title is not valid");
       } else if (author == "") {
         alert("Author is not valid");
-      }  else if (semester == "") {
+      } else if (semester == "") {
         alert("Semester is not valid");
       } else if (subject == "") {
         alert("Title is not valid");
@@ -137,7 +140,7 @@ export class AddBooks extends Component {
             author: "",
           },
           error: "",
-          opt: [6],
+          opt: [3, 4, 6, 7],
           dept: [],
           sub: [],
           loaderDisplay: false,
@@ -242,6 +245,10 @@ export class AddBooks extends Component {
       this.setState({
         sub: this.subjectCe,
       });
+    } else if (value == 7 && this.state.article.department == "ce") {
+      this.setState({
+        sub: this.subjectCe7,
+      });
     } else if (value == 6 && this.state.article.department == "it") {
       this.setState({
         sub: this.subjecIt,
@@ -253,6 +260,14 @@ export class AddBooks extends Component {
     } else if (value == 6 && this.state.article.department == "ec") {
       this.setState({
         sub: this.subjectEc,
+      });
+    } else if (value == 3 && this.state.article.department == "ce") {
+      this.setState({
+        sub: this.subjectCe3,
+      });
+    } else if (value == 4 && this.state.article.department == "ce") {
+      this.setState({
+        sub: this.subjectCe4,
       });
     }
 
@@ -309,7 +324,7 @@ export class AddBooks extends Component {
         ) : (
           ""
         )}
-        <h1 style={{ textAlign: 'center' }}>Add Books</h1>
+        <h1 style={{ textAlign: "center" }}>Add Books</h1>
         <div className={classes.col}>
           <div className={classes.basicInput}>
             <Textfield

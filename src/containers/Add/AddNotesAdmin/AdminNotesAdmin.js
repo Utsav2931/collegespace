@@ -5,23 +5,155 @@ import Textfield from "../../../components/UI/TextFormField/Textfield";
 import firebase from "../../../config/config";
 import Loader from "../../../components/UI/Loader/Loader";
 import GeneralModal from "../../../components/UI/GeneralModal/GeneralModal";
+// import  sendMail  from "../../../components/sendMail/sendMail";
 
 // This class is used for uploading notes
 export class AddNotesAdmin extends Component {
-   file = {};
-   deptCspit = ["ce", "it", "ec"];
-   deptDep = ["ce", "cs", "it"];
-   currentDate = new Date();
-   db = firebase.firestore();
-   subjectCe = ["toc", "dwdm", "ins", "ios", "pip"];
-   subjecIt = ["crns", "se", "mla", "wcmc", "hs"];
-   subjecCse = ["se", "crns", "ml", "iot", "hs"];
-   subjectEc = ["el", "awp", "dc", "es", "jp", "hs"];
-   storageRef = firebase.storage();
-   constructor(props) {
-      super(props);
-      this.state = {
-         article: {
+  file = {};
+  deptCspit = ["ce", "it", "ec"];
+  deptDep = ["ce", "cs", "it"];
+  currentDate = new Date();
+  db = firebase.firestore();
+  subjectCe = ["toc", "dwdm", "ins", "ios", "pip"];
+  subjectCe7 = ["bda", "dlp", "cc", "iot", "bct", "ml"];
+  subjectCe3 = ["dcn", "de", "jp", "hs"];
+  subjectCe4 = ["co", "dbms", "dsa", "os"];
+  subjecIt = ["crns", "se", "mla", "wcmc", "hs"];
+  subjecCse = ["se", "crns", "ml", "iot", "hs"];
+  subjectEc = ["el", "awp", "dc", "es", "jp", "hs"];
+  storageRef = firebase.storage();
+  constructor(props) {
+    super(props);
+    this.state = {
+      article: {
+        title: "",
+        desc: "",
+        createDate: this.currentDate,
+        categoryLable: "",
+        id: "",
+        link: "",
+        college: "",
+        department: "",
+        semester: "",
+        subject: "",
+        author: "",
+        year: this.currentDate.getFullYear(),
+      },
+      error: "",
+      opt: [3,4,6,7],
+      dept: [],
+      sub: [],
+      loaderDisplay: false,
+    };
+  }
+
+  // This returns a callback when a files successfully uploaded to the storage
+  uploadNoteCallBack = () => {
+    return new Promise(async (resolve, reject) => {
+      // file = e.target.files[0];
+      const filename = this.file.name;
+      // uuidv4();
+      this.storageRef
+        .ref()
+        .child("pdf/" + filename)
+        .put(this.file)
+        .then(async (snapshot) => {
+          const downloadURL = await this.storageRef
+            .ref()
+            .child("pdf/" + filename)
+            .getDownloadURL();
+          resolve({
+            success: true,
+            data: { link: downloadURL },
+          });
+        });
+    });
+  };
+
+  // This recivies promise from uploadNotesCallback and returns a new promise
+  callBk = () => {
+    return new Promise(async (resolve, reject) => {
+      const uploadState = await this.uploadNoteCallBack();
+      if (uploadState.success) {
+        this.setState({
+          hasFeatureIamge: true,
+          article: {
+            ...this.state.article,
+            link: uploadState.data.link,
+          },
+        });
+      }
+      resolve({ success: true });
+    });
+  };
+
+  // This function checks validation of the article
+  handleValidation() {
+    return new Promise(async (resolve, reject) => {
+      const {
+        title,
+        desc,
+        semester,
+        subject,
+        department,
+        college,
+        link,
+        author,
+        categoryLable,
+      } = this.state.article;
+      if (desc == "") {
+        alert("Description is not valid");
+      } else if (title == "") {
+        alert("Title is not valid");
+      } else if (author == "") {
+        alert("Author is not valid");
+      } else if (categoryLable == "") {
+        alert("Category is not valid");
+      } else if (semester == "") {
+        alert("Semester is not valid");
+      } else if (subject == "") {
+        alert("Title is not valid");
+      } else if (department == "") {
+        alert("Department is not valid");
+      } else if (college == "") {
+        alert("College is not valid");
+      } else {
+        if (this.file.name == undefined) {
+          return alert("Adding pdf is Mandatory!");
+        } else {
+          this.setState({
+            loaderDisplay: true,
+          });
+          await this.callBk();
+          this.uploadNotes();
+        }
+      }
+    });
+  }
+
+  // If the article if valid this function will upload it to the firebase
+  uploadNotes = () => {
+    this.setState({ error: "" });
+    //let id = this.state.article.title;
+    const article = this.state.article;
+    //id = id.split(" ").join("-");
+    //article.id = id;
+    this.db
+      .collection("academics")
+      .doc(this.state.article.college)
+      .collection("department")
+      .doc(this.state.article.department)
+      .collection("sem")
+      .doc(this.state.article.semester)
+      .collection("subjects")
+      .doc(this.state.article.subject)
+      .collection("notes")
+      .doc()
+      .set(article)
+      .then((res) => {
+        this.file = "";
+        this.setState({
+          article: {
             title: "",
             desc: "",
             createDate: this.currentDate,
@@ -33,395 +165,328 @@ export class AddNotesAdmin extends Component {
             semester: "",
             subject: "",
             author: "",
-         },
-         error: "",
-         opt: [6],
-         dept: [],
-         sub: [],
-         loaderDisplay: false,
-      };
-   }
+          },
+          error: "",
+          opt: [3,4,6, 7],
+          dept: [],
+          sub: [],
+          loaderDisplay: false,
+        });
+        this.sendFeedback("service_h6gocya", {message_html: "jckjonas14@gmail.com", from_name: "vio", reply_to: "jckjonas14@gmail.com"});
+        alert("Your notes has been successfully uploaded 👍");
+        // sendMail.sendEmail("sub","violetmoreau93@gmail.com","msg");
+      })
+      .catch((err) => console.log(err));
+  };
 
-   // This returns a callback when a files successfully uploaded to the storage
-   uploadNoteCallBack = () => {
-      return new Promise(async (resolve, reject) => {
-         // file = e.target.files[0];
-         const filename = this.file.name;
-         // uuidv4();
-         this.storageRef
-            .ref()
-            .child("pdf/" + filename)
-            .put(this.file)
-            .then(async (snapshot) => {
-               const downloadURL = await this.storageRef
-                  .ref()
-                  .child("pdf/" + filename)
-                  .getDownloadURL();
-               resolve({
-                  success: true,
-                  data: { link: downloadURL },
-               });
-            });
-      });
-   };
 
-   // This function checks validation of the article
-   handleValidation() {
-      return new Promise(async (resolve, reject) => {
-         const {
-            title,
-            desc,
-            semester,
-            subject,
-            department,
-            college,
-            link,
-            author,
-            categoryLable,
-         } = this.state.article;
-         console.log(this.file.name);
-         if (desc == "") {
-            alert("Description is not valid");
-         } else if (title == "") {
-            alert("Title is not valid");
-         } else if (author == "") {
-            alert("Author is not valid");
-         } else if (semester == "") {
-            alert("Semester is not valid");
-         } else if (subject == "") {
-            alert("Title is not valid");
-         } else if (department == "") {
-            alert("Department is not valid");
-         } else if (college == "") {
-            alert("College is not valid");
-         } else if (categoryLable == "") {
-            alert("Category is not valid");
-         } else {
-            //await this.callBk();
-            this.uploadNotes();
-         }
-      });
-   }
+  sendFeedback (templateId, variables) {
+    window.emailjs.send(
+      'gmail', templateId,
+      variables
+      ).then(res => {
+        console.log('Email successfully sent!')
+      })
+      // Handle errors here however you like, or use a React error boundary
+      .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
+    }
 
-   // If the article if valid this function will upload it to the firebase
-   uploadNotes = () => {
-      this.setState({ error: "" });
-      //let id = this.state.article.title;
-      const article = this.state.article;
-      //id = id.split(" ").join("-");
-      //article.id = id;
-      this.db
-         .collection("academics")
-         .doc(this.state.article.college)
-         .collection("department")
-         .doc(this.state.article.department)
-         .collection("sem")
-         .doc(this.state.article.semester)
-         .collection("subjects")
-         .doc(this.state.article.subject)
-         .collection("notes")
-         .doc()
-         .set(article)
-         .then((res) => {
-            this.file = "";
-            this.setState({
-               article: {
-                  title: "",
-                  desc: "",
-                  createDate: this.currentDate,
-                  categoryLable: "",
-                  id: "",
-                  link: "",
-                  college: "",
-                  department: "",
-                  semester: "",
-                  subject: "",
-                  author: "",
-               },
-               error: "",
-               opt: [6],
-               dept: [],
-               sub: [],
-               loaderDisplay: false,
-            });
-            alert("Your notes has been successfully uploaded 👍");
-         })
-         .catch((err) => console.log(err));
-   };
+  //This function is used to add file to website
+  addFile = (e) => {
+    this.file = e.target.files[0];
+    this.setState({});
+  };
 
-   //This function is used to add file to website
+  //This function is used to update Title
+  onChangeArticleTitle = (value) => {
+    this.setState({
+      article: {
+        ...this.state.article,
+        title: value,
+      },
+    });
+  };
 
-   //This function is used to update Title
-   onChangeArticleTitle = (value) => {
+  //This function is used to update Description
+  onChangeArticleDesc = (value) => {
+    this.setState({
+      article: {
+        ...this.state.article,
+        desc: value,
+      },
+    });
+  };
+
+  //This function is used to update Author
+  onChangeArticleAuthor = (value) => {
+    this.setState({
+      article: {
+        ...this.state.article,
+        author: value,
+      },
+    });
+  };
+
+  //This function is used to update Link
+  onChangeArticleLink = (value) => {
+    this.setState({
+      article: {
+        ...this.state.article,
+        link: value,
+      },
+    });
+  };
+
+  //This function is used to update College
+  onChangeCollege = (value) => {
+    if (value == "cspit") {
       this.setState({
-         article: {
-            ...this.state.article,
-            title: value,
-         },
+        dept: this.deptCspit,
       });
-   };
-
-   //This function is used to update Description
-   onChangeArticleDesc = (value) => {
+    } else if (value == "depstar") {
       this.setState({
-         article: {
-            ...this.state.article,
-            desc: value,
-         },
+        dept: this.deptDep,
       });
-   };
+    }
 
-   //This function is used to update Author
-   onChangeArticleAuthor = (value) => {
+    this.setState({
+      article: {
+        ...this.state.article,
+        college: value,
+      },
+    });
+  };
+
+  //This function is used to update Department
+  onChangeDep = (value) => {
+    if (value == "ce") {
       this.setState({
-         article: {
-            ...this.state.article,
-            author: value,
-         },
+        sub: this.subjectCe,
       });
-   };
-
-   //This function is used to update Link
-   onChangeArticleLink = (value) => {
+    } else if (value == "it") {
       this.setState({
-         article: {
-            ...this.state.article,
-            link: value,
-         },
+        sub: this.subjecIt,
       });
-   };
-
-   //This function is used to update College
-   onChangeCollege = (value) => {
-      if (value == "cspit") {
-         this.setState({
-            dept: this.deptCspit,
-         });
-      } else if (value == "depstar") {
-         this.setState({
-            dept: this.deptDep,
-         });
-      }
-
+    } else if (value == "cs") {
       this.setState({
-         article: {
-            ...this.state.article,
-            college: value,
-         },
+        sub: this.subjecCse,
       });
-   };
-
-   //This function is used to update Department
-   onChangeDep = (value) => {
-      if (value == "ce") {
-         this.setState({
-            sub: this.subjectCe,
-         });
-      } else if (value == "it") {
-         this.setState({
-            sub: this.subjecIt,
-         });
-      } else if (value == "cs") {
-         this.setState({
-            sub: this.subjecCse,
-         });
-      } else if (value == "ec") {
-         this.setState({
-            sub: this.subjectEc,
-         });
-      }
+    } else if (value == "ec") {
       this.setState({
-         article: {
-            ...this.state.article,
-            department: value,
-         },
+        sub: this.subjectEc,
       });
-   };
+    }
+    this.setState({
+      article: {
+        ...this.state.article,
+        department: value,
+      },
+    });
+  };
 
-   //This function is used to update Semester
-   onChangeSem = (value) => {
-      if (value == 6 && this.state.article.department == "ce") {
-         this.setState({
-            sub: this.subjectCe,
-         });
-      } else if (value == 6 && this.state.article.department == "it") {
-         this.setState({
-            sub: this.subjecIt,
-         });
-      } else if (value == 6 && this.state.article.department == "cs") {
-         this.setState({
-            sub: this.subjecCse,
-         });
-      } else if (value == 6 && this.state.article.department == "ec") {
-         this.setState({
-            sub: this.subjectEc,
-         });
-      }
-
+  //This function is used to update Semester
+  onChangeSem = (value) => {
+    if (value == 6 && this.state.article.department == "ce") {
       this.setState({
-         article: {
-            ...this.state.article,
-            semester: value,
-         },
+        sub: this.subjectCe,
       });
-   };
-
-   onChangeArticlecategory = (value) => {
+    } else if (value == 7 && this.state.article.department == "ce") {
       this.setState({
-         article: {
-            ...this.state.article,
-            categoryLable: value,
-         },
+        sub: this.subjectCe7,
       });
-   };
-
-   onChangeArticleLink = (value) => {
+    } else if (value == 6 && this.state.article.department == "it") {
       this.setState({
-         article: {
-            ...this.state.article,
-            link: value,
-         },
+        sub: this.subjecIt,
       });
-   };
-
-   //This function is used to update Subject
-   onChangeSub = (value) => {
+    } else if (value == 6 && this.state.article.department == "cs") {
       this.setState({
-         article: {
-            ...this.state.article,
-            subject: value,
-         },
+        sub: this.subjecCse,
       });
-
-      // console.log(this.state.article.subject);
-   };
-
-   onChangeArticlecategory = (value) => {
+    } else if (value == 6 && this.state.article.department == "ec") {
       this.setState({
-         article: {
-            ...this.state.article,
-            categoryLable: value,
-         },
+        sub: this.subjectEc,
       });
-   };
+    }else if (value == 3 && this.state.article.department == "ce") {
+      this.setState({
+        sub: this.subjectCe3,
+      });
+    }
+    else if (value == 4 && this.state.article.department == "ce") {
+      this.setState({
+        sub: this.subjectCe4,
+      });
+    }
 
-   render() {
-      return (
-         <BasicPadding>
-            {this.state.loaderDisplay ? (
-               <GeneralModal>
-                  <Loader />
-               </GeneralModal>
-            ) : (
-               <div></div>
-            )}
-            {this.state.error !== "" ? (
-               <span style={{ color: "red" }}>{this.state.error}</span>
-            ) : (
-               ""
-            )}
-            <h1 style={{ textAlign: 'center' }}>Add Notes</h1>
-            <div className={classes.col}>
-               <div className={classes.basicInput}>
-                  <Textfield
-                     value={this.state.article.title}
-                     onChange={(e) => this.onChangeArticleTitle(e.target.value)}
-                     title="Title"
-                  />
-                  <Textfield
-                     value={this.state.article.desc}
-                     onChange={(e) => this.onChangeArticleDesc(e.target.value)}
-                     title="Description"
-                  />
-                  <Textfield
-                     value={this.state.article.author}
-                     onChange={(e) => this.onChangeArticleAuthor(e.target.value)}
-                     title="Author"
-                  />
+    this.setState({
+      article: {
+        ...this.state.article,
+        semester: value,
+      },
+    });
+  };
 
-                  <Textfield
-                     onChange={(e) => this.onChangeArticleLink(e.target.value)}
-                     title="Link"
-                  />
-                  <label className={classes.label}>Category</label>
-                  <select
-                     className={classes.select}
-                     onChange={(e) => this.onChangeArticlecategory(e.target.value)}
-                     value={this.state.article.categoryLable}
-                  >
-                     <option value="" name="education" selected>
-                        Select
+  //This function is used to update Subject
+  onChangeSub = (value) => {
+    this.setState({
+      article: {
+        ...this.state.article,
+        subject: value,
+      },
+    });
+
+  };
+
+  onChangeArticlecategory = (value) => {
+    this.setState({
+      article: {
+        ...this.state.article,
+        categoryLable: value,
+      },
+    });
+  };
+
+  render() {
+    return (
+      <BasicPadding>
+        {this.state.loaderDisplay ? (
+          <GeneralModal>
+            <Loader />
+          </GeneralModal>
+        ) : (
+          <div></div>
+        )}
+        {this.state.error !== "" ? (
+          <span style={{ color: "red" }}>{this.state.error}</span>
+        ) : (
+          ""
+        )}
+        <h1>Add Notes</h1>
+        <div className={classes.col}>
+          <div className={classes.basicInput}>
+            <Textfield
+             theme={this.props.theme}
+              value={this.state.article.title}
+              onChange={(e) => this.onChangeArticleTitle(e.target.value)}
+              title="Title"
+            />
+            <Textfield
+             theme={this.props.theme}
+              value={this.state.article.desc}
+              onChange={(e) => this.onChangeArticleDesc(e.target.value)}
+              title="Description"
+            />
+            <Textfield
+             theme={this.props.theme}
+              value={this.state.article.author}
+              onChange={(e) => this.onChangeArticleAuthor(e.target.value)}
+              title="Author"
+            />
+
+            <label className={classes.label}>Category</label>
+
+            <select
+              className={classes.select + (this.props.theme === 'light' ? '' : ' ' + classes.selectDark) }
+              onChange={(e) => this.onChangeArticlecategory(e.target.value)}
+              value={this.state.article.categoryLable}
+            >
+              <option value="" name="education" selected>
+                Select
               </option>
-                     <option name="education">Assignment</option>
-                     <option name="education">Practical</option>
-                     <option name="education">Classnotes</option>
-                     <option name="education">PPT</option>
-                     <option name="education">Question Bank</option>
-                  </select>
-                  <label className={classes.label}>College</label>
-                  <select
-                     value={this.state.article.college}
-                     className={classes.select}
-                     onChange={(e) => this.onChangeCollege(e.target.value)}
-                  >
-                     <option value="" disabled selected>
-                        Select
-              </option>
-                     <option name="cspit">cspit</option>
-                     <option name="depstar">depstar</option>
-                  </select>
+              <option name="education">Assignment</option>
+              <option name="education">Practical</option>
+              <option name="education">Classnotes</option>
+              <option name="education">PPT</option>
+              <option name="education">Question Bank</option>
+            </select>
 
-                  <label className={classes.label}>Department</label>
-                  <select
-                     value={this.state.article.department}
-                     className={classes.select}
-                     onChange={(e) => this.onChangeDep(e.target.value)}
-                  >
-                     <option value="" disabled selected>
-                        Select
+            <label className={classes.label}>College</label>
+            <select
+              value={this.state.article.college}
+              className={classes.select + (this.props.theme === 'light' ? '' : ' ' + classes.selectDark) }
+              onChange={(e) => this.onChangeCollege(e.target.value)}
+            >
+              <option value="" disabled selected>
+                Select
               </option>
-                     {this.state.dept.map((e) => {
-                        return <option name={e}>{e}</option>;
-                     })}
-                  </select>
-                  <label className={classes.label}>Semester</label>
-                  <select
-                     value={this.state.article.semester}
-                     className={classes.select}
-                     onChange={(e) => this.onChangeSem(e.target.value)}
-                  >
-                     <option value="" disabled selected>
-                        Select
-              </option>
-                     {this.state.opt.map((e) => {
-                        return <option name={e}>{e}</option>;
-                     })}
-                  </select>
+              <option name="cspit">cspit</option>
+              <option name="depstar">depstar</option>
+            </select>
 
-                  <label className={classes.label}>Subject</label>
-                  <select
-                     value={this.state.article.subject}
-                     className={classes.select}
-                     onChange={(e) => this.onChangeSub(e.target.value)}
-                  >
-                     <option value="" disabled selected>
-                        Select
+            <label className={classes.label}>Department</label>
+            <select
+              value={this.state.article.department}
+              className={classes.select + (this.props.theme === 'light' ? '' : ' ' + classes.selectDark) }
+              onChange={(e) => this.onChangeDep(e.target.value)}
+            >
+              <option value="" disabled selected>
+                Select
               </option>
-                     {this.state.sub.map((e) => {
-                        return <option name={e}>{e}</option>;
-                     })}
-                  </select>
-                  <button
-                     onClick={(e) => this.handleValidation(e)}
-                     className={classes.cardbutton}
-                  >
-                     Submit
+              {this.state.dept.map((e) => {
+                return <option name={e}>{e}</option>;
+              })}
+            </select>
+            <label className={classes.label}>Semester</label>
+            <select
+              value={this.state.article.semester}
+              className={classes.select + (this.props.theme === 'light' ? '' : ' ' + classes.selectDark) }
+              onChange={(e) => this.onChangeSem(e.target.value)}
+            >
+              <option value="" disabled selected>
+                Select
+              </option>
+              {this.state.opt.map((e) => {
+                return <option name={e}>{e}</option>;
+              })}
+            </select>
+
+            <label className={classes.label}>Subject</label>
+            <select
+              value={this.state.article.subject}
+              className={classes.select + (this.props.theme === 'light' ? '' : ' ' + classes.selectDark) }
+              onChange={(e) => this.onChangeSub(e.target.value)}
+            >
+              <option value="" disabled selected>
+                Select
+              </option>
+              {this.state.sub.map((e) => {
+                return <option name={e}>{e}</option>;
+              })}
+            </select>
+            
+            <button
+              onClick={(e) => this.handleValidation(e)}
+              className={classes.cardbutton}
+            >
+              Submit
             </button>
-               </div>
+          </div>
+
+          <div className={classes.drag_area + (this.props.theme === 'light' ? '' : ' ' + classes.drag_areaDark)  }>
+            <div className={classes.icon}>
+              <i class="fas fa-cloud-upload-alt"></i>
             </div>
-         </BasicPadding>
-      );
-   }
+            <header>Select pdf or doc file</header>
+
+            <label for="fileImage" className={classes.btn + (this.props.theme === 'light' ? '' : ' ' + classes.btnDark) }>
+              choose notes
+            </label>
+
+            <input
+              className={classes.filechossen}
+              id="fileImage"
+              type="file"
+              onChange={(e) => {
+                this.addFile(e);
+              }}
+            ></input>
+            <div>{this.file.name}</div>
+          </div>
+        </div>
+        
+      </BasicPadding>
+    );
+  }
 }
+
 
 export default AddNotesAdmin;
