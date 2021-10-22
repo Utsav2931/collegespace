@@ -103,7 +103,7 @@ const Navbar = (props) => {
         isValid={isValid}
         show={props.show}
         onclick={props.onclick}
-        theme={props.theme}
+        theme={theme}
       />
       {/* The middle CollegeSpace logo */}
       <Link style={{ textDecoration: "none" }} to="/">

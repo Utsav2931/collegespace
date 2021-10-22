@@ -16,7 +16,8 @@ const StyledBurger = styled.div`
   div {
     width: 2rem;
     height: 0.25rem;
-    background-color: ${({ open,theme }) => (open ? theme === "light" ? "#000" : "#fff" : theme === "light" ? "#333" : "var(--comp-white)")};
+    background-color: ${({ open, theme }) =>
+      open ? "#fff" : theme === "light" ? "#333" : "var(--comp-white)"};
     border-radius: 10px;
     transform-origin: 1px;
     transition: all 0.3s linear;
@@ -38,19 +39,29 @@ const Burger = (props) => {
   const [open, setOpen] = useState(false);
 
   // If the navigation is open, fixesd the position of the body(Can't scroll)
-  (open || props.show)
+  open || props.show
     ? document.body.setAttribute("style", `position: fixed; left:0; right:0;`)
     : document.body.setAttribute("style", ``);
 
-    // Display UI
+  // Display UI
   return (
     <>
-      <StyledBurger open={open} onClick={() => setOpen(!open)} theme={props.theme}>
+      <StyledBurger
+        open={open}
+        onClick={() => setOpen(!open)}
+        theme={props.theme}
+      >
         <div />
         <div />
         <div />
       </StyledBurger>
-      <LeftNav open={open} close={() => setOpen(!open)} academicsPath={props.academicsPath} isValid={props.isValid} onclick={props.onclick}/>
+      <LeftNav
+        open={open}
+        close={() => setOpen(!open)}
+        academicsPath={props.academicsPath}
+        isValid={props.isValid}
+        onclick={props.onclick}
+      />
     </>
   );
 };

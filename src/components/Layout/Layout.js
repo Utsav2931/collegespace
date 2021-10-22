@@ -5,9 +5,8 @@ import NavBar from "../Navigation/Navbar";
 import Modal from "../UI/Modal/Modal";
 import Checkbox from "../UI/CheckBox/Checkbox";
 import ContentBuilder from "../../containers/ContentBuilder/ContentBuilder";
-// import ThemeContextProvider from "../UI/DarkMode/ThemeContext";
 import {ThemeContext} from "../UI/DarkMode/ThemeContext";
-
+import cx from "classnames";
 // Main layout for the whole website
 
 var college = [
@@ -228,14 +227,12 @@ class Layout extends Component {
           department={this.state.department}
           semester={this.state.semester}
           show={this.state.show}
-          // theme={this.props.theme}
-          // toggleTheme={this.props.toggleTheme}
         />
         {/* Main content under the Navbar */}
         <main
           className={
-            classes.Content +
-            (theme === "light" ? "" : " " + classes.contentDark)
+            cx(classes.Content) +
+            (theme === "light" ? "" : " " + cx(classes.contentDark))
           }
         >
           <ContentBuilder

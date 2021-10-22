@@ -1,6 +1,7 @@
 .Content {
   padding-top: 80px;
   display: flex;
+  min-height: 100vh;
 }
 
 .contentDark{

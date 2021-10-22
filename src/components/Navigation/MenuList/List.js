@@ -4,25 +4,26 @@ import ListIteam from "./ListIteam";
 // This class contains sub manu iteams of academic section
 const List = (props) => { 
   let academicsPath = props.academicsPath;
-  let academicsResources = ["paper", "Books", "notes", "timetable"];
+  let academicsResources = ["paper", "Books", "notes", "timetable", "videos"];
 
   // State for the lists object 
   const [lists, setlists] = useState([
     {
       collection: "Academics",
-      answer: ["Papers", "Books", "Notes", "Timetable"],
+      answer: ["Papers", "Books", "Notes", "Timetable", "videos"],
       route: [
         `/academics/cspit/ce/1/paper`,
         `/academics/cspit/ce/1/Books`,
         `/academics/cspit/ce/1/notes`,
         `/academics/cspit/ce/1/timetable`,
+        `/academics/cspit/ce/1/"videos"`,
       ],
       open: false,
     },
     {
       collection: "Portal",
-      answer: ["Events", "Clubs", "FAQS"],
-      route: ["/events", "/clubs", "/faqs"],
+      answer: ["Events", "Clubs", "FAQS", "videos"],
+      route: ["/events", "/clubs", "/faqs", "/videos"],
       open: false,
     },
     {

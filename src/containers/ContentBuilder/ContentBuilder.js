@@ -4,7 +4,6 @@ import AddPost from "../Add/AddPosts/AddPosts";
 import AddPostsAcademics from "../Add/AddPostsAcademics/AddPostsAcademics";
 import Homescreen from "../HomeScreen/Homescreen";
 import Events from "../Events/Events";
-
 import AboutClubs from "../AboutClubs/aboutclubs";
 import Aboutus from "../AboutUs/AboutUs";
 import Faq from "../Faq/faq";
@@ -17,6 +16,7 @@ import Timetable from "../Books/TimeTable/Timetable";
 import AddBooks from "../Add/AddBooks/AddBooks";
 import AddPapers from "../Add/AddPapers/AddPapers";
 import AddNotesAdmin from "../Add/AddNotesAdmin/AdminNotesAdmin";
+import VideoLectures from "../videoLectures/videoLectures";
 
 // for routing between different screens
 export class ContentBuilder extends Component {
@@ -50,6 +50,10 @@ export class ContentBuilder extends Component {
         <Route
           path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/Books/:id`}
           component={AcademicUse}
+        />
+        <Route
+          path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/videos/:id`}
+          component={VideoLectures}
         />
         <Route
           path={`/Academics/:id/:id/:id/:id/:id`}

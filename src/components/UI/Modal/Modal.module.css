@@ -59,6 +59,11 @@
   scrollbar-width: none; /* Firefox */
 }
 
+.cookiesContentDark{
+  background-color: var(--color-div);
+  color: var(--comp-white);
+}
+
 .cookiesContent::-webkit-scrollbar {
   width: 0; /* Remove scrollbar space */
   background: transparent; /* Optional: just make scrollbar invisible */
@@ -72,12 +77,16 @@
   position: fixed;
   width: 30px;
   font-size: 20px;
-  color: #ed6755;
+  color: var(--color-contrast);
   align-self: flex-end;
   background-color: transparent;
   border: none;
   margin-bottom: 10px;
   cursor: pointer;
+}
+
+.button_closeDark{
+ color: var(--color-contrast);
 }
 
 .button_accept {
@@ -93,6 +102,10 @@
 
 .button_close:hover {
   color: #080808;
+}
+
+.button_closeDark:hover{
+  color: #fff;
 }
 
 .LoadingContainerBody {
@@ -125,6 +138,10 @@
   padding: 15px;
   overflow: auto;
   scrollbar-width: none; /* Firefox */
+}
+
+.LoadingBackgroundDark{
+  background-color: var(--color-div);
 }
 
 @media (max-width: 600px) {

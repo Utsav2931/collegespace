@@ -1,13 +1,15 @@
-import React from "react";
-import "./Checkbox.css";
-
+import React, { useContext } from "react";
+import { ThemeContext } from "../DarkMode/ThemeContext";
+import classes from "./Checkbox.module.css";
+import cx from "classnames";
 // generate the checkbox
 const Checkbox = (props) => {
+  const {theme} = useContext(ThemeContext);
   return (
     <>
       <input
         style={{ display: "none" }}
-        class="checkbox-tools"
+        className={cx(classes.checkboxTools) + (theme == "light" ? '' : ' ' + cx(classes.checkboxToolsDark))}
         type="radio"
         name={props.name}
         value={props.value}
@@ -16,7 +18,7 @@ const Checkbox = (props) => {
         onChange = {props.OnchageValue}
       ></input>
 
-      <label class="for-checkbox-tools" for={props.id}>
+      <label className={classes.checkboxTools} for={props.id}>
         {props.title}
       </label>
     </>
