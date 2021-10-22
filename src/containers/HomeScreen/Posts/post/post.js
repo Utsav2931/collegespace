@@ -7,6 +7,7 @@ import parse from "html-react-parser";
 
 
 const post = (props) => {
+  // const {theme, toggleTheme} = useContext(ThemeContext);
   console.log(props.theme);
   console.log(props.image.length);
   // checks whether image is available or not, if not return the other card

@@ -28,51 +28,17 @@ export class ContentBuilder extends Component {
     return (
       // Can select one path at once from the Side drawer
       <Switch>
-        <Route
-          path="/"
-          exact
-          component={() => <Homescreen theme={this.props.theme} />}
-        />
-        <Route
-          path="/add-post"
-          component={() => <AddPost theme={this.props.theme} />}
-        />
-        <Route
-          path="/add-notes"
-          component={() => <AddNotes theme={this.props.theme} />}
-        />
-        <Route
-          path="/events"
-          component={() => <Events theme={this.props.theme} />}
-        />
-        <Route
-          path="/clubs"
-          component={() => <AboutClubs theme={this.props.theme} />}
-        />
-        <Route
-          path="/about"
-          component={() => <Aboutus theme={this.props.theme} />}
-        />
-        <Route
-          path="/faqs"
-          component={() => <Faq theme={this.props.theme} />}
-        />
-        <Route
-          path="/addbooksCS1479"
-          component={() => <AddBooks theme={this.props.theme} />}
-        />
-        <Route
-          path="/addpapersCS1479"
-          component={() => <AddPapers theme={this.props.theme} />}
-        />
-        <Route
-          path="/addpostsAcedemicsCS1479"
-          component={() => <AddPostsAcademics theme={this.props.theme} />}
-        />
-        <Route
-          path="/addnotesCS1479"
-          component={() => <AddNotesAdmin theme={this.props.theme} />}
-        />
+        <Route path="/" exact component={Homescreen} />
+        <Route path="/add-post" component={AddPost} />
+        <Route path="/add-notes" component={AddNotes} />
+        <Route path="/events" component={Events} />
+        <Route path="/clubs" component={AboutClubs} />
+        <Route path="/about" component={Aboutus} />
+        <Route path="/faqs" component={Faq} />
+        <Route path="/addbooksCS1479" component={AddBooks} />
+        <Route path="/addpapersCS1479" component={AddPapers} />
+        <Route path="/addpostsAcedemicsCS1479" component={AddPostsAcademics} />
+        <Route path="/addnotesCS1479" component={AddNotesAdmin} />
         <Route
           path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/notes/:id`}
           component={AcademicUse}
@@ -96,10 +62,10 @@ export class ContentBuilder extends Component {
         />
         <Route
           path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/:id`}
-          component={Academics} 
+          component={Academics}
         />
         <Route path={`/Academics/:id/:id/:id/:id`} component={Academics} />
-        <Route path="/contact-us" component={() => <Contactus theme={this.props.theme} />} />
+        <Route path="/contact-us" component={Contactus} />
         <Route
           path="/academics/choose-path"
           component={(props) => <ErrorModal onclick={this.props.onclick} />}

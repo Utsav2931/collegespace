@@ -6,9 +6,12 @@ import firebase from "../../../config/config";
 import { v4 as uuidv4 } from "uuid";
 import Loader from "../../../components/UI/Loader/Loader";
 import GeneralModal from "../../../components/UI/GeneralModal/GeneralModal";
+import {ThemeContext} from "../../../components/UI/DarkMode/ThemeContext";
 
 //This class is used for adding a new Post
 export class AddPosts extends Component {
+  static contextType = ThemeContext;
+
   currentDate = new Date();
   files = [];
   db = firebase.firestore();
@@ -202,6 +205,9 @@ export class AddPosts extends Component {
   };
 
   render() {
+
+    const {theme} = this.context;
+
     this.index = 0;
     return (
       <BasicPadding>
@@ -222,32 +228,32 @@ export class AddPosts extends Component {
         <div className={classes.col}>
           <div className={classes.basicInput}>
             <Textfield
-              theme={this.props.theme}
+              theme={theme}
               value={this.state.article.title}
               onChange={(e) => this.onChangeArticleTitle(e.target.value)}
               title="Title"
             />
             <Textfield
-              theme={this.props.theme}
+              theme={theme}
               value={this.state.article.desc}
               onChange={(e) => this.onChangeArticleDesc(e.target.value)}
               title="Description"
             />
             <Textfield
-              theme={this.props.theme}
+              theme={theme}
               value={this.state.article.link}
               onChange={(e) => this.onChangeArticleLink(e.target.value)}
               title="Link"
             />
             <Textfield
-              theme={this.props.theme}
+              theme={theme}
               value={this.state.article.author}
               onChange={(e) => this.onChangeArticleAuthor(e.target.value)}
               title="Author"
             />
             <label className={classes.label}>Category</label>
             <select
-              className={classes.select + (this.props.theme === 'light' ? '' : ' ' + classes.selectDark) }
+              className={classes.select + (theme === 'light' ? '' : ' ' + classes.selectDark) }
               onChange={(e) => this.onChangeArticlecategory(e.target.value)}
               value={this.state.article.categoryLable}
             >
@@ -266,10 +272,10 @@ export class AddPosts extends Component {
             </button>
           </div>
 
-          <div className={classes.drag_area + (this.props.theme === 'light' ? '' : ' ' + classes.drag_areaDark)  }>
+          <div className={classes.drag_area + (theme === 'light' ? '' : ' ' + classes.drag_areaDark)  }>
             <header>Select Image or multiple images </header>
             {/* <div style={{color: "grey"}}>450x450 px recommended</div> */}
-            <label for="fileImage" className={classes.btn + (this.props.theme === 'light' ? '' : ' ' + classes.btnDark) }>
+            <label for="fileImage" className={classes.btn + (theme === 'light' ? '' : ' ' + classes.btnDark) }>
               Choose Image
             </label>
             <input

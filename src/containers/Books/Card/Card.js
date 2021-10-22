@@ -1,26 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "../Card/Card.module.css";
 import image from "../../../assets/Images/image.png";
 import paperImg from "../../../assets/Images/paper.png";
 import bookImg from "../../../assets/Images/books.png";
 import { Link } from "react-router-dom";
-import App from "../../App";
-import styled from 'styled-components';
-import { withTheme } from 'styled-components';
-
+import { ThemeContext } from "../../../components/UI/DarkMode/ThemeContext";
+import cx from "classnames";
 
 // Generate the card and display the content which is received from props
 const Book = (props) => {
-  // console.log(theme);
+  const { theme } = useContext(ThemeContext);
   return (
-    
     //  add the id to the path
     <Link
       style={{ textDecoration: "none", color: "black" }}
       to={`${props.propp.history.location.pathname}/${props.varr.id}`}
     >
       <div
-        className={classes.Book}
+        className={
+          cx(classes.Book) +
+          (theme == "light" ? "" : " " + cx(classes.BookDark))
+        }
         onClick={() => {
           const url = props.varr.link;
           if (url != null) window.open(url, "_blank");
@@ -37,7 +37,14 @@ const Book = (props) => {
         )}
         <div className={classes.text}>
           <div className={classes.authorText}>{props.varr.author}</div>
-          <div className={classes.titleText}>{props.varr.title}</div>
+          <div
+            className={
+              cx(classes.titleText) +
+              (theme == "light" ? "" : " " + cx(classes.titleTextDark))
+            }
+          >
+            {props.varr.title}
+          </div>
           <div className={classes.descText}>{props.varr.desc}</div>
         </div>
       </div>

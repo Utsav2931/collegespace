@@ -4,19 +4,21 @@ import Card from "./Card/Card";
 import firebase from "../../config/config";
 import classes from "./GeneralPage.module.css";
 import Loader from "../../components/UI/Loader/Loader";
+import { ThemeContext } from "../../components/UI/DarkMode/ThemeContext";
+import cx from "classnames";
 
 const db = firebase.firestore();
 var arrayy;
 var theme;
 // Used to display the subject cards
 class Subject extends Component {
-
+  static contextType = ThemeContext;
   // used to initialize the arrayy var using the link of the page(using react router)
   constructor(props) {
     super(props);
     console.log(props);
     arrayy = this.props.match.url.split("/");
-    theme= this.props.theme;
+    // theme= this.props.theme;
     // State of this page
     this.state = {
       subjects: [],
@@ -83,14 +85,20 @@ class Subject extends Component {
 
   // to render the UI
   render() {
-    console.log(this.props.theme);
+    const { theme } = this.context;
+    // console.log(theme);
     return (
-      console.log(theme),
+      // console.log(theme),
       <BasicLayout>
         <div className={classes.titleHeader}>
           {this.capitalizeFirstLetter(this.props.match.params.id)}
         </div>
-        <div className={classes.headercontent}>
+        <div
+          className={
+            cx(classes.headercontent) +
+            (theme === "light" ? "" : " " + cx(classes.headercontentDark))
+          }
+        >
           {arrayy[2].toUpperCase()}-{arrayy[3].toUpperCase()} /{" "}
           {arrayy[4].toUpperCase()} / Select Subject
         </div>

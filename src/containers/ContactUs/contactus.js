@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./contactus.css";
 import firebase from "../../config/config";
 import BasicLayout from "../../components/UI/BasicCompPadding/BasicLayout";
 import GeneralModal from "../../components/UI/GeneralModal/GeneralModal";
 import Loader from "../../components/UI/Loader/Loader";
+import { ThemeContext } from "../../components/UI/DarkMode/ThemeContext";
 
 // Contact us page
-const ContactUs = (props) => {
+const ContactUs = () => {
+  const {theme} = useContext(ThemeContext);
 var db = firebase.firestore();
 
   // all react useState hooks for state management
@@ -61,12 +63,11 @@ var db = firebase.firestore();
       )}
 
       <div className="contactus">
-        <form className={"form" + (props.theme === 'light' ? '' : ' ' + "formDark")} onSubmit={handleSubmit}>
+        <form className={"form" + (theme === 'light' ? '' : ' ' + "formDark")} onSubmit={handleSubmit}>
           <div className="title">Contact Us </div>
           {error !== "" ? <span style={{ color: "red" }}>{error}</span> : ""}
           {/* <label>Name</label> */}
           <input
-          // classes.Post + (props.theme === 'light' ? '' : ' ' + classes.PostDark)
             
             placeholder="Name"
             value={name}

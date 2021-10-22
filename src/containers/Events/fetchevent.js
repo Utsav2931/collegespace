@@ -1,8 +1,10 @@
-import React from "react";
+import React, {useContext} from "react";
 import "./events.css";
+import { ThemeContext } from "../../components/UI/DarkMode/ThemeContext.js";
 
 // Dislay all fetched data in a user readable form
-const fetchevent = (props) => {
+const Fetchevent = (props) => {
+  const { theme } = useContext(ThemeContext);
   return (
     <div class="timeline">
       <div class="timeline-event">
@@ -34,4 +36,4 @@ const fetchevent = (props) => {
   );
 };
 
-export default fetchevent;
+export default Fetchevent;

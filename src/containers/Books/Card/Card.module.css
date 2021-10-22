@@ -10,6 +10,10 @@
   transition: all 0.3s ease-in-out;
 }
 
+.BookDark{
+  background-color: var(--color-div);
+}
+
 .cardImage {
   max-width: 100%;
   display: block;
@@ -29,10 +33,14 @@
   font-weight: 500;
 }
 
+.titleTextDark {
+  color: var(--comp-white);
+}
+
 .descText {
   margin-top: 3px;
   font-size: 0.9em;
-  color: #6e6a6a;
+  color: var(--text-offwhite);
 }
 
 .authorText {
@@ -59,6 +67,11 @@
 .Book:hover {
   transform: scale(1.05);
   box-shadow: 0px 17px 20px -6px rgba(187, 195, 204, 0.36);
+}
+
+.BookDark:hover{
+  transform: scale(1.05);
+  box-shadow: 0px 17px 20px -6px rgba(39, 39, 39, 0.36);
 }
 
 @media screen and (max-width: 458px) {

@@ -5,12 +5,14 @@ import firebase from "../../config/config";
 import classes from "./GeneralPage.module.css";
 import Loader from "../../components/UI/Loader/Loader";
 import cx from "classnames";
+import { ThemeContext } from "../../components/UI/DarkMode/ThemeContext";
 
 const db = firebase.firestore();
 var array;
 
 // Used to display papers, books, and notes respected to the subject
 class AcademicUse extends Component {
+  static contextType = ThemeContext;
   //  state.allAticles = [];
   // used to initialize the array var using the link of the page(using react router)
   constructor(props) {
@@ -116,7 +118,7 @@ class AcademicUse extends Component {
         this.setState({
           academicData: filterArtical,
         });
-      } else if(yearValue == "All Year" && value != "All Notes"){
+      } else if (yearValue == "All Year" && value != "All Notes") {
         let filterArtical = [];
         // let this.state.allAticles = [];
         this.state.allAticles.forEach(function (doc) {
@@ -131,7 +133,7 @@ class AcademicUse extends Component {
         this.setState({
           academicData: filterArtical,
         });
-      }else if(yearValue != "All Year" && value != "All Notes"){
+      } else if (yearValue != "All Year" && value != "All Notes") {
         let filterArtical = [];
         // let this.state.allAticles = [];
         this.state.allAticles.forEach(function (doc) {
@@ -222,13 +224,19 @@ class AcademicUse extends Component {
 
   // to render the UI
   render() {
+    const { theme } = this.context;
     return (
       <BasicLayout>
         <div className={classes.titleHeader}>
           {this.capitalizeFirstLetter(array[5])}
         </div>
         {/* <div className={classes.pathAndFilter}> */}
-        <div className={classes.headercontent}>
+        <div
+          className={
+            cx(classes.headercontent) +
+            (theme == "light" ? "" : " " + cx(classes.headercontentDark))
+          }
+        >
           <div>
             {array[2].toUpperCase()}-{array[3].toUpperCase()} /{" "}
             {array[4].toUpperCase()} / {array[6].toUpperCase()} /
@@ -236,7 +244,10 @@ class AcademicUse extends Component {
           {array[5] == "notes" ? (
             <div>
               <select
-                className={classes.selectFilter}
+                className={
+                  cx(classes.selectFilter) +
+                  (theme == "light" ? "" : " " + cx(classes.selectFilterDark))
+                }
                 onChange={(e) =>
                   this.onChangeArticlecategory(
                     this.state.filter,
@@ -245,46 +256,31 @@ class AcademicUse extends Component {
                 }
                 // value={this.state.article.categoryLable}
               >
-                <option className={classes.optionClass} name="Year" selected>
+                <option name="Year" selected>
                   All Year
                 </option>
-                <option className={classes.optionClass} name="Year">
-                  2020
-                </option>
-                <option className={classes.optionClass} name="Year">
-                  2021
-                </option>
+                <option name="Year">2020</option>
+                <option name="Year">2021</option>
               </select>
 
               <select
-                className={classes.selectFilter}
+                className={
+                  cx(classes.selectFilter) +
+                  (theme == "light" ? "" : " " + cx(classes.selectFilterDark))
+                }
                 onChange={(e) =>
                   this.onChangeArticlecategory(e.target.value, this.state.year)
                 }
                 // value={this.state.article.categoryLable}
               >
-                <option
-                  className={classes.optionClass}
-                  name="education"
-                  selected
-                >
+                <option name="education" selected>
                   All Notes
                 </option>
-                <option className={classes.optionClass} name="education">
-                  Assignment
-                </option>
-                <option className={classes.optionClass} name="education">
-                  Practical
-                </option>
-                <option className={classes.optionClass} name="education">
-                  Classnotes
-                </option>
-                <option className={classes.optionClass} name="education">
-                  PPT
-                </option>
-                <option className={classes.optionClass} name="education">
-                  Question Bank
-                </option>
+                <option name="education">Assignment</option>
+                <option name="education">Practical</option>
+                <option name="education">Classnotes</option>
+                <option name="education">PPT</option>
+                <option name="education">Question Bank</option>
               </select>
             </div>
           ) : (
@@ -298,19 +294,11 @@ class AcademicUse extends Component {
                 onChange={(e) => this.onChangePapercategory(e.target.value)}
                 // value={this.state.article.categoryLable}
               >
-                <option
-                  className={classes.optionClass}
-                  name="education"
-                  selected
-                >
+                <option name="education" selected>
                   All Papers
                 </option>
-                <option className={classes.optionClass} name="education">
-                  Internal papers
-                </option>
-                <option className={classes.optionClass} name="education">
-                  External papers
-                </option>
+                <option name="education">Internal papers</option>
+                <option name="education">External papers</option>
               </select>
             </div>
           ) : (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import BasicLayout from "../../components/UI/BasicCompPadding/BasicLayout";
 import classes from "./Aboutus.module.css";
 import { FaTwitter } from "react-icons/fa";
@@ -10,6 +10,7 @@ import utsav from "../../assets/Images/UtsavProfileee.png";
 import smit from "../../assets/Images/SmitProfile.png";
 import dev from "../../assets/Images/DevProfile.png";
 import DevCard from "./DevCard";
+import { ThemeContext } from "../../components/UI/DarkMode/ThemeContext";
 
 // Social links for CollegeSpace
 const socialLinks = [
@@ -58,7 +59,8 @@ let developerInfo = [
 ];
 
 // Component to display the About us page
-const AboutUs = (props) => {
+const AboutUs = () => {
+  const {theme} = useContext(ThemeContext);
   return (
     <BasicLayout>
       <div className={classes.titleHeader}>About us</div>
@@ -75,7 +77,7 @@ const AboutUs = (props) => {
           <br />
           Show your LOVE if you like this website.
         </div>
-        <div className={classes.imagediv + (props.theme === 'light' ? '' : ' ' + classes.imagedivDark)}>
+        <div className={classes.imagediv + (theme === 'light' ? '' : ' ' + classes.imagedivDark)}>
           <img className={classes.img} src={collegespacelogo} alt="" />
         </div>
       </div>
@@ -84,23 +86,23 @@ const AboutUs = (props) => {
       <div className={classes.link}>
         <li className={classes.iconStyle}>
           <SocialLink link={socialLinks[0]}>
-            <FaTwitter size={30} color={props.theme === 'light' ? 'black' : 'white'} />
+            <FaTwitter size={30} color={theme === 'light' ? 'black' : 'white'} />
           </SocialLink>
         </li>
 
         <li className={classes.iconStyle}>
           <SocialLink link={socialLinks[1]}>
-            <FaInstagram size={30} color={props.theme === 'light' ? 'black' : 'white'} />
+            <FaInstagram size={30} color={theme === 'light' ? 'black' : 'white'} />
           </SocialLink>
         </li>
       </div>
 
-      <div className={classes.headerText}>Gigs behind this project</div>
+      <div className={classes.headerText}>Folks behind this gig</div>
 
       {/* Map all developerInfo object's data to DevCard component to display data */}
       <div className={classes.CardRow}>
         {developerInfo.map((variable, index) => {
-          return <DevCard varr={variable} key={index} theme={props.theme} />;
+          return <DevCard varr={variable} key={index} theme={theme} />;
         })}
       </div>
     </BasicLayout>

@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import "./aboutclubs.css";
 import BasicLayout from "../../components/UI/BasicCompPadding/BasicLayout";
+import { ThemeContext } from "../../components/UI/DarkMode/ThemeContext";
 
 // Display the information about the clubs
-const aboutdept = () => {
+const Aboutdept = () => {
+  const {theme} = useContext(ThemeContext); 
   return (
     <BasicLayout>
         <h1 className="contentHead">Clubs</h1>
@@ -100,4 +102,4 @@ const aboutdept = () => {
   );
 };
 
-export default aboutdept;
+export default Aboutdept;
