@@ -11,6 +11,7 @@ import smit from "../../assets/Images/SmitProfile.png";
 import dev from "../../assets/Images/DevProfile.png";
 import DevCard from "./DevCard";
 import { ThemeContext } from "../../components/UI/DarkMode/ThemeContext";
+import Patchnotes from "../patchnotes/patchnotes";
 
 // Social links for CollegeSpace
 const socialLinks = [
@@ -77,7 +78,12 @@ const AboutUs = () => {
           <br />
           Show your LOVE if you like this website.
         </div>
-        <div className={classes.imagediv + (theme === 'light' ? '' : ' ' + classes.imagedivDark)}>
+        <div
+          className={
+            classes.imagediv +
+            (theme === "light" ? "" : " " + classes.imagedivDark)
+          }
+        >
           <img className={classes.img} src={collegespacelogo} alt="" />
         </div>
       </div>
@@ -86,13 +92,19 @@ const AboutUs = () => {
       <div className={classes.link}>
         <li className={classes.iconStyle}>
           <SocialLink link={socialLinks[0]}>
-            <FaTwitter size={30} color={theme === 'light' ? 'black' : 'white'} />
+            <FaTwitter
+              size={30}
+              color={theme === "light" ? "black" : "white"}
+            />
           </SocialLink>
         </li>
 
         <li className={classes.iconStyle}>
           <SocialLink link={socialLinks[1]}>
-            <FaInstagram size={30} color={theme === 'light' ? 'black' : 'white'} />
+            <FaInstagram
+              size={30}
+              color={theme === "light" ? "black" : "white"}
+            />
           </SocialLink>
         </li>
       </div>
@@ -105,6 +117,9 @@ const AboutUs = () => {
           return <DevCard varr={variable} key={index} theme={theme} />;
         })}
       </div>
+
+      <div className={classes.headerText}>Patch notes</div>
+      <Patchnotes/>
     </BasicLayout>
   );
 };

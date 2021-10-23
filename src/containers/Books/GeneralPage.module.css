@@ -60,7 +60,7 @@
 
 .headercontentDark {
   background-color: var(--color-contrastBackgroundDark);
-  color: var(--color-contrast)
+  color: var(--color-contrast);
 }
 
 .pathAndFilter {
@@ -81,7 +81,7 @@
   height: 43px;
   border-radius: 5px;
   box-shadow: none !important;
-  border: none  !important;
+  border: none !important;
   outline: none !important;
   transition: all 0.3s ease-in-out;
   /* font-size: 17px; */
@@ -91,26 +91,115 @@
   cursor: pointer;
 }
 
-.selectFilterDark{
+.selectFilterDark {
   background-color: var(--color-contrastBackgroundDark);
-  color: var(--color-contrast)
+  color: var(--color-contrast);
+}
+
+.filterAndSearchDiv {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  /* background-color: rgb(124, 79, 20); */
+}
+
+.formDiv {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -0%);
+  transition: all 1s;
+  width: 43px;
+  height: 43px;
+  background: var(--color-contrastBackgroundLight);
+  box-sizing: border-box;
+  border-radius: 25px;
+  border: 0px solid black;
+  padding: 5px;
+}
+
+.formDivDark {
+  background: var(--color-contrastBackgroundDark);
+}
+
+.inputText {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 43px;
+  line-height: 30px;
+  outline: 0;
+  border: 0;
+  display: none;
+  font-size: 1em;
+  border-radius: 20px;
+  padding: 0 20px;
+  background-color: var(--color-contrastBackgroundLight);
+  color: var(--color-contrast);
+}
+
+.inputTextDark {
+  background-color: var(--color-contrastBackgroundDark);
+}
+
+.fa {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 42.5px;
+  height: 42.5px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 50%;
+  background: var(--color-contrastBackgroundLight);
+  text-align: center;
+  font-size: 1.2em;
+  transition: all 1s;
+}
+
+.faDark {
+  background: var(--color-contrastBackgroundDark);
 }
 
 
-@media (max-width: 600px){
-  .headercontent{
+.formDiv:hover,
+.formDiv:valid {
+  width: 200px;
+  cursor: pointer;
+}
+
+.formDiv:hover .inputText,
+.formDiv:valid .inputText {
+  display: block;
+}
+
+
+.formDiv:hover .fa,
+.formDiv:valid .fa {
+  background: var(--color-contrastBackgroundLight);
+}
+
+.formDivDark:hover .faDark,
+.formDivDark:valid .faDark {
+  background: var(--color-contrastBackgroundDark);
+}
+
+
+@media (max-width: 600px) {
+  .headercontent {
     font-size: 14px;
   }
 }
 
 @media (max-width: 380px) {
-  .headercontent{
+  .headercontent {
     font-size: 12px;
   }
 }
 
 @media (max-width: 300px) {
-  .headercontent{
+  .headercontent {
     font-size: 10px;
   }
 

@@ -6,6 +6,7 @@ import classes from "./GeneralPage.module.css";
 import Loader from "../../components/UI/Loader/Loader";
 import cx from "classnames";
 import { ThemeContext } from "../../components/UI/DarkMode/ThemeContext";
+import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg";
 
 const db = firebase.firestore();
 var array;
@@ -26,11 +27,13 @@ class AcademicUse extends Component {
       year: "All Year",
       allAticles: [],
       YearData: [],
+      searchArtical: [],
     };
   }
 
   // executes when the screen is displayed
   componentDidMount() {
+    console.log("component did mount");
     this.getMaterials();
   }
 
@@ -63,6 +66,7 @@ class AcademicUse extends Component {
           this.setState(
             {
               academicData: this.state.allAticles,
+              searchArtical: this.state.allAticles,
               yearData: this.state.allAticles,
             },
             () => {
@@ -101,6 +105,7 @@ class AcademicUse extends Component {
     if (value == "All Notes" && yearValue == "All Year") {
       this.setState({
         academicData: this.state.allAticles,
+        searchArtical: this.state.allAticles,
       });
     } else {
       if (value == "All Notes" && yearValue != "All Year") {
@@ -117,6 +122,7 @@ class AcademicUse extends Component {
 
         this.setState({
           academicData: filterArtical,
+          searchArtical: filterArtical,
         });
       } else if (yearValue == "All Year" && value != "All Notes") {
         let filterArtical = [];
@@ -132,6 +138,7 @@ class AcademicUse extends Component {
 
         this.setState({
           academicData: filterArtical,
+          searchArtical: filterArtical,
         });
       } else if (yearValue != "All Year" && value != "All Notes") {
         let filterArtical = [];
@@ -147,49 +154,11 @@ class AcademicUse extends Component {
 
         this.setState({
           academicData: filterArtical,
+          searchArtical: filterArtical,
         });
       }
     }
   };
-
-  // onYearChange = (value) => {
-  //   this.setState({
-  //     year: value,
-  //   })
-  //   if (value == "All Year") {
-  //     this.setState({
-  //       filter: "",
-  //       academicData: this.state.allAticles,
-  //       yearData: this.state.allAticles,
-  //     });
-  //   } else {
-  //     let filterArtical = [];
-  //     let filter = this.state.filter;
-  //     // let this.state.allAticles = [];
-  //     this.state.allAticles.forEach(function (doc) {
-  //       if(filter == ""){
-  //         if (doc.year == value) {
-  //           const artical = {
-  //             ...doc,
-  //           };
-  //           filterArtical.push(artical);
-  //         }
-  //       }
-  //       else{
-  //       if (doc.year == value && doc.categoryLable == filter) {
-  //         const artical = {
-  //           ...doc,
-  //         };
-  //         filterArtical.push(artical);
-  //       }}
-  //     });
-
-  //     this.setState({
-  //       academicData: filterArtical,
-  //       yearData: filterArtical,
-  //     });
-  //   }
-  // }
 
   onChangePapercategory = (value) => {
     this.setState({
@@ -201,7 +170,6 @@ class AcademicUse extends Component {
       });
     } else {
       let filterArtical = [];
-      // let this.state.allAticles = [];
       this.state.allAticles.forEach(function (doc) {
         if (doc.categoryLable == value) {
           const artical = {
@@ -225,21 +193,154 @@ class AcademicUse extends Component {
   // to render the UI
   render() {
     const { theme } = this.context;
+    console.log(this.state.searchArtical);
+    console.log(this.state.academicData);
     return (
       <BasicLayout>
         <div className={classes.titleHeader}>
           {this.capitalizeFirstLetter(array[5])}
         </div>
-        <div className={classes.block}>
-          <input
+
+        {/* <div className={classes.pathAndFilter}> */}
+        <div className={classes.filterAndSearchDiv}>
+          <div
+            className={
+              cx(classes.headercontent) +
+              (theme == "light" ? "" : " " + cx(classes.headercontentDark))
+            }
+          >
+            <div>
+              {array[2].toUpperCase()}-{array[3].toUpperCase()} /{" "}
+              {array[4].toUpperCase()} / {array[6].toUpperCase()} /
+            </div>
+            {array[5] == "notes" ? (
+              <div>
+                <select
+                  className={
+                    cx(classes.selectFilter) +
+                    (theme == "light" ? "" : " " + cx(classes.selectFilterDark))
+                  }
+                  onChange={(e) =>
+                    this.onChangeArticlecategory(
+                      this.state.filter,
+                      e.target.value
+                    )
+                  }
+                  // value={this.state.article.categoryLable}
+                >
+                  <option name="Year" selected>
+                    All Year
+                  </option>
+                  <option name="Year">2020</option>
+                  <option name="Year">2021</option>
+                </select>
+
+                <select
+                  className={
+                    cx(classes.selectFilter) +
+                    (theme == "light" ? "" : " " + cx(classes.selectFilterDark))
+                  }
+                  onChange={(e) =>
+                    this.onChangeArticlecategory(
+                      e.target.value,
+                      this.state.year
+                    )
+                  }
+                  // value={this.state.article.categoryLable}
+                >
+                  <option name="education" selected>
+                    All Notes
+                  </option>
+                  <option name="education">Assignment</option>
+                  <option name="education">Practical</option>
+                  <option name="education">Classnotes</option>
+                  <option name="education">PPT</option>
+                  <option name="education">Question Bank</option>
+                </select>
+              </div>
+            ) : (
+              <div />
+            )}
+
+            {array[5] == "paper" ? (
+              <div>
+                <select
+                  className={
+                    cx(classes.selectFilter) +
+                    (theme == "light" ? "" : " " + cx(classes.selectFilterDark))
+                  }
+                  onChange={(e) => this.onChangePapercategory(e.target.value)}
+                  // value={this.state.article.categoryLable}
+                >
+                  <option name="education" selected>
+                    All Papers
+                  </option>
+                  <option name="education">Internal papers</option>
+                  <option name="education">External papers</option>
+                </select>
+              </div>
+            ) : (
+              <div />
+            )}
+          </div>
+
+          <div>
+            <form
+              action=""
+              className={
+                cx(classes.formDiv) +
+                (theme == "light" ? "" : " " + cx(classes.formDivDark))
+              }
+            >
+              <input
+                type="search"
+                className={
+                  cx(classes.inputText) +
+                  (theme == "light" ? "" : " " + cx(classes.inputTextDark))
+                }
+                type="text"
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  let filterArtical = [];
+                  this.state.searchArtical.forEach(function (doc) {
+                    if (
+                      doc.desc
+                        .toLowerCase()
+                        .includes(e.target.value.toLowerCase()) ||
+                      doc.title
+                        .toLowerCase()
+                        .includes(e.target.value.toLowerCase())
+                    ) {
+                      const artical = {
+                        ...doc,
+                      };
+                      filterArtical.push(artical);
+                    }
+                  });
+                  this.setState({
+                    academicData: filterArtical,
+                  });
+                }}
+                required
+              />
+              <i
+                className={
+                  cx(classes.fa) +
+                  (theme == "light" ? "" : " " + cx(classes.faDark))
+                }
+              ><SearchIcon/></i>
+              {/* <a href="javascript:void(0)" id="clear-btn">
+              Clear
+            </a> */}
+            </form>
+            {/* <input
             style={{ marginBottom: "10px" }}
             type="text"
             class="input-res"
             onChange={(e) => {
               console.log(e.target.value);
               let filterArtical = [];
-              // let this.state.allAticles = [];
-              this.state.allAticles.forEach(function (doc) {
+              this.state.searchArtical.forEach(function (doc) {
                 if (
                   doc.desc
                     .toLowerCase()
@@ -256,82 +357,8 @@ class AcademicUse extends Component {
                 academicData: filterArtical,
               });
             }}
-          />
-        </div>
-        {/* <div className={classes.pathAndFilter}> */}
-        <div
-          className={
-            cx(classes.headercontent) +
-            (theme == "light" ? "" : " " + cx(classes.headercontentDark))
-          }
-        >
-          <div>
-            {array[2].toUpperCase()}-{array[3].toUpperCase()} /{" "}
-            {array[4].toUpperCase()} / {array[6].toUpperCase()} /
+          /> */}
           </div>
-          {array[5] == "notes" ? (
-            <div>
-              <select
-                className={
-                  cx(classes.selectFilter) +
-                  (theme == "light" ? "" : " " + cx(classes.selectFilterDark))
-                }
-                onChange={(e) =>
-                  this.onChangeArticlecategory(
-                    this.state.filter,
-                    e.target.value
-                  )
-                }
-                // value={this.state.article.categoryLable}
-              >
-                <option name="Year" selected>
-                  All Year
-                </option>
-                <option name="Year">2020</option>
-                <option name="Year">2021</option>
-              </select>
-
-              <select
-                className={
-                  cx(classes.selectFilter) +
-                  (theme == "light" ? "" : " " + cx(classes.selectFilterDark))
-                }
-                onChange={(e) =>
-                  this.onChangeArticlecategory(e.target.value, this.state.year)
-                }
-                // value={this.state.article.categoryLable}
-              >
-                <option name="education" selected>
-                  All Notes
-                </option>
-                <option name="education">Assignment</option>
-                <option name="education">Practical</option>
-                <option name="education">Classnotes</option>
-                <option name="education">PPT</option>
-                <option name="education">Question Bank</option>
-              </select>
-            </div>
-          ) : (
-            <div />
-          )}
-
-          {array[5] == "paper" ? (
-            <div>
-              <select
-                className={classes.selectFilter}
-                onChange={(e) => this.onChangePapercategory(e.target.value)}
-                // value={this.state.article.categoryLable}
-              >
-                <option name="education" selected>
-                  All Papers
-                </option>
-                <option name="education">Internal papers</option>
-                <option name="education">External papers</option>
-              </select>
-            </div>
-          ) : (
-            <div />
-          )}
         </div>
 
         <div className={classes.GeneralRow}>

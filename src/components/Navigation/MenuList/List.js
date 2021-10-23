@@ -22,8 +22,8 @@ const List = (props) => {
     },
     {
       collection: "Portal",
-      answer: ["Events", "Clubs", "FAQS", "videos"],
-      route: ["/events", "/clubs", "/faqs", "/videos"],
+      answer: ["Events", "Clubs", "FAQS" ],
+      route: ["/events", "/clubs", "/faqs"],
       open: false,
     },
     {

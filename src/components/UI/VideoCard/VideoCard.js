@@ -4,7 +4,7 @@ import classes from "../../../containers/Books/Card/Card.module.css";
 import cx from "classnames";
 import { ThemeContext } from "../DarkMode/ThemeContext";
 
-const VideoCard = () => {
+const VideoCard = ({title, desc}) => {
   const { theme } = useContext(ThemeContext);
   
   return (
@@ -26,9 +26,9 @@ const VideoCard = () => {
             (theme == "light" ? "" : " " + cx(classes.titleTextDark))
           }
         >
-          Video of MAAP
+          {title}
         </div>
-        <div className={classes.descText}>It's just a video</div>
+        <div className={classes.descText}>{desc}</div>
       </div>
     </div>
   );

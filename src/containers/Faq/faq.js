@@ -1,6 +1,7 @@
 import React from "react";
 import "./faq.css";
 import BasicLayout from "../../components/UI/BasicCompPadding/BasicLayout";
+import Patchnotes from "../patchnotes/patchnotes";
 
 // Displays all the faqs
 const faq = () => {
@@ -73,6 +74,7 @@ const faq = () => {
         </div>
         <hr class="new1"></hr>
       </div>
+      {/* <Patchnotes/> */}
     </BasicLayout>
   );
 };

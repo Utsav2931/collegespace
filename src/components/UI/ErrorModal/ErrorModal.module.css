@@ -7,10 +7,15 @@
   align-items: center;
   justify-content: center;
   height: fit-content;
-  background-color: #ffeee4;
-  color: #ff590b;
+  background-color: var(--color-contrastBackgroundLight);
+  color: var(--color-contrast);
   padding: 50px;
   border-radius: 15px;
+}
+
+.ErrorModalDark {
+  background-color: var(--color-contrastBackgroundDark);
+  color: var(--color-contrast);
 }
 
 .pathImage {

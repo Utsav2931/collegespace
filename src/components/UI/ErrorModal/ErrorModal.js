@@ -1,13 +1,16 @@
-import React from "react";
+import React, {useContext} from "react";
 import BasicLayout from "../BasicCompPadding/BasicLayout";
 import classes from "./ErrorModal.module.css";
 import choosePath from "../../../assets/Images/choosePath.png";
+import { ThemeContext } from "../DarkMode/ThemeContext";
+import cx from "classnames";
 
 // Error model, used this component to display error message
 const ErrorModal = (props) => {
+  const { theme } = useContext(ThemeContext);;
   return (
     <BasicLayout>
-      <div className={classes.ErrorModal}>
+      <div className={cx(classes.ErrorModal) + (theme === "light" ? '' : ' ' + cx(classes.ErrorModalDark) )}>
         <img src={choosePath} className={classes.pathImage}></img>
         <div className={classes.heading}>Haven't chosen a PATH yet?</div>
         <div className={classes.dec}>

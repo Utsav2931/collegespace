@@ -17,6 +17,7 @@ import AddBooks from "../Add/AddBooks/AddBooks";
 import AddPapers from "../Add/AddPapers/AddPapers";
 import AddNotesAdmin from "../Add/AddNotesAdmin/AdminNotesAdmin";
 import VideoLectures from "../videoLectures/videoLectures";
+import PdfViewer from "../Books/PdfViewer/PdfViewer";
 
 // for routing between different screens
 export class ContentBuilder extends Component {
@@ -40,9 +41,14 @@ export class ContentBuilder extends Component {
         <Route path="/addpostsAcedemicsCS1479" component={AddPostsAcademics} />
         <Route path="/addnotesCS1479" component={AddNotesAdmin} />
         <Route
+          path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/notes/:id/:id`}
+          component={PdfViewer}
+        />
+        <Route
           path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/notes/:id`}
           component={AcademicUse}
         />
+
         <Route
           path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/paper/:id`}
           component={AcademicUse}
@@ -68,6 +74,7 @@ export class ContentBuilder extends Component {
           path={`/Academics/${this.props.college}/${this.props.department}/${this.props.semester}/:id`}
           component={Academics}
         />
+
         <Route path={`/Academics/:id/:id/:id/:id`} component={Academics} />
         <Route path="/contact-us" component={Contactus} />
         <Route

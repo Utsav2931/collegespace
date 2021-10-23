@@ -6,6 +6,7 @@ import bookImg from "../../../assets/Images/books.png";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../../components/UI/DarkMode/ThemeContext";
 import cx from "classnames";
+import PdfViewer from "../PdfViewer/PdfViewer";
 
 // Generate the card and display the content which is received from props
 const Book = (props) => {
@@ -22,6 +23,8 @@ const Book = (props) => {
           (theme == "light" ? "" : " " + cx(classes.BookDark))
         }
         onClick={() => {
+          // <PdfViewer url={props.varr.link} />
+          // console.log("IN CARD");
           const url = props.varr.link;
           if (url != null) window.open(url, "_blank");
         }}

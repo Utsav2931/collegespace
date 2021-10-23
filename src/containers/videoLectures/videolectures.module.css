@@ -1,0 +1,42 @@
+.titleHeader {
+  font-family: "Poppins", sans-serif;
+  font-size: 3em;
+  font-weight: 500;
+  letter-spacing: 0.04ch;
+  line-height: 50px;
+  padding-bottom: 15px;
+}
+
+.iFrameDiv {
+  width: "100%";
+  aligncontent: "center";
+  margin: 30px 0;
+}
+
+.GeneralRow {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 1.2rem;
+}
+
+.GeneralRow > div {
+  width: 100%;
+}
+
+@media (max-width: 300px) {
+  .GeneralRow {
+    display: grid;
+    margin: 0 auto;
+    grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+    /* grid-gap: 0.8rem; */
+  }
+}
+
+@media screen and (max-width: 458px) {
+  .GeneralRow {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+    grid-gap: 0.8rem;
+  }
+}

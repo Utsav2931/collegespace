@@ -44,7 +44,7 @@ const Nav = styled.nav`
     font-size: 16px;
     cursor: pointer;
     color: white;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     box-shadow: 0px 6px 18px -5px rgb(237, 133, 85);
   }
 
@@ -60,6 +60,7 @@ const Nav = styled.nav`
     justify-content: flex-end;
     align-items: center;
     gap: 20px;
+    /* background-color: aquamarine; */
   }
   @media (max-width: 600px) {
     .path {
@@ -110,14 +111,15 @@ const Navbar = (props) => {
         <p className="logo">CollegeSpace</p>
       </Link>
       {/* Button to select and modify the path */}
-      <button className="buttonStyle" type="button" onClick={props.onclick}>
-        Branch
-      </button>
+
       <div className="toggleDiv">
-      <div onClick={props.onclick} className="path">
-        {academicsPath}
-      </div>
-      <Toggle theme={theme} toggleTheme={toggleTheme} />
+        <button className="buttonStyle" type="button" onClick={props.onclick}>
+          Branch
+        </button>
+        <div onClick={props.onclick} className="path">
+          {academicsPath}
+        </div>
+        <Toggle theme={theme} toggleTheme={toggleTheme} />
       </div>
     </Nav>
   );
